@@ -1,0 +1,40 @@
+<div class="row-fluid">
+    <table class="table table-bordered table-striped responsive">
+        <thead>
+            <tr>
+                <th>File name</th>
+                <th>Owner</th>
+                <th>Submitted at</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if images %}
+                {% for image in images %}
+                    <tr>
+                        <td>
+                            <a href="{% url "analyses.views.show_analysis" image.id %}">{{ image.file_name }}</a></td>
+                        <td>{{ image.owner.username }}</td>
+                        <td>{{ image.created_at }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <a class="btn tool fancybox" title="Show preview" href="{% url "analyses.views.image" image.image_id %}">
+                                    <i class="icon-picture"> </i>
+                                </a>
+                                <a class="btn tool" title="Show analysis" href="{% url "analyses.views.show_analysis" image.id %}">
+                                    <i class="icon-list-alt"> </i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">
+                        No data available in table
+                    </td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>

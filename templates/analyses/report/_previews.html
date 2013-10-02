@@ -1,0 +1,84 @@
+<div class="box-tab corner-all">
+    <div class="box-header corner-top">
+        <ul class="nav nav-pills" id="tab-stat">
+            <li class="active">
+                <a data-toggle="tab" href="#system-preview">Previews</a>
+            </li>
+        </ul>
+    </div>
+    <div class="box-body">
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="system-preview">
+                <div class="row-fluid">
+                    <ul class="thumbnails">
+                        {% for preview in anal.metadata.preview %}
+                            <li>
+                                <div class="thumbnail">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    {% if preview.original_file %}
+                                                        <a class="fancybox" href="{% url "analyses.views.image" preview.original_file %}">
+                                                    {% else %}
+                                                        <a class="fancybox" href="{% url "analyses.views.image" preview.file %}">
+                                                    {% endif %}
+                                                        <img src="{% url "analyses.views.image" preview.file %}">
+                                                    </a>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="pull-left">
+                                            <tr>
+                                                <td>
+                                                    <b>Size:</b>
+                                                </td>
+                                                <td>
+                                                    {{ preview.size }} bytes
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>Mime type:</b>
+                                                </td>
+                                                <td>
+                                                    {{ preview.mime_type }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>Extension:</b>
+                                                </td>
+                                                <td>
+                                                    {{ preview.ext }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>Dimension:</b>
+                                                </td>
+                                                <td>
+                                                    {{ preview.dimensions }}
+                                                </td>
+                                            </tr>
+                                            {% if preview.diff %}
+                                            <tr>
+                                                <td>
+                                                    <b>Differ:</b>
+                                                </td>
+                                                <td>
+                                                    <span class="badge badge-important">{{ preview.diff }}</span>
+                                                </td>
+                                            </tr>
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

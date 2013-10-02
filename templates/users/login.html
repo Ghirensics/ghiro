@@ -1,0 +1,29 @@
+{% extends "base_index.html" %}
+
+{% block login %}
+<form class="form-horizontal" method="post" action="{% url "django.contrib.auth.views.login" %}">{% csrf_token %}
+    <legend>
+        <i class="icon-user"> </i> Login
+    </legend>
+    <div class="control-group">
+        <label class="control-label" for="username">{{form.username.label_tag}}</label>
+        <div class="controls">
+            {{form.username}}
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="password">{{form.password.label_tag}}</label>
+        <div class="controls">
+            {{form.password}}
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <input type="hidden" name="next" value="{{ next }}" />
+            <button type="submit" class="btn btn-primary btn-large">
+                Login
+            </button>
+        </div>
+    </div>
+</form>
+{% endblock %}

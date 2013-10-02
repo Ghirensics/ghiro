@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Ghiro</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Ghiro - automated image forensic tool">
+        <meta name="author" content="Ghiro developers">
+        <meta http-equiv="X-UA-Compatible" content="IE=9" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        {# Styles #}
+        <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{ STATIC_URL }}css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/index-style.css">
+        {# JS #}
+        <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+        <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+        <!--[if lt IE 9]>
+        <script src="{{ STATIC_URL }}js/html5shiv.js"></script>
+        <![endif]-->
+        {# Fav icons #}
+        <link rel="shortcut icon" href="{{ STATIC_URL }}img/ico/favicon.ico">
+    </head>
+    <body>
+        <header>
+            <div class="cbp-af-header">
+                <div class="cbp-af-inner">
+                    <div class="container">
+                        <div class="row">
+                            <div class="span4">
+                                <div class="">
+                                    <a href="/"><img src="/static/img/logo/logo_ghiro176x80.png"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <section id="intro">
+            <div class="container">
+                <div class="row">
+                    <div class="span6">
+                        <h2><strong>Automated <span class="highlight primary">image forensics</span></strong></h2>
+                        <p class="lead">
+                            All Ghiro features can be controlled via web interface. You can upload images, bunch of images, navigate reports, get a quick or deep overview of images analysis.
+                        </p>
+                        <ul class="list list-ok strong bigger">
+                            <li>
+                                Forensic techniques all-in-one
+                            </li>
+                            <li>
+                                Free and Open Source
+                            </li>
+                            <li>
+                                Fully automated with a beautiful web interface
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="span6">
+                        <div class="group section-wrap upper" id="upper">
+                            {% block login %}{% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="maincontent">
+            <div class="container">
+                <div class="row">
+                    <div class="span4">
+                        <div class="features">
+                            <div class="icon">
+                                <i class="icon-bg-dark icon-circled icon-picture icon-5x"></i>
+                            </div>
+                            <div class="features_content">
+                                <h3>Image analysis</h3>
+                                <p class="left">
+                                    Photo analysis with many techniques: Error Level Analysis (ELA), MIME information, GPS localization, thumbnail extraction and thumbnail consistency check.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="features">
+                            <div class="icon">
+                                <i class="icon-bg-dark icon-circled icon-code icon-5x"></i>
+                            </div>
+                            <div class="features_content">
+                                <h3>Metadata extraction</h3>
+                                <p class="left">
+                                    Metadata are divided in several categories depending on the standard they come from. Image metadata are extracted and categorized. For example: EXIF, IPTC, XMP.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="features">
+                            <div class="icon">
+                                <i class="icon-bg-dark icon-circled icon-camera icon-5x"></i>
+                            </div>
+                            <div class="features_content">
+                                <h3>Automation</h3>
+                                <p class="left">
+                                    Ghiro is developed to handle tons of images, you can group them in cases, assign users to cases with proper permission, search images for properties or image location.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="footer">
+            <div class="subfooter">
+                <div class="container">
+                    <div class="row">
+                        <div class="span6">
+                            <p>
+                                Ghiro 0.1 - &copy; With poetry, <a href="http://twitter.com/jekil" target="_blank">jekil</a> and <a href="#">burlone</a>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

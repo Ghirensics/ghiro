@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="span11">
+    <div class="content content-large">
+        <div class="content-header">
+            <h2><i class="icon-picture"> </i> Images <small>browse all images</small></h2>
+        </div>
+        <div class="content-breadcrumb">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/"><i class="icon-home"> </i> Dashboard</a><span class="divider">&rsaquo;</span>
+                </li>
+                <li class="active">
+                    Images
+                </li>
+            </ul>
+        </div>
+        <div class="content-body">
+            <div class="row-fluid">
+                <ul class="nav nav-pills">
+                    <li {% if pagename == "list" %} class="active" {% endif %}>
+                        <a href="{% url "analyses.views.list_images" "list"%}">List</a>
+                    </li>
+                    {% if not hide_thumb %}
+                        <li {% if pagename == "thumb" %} class="active" {% endif %}>
+                            <a href="{% url "analyses.views.list_images" "thumb" %}">Thumbnails</a>
+                        </li>
+                    {% endif %}
+                    <li {% if pagename == "map" %} class="active" {% endif %}>
+                        <a href="{% url "analyses.views.list_images" "map" %}">Map</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+            {% if pagename == "list" %}
+                    {% include "analyses/cases/_list_image.html" %}
+                    {% if images %}
+                        <div class="pagination text-center">
+                            {% if images.has_previous %}
+                                <ul>
+                                    <li>
+                                        <a href="{% url "analyses.views.list_images" "list" %}?page={{ images.previous_page_number }}">← Previous</a>
+                                    </li>
+                                </ul>
+                            {% endif %}
+                            <span class="current pull-left">
+                                <small>Page {{ images.number }} of {{ images.paginator.num_pages }}</small>
+                            </span>        
+                            {% if images.has_next %}
+                                <ul>
+                                    <li>
+                                        <a href="{% url "analyses.views.list_images" "list" %}?page={{ images.next_page_number }}">Next → </a>
+                                    </li>
+                                </ul>
+                            {% endif %}
+                        </div> 
+                    {% endif %}
+            {% elif pagename == "thumb" %}
+                    {% include "analyses/cases/_thum_image.html" %}
+                    {% if images %}
+                        <div class="pagination text-center">
+                            {% if images.has_previous %}
+                                <ul>
+                                    <li>
+                                        <a href="{% url "analyses.views.list_images" "thumb" %}?page={{ images.previous_page_number }}">← Previous</a>
+                                    </li>
+                                </ul>
+                            {% endif %}
+                            <span class="current pull-left">
+                                <small>Page {{ images.number }} of {{ images.paginator.num_pages }}</small>
+                            </span>        
+                            {% if images.has_next %}
+                                <ul>
+                                    <li>
+                                        <a href="{% url "analyses.views.list_images" "thumb" %}?page={{ images.next_page_number }}">Next → </a>
+                                    </li>
+                                </ul>
+                            {% endif %}
+                        </div> 
+                    {% else %}
+                        <div class="alert">
+                            <strong>Warning!</strong> there are not any photos.
+                        </div> 
+                    {% endif %}
+            {% elif pagename == "map" %}
+                    {% include "analyses/cases/_map_image.html" %}
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

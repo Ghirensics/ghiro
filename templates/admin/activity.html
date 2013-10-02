@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="span11">
+    <div class="content content-large">
+        <div class="content-header">
+            <h2><i class="icon-lock"> </i> Administration <small>activity logging</small></h2>
+        </div>
+        <div class="content-breadcrumb">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/"><i class="icon-home"> </i> Dashboard</a><span class="divider">&rsaquo;</span>
+                </li>
+                <li>
+                    <a href="{% url "users.views.admin_list_users" %}"><i class="icon-lock"> </i> Administration</a><span class="divider">&rsaquo;</span>
+                </li>
+                <li class="active">
+                    Activity
+                </li>
+            </ul>
+        </div>
+        <div class="content-body">
+            <div class="box-header corner-top">
+                <ul class="nav nav-pills" id="cases_tab">
+                    <li>
+                        <a href="{% url "users.views.admin_list_users" %}">Users</a>
+                    </li>
+                    <li class="active">
+                        <a href="{% url "users.views.admin_list_activity" %}">Activity</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="users">
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="box corner-all">
+                                    <div class="box-body">
+                                        {% include "admin/_list_activity.html" %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

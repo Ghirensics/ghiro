@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="span11">
+    <div class="content content-large">
+        <div class="content-header">
+            <h2><i class="icon-briefcase"> </i> Administration</h2>
+        </div>
+        <div class="content-breadcrumb">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/"><i class="icon-home"> </i> Dashboard</a><span class="divider">&rsaquo;</span>
+                </li>
+                <li>
+                    <a href="{% url "users.views.admin_list_users" %}"><i class="icon-lock"> </i> Administration</a>
+                        <span class="divider">&rsaquo;</span>
+                </li>
+                <li class="active">
+                    New user
+                </li>
+            </ul>
+        </div>
+        <div class="content-body">
+            <form action="{% url "users.views.admin_new_user" %}" method="POST">{% csrf_token %}
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="fieldWrapper">
+                            <label for="id_username">Username: (<span class="helptext"><small><em>Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only</em></small></span>)</label>
+                            {{ form.username }}<span class="help-inline">{{ form.username.errors }}</span>
+                            
+                        </div>
+                        <div class="fieldWrapper">
+                            <label for="id_password1">Password:</label>
+                            {{ form.password1 }}<span class="help-inline">{{ form.password1.errors }}</span>
+                        </div>
+                        <div class="fieldWrapper">
+                            <label for="id_password2">Password (again): - <span class="helptext"><small><em> the same password as above, for verification.</em></small></span></label>
+                            {{ form.password2 }}<span class="help-inline">{{ form.password2.errors }}</span>
+                        </div>
+                        <div class="form-actions">
+                            <button id="btn_submit" type="submit" class="btn btn-large btn-success">
+                                Save
+                            </button>
+                            <a href="javascript:history.back();" class="btn btn-large"> Back </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

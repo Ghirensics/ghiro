@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="span11">
+    <div class="content content-large">
+        <div class="content-header">
+            <h2><i class="icon-th-list"></i> Cases<small></small></h2>
+        </div>
+        <div class="content-breadcrumb">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/"><i class="icon-home"></i> Dashboard</a><span class="divider">&rsaquo;</span>
+                </li>
+                <li>
+                    <a href="{% url "analyses.views.list_cases" %}"><i class="icon-briefcase"></i> Cases</a><span class="divider">&rsaquo;</span>
+                </li>
+                <li>
+                    <a href="{% url "analyses.views.show_case" analysis.case.id "list" %}"><i class="icon-book"></i> {{ analysis.case.name }}</a><span class="divider">&rsaquo;</span>
+                </li>
+                <li class="active">
+                    Report
+                </li>
+            </ul>
+        </div>
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="media">
+                        <a class="pull-left" href="#"> 
+                            {% if analysis.thumb_id %}
+                                <span href="{% url "analyses.views.image" analysis.image_id %}" class="fancybox">
+                                    <img src="{% url "analyses.views.image" analysis.thumb_id %}" class="img-rounded media-object">
+                                </span> 
+                            {% else %} 
+                                <img src="{{ STATIC_URL }}img/no_image_large.jpg" class="img-rounded media-object">
+                            {% endif %} 
+                        </a>
+                        <div class="media-body">
+                            <h2 class="media-heading">Image analysis: {{ anal.hash.md5 }}</h2>
+                            <h1>
+                                <a href="{% url "analyses.views.image" analysis.image_id %}" class="btn"><i class="icon-download"></i> Download</a>
+                                <a href="{% url "analyses.views.image" analysis.image_id %}" class="action_print btn btn-info"><i class="icon-print"></i> Print</a>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="tabbable tabs-left">
+                            <ul class="nav nav-pills">
+                                <li class="active">
+                                    <a href="#dash" data-toggle="tab">Dashboard</a>
+                                </li>
+                                <li>
+                                    <a href="#static" data-toggle="tab">Static</a>
+                                </li>
+                                {% if anal.metadata.Exif %}
+                                <li>
+                                    <a href="#exif" data-toggle="tab">EXIF</a>
+                                </li>
+                                {% endif %}
+                                {% if anal.metadata.Iptc %}
+                                <li>
+                                    <a href="#iptc" data-toggle="tab">IPTC</a>
+                                </li>
+                                {% endif %}
+                                {% if anal.metadata.Xmp %}
+                                <li>
+                                    <a href="#xmp" data-toggle="tab">XMP</a>
+                                </li>
+                                {% endif %}
+                                {% if anal.metadata.preview and anal.metadata.preview|length > 0  %}
+                                <li>
+                                    <a href="#thumb" data-toggle="tab">Thumb</a>
+                                </li>
+                                {% endif %}
+                                {% if anal.metadata.gps %}
+                                <li>
+                                    <a href="#map" data-toggle="tab">Map</a>
+                                </li>
+                                {% endif %}
+                                {% if anal.ela %}
+                                <li>
+                                    <a href="#ela" data-toggle="tab">ELA</a>
+                                </li>
+                                {% endif %}
+                                {% if anal.signatures and anal.signatures|length > 0 %}
+                                <li>
+                                    <a href="#signs" data-toggle="tab">Signatures</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                            <div class="tab-content">
+                                <div class="active tab-pane" id="dash">
+                                    {% include 'analyses/report/_dashboard.html' %}
+                                </div>
+                                <div class="tab-pane" id="static">
+                                    {% include 'analyses/report/_static.html' %}
+                                </div>
+                                {% if anal.metadata.Exif %}
+                                <div id="exif" class="tab-pane">
+                                    {% include 'analyses/report/_exif.html' %}
+                                </div>
+                                {% endif %}
+                                {% if anal.metadata.Iptc %}
+                                <div id="iptc" class="tab-pane">
+                                    {% include 'analyses/report/_iptc.html' %}
+                                </div>
+                                {% endif %}
+                                {% if anal.metadata.Xmp %}
+                                <div id="xmp" class="tab-pane">
+                                    {% include 'analyses/report/_xmp.html' %}
+                                </div>
+                                {% endif %}
+                                {% if anal.metadata.preview and anal.metadata.preview|length > 0  %}
+                                <div id="thumb" class="tab-pane">
+                                    {% include 'analyses/report/_previews.html' %}
+                                </div>
+                                {% endif %}
+                                {% if anal.metadata.gps %}
+                                <div id="map" class="tab-pane">
+                                    {% include 'analyses/report/_map.html' %}
+                                </div>
+                                {% endif %}
+                                {% if anal.ela %}
+                                <div id="ela" class="tab-pane">
+                                    {% include 'analyses/report/_ela.html' %}
+                                </div>
+                                {% endif %}
+                                {% if anal.signatures and anal.signatures|length > 0 %}
+                                <div id="signs" class="tab-pane">
+                                    {% include 'analyses/report/_signature.html' %}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

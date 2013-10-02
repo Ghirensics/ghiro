@@ -1,0 +1,38 @@
+{% load analyses_tags %}
+<div class="row-fluid">
+    <h4>Latest analysis submitted:</h4>
+</div>
+{% if anals.count > 0 %}
+{% for anal in anals %}
+<div class="row-fluid">
+    <div class="media">
+        <a class="pull-left" href="#"> {% if anal.files.thumb100 %} <img class="media-object img-rounded" src="{% url "analyses.views.image" anal.files.thumb100 %}"> {% else %} <img src="{{ STATIC_URL }}img/no_image.jpg" class="media-object img-rounded"> {% endif %} </a>
+        <div class="media-body">
+            <h4 class="media-heading"><a href="{% url "analyses.views.show" anal.hash.md5 anal.uuid %}">{{ anal.hash.md5|upper }}</a></h4>
+            <p>
+                <b>Submitted at</b>: {{ anal.created_at }}
+                <br />
+                {% if anal.signatures %}
+                <b>Signatures</b>:
+                {% regroup anal.signatures|dictsort:"severity" by severity as signs %}
+                {% for sign in signs %}
+                {% if sign.grouper == 1%}
+                <span class="badge badge-success">{{ sign.list|length }}</span>
+                {% elif sign.grouper == 2%}
+                <span class="badge badge-warning">{{ sign.list|length }}</span>
+                {% elif sign.grouper == 3%}
+                <span class="badge badge-important">{{ sign.list|length }}</span>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    <hr />
+</div>
+{% endfor %}
+{% else %}
+<div class="row-fluid">
+    <h4>No analysis yet.</h4>
+</div>
+{% endif %}

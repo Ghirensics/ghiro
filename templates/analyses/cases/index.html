@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="span11">
+    <div class="content content-large">
+        <div class="content-header">
+            <h2><i class="icon-briefcase"> </i> Cases <small>browse all cases</small></h2>
+        </div>
+        <div class="content-breadcrumb">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/"><i class="icon-home"> </i> Dashboard</a><span class="divider">&rsaquo;</span>
+                </li>
+                <li class="active">
+                    Cases
+                </li>
+            </ul>
+        </div>
+        <div class="content-body">
+            <div>
+                <h3><a href="{% url "analyses.views.new_case" %}"></a></h3>
+            </div>
+            <div class="corner-all">
+                <div class="header-control pull-right">
+                    <a href="{% url "analyses.views.new_case" %}" class="btn btn-success tool" title="Add case">
+                        <i class="icon-plus"> </i>
+                    </a>
+                </div>
+                <div class="box-header corner-top">
+                    <ul class="nav nav-pills" id="cases_tab">
+                        <li class="active">
+                            <a href="#all" data-toggle="tab">All</a>
+                        </li>
+                        <li>
+                            <a href="#owned" data-toggle="tab">Owned</a>
+                        </li>
+                        <li>
+                            <a href="#others" data-toggle="tab">Not owned</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="all">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <div class="box corner-all">
+                                        <div class="box-body">
+                                            <table class="table table-bordered table-striped responsive datatables_owner">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Status</th>
+                                                        <th>Created at</th>
+                                                        <th>Owner</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for case in last_cases %}
+                                                        <tr>
+                                                            <td><a href="{% url "analyses.views.show_case" case.id "list" %}">{{ case.name }}</a></td>
+                                                            <td>{{ case.get_state_display }}</td>
+                                                            <td>{{ case.created_at }}</td>
+                                                            <td>{{ case.owner.username }}</td>
+                                                            <td>
+                                                            <div class="btn-group">
+                                                                {% if case.state == "C" %}
+                                                                    <a class="btn tool" title="No actions available" disabled="disabled"> <i class="icon-edit"></i> </a>
+                                                                    <a class="btn btn-warning tool" disabled="disabled" title="Case already closed"> <i class="icon-remove"></i> </a>
+                                                                {% else %}
+                                                                    <a class="btn tool" title="Edit case" href="{% url "analyses.views.edit_case" case.id %}"> <i class="icon-edit"></i> </a>
+                                                                    <a class="btn btn-warning tool btn-close" id="{% url "analyses.views.close_case" case.id %}" title="Close case" href="#close" role="button" data-toggle="modal"> <i class="icon-remove"></i> </a>
+                                                                {% endif %}
+                                                            </div></td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="owned">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <div class="box corner-all">
+                                        <div class="box-body">
+                                            <table class="table table-bordered table-striped responsive datatables">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Status</th>
+                                                        <th>Created at</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for case in my_cases %}
+                                                        <tr>
+                                                            <td><a href="{% url "analyses.views.show_case" case.id "list" %}">{{ case.name }}</a></td>
+                                                            <td>{{ case.get_state_display }}</td>
+                                                            <td>{{ case.created_at }}</td>
+                                                            <td>
+                                                            <div class="btn-group">
+                                                                {% if case.state == "C" %}
+                                                                    <a class="btn tool" title="No actions available" disabled="disabled"> <i class="icon-edit"></i> </a>
+                                                                    <a class="btn btn-warning tool" disabled="disabled" title="Case already closed"> <i class="icon-remove"></i> </a>
+                                                                {% else %}
+                                                                    <a class="btn tool" title="Edit case" href="{% url "analyses.views.edit_case" case.id %}"> <i class="icon-edit"></i> </a>
+                                                                    <a class="btn btn-warning tool btn-close" id="{% url "analyses.views.close_case" case.id %}" title="Close case" href="#close" role="button" data-toggle="modal"> <i class="icon-remove"></i> </a>
+                                                                {% endif %}
+                                                            </div></td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="others">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <div class="box corner-all">
+                                        <div class="box-body">
+                                            <table class="table table-bordered table-striped responsive datatables_owner">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Status</th>
+                                                        <th>Created at</th>
+                                                        <th>Owner</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for case in others_cases %}
+                                                        <tr>
+                                                            <td><a href="{% url "analyses.views.show_case" case.id "list" %}">{{ case.name }}</a></td>
+                                                            <td>{{ case.get_state_display }}</td>
+                                                            <td>{{ case.created_at }}</td>
+                                                            <td>{{ case.owner.username }}</td>
+                                                            <td>
+                                                            <div class="btn-group">
+                                                                {% if case.state == "C" %}
+                                                                    <a class="btn tool" title="No actions available" disabled="disabled"> <i class="icon-edit"></i> </a>
+                                                                    <a class="btn btn-warning tool" disabled="disabled" title="Case already closed"> <i class="icon-remove"></i> </a>
+                                                                {% else %}
+                                                                    <a class="btn tool" title="Edit case" href="{% url "analyses.views.edit_case" case.id %}"> <i class="icon-edit"></i> </a>
+                                                                    <a class="btn btn-warning tool btn-close" id="{% url "analyses.views.close_case" case.id %}" title="Close case" href="#close" role="button" data-toggle="modal"> <i class="icon-remove"></i> </a>
+                                                                {% endif %}
+                                                            </div></td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="close" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×
+        </button>
+        <h3>Close the case</h3>
+    </div>
+    <div class="modal-body">
+        <p>
+            Are you sure continue?
+        </p>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-warning" id="id">
+            Close
+        </a>
+        <button class="btn" data-dismiss="modal" aria-hidden="true">
+            Cancel
+        </button>
+    </div>
+</div>
+
+<script type="text/javascript">
+$('.btn-close').click(function(){
+var id = $(this).attr("id");
+$("#id").attr({href: id});
+});
+
+$('.datatables').dataTable({
+"sDom" : '<"top">t<"bottom"lp><"clear">',
+"aaSorting": [[ 2, "desc" ]]
+});
+
+$('.datatables_owner').dataTable({
+"sDom" : '<"top">t<"bottom"lp><"clear">',
+"aaSorting": [[ 2, "desc" ]]
+});
+</script>
+
+{%  endblock %}

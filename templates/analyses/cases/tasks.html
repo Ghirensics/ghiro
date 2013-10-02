@@ -1,0 +1,97 @@
+<div>
+    <ul class="nav nav-pills">
+        <li class="active">
+            <a href="#tasks" data-toggle="tab">Tasks</a>
+        </li>
+        <li>
+            <a href="#owned" data-toggle="tab">Owned</a>
+        </li>
+        <li>
+            <a href="#others" data-toggle="tab">Not owned</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="tasks">
+            <table class="table table-bordered table-striped responsive datatables" >
+                <thead>
+                    <tr>
+                        <th>File name</th>
+                        <th>Status</th>
+                        <th>Owner</th>
+                        <th>Submitted at</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                    <tr>
+                        <td> 
+                        {% if task.state == "C" %} 
+                            <a href="{% url "analyses.views.show_analysis" task.id %}">{{ task.file_name }}</a> 
+                        {% else %}
+                            {{ task.file_name }}
+                        {% endif %} 
+                        </td>
+                        <td>{{ task.get_state_display }}</td>
+                        <td>{{ task.owner.username }}</td>
+                        <td>{{ task.created_at }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane" id="owned">
+            <table class="table table-bordered table-striped responsive datatables">
+                <thead>
+                    <tr>
+                        <th>File name</th>
+                        <th>Status</th>
+                        <th>Submitted at</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                    <tr>
+                        <td> 
+                        {% if task.state == "C" %} 
+                            <a href="{% url "analyses.views.show_analysis" task.id %}">{{ task.file_name }}</a> 
+                        {% else %}
+                            {{ task.file_name }}
+                        {% endif %} 
+                        </td>
+                        <td>{{ task.get_state_display }}</td>
+                        <td>{{ task.created_at }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane" id="others">
+            <table class="table table-bordered table-striped responsive datatables">
+                <thead>
+                    <tr>
+                        <th>File name</th>
+                        <th>Status</th>
+                        <th>Owner</th>
+                        <th>Submitted at</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                    <tr>
+                        <td> 
+                        {% if task.state == "C" %} 
+                            <a href="{% url "analyses.views.show_analysis" task.id %}">{{ task.file_name }}</a> 
+                        {% else %}
+                            {{ task.file_name }}
+                        {% endif %} 
+                        </td>
+                        <td>{{ task.get_state_display }}</td>
+                        <td>{{ task.owner.username }}</td>
+                        <td>{{ task.created_at }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

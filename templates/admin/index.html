@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="span11">
+    <div class="content content-large">
+        <div class="content-header">
+            <h2><i class="icon-lock"> </i> Administration <small>user account management</small></h2>
+        </div>
+        <div class="content-breadcrumb">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/"><i class="icon-home"> </i> Dashboard</a><span class="divider">&rsaquo;</span>
+                </li>
+                <li class="active">
+                    Administration
+                </li>
+            </ul>
+        </div>
+        <div class="content-body">
+            <div class="box-header corner-top">
+                <ul class="nav nav-pills" id="cases_tab">
+                    <li class="active">
+                        <a href="{% url "users.views.admin_list_users" %}">Users</a>
+                    </li>
+                    <li>
+                        <a href="{% url "users.views.admin_list_activity" %}">Activity</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="users">
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="box corner-all">
+                                    <div class="box-body">
+                                        <div class="header-control pull-right">
+                                            <a href="{% url "users.views.admin_new_user" %}" class="btn btn-success tool" title="Add user"><i class="icon-plus"></i></a>
+                                        </div>
+                                        <ul class="nav nav-pills"> </ul>
+                                        <table class="table table-bordered table-striped responsive datatables">
+                                            <thead>
+                                                <tr>
+                                                    <th>Username</th>
+                                                    <th>Actived</th>
+                                                    <th>Superuser</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for user in users %}
+                                                <tr>
+                                                    <td><a href="{% url "users.views.admin_show_user" user.id %}">{{ user.username }}</a></td>
+                                                    <td>
+                                                        {% if user.is_active %}
+                                                            <i class="icon-ok text-success"> </i>
+                                                        {% else %}
+                                                            <i class="icon-remove text-error"> </i>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if user.is_superuser %}
+                                                            <i class="icon-ok text-success"> </i>
+                                                        {% else %}
+                                                            <i class="icon-remove text-error"> </i>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <a class="btn tool" title="View user" href="{% url "users.views.admin_show_user" user.id %}">
+                                                                <i class="icon-eye-open"> </i>
+                                                            </a>
+                                                            <a class="btn tool" title="View user activity" href="{% url "users.views.admin_show_activity" user.id %}">
+                                                                <i class="icon-list"> </i>
+                                                            </a>
+                                                            <a class="btn tool" title="Edit user" href="{% url "users.views.admin_edit_user" user.id %}">
+                                                                <i class="icon-edit"> </i>
+                                                            </a>
+                                                            {% if user.is_active %}
+                                                                <a class="btn btn-danger tool btn-disable" title="Disable user" href="#disable" role="button" data-toggle="modal" id="{% url "users.views.admin_disable_user" user.id %}">
+                                                                    <i class="icon-ban-circle"> </i>
+                                                                </a>
+                                                            {% else %}
+                                                                <a class="btn btn-danger tool" disabled="disabled" title="User disabled">
+                                                                   <i class="icon-ban-circle"> </i>
+                                                                </a>
+                                                            {% endif %}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="disable" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true"> 
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×
+        </button>
+        <h3>Disable user</h3>
+    </div>
+    <div class="modal-body">
+        <p>
+            Disabling an user the related account will be marked as inactive.
+            So the user will not be able to logon in Ghiro, until an administrator
+            will re-enable he.
+            The user account and the user data will not be deleted.
+        </p>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-danger" id="id">
+            Disable
+        </a>
+        <a class="btn" data-dismiss="modal" aria-hidden="true">
+            Cancel
+        </a>
+    </div>
+</div>
+
+<script type="text/javascript">
+$('.datatables').dataTable({
+    "sDom" : '<"top">t<"bottom"lp><"clear">'
+});
+
+$('.btn-disable').click(function(){
+    var id = $(this).attr("id");
+    $("#id").attr({href: id});
+});
+</script>
+{% endblock %}

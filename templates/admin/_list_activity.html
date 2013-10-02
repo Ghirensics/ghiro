@@ -1,0 +1,34 @@
+<table class="table table-bordered table-striped responsive datatables">
+    <thead>
+        <tr>
+            <th>Message</th>
+            <th>Category</th>
+            <th>User</th>
+            <th>Source IP</th>
+            <th>Created</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for activity in activities %}
+        <tr>
+            <td>{{ activity.message }}</td>
+            <td>{{ activity.get_category_display }}</td>
+            <td>{{ activity.user.username }}</td>
+            <td>{{ activity.source_ip }}</td>
+            <td>{{ activity.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script type="text/javascript">
+$('.datatables').dataTable({
+    "sDom" : '<"top"f>t<"bottom"lp><"clear">',
+    "aaSorting": [[ 4, "desc" ]]
+});
+
+$('.btn-disable').click(function(){
+    var id = $(this).attr("id");
+    $("#id").attr({href: id});
+});
+</script>

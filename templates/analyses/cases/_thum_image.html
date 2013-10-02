@@ -1,0 +1,23 @@
+<div class="row-fluid">
+   <ul class="ghiro-thumbnails">
+       {% for image in images %}
+       <li>
+            {% if image.thumb_id %}
+               <a class="fancybox" rel="group" href="{% url "analyses.views.image" image.image_id %}" title="{{ image.file_name }}">
+                   <img src="{% url "analyses.views.image" image.thumb_id %}" />
+               </a>
+               <div class="tools">
+                   <a href="{% url "analyses.views.show_analysis" image.id %}"> <i class="icon-list-alt"> </i></a>
+                   <a class="fancybox" href="{% url "analyses.views.image" image.image_id %}" title="{{ image.file_name }}"><i class="icon-picture"> </i></a>
+               </div>
+            {% else %} 
+                <img src="{{ STATIC_URL }}img/no_image_large.jpg" />
+                <div class="tools">
+                   <a href="{% url "analyses.views.show_analysis" image.id %}"> <i class="icon-list-alt"> </i></a>
+                   <a class="fancybox" href="{% url "analyses.views.image" image.image_id %}" title="{{ image.file_name }}"><i class="icon-picture"> </i></a>
+               </div>
+            {% endif %}
+       </li>
+       {% endfor %}
+   </ul>
+</div>

@@ -1,0 +1,121 @@
+section#intro {
+    background: none repeat scroll 0 0 #F5F5F5;
+    border-bottom: 1px solid #E9E9E9;
+    height: auto;
+    margin: 80px auto 40px;
+    max-width: 100%;
+    padding: 60px 0 0;
+}
+.icon-5x {
+    text-align: center;
+}
+.icon-5x {
+    font-size: 65px !important;
+    width: 120px !important;
+    height: 120px !important;
+    line-height: 120px !important;
+}
+i.icon-bg-dark {
+    display: inline-block;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+}
+i.icon-bg-dark {
+    color: #fefefe;
+    background: #333;
+}
+.icon-5x {
+    border-bottom-width: 3px !important;
+}
+.icon-circled {
+    border-radius: 1000px !important;
+    -moz-border-radius: 1000px !important;
+    -webkit-border-radius: 1000px !important;
+    -o-border-radius: 1000px !important;
+    -ms-border-radius: 1000px !important;
+}
+.cbp-af-header {
+    background: none repeat scroll 0 0 #333333;
+    height: 60px;
+    left: 0;
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    transition: height 0.3s ease 0s;
+    width: 100%;
+    z-index: 10000;
+}
+.features {
+    display: block;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.features .features_content {
+    padding-left: 150px;
+}
+.features_content h3 {
+    letter-spacing: -2px;
+    font-weight: 700;
+}
+.features .icon i {
+    position: absolute;
+    top: 0px;
+}
+footer {
+    padding-top: 30px;
+    color: #7e7e7e;
+}
+footer.footer {
+    background: #3a3a3a;
+}
+footer .subfooter {
+    padding-top: 10px;
+    background: #222;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+    .footer {
+        position: relative;
+        top: 10px;
+        left: 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 767px) {
+    .footer {
+        position: relative;
+        top: 20px;
+        left: 0;
+        width: 100%;
+    }
+    .cbp-af-header {
+        width: 675px;
+        left: 20px;
+    }
+    .subfooter {
+        padding-left: 10px;
+    }
+    .features {
+        padding-bottom: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        position: relative;
+        top: 20px;
+        left: 0;
+        width: 100%;
+    }
+}

@@ -1,0 +1,24 @@
+{% load analyses_tags %}
+
+{% if value|classname == "dict" %}
+    {% for a, b in value.iteritems %}
+        {% if b|classname == "list" %}
+            <b>{{ a }}</b>: 
+            {% for item in b %}
+                {{ item }} 
+            {% endfor %}
+            <br />
+        {% elif b|classname == "dict" %}
+            <b>{{ a }}</b>: 
+            {% for k,v in b.iteritems %}
+                {{ k }}: {{ v}}; 
+        {% endfor %}
+            <br />
+        {% else %}
+            <b>{{ a }}</b>: {{ b }}<br />
+        {% endif %}
+    {% endfor %}
+{% else %}
+	{{ value }}
+{% endif %}
+

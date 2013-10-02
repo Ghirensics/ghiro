@@ -1,0 +1,33 @@
+<div class="box-tab corner-all">
+    <div class="box-header corner-top">
+        <ul class="nav nav-pills" id="tab-stat">
+            <li class="active">
+                <a data-toggle="tab" href="#system-iptc">IPTC Metadata</a>
+            </li>
+        </ul>
+    </div>
+    <div class="box-body">
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="system-iptc">
+                <div class="row-fluid">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Segment</th>
+                                <th>Key: Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for k, v in anal.metadata.Iptc.iteritems %}
+                            <tr>
+                                <td><b>{{ k|upper }}</b></td>
+                                <td> {% include  'analyses/report/_visualize_value.html' with value=v %} </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

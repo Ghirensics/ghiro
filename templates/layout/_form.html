@@ -1,0 +1,23 @@
+<div class="control-group">
+    <div class="controls">
+        {{ form.non_field_errors }}
+        <div class="fieldWrapper">
+            <label for="id_name">Name:</label>
+            {{ form.name }}<span class="help-inline">{{ form.name.errors }}</span>
+        </div>
+        <div class="fieldWrapper">
+            <label for="id_description">Description:</label>
+            {{ form.description }}<span class="help-inline">{{ form.description.errors }}</span>
+        </div>
+        <div class="fieldWrapper">
+            <label for="id_users">Users</label>
+            {{ form.users }}<span class="help-inline">{{ form.users.errors }}</span><em>Use the CTRL key to select multiple users.</em>
+        </div>
+        <div class="form-actions">
+            <button id="btn_submit" type="submit" class="btn btn-large btn-success">
+                Save
+            </button>
+            <a href="{% url "analyses.views.list_cases" %}" class="btn btn-large"> Back </a>
+        </div>
+    </div>
+</div>

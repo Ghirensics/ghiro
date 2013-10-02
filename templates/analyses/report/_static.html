@@ -1,0 +1,121 @@
+<div class="box-tab corner-all">
+    <div class="box-header corner-top">
+        <div class="header-control pull-right">
+            <a data-box="collapse"><i class="icofont-caret-up"></i></a>
+        </div>
+        <ul class="nav nav-pills" id="tab-stat">
+            <li class="active">
+                <a data-toggle="tab" href="#system-info">Static info</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#server-type">FileType</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#server-hash">Hashes</a>
+            </li>
+            {% if analysis.list_set.all %}
+             <li>
+                <a data-toggle="tab" href="#server-hash-match">Hash matched</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="box-body">
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="system-info">
+                <div class="row-fluid">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if anal.file_name %}
+                            <tr>
+                                <td><b>Filename</b></td>
+                                <td>{{ anal.file_name }}</td>
+                            </tr>
+                            {% endif %}
+                            {% if anal.metadata.dimensions %}
+                            <tr>
+                                <td><b>Dimensions</b></td>
+                                <td>{{ anal.metadata.dimensions }}</td>
+                            </tr>
+                            {% endif %}
+                            <tr>
+                                <td><b>Analyzed at</b></td>
+                                <td>{{ analysis.completed_at }}</td>
+                            </tr>
+                            {% if anal.metadata.comment %}
+                            <tr>
+                                <td><b>Comment</b></td>
+                                <td>{{ anal.metadata.comment }}</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="server-type">
+                <div class="row-fluid">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ anal.file_type }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="server-hash">
+                <div class="row-fluid">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for k, v in anal.hash.iteritems %}
+                            <tr>
+                                <td><b>{{ k|upper }}</b></td>
+                                <td>{{ v }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="server-hash-match">
+                <div class="row-fluid">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% if analysis.list_set.all %}
+                            {% for match in analysis.list_set.all %}
+                            <tr>
+                                <td><strong>{{ match.name }}</strong></td>
+                                <td>{{ match.description }}</td>
+                            </tr>
+                            {% endfor %}
+                       {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
