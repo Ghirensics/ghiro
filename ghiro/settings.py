@@ -118,11 +118,6 @@ INSTALLED_APPS = (
     "hashes",
 )
 
-# Create log file directory.
-logs_path = os.path.join(os.getcwd(), "logs")
-if not os.path.exists(logs_path):
-    os.mkdir(logs_path)
-
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
@@ -155,14 +150,6 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'simple',
             },
-        'debug_log_file':{
-            'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join('.', 'logs', 'debug.log'),
-            'maxBytes': '16777216', # 16megabytes
-            'backupCount': 3,
-            'formatter': 'verbose'
-        },
     },
     'loggers': {
         'django.request': {
@@ -171,7 +158,7 @@ LOGGING = {
             'propagate': True,
         },
         'processor': {
-            'handlers': ['console', 'debug_log_file'],
+            'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': False,
             },
