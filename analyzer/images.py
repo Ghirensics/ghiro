@@ -77,17 +77,17 @@ class MetadataAnalyzer():
     def _get_xmp(self):
         """Extract XMP metadata."""
         for key in self.metadata.get_xmp_tags():
-            self._add_key(key, self.metadata.get_xmp_tag_string(key))
+            self._add_key(key, self.metadata.get(key))
 
     def _get_iptc(self):
         """Extract IPTC metadata."""
         for key in self.metadata.get_iptc_tags():
-            self._add_key(key, self.metadata.get_iptc_tag_string(key))
+            self._add_key(key, self.metadata.get(key))
 
     def _get_exif(self):
         """Extract EXIF metadata."""
         for key in self.metadata.get_exif_tags():
-            self._add_key(key, self.metadata.get_exif_tag_string(key))
+            self._add_key(key, self.metadata.get(key))
 
     def _get_previews(self):
         """Extract previews."""

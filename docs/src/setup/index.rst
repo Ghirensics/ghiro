@@ -16,7 +16,7 @@ Ghiro has the following requirements:
     * Python: that's how we roll (only Python 2.x, at least release 2.7)
     * Python-magic: for MIME extraction
     * Python 2.x bindings for gobject-introspection libraries, required by Gexiv2
-    * Gexiv2: for metadata extraction (at least release 0.4)
+    * Gexiv2: for metadata extraction (at least release 0.6.1)
     * Python Imaging Library (PIL): for image manipulation (at least release 1.1)
     * Python-dateutil: for datetime manipulation
     * Pymongo: driver for MongoDB (at least release 2.5)
