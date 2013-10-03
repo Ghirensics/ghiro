@@ -203,26 +203,26 @@ Setup Apache and mod_wsgi with the following command (run as root or with sudo):
     apt-get install apache2 libapache2-mod-wsgi
 
 An example of virtual host configuration is the following (Ghiro is extracted in
-/var/www/ghiro/ in this example):
+/var/www/ghiro/ in this example)::
 
-<VirtualHost *:80>
-    ServerAdmin webmaster@localhost
-    WSGIProcessGroup ghiro
-    WSGIDaemonProcess ghiro processes=5 threads=10 user=nobody group=nogroup python-path=/var/www/ghiro/ home=/var/www/ghiro/ display-name=local
-    WSGIScriptAlias / /var/www/ghiro/ghiro/wsgi.py
-    Alias /static/ /var/www/ghiro/static/
-    <Location "/static/">
-        Options -Indexes
-    </Location>
+    <VirtualHost *:80>
+        ServerAdmin webmaster@localhost
+        WSGIProcessGroup ghiro
+        WSGIDaemonProcess ghiro processes=5 threads=10 user=nobody group=nogroup python-path=/var/www/ghiro/ home=/var/www/ghiro/ display-name=local
+        WSGIScriptAlias / /var/www/ghiro/ghiro/wsgi.py
+        Alias /static/ /var/www/ghiro/static/
+        <Location "/static/">
+            Options -Indexes
+        </Location>
 
-    ErrorLog ${APACHE_LOG_DIR}/error.log
+        ErrorLog ${APACHE_LOG_DIR}/error.log
 
-    # Possible values include: debug, info, notice, warn, error, crit,
-    # alert, emerg.
-    LogLevel warn
+        # Possible values include: debug, info, notice, warn, error, crit,
+        # alert, emerg.
+        LogLevel warn
 
-    CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+    </VirtualHost>
 
 Restart apache. Now the web application is listening on port 80/tcp, just put the IP
 address in your browser.
