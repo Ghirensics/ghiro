@@ -15,7 +15,8 @@ Ghiro has the following requirements:
     * MongoDB: you need to run a MongoDB database (at least release 2.0)
     * Python: that's how we roll (only Python 2.x, at least release 2.7)
     * Python-magic: for MIME extraction
-    * Gexiv: for metadata extraction (at least release 0.4)
+    * Python 2.x bindings for gobject-introspection libraries, required by Gexiv2
+    * Gexiv2: for metadata extraction (at least release 0.4)
     * Python Imaging Library (PIL): for image manipulation (at least release 1.1)
     * Python-dateutil: for datetime manipulation
     * Pymongo: driver for MongoDB (at least release 2.5)
@@ -41,8 +42,8 @@ If you don't have already it, install MongoDB with the following command (run as
 
 Install required libraries with the the following commands (run as root or with sudo)::
 
-    apt-get install python-pip python-magic libgexiv2-1 python-imaging python-dateutil
-    apt-get install build-essential python-dev
+    apt-get install python-pip libgexiv2-1 python-imaging python-dateutil
+    apt-get install build-essential python-dev python-gi
 
 Install latest Django with the following command (run as root or with sudo)::
 
@@ -51,6 +52,10 @@ Install latest Django with the following command (run as root or with sudo)::
 Install latest PyMongo with the following command (run as root or with sudo)::
 
     pip install pymongo
+
+Install latest Pytjon magic with the following command (run as root or with sudo)::
+
+    pip install  python-magic
 
 Preparing
 ---------
@@ -196,3 +201,52 @@ Now we are going to configure Apache as a front end for Ghiro's django applicati
 Setup Apache and mod_wsgi with the following command (run as root or with sudo)::
 
     apt-get install apache2 libapache2-mod-wsgi
+
+An example of virtual host configuration is the following (Ghiro is extracted in
+/var/www/ghiro/ in this example):
+
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    WSGIProcessGroup ghiro
+    WSGIDaemonProcess ghiro processes=5 threads=10 user=nobody group=nogroup python-path=/var/www/ghiro/ home=/var/www/ghiro/ display-name=local
+    WSGIScriptAlias / /var/www/ghiro/ghiro/wsgi.py
+    Alias /static/ /var/www/ghiro/static/
+    <Location "/static/">
+        Options -Indexes
+    </Location>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+
+    # Possible values include: debug, info, notice, warn, error, crit,
+    # alert, emerg.
+    LogLevel warn
+
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+Restart apache. Now the web application is listening on port 80/tcp, just put the IP
+address in your browser.
+
+Run the processor with upstart
+------------------------------
+
+You can automatically run the processor with upstart.
+
+Create the file ghiro.conf in /etc/init/ with the following content::
+
+    description     "Ghiro"
+
+    start on startup
+    stop on shutdown
+    script
+            cd /var/www/ghiro/
+            exec /usr/bin/python manage.py process
+    end script
+
+To stop the processor use the following command (run as root or with sudo)::
+
+    service ghiro stop
+
+To start the processor use the following command (run as root or with sudo)::
+
+    service ghiro start
