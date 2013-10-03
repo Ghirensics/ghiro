@@ -34,10 +34,14 @@ class Command(NoArgsCommand):
     def _process(self):
         """Starts processing waiting tasks."""
         while True:
+            # Clean django model cache.
+            transaction.enter_transaction_management()
+            transaction.commit()
+
             # Fetch tasks waiting processing.
             tasks = Analysis.objects.filter(state="W").order_by("id")
 
-            if tasks:
+            if tasks.exists():
                 logger.info("Found {0} images waiting".format(tasks.count()))
 
                 for task in tasks:
