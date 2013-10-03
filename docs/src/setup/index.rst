@@ -239,8 +239,7 @@ Create the file ghiro.conf in /etc/init/ with the following content::
     start on started mysql
     stop on shutdown
     script
-            cd /var/www/ghiro/
-            sleep 120
+            chdir /var/www/ghiro/
             exec /usr/bin/python manage.py process
     end script
 
