@@ -5,6 +5,7 @@
 import logging
 from django.core.management.base import NoArgsCommand
 from django.utils.timezone import now
+from django.db import transaction
 from time import sleep
 
 import analyzer.db as db
@@ -29,12 +30,10 @@ class Command(NoArgsCommand):
             self._process()
         except KeyboardInterrupt:
             print "Exiting... (requested by user)"
-            self.is_running = False
 
     def _process(self):
         """Starts processing waiting tasks."""
-        self.is_running = True
-        while self.is_running:
+        while True:
             # Fetch tasks waiting processing.
             tasks = Analysis.objects.filter(state="W").order_by("id")
 
