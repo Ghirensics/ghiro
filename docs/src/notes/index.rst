@@ -8,6 +8,13 @@ Any pull request will be really appreciated.
 
 .. _`official GitHub page`: https://github.com/ghirensics/ghiro
 
+You are welcome in our IRC chat on `Freenode`_, configure you client for::
+
+    Server: irc.freenode.net
+    Channel: #ghiro
+
+.. _`Freenode`: http://freenode.net/
+
 Disclaimer
 ==========
 
