@@ -1,0 +1,8 @@
+DEVELOPERS
+----------
+
+Alessandro `jekil` Tanasi (@jekil) - alessandro at tanasi.it
+Lead Developer
+
+Marco `burlone` Buoncristiano
+Design and User Experience Architect
