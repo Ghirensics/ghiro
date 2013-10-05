@@ -13,3 +13,16 @@ Cases allow you to group image analysis by topic, you can choose which user allo
 permission schema. 
 
 Official website: http://getghiro.org
+
+Community and reports
+---------------------
+
+To report bugs or request for new features you can use the ticketing
+system or you can just drop us an email or DM us on Twitter.
+Any pull request will be really appreciated.
+
+You are welcome in our IRC chat on Freenode network, configure you client for:
+
+    Server: irc.freenode.net
+    Channel: #ghiro
+
