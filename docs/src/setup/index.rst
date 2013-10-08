@@ -24,6 +24,13 @@ Ghiro has the following requirements:
 
 If you choose MySQL or PostgrSQL as database you have to install their additional drivers.
 
+Ghiro web application is tested and working on the following browsers:
+    * Internet Explorer 8, Internet Explorer 9, Internet Explorer 10
+    * Mozilla Firefox 24
+    * Opera 17
+    * Safari 7
+    * IOS 7 for Ipad and Iphone
+
 Getting started
 ===============
 
