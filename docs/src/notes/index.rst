@@ -1,11 +1,17 @@
-Contribute, bugs and feature requests
-=====================================
+Keep in touch with us
+=====================
 
-To report bugs or request for new features you can use the ticketing
-system in `official GitHub page`_. or you can just drop us an email or
-DM us on Twitter.
+Join the discussion to talk about Ghiro, we want you!
 
-.. _`official GitHub page`: https://github.com/ghirensics/ghiro
+Mailing list - Google Group
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Join our mailing list to the `Ghiro Google Group`_.
+
+.. _`Ghiro Google Group`: https://groups.google.com/d/forum/ghiro
+
+IRC Chat
+^^^^^^^^
 
 You are welcome in our IRC chat on `Freenode`_, configure you client for::
 
@@ -14,8 +20,22 @@ You are welcome in our IRC chat on `Freenode`_, configure you client for::
 
 .. _`Freenode`: http://freenode.net/
 
-We appreciate every feedback, question, bug report, pull requests and contributions.
+WTF mail
+^^^^^^^^
 
+If you have something super secret to discuss privately with us just drop an email to: wtf@getghiro.org
+
+
+Contribute, bugs and feature requests
+=====================================
+
+We appreciate every feedback, question, bug report, pull requests and contributions.
+You can help Ghiro in many ways: contributing with code, hunting bugs,
+submitting feature request, donating money or in many other ways.
+To report bugs or request for new features you can use the ticketing
+system in `official GitHub page`_. or just get in touch with us.
+
+.. _`official GitHub page`: https://github.com/ghirensics/ghiro
 
 Donations
 ---------
