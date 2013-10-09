@@ -27,10 +27,17 @@ ensuring the longevity and overall health of the project.
 We accept both sponsorship (a sponsorship is an annual commitment of funds to the project) and donations.
 We allow the following forms of payment but feel free to contact us for any question.
 
+PayPal
+^^^^^^
+
+You can donate via a PayPal account or using all credit cards at the `donation page`_.
+
+.. _`donation page`: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZWC9427RGEJ32
+
 BitCoin
 ^^^^^^^
 
-BTC Address: 15TWFTDA3c3LpjzCXGY4WZFANXjydfBtSN
+You can donate using BitCoin to this address: 15TWFTDA3c3LpjzCXGY4WZFANXjydfBtSN
 
 .. image:: ../_images/bitcoin.png
     :scale: 50%
