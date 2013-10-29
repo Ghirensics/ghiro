@@ -45,6 +45,15 @@ $(document).ready(function() {
         }, 2000)
     });
     
+    $('.btn-close-case').click(function(){
+        var id = $(this).attr("id");
+        $("#id-close").attr({href: id});
+    });
+    
+    $('.btn-delete-case').click(function(){
+        var id = $(this).attr("id");
+        $("#id-delete").attr({href: id});
+    });
 });
 
 function internetStatus(){

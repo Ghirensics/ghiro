@@ -124,6 +124,26 @@ def close_case(request, case_id):
 
 @require_safe
 @login_required
+def delete_case(request, case_id):
+    """Delete a case."""
+    case = get_object_or_404(Case, pk=case_id)
+
+    # Security check.
+    if request.user != case.owner and not request.user.is_superuser:
+        return render_to_response("error.html",
+                                  {"error": "You are not authorized to delete this."},
+                                  context_instance=RequestContext(request))
+
+    Case.objects.get(pk=case_id).delete()
+
+    # Auditing.
+    log_activity("C",
+                 "Case {0} deleted".format(case.name),
+                 request)
+    return HttpResponseRedirect(reverse("analyses.views.list_cases"))
+
+@require_safe
+@login_required
 def show_case(request, case_id, page_name):
     """Details about a case."""
     case = get_object_or_404(Case, pk=case_id)
@@ -287,7 +307,6 @@ def new_folder(request, case_id):
     return render_to_response("analyses/images/new_folder.html",
                               {"form": form, "case": case},
                               context_instance=RequestContext(request))
-
 @require_safe
 @login_required
 def show_analysis(request, analysis_id):

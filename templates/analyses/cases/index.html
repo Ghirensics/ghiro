@@ -68,7 +68,8 @@
                                                                     <a class="btn btn-warning tool" disabled="disabled" title="Case already closed"> <i class="icon-remove"></i> </a>
                                                                 {% else %}
                                                                     <a class="btn tool" title="Edit case" href="{% url "analyses.views.edit_case" case.id %}"> <i class="icon-edit"></i> </a>
-                                                                    <a class="btn btn-warning tool btn-close" id="{% url "analyses.views.close_case" case.id %}" title="Close case" href="#close" role="button" data-toggle="modal"> <i class="icon-remove"></i> </a>
+                                                                    <a class="btn btn-warning tool btn-close-case" id="{% url "analyses.views.close_case" case.id %}" title="Close case" href="#close" role="button" data-toggle="modal"> <i class="icon-remove"></i> </a>
+                                                                    <a class="btn btn-danger tool btn-delete-case" id="{% url "analyses.views.delete_case" case.id %}" title="Delete case" href="#delete" role="button" data-toggle="modal"> <i class="icon-trash"></i> </a>
                                                                 {% endif %}
                                                             </div></td>
                                                         </tr>
@@ -107,7 +108,8 @@
                                                                     <a class="btn btn-warning tool" disabled="disabled" title="Case already closed"> <i class="icon-remove"></i> </a>
                                                                 {% else %}
                                                                     <a class="btn tool" title="Edit case" href="{% url "analyses.views.edit_case" case.id %}"> <i class="icon-edit"></i> </a>
-                                                                    <a class="btn btn-warning tool btn-close" id="{% url "analyses.views.close_case" case.id %}" title="Close case" href="#close" role="button" data-toggle="modal"> <i class="icon-remove"></i> </a>
+                                                                    <a class="btn btn-warning tool btn-close-case" id="{% url "analyses.views.close_case" case.id %}" title="Close case" href="#close" role="button" data-toggle="modal"> <i class="icon-remove"></i> </a>
+                                                                    <a class="btn btn-danger tool btn-delete-case" id="{% url "analyses.views.delete_case" case.id %}" title="Delete case" href="#delete" role="button" data-toggle="modal"> <i class="icon-trash"></i> </a>
                                                                 {% endif %}
                                                             </div></td>
                                                         </tr>
@@ -148,7 +150,8 @@
                                                                     <a class="btn btn-warning tool" disabled="disabled" title="Case already closed"> <i class="icon-remove"></i> </a>
                                                                 {% else %}
                                                                     <a class="btn tool" title="Edit case" href="{% url "analyses.views.edit_case" case.id %}"> <i class="icon-edit"></i> </a>
-                                                                    <a class="btn btn-warning tool btn-close" id="{% url "analyses.views.close_case" case.id %}" title="Close case" href="#close" role="button" data-toggle="modal"> <i class="icon-remove"></i> </a>
+                                                                    <a class="btn btn-warning tool btn-close-case" id="{% url "analyses.views.close_case" case.id %}" title="Close case" href="#close" role="button" data-toggle="modal"> <i class="icon-remove"></i> </a>
+                                                                    <a class="btn btn-danger tool btn-delete-case" id="{% url "analyses.views.delete_case" case.id %}" title="Delete case" href="#delete" role="button" data-toggle="modal"> <i class="icon-trash"></i> </a>
                                                                 {% endif %}
                                                             </div></td>
                                                         </tr>
@@ -167,34 +170,9 @@
     </div>
 </div>
 
-<div id="close" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-            ×
-        </button>
-        <h3>Close the case</h3>
-    </div>
-    <div class="modal-body">
-        <p>
-            Are you sure continue?
-        </p>
-    </div>
-    <div class="modal-footer">
-        <a class="btn btn-warning" id="id">
-            Close
-        </a>
-        <button class="btn" data-dismiss="modal" aria-hidden="true">
-            Cancel
-        </button>
-    </div>
-</div>
+{% include "layout/_modalActionCase.html" %}
 
 <script type="text/javascript">
-$('.btn-close').click(function(){
-var id = $(this).attr("id");
-$("#id").attr({href: id});
-});
-
 $('.datatables').dataTable({
 "sDom" : '<"top">t<"bottom"lp><"clear">',
 "aaSorting": [[ 2, "desc" ]]
