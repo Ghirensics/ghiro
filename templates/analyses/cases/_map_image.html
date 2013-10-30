@@ -11,16 +11,34 @@ function initialize() {
         zoom: 2,
         mapTypeId: google.maps.MapTypeId.HYBRID
     };
+
     map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
     {% for image in images %}
+
+        var contentString = '<div>'+
+            '<h4 id="firstHeading" class="firstHeading">{{ image.file_name }}</h4>'+
+            '<div>'+
+            '<a href="{% url "analyses.views.show_analysis" image.id %}">'+
+            '<img src="{% url "analyses.views.image" image.thumb_id %}" />'+
+            '</a>'+
+            '</div>'+
+            '</div>';
+
+        var infowindow_{{ forloop.counter }} = new google.maps.InfoWindow({
+            content: contentString
+        });
+
         marker_{{ forloop.counter }} = new google.maps.Marker({
             position: new google.maps.LatLng({{ image.latitude|floatformat:6 }}, {{ image.longitude|floatformat:6 }}),
             map: map,
-            title: "{{ image.file_name }}",
+            title: "{{ image.file_name }}"
         });
+
         google.maps.event.addListener(marker_{{ forloop.counter }}, 'click', function() {
-            window.location = '{% url "analyses.views.show_analysis" image.id %}';
+            infowindow_{{ forloop.counter }}.open(map,marker_{{ forloop.counter }});
         });
+
     {% endfor %}
 }
 
