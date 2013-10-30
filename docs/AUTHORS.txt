@@ -4,5 +4,5 @@ DEVELOPERS
 Alessandro `jekil` Tanasi (@jekil) - alessandro at tanasi.it
 Lead Developer
 
-Marco `burlone` Buoncristiano
+Marco `burlone` Buoncristiano - marco.buoncristiano at gmail.com
 Design and User Experience Architect
