@@ -7,7 +7,12 @@
                    <img src="{% url "analyses.views.image" image.thumb_id %}" />
                </a>
                <div class="tools">
-                   <a href="{% url "analyses.views.show_analysis" image.id %}"> <i class="icon-list-alt"> </i></a>
+                   <a href="{% url "analyses.views.show_analysis" image.id %}" title="Show report"> <i class="icon-list-alt"> </i></a>
+                   {% if image.favorites.all %}
+                        <a href="#" id="{% url "analyses.views.favorite" image.id %}" rel="{{ image.id }}" title="Add to favorites" class="favorite btn-warning star{{image.id}}"> <i class="icon-star"> </i></a>
+                   {% else %}
+                        <a href="#" id="{% url "analyses.views.favorite" image.id %}" rel="{{ image.id }}" title="Add to favorites" class="favorite star{{image.id}}"> <i class="icon-star"> </i></a>
+                   {% endif %}
                    <a class="fancybox" href="{% url "analyses.views.image" image.image_id %}" title="{{ image.file_name }}"><i class="icon-picture"> </i></a>
                </div>
             {% else %} 

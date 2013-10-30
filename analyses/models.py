@@ -79,3 +79,9 @@ class Analysis(models.Model):
 
         if "gps" in record["metadata"]:
             return record["metadata"]["gps"]["pos"]["Longitude"]
+
+class Favorite(models.Model):
+    """Add favorite to image."""
+
+    analysis = models.ForeignKey(Analysis, null=False, blank=False, on_delete=models.CASCADE, db_index=True, editable=False, related_name="favorites")
+    owner = models.ForeignKey(Profile, null=False, blank=False, on_delete=models.CASCADE, db_index=True, editable=False, related_name="owned_favorites")

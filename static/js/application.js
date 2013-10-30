@@ -32,7 +32,7 @@ $(document).ready(function() {
             
             return false;
             }
-        }
+    };
         $(document).ready(function () {
         Popup.init();
     });
@@ -42,7 +42,7 @@ $(document).ready(function() {
         btn.button('loading');
         setTimeout(function(){
             btn.button('reset')
-        }, 2000)
+        }, 2000);
     });
     
     $('.btn-close-case').click(function(){
@@ -54,6 +54,26 @@ $(document).ready(function() {
         var id = $(this).attr("id");
         $("#id-delete").attr({href: id});
     });
+   
+   $('.favorite').click(function(){
+        var id = $(this).attr("id");
+        var rel = $(this).attr("rel");
+        $.ajax({
+            type: "GET",
+            url: id,
+            success: function(data){
+                if (data == "true"){
+                    $(".star"+rel).addClass('btn-warning');
+                }else{
+                    $(".star"+rel).removeClass('btn-warning');
+                }
+            },
+            error: function (request, status, error) {
+                alert(request.responseText);
+            }
+        });
+    });
+    
 });
 
 function internetStatus(){

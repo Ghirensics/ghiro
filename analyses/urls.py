@@ -17,5 +17,6 @@ urlpatterns = patterns("",
     url(r"^show/(?P<analysis_id>[\d]+)/$", "analyses.views.show_analysis"),
     url(r"^images/(?P<page_name>[\w]+)/$", "analyses.views.list_images"),
     url(r"^images/file/(?P<id>[\d\w]+)/$", "analyses.views.image"),
+    url(r"^images/favorite/(?P<id>[\d\w]+)/$", "analyses.views.favorite"),
     url(r"^search/(?P<page_name>[\w]+)/$", "analyses.views.search"),
 )

@@ -21,7 +21,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count
 
 import analyses.forms as forms
-from analyses.models import Case, Analysis
+from analyses.models import Case, Analysis, Favorite
 from users.models import Profile
 from analyzer.db import save_file, get_file
 from analyzer.utils import create_thumb
@@ -561,3 +561,27 @@ def dashboard(request):
             "failed_graph": failed_graph
         },
         context_instance=RequestContext(request))
+
+@login_required
+def favorite(request, id):
+    """Favorite image."""
+    analysis = get_object_or_404(Analysis, pk=id)
+
+    # Security check.
+    if not(request.user.is_superuser or request.user in analysis.case.users.all()):
+        return render_to_response("error.html",
+            {"error": "You are not authorized to view this."},
+            context_instance=RequestContext(request))
+
+    if Favorite.objects.filter(analysis=analysis).filter(owner=request.user).exists():
+        Favorite.objects.filter(analysis=analysis).filter(owner=request.user).delete()
+        return HttpResponse("false")
+    else:
+        Favorite(analysis=analysis, owner=request.user).save()
+
+    # Auditing.
+    log_activity("A",
+                 "Favorite image added: {0}".format(analysis.file_name),
+                 request)
+    #return HttpResponseRedirect(reverse("analyses.views.show_analysis", args=(analysis.id,)))
+    return HttpResponse("true")

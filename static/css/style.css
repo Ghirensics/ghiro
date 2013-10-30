@@ -270,7 +270,7 @@ a {
     transition: all 0.2s ease 0s;
     vertical-align: middle;
     width: 29px;
-    height: 55px;
+    height: 85px;
 }
 .ghiro-thumbnails > li:hover > .tools {
     left: 0;
