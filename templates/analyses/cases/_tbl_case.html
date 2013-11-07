@@ -71,6 +71,9 @@
     <li {% if pagename == "map" %} class="active" {% endif %}>
         <a href="{% url "analyses.views.show_case" case.id "map" %}">Map</a>
     </li>
+    <li {% if pagename == "favorites" %} class="active" {% endif %}>
+        <a href="{% url "analyses.views.show_case" case.id "favorites" %}">Favorites</a>
+    </li>
 </ul>
 {% if pagename == "list" %}
     <table class="table table-bordered table-striped responsive">
@@ -267,6 +270,8 @@
         {% endif %}
 {% elif pagename == "map" %}
     {% include "analyses/cases/_map_image.html" with images=tasks %}
+{% elif pagename == "favorites" %}
+    {% include "analyses/cases/_favorites.html" with images=tasks %}
 {% endif %}
 
 <script type="text/javascript">

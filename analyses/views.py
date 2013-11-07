@@ -171,6 +171,9 @@ def show_case(request, case_id, page_name):
     elif page_name == "others":
         tasks = tasks.exclude(owner=request.user)
         tasks = _paginate(tasks, page, 20)
+    elif page_name == "favorites":
+        tasks = tasks.filter(favorites__owner=request.user)
+        tasks = _paginate(tasks, page, 20)
     elif page_name == "map":
         # Return all data, lookup on mongo to be faster.
         mongo_results = db.analyses.find({"metadata.gps.pos": {"$exists": True}})
