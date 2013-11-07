@@ -393,6 +393,10 @@ def list_images(request, page_name):
     if page_name == "list" or page_name == "thumb":
         page = request.GET.get("page")
         last = _paginate(last, page, 20)
+    elif page_name == "favorites":
+        last = last.filter(favorites__owner=request.user)
+        page = request.GET.get("page")
+        last = _paginate(last, page, 20)
     elif page_name == "map":
         # Return all data, lookup on mongo to be faster.
         mongo_results = db.analyses.find({"metadata.gps.pos": {"$exists": True}})

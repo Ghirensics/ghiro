@@ -30,6 +30,9 @@
                     <li {% if pagename == "map" %} class="active" {% endif %}>
                         <a href="{% url "analyses.views.list_images" "map" %}">Map</a>
                     </li>
+                    <li {% if pagename == "favorites" %} class="active" {% endif %}>
+                        <a href="{% url "analyses.views.list_images" "favorites" %}">Favorites</a>
+                    </li>
                 </ul>
             </div>
             <div>
@@ -85,6 +88,8 @@
                     {% endif %}
             {% elif pagename == "map" %}
                     {% include "analyses/cases/_map_image.html" %}
+            {% elif pagename == "favorites" %}
+                    {% include "analyses/cases/_favorites.html" %}
             {% endif %}
             </div>
         </div>

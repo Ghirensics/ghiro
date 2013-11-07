@@ -37,7 +37,12 @@
                         </a>
                         <div class="media-body">
                             <h2 class="media-heading">Image analysis: {{ anal.hash.md5 }}</h2>
-                            <h1>
+                            <h1 class="btn-group">
+                                {% if analysis.favorites.all %}
+                                    <a href="#" id="{% url "analyses.views.favorite" analysis.id %}" rel="{{ analysis.id }}" class="btn favorite btn-warning star{{ analysis.id }}"> <i class="icon-star"> </i></a>
+                                {% else %}
+                                    <a href="#" id="{% url "analyses.views.favorite" analysis.id %}" rel="{{ analysis.id }}" class="btn favorite star{{ analysis.id }}"> <i class="icon-star"> </i></a>
+                                {% endif %}
                                 <a href="{% url "analyses.views.image" analysis.image_id %}" class="btn"><i class="icon-download"></i> Download</a>
                                 <a href="{% url "analyses.views.image" analysis.image_id %}" class="action_print btn btn-info"><i class="icon-print"></i> Print</a>
                             </h1>
