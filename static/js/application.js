@@ -54,7 +54,7 @@ $(document).ready(function() {
         var id = $(this).attr("id");
         $("#id-delete").attr({href: id});
     });
-   
+
    $('.favorite').click(function(){
         var id = $(this).attr("id");
         var rel = $(this).attr("rel");
@@ -68,7 +68,7 @@ $(document).ready(function() {
                     $(".star"+rel).removeClass('btn-warning');
                 }
             },
-            error: function (request, status, error) {
+            error: function (request) {
                 alert(request.responseText);
             }
         });
@@ -85,3 +85,10 @@ function internetStatus(){
         loadScript();
     }
 };
+
+function loadScript() {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "http://maps.google.com/maps/api/js?sensor=false&callback=initialize";
+    document.body.appendChild(script);
+}
