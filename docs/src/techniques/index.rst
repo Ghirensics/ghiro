@@ -99,10 +99,12 @@ The geotag inside image metadata is read and the position where the photo was ta
 ELA (Error Level Analysis)
 ==========================
 
-Error Level Analysis (ELA) is a technique aimed to detect if an image is edited or not.
+`Error Level Analysis`_ (ELA) is a technique aimed to detect if an image is edited or not.
 It can be applied to compressed images, i.e. JPEG or PNG. The main idea is that an image in his original form has unique levels of compression.
 The analyzed image is resaved and differences in compression levels are calculated, if differences are detected a probability of edits is high.
 Ghiro calculates error levels and detects differences between them.
+
+.. _`Error Level Analysis`: http://blackhat.com/presentations/bh-dc-08/Krawetz/Whitepaper/bh-dc-08-krawetz-WP.pdf
 
 Hash digest generation
 ======================
