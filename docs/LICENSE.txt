@@ -645,3 +645,6 @@ license: Apache License Version 2.0
 
 Font Awesome is copyrighted by Dave Gandy and released under the following
 license: SIL OFL 1.1 - http://scripts.sil.org/OFL
+
+Plupload is copyrighted by Moxiecode Systems AB and released under the following
+license: GPL2 Licensed
