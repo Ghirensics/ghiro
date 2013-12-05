@@ -1,29 +1,42 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="span11">
-    <div class="content content-large">
-        <div class="content-header">
-            <h2><i class="icon-briefcase"> </i> Cases</h2>
-        </div>
-        <div class="content-breadcrumb">
-            <ul class="breadcrumb">
-                <li>
-                    <a href="/"><i class="icon-home"></i> Dashboard</a><span class="divider">&rsaquo;</span>
-                </li>
-                <li>
-                    <a href="{% url "analyses.views.list_cases" %}"><i class="icon-briefcase"> </i> Cases</a>
-                    <span class="divider">&rsaquo;</span>
-                </li>
-                <li>
-                    <a href="{% url "analyses.views.show_case" case.id "list" %}"><i class="icon-book"> </i> {{ case.name }}</a><span class="divider">&rsaquo;</span>
-                </li>
-                <li class="active">
-                    New Image
-                </li>
-            </ul>
-        </div>
-        <div class="content-body">
+    <div class="span11">
+        <div class="content content-large">
+            <div class="content-header">
+                <h2><i class="icon-briefcase"> </i> Cases</h2>
+            </div>
+            <div class="content-breadcrumb">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="/"><i class="icon-home"></i> Dashboard</a><span class="divider">&rsaquo;</span>
+                    </li>
+                    <li>
+                        <a href="{% url "analyses.views.list_cases" %}"><i class="icon-briefcase"> </i> Cases</a>
+                        <span class="divider">&rsaquo;</span>
+                    </li>
+                    <li>
+                        <a href="{% url "analyses.views.show_case" case.id "list" %}"><i class="icon-book"> </i> {{ case.name }}</a><span class="divider">&rsaquo;</span>
+                    </li>
+                    <li class="active">
+                        New Image
+                    </li>
+                </ul>
+            </div>
+            <div class="content-body">
+                <div class="row-fluid">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body noPadding">
+                                <form enctype="multipart/form-data">{% csrf_token %}
+                                    <div id="uploader"></div>
+                                    <div id="filelist" style="width:auto; height:150px; overflow-y:scroll; overflow-y:hide;"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--
             <blockquote>
                 <p>You can choose an image on your file system and upload it.</p>
             </blockquote>
@@ -37,7 +50,82 @@
                 </div>
                 <span class="help-inline">{{ form.image.errors }}</span>
             </form>
+            -->
+            </div>
         </div>
     </div>
-</div>
+
+    {# Styles #}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/plupload/jquery.plupload.queue.css">
+    {# JS #}
+    <script src="{{ STATIC_URL }}js/plupload/jquery-migrate-1.0.0.js"></script>
+    <script src="{{ STATIC_URL }}js/plupload/elfinder.min.js"></script>
+    <script src="{{ STATIC_URL }}js/plupload/jquery.plupload.queue.js"></script>
+    <script src="{{ STATIC_URL }}js/plupload/plupload.full.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+            $("#uploader").pluploadQueue({
+                runtimes : 'html5',
+                url : '{% url "analyses.views.new_image" case.id %}',
+                unique_names: false,
+                multipart: true,
+                file_data_name: 'image',
+                headers : {'X-Requested-With' : 'XMLHttpRequest', 'X-CSRFToken' : '{{csrf_token}}'}
+            });
+
+            $('form').submit(function(e) {
+                var uploader = $('#uploader').pluploadQueue();
+
+                if (uploader.total.uploaded == 0) {
+                    if (uploader.files.length > 0) {
+                        uploader.bind('UploadProgress', function() {
+                            if (uploader.total.uploaded == uploader.files.length)
+                                $('form').submit();
+                        });
+                        uploader.start();
+                    } else {
+                        alert('You must at least upload one file.');
+                    }
+                    e.preventDefault();
+                }
+            });
+
+            var uploader = $('#uploader').pluploadQueue();
+
+            uploader.bind('UploadComplete', function(up) {
+                if (up.total.queued == 0 && uploader.total.uploaded == up.files.length){
+                    window.location.href = "{% url "analyses.views.show_case" case.id "list" %}";
+                }else{
+                    $('#filelist').prepend("<div>Error:</div>");
+                }
+            });
+
+            uploader.bind('FileUploaded', function(up, file, info) {
+                var response = jQuery.parseJSON(info.response);
+                if(response.error){
+                    file.status = plupload.FAILED;
+                    up.trigger('QueueChanged');
+                    $('#filelist').append("<div>" + (file ? " File: " + file.name : "") +
+                            " Error: " + response.error.code +
+                            ", Message: " + response.error.message +
+                            "</div>"
+                    );
+                }
+            });
+
+            uploader.bind('Error', function(up, err) {
+                $('#filelist').append("<div>" +
+                        (err.file ? " File: " + err.file.name : "") +
+                        "</div>"
+                );
+
+                up.refresh();
+            });
+
+        })
+
+    </script>
+
 {% endblock %}
