@@ -6,6 +6,7 @@ import gridfs
 import os
 import re
 import magic
+import json
 from bson.son import SON
 from bson.objectid import ObjectId, InvalidId
 from django.template import RequestContext
@@ -19,6 +20,7 @@ from django.db.models import Q
 from django.utils.timezone import now
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count
+from django.utils.encoding import force_unicode
 
 import analyses.forms as forms
 from analyses.models import Case, Analysis, Favorite
@@ -239,6 +241,7 @@ def new_image(request, case_id):
 
     if request.method == "POST":
         form = forms.UploadImageForm(request.POST, request.FILES)
+
         if form.is_valid():
             task = form.save(commit=False)
             task.owner = request.user
@@ -252,8 +255,29 @@ def new_image(request, case_id):
             log_activity("I",
                          "Created new analysis {0}".format(task.file_name),
                          request)
-            return HttpResponseRedirect(reverse("analyses.views.show_case", args=(case.id, "list")))
+            # Response designed for Plupload component.
+            response = HttpResponse('{"jsonrpc": "2.0", "result": null, "id": "id"}', content_type="application/json")
+            # Never cache AJAX response.
+            response["Expires"] = "Mon, 1 Jan 2000 01:00:00 GMT"
+            response["Cache-Control"] = "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+            response["Pragma"] = "no-cache"
+            return response
+        else:
+            # Deal with a validation error. We are using Plupload which basically is an AJAX component
+            # so we have to deal with custom validation errors passing in JSON.
+            # Plupload needs a status code 200/OK to get additional data passed from the web server.
+            response = HttpResponse(json.dumps({"jsonrpc" : "2.0",
+                                                "error" : {"code": 88,
+                                                           "message": " ".join([(u" ".join([force_unicode(i) for i in v])) for k, v in form.errors.items()])},
+                                                "id" : "id"}),
+                                    content_type="application/json")
+            # Never cache AJAX response.
+            response["Expires"] = "Mon, 1 Jan 2000 01:00:00 GMT"
+            response["Cache-Control"] = "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+            response["Pragma"] = "no-cache"
+            return response
     else:
+        # Request is not a POST.
         form = forms.UploadImageForm()
 
     return render_to_response("analyses/images/new_image.html",
