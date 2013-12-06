@@ -30,27 +30,21 @@
                             <div class="panel-body noPadding">
                                 <form enctype="multipart/form-data">{% csrf_token %}
                                     <div id="uploader"></div>
-                                    <div id="filelist" style="width:auto; height:150px; overflow-y:scroll; overflow-y:hide;"></div>
                                 </form>
+                                <div id="filelist" class="hide">
+                                    <strong id="generic_error">
+                                        <i class="icon-warning-sign text-error"></i>
+                                        Errors:
+                                    </strong>
+                                    <strong id="server_error" class="hide">
+                                        <i class="icon-warning-sign text-error"></i>
+                                        Server error: unexpected error, try to reload page and check logs.
+                                    </strong>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--
-            <blockquote>
-                <p>You can choose an image on your file system and upload it.</p>
-            </blockquote>
-            <form action="{% url "analyses.views.new_image" case.id %}" method="post" class="form-inline" enctype="multipart/form-data">{% csrf_token %}
-                <div class="input-append">
-                    <input id="id_image" name="image" class="upload-image" type="file" placeholder="Select your image..">
-                    <button id="btn_submit" class="btn btn-large btn-success" type="submit">
-                        Add
-                    </button>
-                    <a href="{% url "analyses.views.show_case" case.id "list" %}" class="btn btn-large"> Back </a>
-                </div>
-                <span class="help-inline">{{ form.image.errors }}</span>
-            </form>
-            -->
             </div>
         </div>
     </div>
@@ -72,6 +66,11 @@
                 unique_names: false,
                 multipart: true,
                 file_data_name: 'image',
+                preinit: {
+                    Init: function (up, info) {
+                        $('#uploader_container').removeAttr("title");
+                    }
+                },
                 headers : {'X-Requested-With' : 'XMLHttpRequest', 'X-CSRFToken' : '{{csrf_token}}'}
             });
 
@@ -85,8 +84,6 @@
                                 $('form').submit();
                         });
                         uploader.start();
-                    } else {
-                        alert('You must at least upload one file.');
                     }
                     e.preventDefault();
                 }
@@ -98,7 +95,7 @@
                 if (up.total.queued == 0 && uploader.total.uploaded == up.files.length){
                     window.location.href = "{% url "analyses.views.show_case" case.id "list" %}";
                 }else{
-                    $('#filelist').prepend("<div>Error:</div>");
+                    $('.plupload_buttons').append("<a href='{% url 'analyses.views.show_case' case.id 'list' %}' class='btn btn-info result_button'>Back</a>").show();
                 }
             });
 
@@ -108,10 +105,12 @@
                     file.status = plupload.FAILED;
                     up.trigger('QueueChanged');
                     $('#filelist').append("<div>" + (file ? " File: " + file.name : "") +
-                            " Error: " + response.error.code +
-                            ", Message: " + response.error.message +
+                            ", Reason: " + response.error.message +
                             "</div>"
-                    );
+                    ).show();
+                }else{
+                    $('#generic_error').show();
+                    $('.result_button').hide();
                 }
             });
 
@@ -119,9 +118,9 @@
                 $('#filelist').append("<div>" +
                         (err.file ? " File: " + err.file.name : "") +
                         "</div>"
-                );
-
-                up.refresh();
+                ).show();
+                $('#server_error').show();
+                $('.result_button').hide();
             });
 
         })

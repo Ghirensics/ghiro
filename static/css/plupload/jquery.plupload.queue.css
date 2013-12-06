@@ -3,22 +3,7 @@
 ------------------------------------------------------------------- */
 
 .plupload_button {
-    display: -moz-inline-box; /* FF < 3*/
-    display: inline-block;
-    font: normal 12px sans-serif;
-    text-decoration: none;
-    color: #42454a;
-    border: 1px solid #bababa;
-    padding: 2px 8px 3px 20px;
-    margin-right: 4px;
-    background: #f3f3f3 url('../../img/plupload/buttons.png') no-repeat 0 center;
-    outline: 0;
-
-    /* Optional rounded corners for browsers that support it */
-    -moz-border-radius: 3px;
-    -khtml-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+    margin-left: 4px;
 }
 
 .plupload_button:hover {
@@ -29,7 +14,6 @@
 .plupload_disabled, a.plupload_disabled:hover {
     color: #737373;
     border-color: #c5c5c5;
-    background: #ededed url('../../img/plupload/buttons-disabled.png') no-repeat 0 center;
     cursor: default;
 }
 
@@ -38,14 +22,12 @@
 }
 
 .plupload_wrapper {
-
     width: 100%;
 }
 
 .plupload_container {
     padding: 8px;
     background: url('../../img/plupload/transp50.png');
-    /*-moz-border-radius: 5px;*/
 }
 
 .plupload_container input {
@@ -174,11 +156,19 @@ li.plupload_droptext {
     vertical-align: middle;
     border: 0;
     line-height: 165px;
+    font-size: 20px;
+    color: #666;
 }
 
 /* Custom styles */
-.plupload_container {padding: 0;background: none;}
-.plupload_header {background:url(../../img/plupload/furley_bg2.png) repeat-x;border-bottom: 1px solid #c9c9c9;}
+.plupload_container {
+    padding: 0;
+    background: none;
+}
+.plupload_header {
+    background: none;
+    border-bottom: 1px solid #c9c9c9;
+}
 .plupload_header_content {
     background: url(../../img/plupload/cloud-upload.png) no-repeat 10px center;
     color: #666;
@@ -214,10 +204,14 @@ li.plupload_droptext {
     line-height: 20px;
 }
 
-.plupload_button {
-    border: 1px solid #c9c9c9;
-    -moz-border-radius: 1px;
-    -khtml-border-radius: 1px;
-    -webkit-border-radius: 1px;
-    border-radius: 1px;
+#filelist{
+    width:auto;
+    height:150px;
+    overflow-y:scroll;
+    overflow-y:hide;
+    text-align: left;
+}
+
+.result_button{
+    margin-left: 4px;
 }
