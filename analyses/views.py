@@ -6,6 +6,8 @@ import gridfs
 import os
 import re
 import magic
+import urllib2
+import urlparse
 import json
 from bson.son import SON
 from bson.objectid import ObjectId, InvalidId
@@ -21,6 +23,9 @@ from django.utils.timezone import now
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count
 from django.utils.encoding import force_unicode
+from django.conf import settings
+from django.core.files import File
+from django.core.files.temp import NamedTemporaryFile
 
 import analyses.forms as forms
 from analyses.models import Case, Analysis, Favorite
@@ -283,6 +288,75 @@ def new_image(request, case_id):
     return render_to_response("analyses/images/new_image.html",
                               {"form": form, "case": case},
                               context_instance=RequestContext(request))
+
+@login_required
+def new_url(request, case_id):
+    """Upload a new image via URL."""
+    case = get_object_or_404(Case, pk=case_id)
+
+    # Security check.
+    if not request.user.is_superuser and not request.user in case.users.all():
+        return render_to_response("error.html",
+            {"error": "You are not authorized to add image to this."},
+            context_instance=RequestContext(request))
+
+    if case.state == "C":
+        return render_to_response("error.html",
+            {"error": "You cannot add an image to a closed case."},
+            context_instance=RequestContext(request))
+
+    if request.method == "POST":
+        form = forms.UrlForm(request.POST)
+
+        if form.is_valid():
+            # Download file.
+            try:
+                url = urllib2.urlopen(request.POST.get("url"), timeout=5)
+            except urllib2.URLError as e:
+                if hasattr(e, "reason"):
+                    return render_to_response("error.html",
+                        {"error": "We failed to reach a server, reason: %s" % e.reason},
+                        context_instance=RequestContext(request))
+                elif hasattr(e, "code"):
+                    return render_to_response("error.html",
+                        {"error": "The remote server couldn't fulfill the request, HTTP error code %s" % e.code},
+                        context_instance=RequestContext(request))
+
+            # Store temp file.
+            url_temp = NamedTemporaryFile(delete=True)
+            url_temp.write(url.read())
+            url_temp.flush()
+
+            # Convert to File object.
+            url_file = File(url_temp).name
+
+            # Check content type.
+            mime = magic.Magic(mime=True)
+            content_type = mime.from_file(url_file)
+            if content_type not in settings.ALLOWED_EXT:
+                return render_to_response("error.html",
+                    {"error": "File type not supported"},
+                    context_instance=RequestContext(request))
+            # Create analysis task.
+            task = Analysis()
+            task.owner = request.user
+            task.case = case
+            task.file_name = os.path.basename(urlparse.urlparse(request.POST.get("url")).path)
+            task.image_id = save_file(file_path=url_file, content_type=content_type)
+            task.thumb_id = create_thumb(url_file)
+            task.save()
+            # Auditing.
+            log_activity("I",
+                "Created new analysis {0} from URL {1}".format(task.file_name, request.POST.get("url")),
+                request)
+            return HttpResponseRedirect(reverse("analyses.views.show_case", args=(case.id, "list")))
+    else:
+        # Request is not a POST.
+        form = forms.UrlForm()
+
+    return render_to_response("analyses/images/new_url.html",
+        {"form": form, "case": case},
+        context_instance=RequestContext(request))
 
 @login_required
 def new_folder(request, case_id):

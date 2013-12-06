@@ -6,6 +6,7 @@ import os
 from django import forms
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.core.validators import URLValidator
 
 from analyses.models import Case, Analysis
 
@@ -48,5 +49,20 @@ class ImageFolderForm(forms.Form):
             # Checks if is a directory.
             if not os.path.isdir(path):
                 raise ValidationError("Specified path is not a directory.")
+        else:
+            raise ValidationError("URL field is mandatory.")
+
+class UrlForm(forms.Form):
+    """Image url form."""
+    url = forms.CharField(required=True)
+
+    def clean_url(self):
+        url = self.cleaned_data.get("url", False)
+        if url:
+            validate = URLValidator()
+            try:
+                validate(url)
+            except ValidationError as e:
+                raise ValidationError("Please enter a valid URL: %s" % e)
         else:
             raise ValidationError("Path field is mandatory.")
