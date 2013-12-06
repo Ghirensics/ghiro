@@ -8,6 +8,10 @@
             <a href="{% url "analyses.views.new_image" case.id %}"><i class="icon-picture"></i> Add image</a>
         </li>
         <li>
+            <a href="{% url "analyses.views.new_url" case.id %}"><i class="icon-link"></i> Add to url</a>
+        </li>
+        <li class="divider"></li>
+        <li>
             <a href="{% url "analyses.views.new_folder" case.id %}"><i class="icon-folder-open"></i> Add folder</a>
         </li>
     </ul>
