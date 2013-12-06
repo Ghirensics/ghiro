@@ -11,7 +11,7 @@ body {
     display: block;
     min-height: 50px;
     z-index: 99;
-    background: #333333 url('../img/bg-body-bar.jpg');
+    background: #333333 url('/static/img/bg-body-bar.jpg');
     background-position: 0 0;
     background-repeat: repeat no-repeat;
     border-bottom: 1px solid #2E2E2E;
@@ -89,7 +89,7 @@ body {
     display: block;
     height: 100%;
     top: 60px;
-    background: #333333 url('../img/bg-body-bar.jpg');
+    background: #333333 url('/static/img/bg-body-bar.jpg');
     border: 1px solid #2E2E2E;
     width: 6.382978723404255%;
     *width: 6.329787234042553%;
@@ -138,7 +138,7 @@ body {
 .content > .content-header {
     padding: 10px 20px 12px 20px;
     border-bottom: 1px solid #CDCDCD;
-    background: #E9E9E9 url('../img/bg-content-header.png');
+    background: #E9E9E9 url('/static/img/bg-content-header.png');
     color: #626262;
 }
 .content > .content-header h1, .content > .content-header h2, .content > .content-header h3, .content > .content-header h4, .content > .content-header h5, .content > .content-header h6 {
