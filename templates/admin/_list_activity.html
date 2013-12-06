@@ -1,6 +1,7 @@
 <table class="table table-bordered table-striped responsive datatables">
     <thead>
         <tr>
+            <th>#</th>
             <th>Message</th>
             <th>Category</th>
             <th>User</th>
@@ -11,6 +12,7 @@
     <tbody>
         {% for activity in activities %}
         <tr>
+            <td>{{ activity.id }}</td>
             <td>{{ activity.message }}</td>
             <td>{{ activity.get_category_display }}</td>
             <td>{{ activity.user.username }}</td>
@@ -24,7 +26,7 @@
 <script type="text/javascript">
 $('.datatables').dataTable({
     "sDom" : '<"top"f>t<"bottom"lp><"clear">',
-    "aaSorting": [[ 4, "desc" ]]
+    "aaSorting": [[ 0, "desc" ]]
 });
 
 $('.btn-disable').click(function(){
