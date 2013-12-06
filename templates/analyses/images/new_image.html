@@ -61,16 +61,17 @@
         $(document).ready(function() {
 
             $("#uploader").pluploadQueue({
-                runtimes : 'html5',
+                runtimes : 'html5,flash',
                 url : '{% url "analyses.views.new_image" case.id %}',
                 unique_names: false,
                 multipart: true,
                 file_data_name: 'image',
                 preinit: {
-                    Init: function (up, info) {
+                    Init: function () {
                         $('#uploader_container').removeAttr("title");
                     }
                 },
+                flash_swf_url : '{{ STATIC_URL }}js/plupload/plupload.flash.swf',
                 headers : {'X-Requested-With' : 'XMLHttpRequest', 'X-CSRFToken' : '{{csrf_token}}'}
             });
 
