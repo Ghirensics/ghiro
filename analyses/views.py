@@ -337,6 +337,7 @@ def new_url(request, case_id):
                 return render_to_response("error.html",
                     {"error": "File type not supported"},
                     context_instance=RequestContext(request))
+
             # Create analysis task.
             task = Analysis()
             task.owner = request.user
@@ -387,16 +388,23 @@ def new_folder(request, case_id):
                     {"error": "Folder is not a directory."},
                     context_instance=RequestContext(request))
             # Add all files in directory.
+            mime = magic.Magic(mime=True)
             for file in os.listdir(request.POST.get("path")):
+                content_type = mime.from_file(os.path.join(request.POST.get("path"), file))
+                # Check if content type is allowed.
+                if not check_allowed_content(content_type):
+                    # TODO: add some kind of feedback.
+                    pass
+
                 task = Analysis()
                 task.owner = request.user
                 task.case = case
                 task.file_name = file
-                mime = magic.Magic(mime=True)
                 task.image_id = save_file(file_path=os.path.join(request.POST.get("path"), file),
-                                          content_type=mime.from_file(os.path.join(request.POST.get("path"), file)))
+                                          content_type=content_type)
                 task.thumb_id = create_thumb(os.path.join(request.POST.get("path"), file))
                 task.save()
+
                 # Auditing.
                 log_activity("I",
                              "Created new analysis {0}".format(task.file_name),
