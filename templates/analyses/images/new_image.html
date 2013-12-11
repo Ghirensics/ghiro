@@ -1,6 +1,6 @@
-{% extends "base.html" %}
+    {% extends "base.html" %}
 
-{% block content %}
+    {% block content %}
     <div class="span11">
         <div class="content content-large">
             <div class="content-header">
@@ -92,11 +92,17 @@
 
             var uploader = $('#uploader').pluploadQueue();
 
+            uploader.bind('FilesAdded', function() {
+                $('.plupload_start').show();
+                $('.result_button').hide();
+            });
+
             uploader.bind('UploadComplete', function(up) {
                 if (up.total.queued == 0 && uploader.total.uploaded == up.files.length){
                     window.location.href = "{% url "analyses.views.show_case" case.id "list" %}";
                 }else{
-                    $('.plupload_buttons').append("<a href='{% url 'analyses.views.show_case' case.id 'list' %}' class='btn btn-info result_button'>Back</a>").show();
+                    $('.plupload_buttons').append("<a href='{% url 'analyses.views.show_case' case.id 'list' %}' class='btn result_button'>Back</a>").show();
+                    $('.plupload_start').hide();
                 }
             });
 
@@ -128,4 +134,4 @@
 
     </script>
 
-{% endblock %}
+    {% endblock %}
