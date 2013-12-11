@@ -51,3 +51,13 @@ def mongo_connect():
         sys.exit()
     else:
         return db
+
+def check_allowed_content(content_type):
+    """Check if a content type is allowed to be scanned.
+    @param content_type: content type in MIME format
+    @return: boolean test result
+    """
+    if content_type in settings.ALLOWED_EXT:
+        return True
+    else:
+        return False

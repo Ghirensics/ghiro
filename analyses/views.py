@@ -32,7 +32,7 @@ from analyses.models import Case, Analysis, Favorite
 from users.models import Profile
 from analyzer.db import save_file, get_file
 from analyzer.utils import create_thumb
-from ghiro.common import log_activity, mongo_connect
+from ghiro.common import log_activity, mongo_connect, check_allowed_content
 
 # Mongo connection.
 db = mongo_connect()
@@ -333,7 +333,7 @@ def new_url(request, case_id):
             # Check content type.
             mime = magic.Magic(mime=True)
             content_type = mime.from_file(url_file)
-            if content_type not in settings.ALLOWED_EXT:
+            if not check_allowed_content(content_type):
                 return render_to_response("error.html",
                     {"error": "File type not supported"},
                     context_instance=RequestContext(request))

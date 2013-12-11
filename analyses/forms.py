@@ -9,6 +9,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 
 from analyses.models import Case, Analysis
+from ghiro.common import check_allowed_content
 
 class CaseForm(forms.ModelForm):
     """Case form."""
@@ -31,7 +32,7 @@ class UploadImageForm(forms.ModelForm):
                 raise ValidationError("Image file too large")
             # Type check.
             file_type = image.content_type
-            if not file_type in settings.ALLOWED_EXT:
+            if not check_allowed_content(file_type):
                 raise ValidationError("Image type not supported.")
         else:
             raise ValidationError("Image field is mandatory.")
