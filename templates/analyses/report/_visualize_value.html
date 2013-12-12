@@ -3,22 +3,25 @@
 {% if value|classname == "dict" %}
     {% for a, b in value.iteritems %}
         {% if b|classname == "list" %}
-            <b>{{ a }}</b>: 
+            <b>{{ a }}</b>:
             {% for item in b %}
-                {{ item }} 
+                {{ item }}
             {% endfor %}
             <br />
         {% elif b|classname == "dict" %}
-            <b>{{ a }}</b>: 
+            <b>{{ a }}</b>:
             {% for k,v in b.iteritems %}
-                {{ k }}: {{ v}}; 
+                {{ k }}: {{ v}};
         {% endfor %}
             <br />
         {% else %}
-            <b>{{ a }}</b>: {{ b }}<br />
+            <span data-trigger="hover" class="pop" data-toggle="popover" data-placement="top" title="{{ a }}" data-content="x">
+                <b>{{ a }}</b>:
+            </span>
+            {{ b }}<br />
         {% endif %}
     {% endfor %}
 {% else %}
-	{{ value }}
+    {{ value }}
 {% endif %}
 
