@@ -304,6 +304,7 @@ class AnalyzerRunner():
         """Run analysis."""
         # Set file name.
         self.results["file_name"] = self.file_name
+        self.results["file_size"] = len(self.file_data)
 
         # Extract MIME info.
         self.results["mime_type"] = MIMEAnalyzer.get_magic_filetype(self.temp_image)
