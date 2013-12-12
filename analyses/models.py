@@ -80,6 +80,14 @@ class Analysis(models.Model):
         if "gps" in record["metadata"]:
             return record["metadata"]["gps"]["pos"]["Longitude"]
 
+    @property
+    def report(self):
+        """Lookups report on mongo, used to fetch anal."""
+        try:
+            return db.analyses.find_one(ObjectId(self.analysis_id))
+        except:
+            return None
+
 class Favorite(models.Model):
     """Add favorite to image."""
 
