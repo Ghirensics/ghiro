@@ -1,27 +1,31 @@
 {% if case.state == "O" %}
-<div class="pull-right btn-group">
-    <a type="button" class="btn btn-success  tool" title="Add" data-toggle="dropdown">
-        <i class="icon-plus"></i> <span class="caret"></span> 
-    </a>
-    <ul class="dropdown-menu">
-        <li>
-            <a href="{% url "analyses.views.new_image" case.id %}"><i class="icon-picture"></i> Add image</a>
-        </li>
-        <li>
-            <a href="{% url "analyses.views.new_url" case.id %}"><i class="icon-link"></i> Add image URL</a>
-        </li>
-        <li class="divider"></li>
-        <li>
-            <a href="{% url "analyses.views.new_folder" case.id %}"><i class="icon-folder-open"></i> Add folder</a>
-        </li>
-    </ul>
-    <a href="{% url "analyses.views.edit_case" case.id %}" class="btn tool" title="Edit case"><i class="icon-edit"></i></a>
-    <a class="btn btn-warning tool btn-close-case" id="{% url "analyses.views.close_case" case.id %}" title="Close case" href="#close" role="button" data-toggle="modal"> <i class="icon-remove"></i> </a>
-    <a class="btn btn-danger tool btn-delete-case" id="{% url "analyses.views.delete_case" case.id %}" title="Delete case" href="#delete" role="button" data-toggle="modal"> <i class="icon-trash"></i> </a>
-</div>
-<div class="pull-right">
-    <a class="btn" onClick="window.location.reload();return false;"><i class="icon-refresh"></i></a><span class="notice-new" id="notice"></span>
-</div>
+    <div class="pull-right btn-group">
+        <a type="button" class="btn btn-success  tool" title="Add" data-toggle="dropdown">
+            <i class="icon-plus"></i> <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="{% url "analyses.views.new_image" case.id %}"><i class="icon-picture"></i> Add image</a>
+            </li>
+            <li>
+                <a href="{% url "analyses.views.new_url" case.id %}"><i class="icon-link"></i> Add image url</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="{% url "analyses.views.new_folder" case.id %}"><i class="icon-folder-open"></i> Add folder</a>
+            </li>
+        </ul>
+        <a href="{% url "analyses.views.edit_case" case.id %}" class="btn tool" title="Edit case"><i class="icon-edit"></i></a>
+        <a class="btn btn-warning tool btn-close-case" id="{% url "analyses.views.close_case" case.id %}" title="Close case" href="#close" role="button" data-toggle="modal"> <i class="icon-remove"></i> </a>
+        <a class="btn btn-danger tool btn-delete-case" id="{% url "analyses.views.delete_case" case.id %}" title="Delete case" href="#delete" role="button" data-toggle="modal"> <i class="icon-trash"></i> </a>
+    </div>
+    <div class="pull-right">
+        <a class="btn" onClick="window.location.reload();return false;"><i class="icon-refresh"></i></a><span class="notice-new" id="notice"></span>
+    </div>
+{% else %}
+    <div class="pull-right btn-group">
+        <a class="btn btn-danger tool btn-delete-case" id="{% url "analyses.views.delete_case" case.id %}" title="Delete case" href="#delete" role="button" data-toggle="modal"> <i class="icon-trash"></i> </a>
+    </div>
 {% endif %}
 <div>
     <dl class="dl-horizontal">

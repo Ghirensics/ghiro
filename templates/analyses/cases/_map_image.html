@@ -17,13 +17,15 @@ function initialize() {
     {% for image in images %}
 
         var contentString = '<div>'+
-            '<h4 id="firstHeading" class="firstHeading">{{ image.file_name }}</h4>'+
-            '<div>'+
-            '<a href="{% url "analyses.views.show_analysis" image.id %}">'+
-            '<img src="{% url "analyses.views.image" image.thumb_id %}" />'+
-            '</a>'+
-            '</div>'+
-            '</div>';
+            '<a href="{% url "analyses.views.show_analysis" image.id %}">' +
+            '<h4>{{ image.file_name }}</h4>'+
+            '<div id="img_container_map">'+
+            '<img src="{% url "analyses.views.image" image.thumb_id %}" />' +
+            '<span class="badge badge-success badge-map-low">{{ anal.signatures|count_severity:"1" }}</span>' +
+            '<span class="badge badge-warning badge-map-warning">{{ anal.signatures|count_severity:"2" }}</span>' +
+            '<span class="badge badge-important badge-map-error">{{ anal.signatures|count_severity:"3" }}</span>' +
+            '</div>' +
+            '</a>';
 
         var infowindow_{{ forloop.counter }} = new google.maps.InfoWindow({
             content: contentString

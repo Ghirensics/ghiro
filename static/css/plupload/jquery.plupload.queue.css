@@ -79,7 +79,7 @@
 }
 
 .plupload_filelist_footer {border-top: 1px solid #FFF; height: 22px; line-height: 20px; vertical-align: middle;}
-.plupload_file_name {float: left; overflow: hidden}
+.plupload_file_name {float: left; overflow: hidden; }
 .plupload_file_status {color: #777;}
 .plupload_file_status span {color: #42454A;}
 .plupload_file_size, .plupload_file_status, .plupload_progress {
@@ -88,7 +88,7 @@
 }
 .plupload_file_size, .plupload_file_status, .plupload_file_action {text-align: right;}
 
-.plupload_filelist .plupload_file_name {width: 205px}
+.plupload_filelist .plupload_file_name {width: auto}
 
 .plupload_file_action {
     float: right;
