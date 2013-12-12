@@ -1,3 +1,5 @@
+{% load analyses_tags %}
+
 <div id="map_canvas"></div>
 
 <script>
@@ -21,9 +23,9 @@ function initialize() {
             '<h4>{{ image.file_name }}</h4>'+
             '<div id="img_container_map">'+
             '<img src="{% url "analyses.views.image" image.thumb_id %}" />' +
-            '<span class="badge badge-success badge-map-low">{{ anal.signatures|count_severity:"1" }}</span>' +
-            '<span class="badge badge-warning badge-map-warning">{{ anal.signatures|count_severity:"2" }}</span>' +
-            '<span class="badge badge-important badge-map-error">{{ anal.signatures|count_severity:"3" }}</span>' +
+            '<span class="badge badge-success badge-map-low">{{ image.report.signatures|count_severity:"1" }}</span>' +
+            '<span class="badge badge-warning badge-map-warning">{{ image.report.signatures|count_severity:"2" }}</span>' +
+            '<span class="badge badge-important badge-map-error">{{ image.report.signatures|count_severity:"3" }}</span>' +
             '</div>' +
             '</a>';
 
