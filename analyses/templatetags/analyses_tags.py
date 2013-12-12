@@ -5,6 +5,9 @@
 import datetime
 from django import template
 from dateutil import parser
+
+from analyses.models import AnalysisMetadataDescription
+
 register = template.Library()
  
 @register.filter("mongo_id")
@@ -67,3 +70,16 @@ def to_date(date):
         return parser.parse(date)
     else:
         return date
+
+@register.filter
+def get_metadata_description(key):
+    """Get description for a metadata key.
+    @param key: fully qualified metadata key
+    @return: metadata key description
+    """
+    try:
+        data =AnalysisMetadataDescription.objects.get(key=key.lower())
+    except AnalysisMetadataDescription.DoesNotExist:
+        return "Description not available."
+    else:
+        return data.description

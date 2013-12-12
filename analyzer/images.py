@@ -73,6 +73,8 @@ class MetadataAnalyzer():
         # Skipping keys wih empty values, they will not appear in report.
         if value and value != "" and value != "None":
             self.results[family][group][tag] = utils.to_unicode(value)
+        # Add key description to database.
+        utils.add_metadata_description(key, self.metadata.get_tag_description(key))
 
     def _get_xmp(self):
         """Extract XMP metadata."""

@@ -10,6 +10,7 @@ from django.db.models import Q
 
 import analyzer.db as db
 from hashes.models import List
+from analyses.models import AnalysisMetadataDescription
 
 class AutoVivification(dict):
     """Implementation of perl's autovivification feature."""
@@ -119,3 +120,16 @@ def create_thumb(file_path):
         return db.save_file(data=image2str(thumb), content_type="image/jpeg")
     except:
         return None
+
+def add_metadata_description(key, description):
+    """Adds key metadata description to lookup table.
+    @param key: fully qualified metadata key
+    @param description: key description
+    """
+    # Skip if no description is provided.
+    if description:
+        try:
+            AnalysisMetadataDescription.objects.get(key=key.lower())
+        except AnalysisMetadataDescription.DoesNotExist:
+            obj = AnalysisMetadataDescription(key=key.lower(), description=description)
+            obj.save()

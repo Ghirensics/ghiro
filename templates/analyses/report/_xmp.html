@@ -21,7 +21,7 @@
                             {% for k, v in anal.metadata.Xmp.iteritems %}
                             <tr>
                                 <td><b>{{ k|upper }}</b></td>
-                                <td> {% include  'analyses/report/_visualize_value.html' with value=v %} </td>
+                                <td> {% include 'analyses/report/_visualize_value.html' with value=v  subgroup=k group="Xmp" %} </td>
                             </tr>
                             {% endfor %}
                         </tbody>

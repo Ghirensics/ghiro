@@ -15,7 +15,11 @@
         {% endfor %}
             <br />
         {% else %}
-            <span data-trigger="hover" class="pop" data-toggle="popover" data-placement="top" title="{{ a }}" data-content="x">
+            {# Re-create fully qualified metadata key name. #}
+            {% with group|add:"."|add:subgroup|add:"."|add:a as key_full %}
+                {# Check if a description is available for this metadata key and show help popup. #}
+                <span data-trigger="hover" class="pop" data-toggle="popover" data-placement="top" title="{{ key_full }}" data-content="{{ key_full|get_metadata_description }}">
+            {% endwith %}
                 <b>{{ a }}</b>:
             </span>
             {{ b }}<br />

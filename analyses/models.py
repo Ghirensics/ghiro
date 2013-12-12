@@ -88,6 +88,13 @@ class Analysis(models.Model):
         except:
             return None
 
+class AnalysisMetadataDescription(models.Model):
+    """Descriptors for metadata keys."""
+
+    key = models.CharField(max_length=255, editable=False, null=False, blank=False, db_index=True, unique=True)
+    description = models.TextField(editable=False, null=False, blank=False)
+
+
 class Favorite(models.Model):
     """Add favorite to image."""
 
