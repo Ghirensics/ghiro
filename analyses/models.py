@@ -2,15 +2,19 @@
 # This file is part of Ghiro.
 # See the file 'docs/LICENSE.txt' for license terms.
 
+import gridfs
 
 from bson.objectid import ObjectId
 from django.db import models
 from django.conf import settings
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
 
 from ghiro.common import mongo_connect
 from users.models import Profile
 
 db = mongo_connect()
+fs = gridfs.GridFS(db)
 
 class Case(models.Model):
     """Collection of image analysis."""
@@ -87,6 +91,48 @@ class Analysis(models.Model):
             return db.analyses.find_one(ObjectId(self.analysis_id))
         except:
             return None
+
+@receiver(pre_delete, sender=Analysis)
+def delete_mongo_analysis(sender, instance, **kwargs):
+    """Hook to delete mongo data if an analysis is deleted."""
+
+    def delete_file(uuid):
+        """Deletes a file from GridFS.
+        @param uuid: file UUID
+        """
+        try:
+            obj_id = db.fs.files.find_one({"uuid": uuid})["_id"]
+            fs.delete(ObjectId(obj_id))
+        except:
+            # TODO: add logging.
+            pass
+
+    # Fetch analysis.
+    analysis = db.analyses.find_one({"_id": ObjectId(instance.analysis_id)})
+    # Delete files created during analysis.
+    useless_files = []
+    # Delete thumbnail.
+    if instance.thumb_id:
+        useless_files.append(instance.thumb_id)
+    # Delete ELA image.
+    if analysis["ela"]:
+        useless_files.append(analysis["ela"]["ela_image"])
+    # Delete preview images.
+    if analysis["metadata"] and analysis["metadata"]["preview"]:
+        for preview in analysis["metadata"]["preview"]:
+            useless_files.append(preview["file"])
+    # Delete original image if isn't used by other analyses.
+    if Analysis.objects.filter(image_id=instance.image_id).count() == 1:
+        useless_files.append(instance.image_id)
+    # Delete all the shit.
+    for file in useless_files:
+        delete_file(file)
+    # Delete analysis data.
+    try:
+        db.analyses.remove({"_id": ObjectId(instance.analysis_id)})
+    except:
+        # TODO: add logging.
+        pass
 
 class AnalysisMetadataDescription(models.Model):
     """Descriptors for metadata keys."""

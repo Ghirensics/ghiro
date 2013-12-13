@@ -459,6 +459,28 @@ def show_analysis(request, analysis_id):
 
 @require_safe
 @login_required
+def delete_analysis(request, analysis_id):
+    """Deletes a report."""
+    analysis = get_object_or_404(Analysis, pk=analysis_id)
+
+    # Security check.
+    if not(request.user.is_superuser or request.user in analysis.case.users.all()):
+        return render_to_response("error.html",
+            {"error": "You are not authorized to delete this."},
+            context_instance=RequestContext(request))
+
+    # If the analysis is still in process wait for the completion.
+    if analysis.state == "W":
+        return render_to_response("analyses/images/waiting.html",
+            {"analysis": analysis},
+            context_instance=RequestContext(request))
+    else:
+        analysis.delete()
+        # TODO: Redirect to the page visited before instad of this.
+        return HttpResponseRedirect(reverse("analyses.views.show_case", args=(analysis.case.id, "list")))
+
+@require_safe
+@login_required
 def image(request, id):
     try:
        file = get_file(id)
