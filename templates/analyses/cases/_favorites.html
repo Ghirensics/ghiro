@@ -24,6 +24,9 @@
                                 <a class="btn tool" title="Show analysis" href="{% url "analyses.views.show_analysis" image.id %}">
                                     <i class="icon-list-alt"> </i>
                                 </a>
+                                <a class="btn tool btn-warning unfavorite" id="{% url "analyses.views.favorite" image.id %}" rel="{{ image.id }}" title="Unfavorite">
+                                    <i class="icon-star"> </i>
+                                </a>
                             </div>
                         </td>
                     </tr>
@@ -38,3 +41,17 @@
         </tbody>
     </table>
 </div>
+
+<script type="text/javascript">
+$('.unfavorite').click(function(){
+   var id = $(this).attr("id");
+   var rel = $(this).attr("rel");
+   $.ajax({
+       type: "GET",
+       url: id,
+       success: function(){
+           window.location.href="{% url 'analyses.views.list_images' 'favorites' %}";
+       }
+   });
+});
+</script>
