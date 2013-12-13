@@ -3,6 +3,8 @@
 # See the file 'docs/LICENSE.txt' for license terms.
 
 import os
+import magic
+
 from django import forms
 from django.conf import settings
 from django.core.exceptions import ValidationError
@@ -31,7 +33,8 @@ class UploadImageForm(forms.ModelForm):
             if image._size > settings.MAX_FILE_UPLOAD:
                 raise ValidationError("Image file too large")
             # Type check.
-            file_type = image.content_type
+            mime = magic.Magic(mime=True)
+            file_type = mime.from_file(image.temporary_file_path())
             if not check_allowed_content(file_type):
                 raise ValidationError("Image type not supported.")
         else:
