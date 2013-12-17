@@ -1,14 +1,15 @@
 $(document).ready(function() {
-    
+
     $('.tool').tooltip();
-    
+
     $('.pop').popover();
+
     $(".fancybox").fancybox({
         'type': 'image',
         helpers : {
             title : {
                 type : 'float'
-            },
+            }
         },
         tpl : {
             error : 'Can not dispaly preview, unsupported format.'
@@ -20,7 +21,7 @@ $(document).ready(function() {
         init : function () {
             $('a.action_print').bind('click', Popup.printIt);
         },
-        
+
         printIt : function () {
             var win = window.open("","Print");
             if (win.document) {
@@ -29,22 +30,22 @@ $(document).ready(function() {
                 win.focus();
                 win.print();
             }
-            
+
             return false;
             }
     };
-        $(document).ready(function () {
+    $(document).ready(function () {
         Popup.init();
     });
-    
+
     $('#btn_submit').click(function(){
         var btn = $(this);
         btn.button('loading');
         setTimeout(function(){
             btn.button('reset')
-        }, 2000);
+        }, 3000);
     });
-    
+
     $('.btn-close-case').click(function(){
         var id = $(this).attr("id");
         $("#id-close").attr({href: id});
@@ -67,13 +68,10 @@ $(document).ready(function() {
                 }else{
                     $(".star"+rel).removeClass('btn-warning');
                 }
-            },
-            error: function (request) {
-                alert(request.responseText);
             }
         });
     });
-    
+
 });
 
 function internetStatus(){

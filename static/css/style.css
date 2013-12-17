@@ -3,7 +3,7 @@ body {
     overflow-y: scroll;
 }
 
-/* header */
+/* Header */
 .header {
     position: fixed;
     top: 0px;
@@ -17,7 +17,7 @@ body {
     border-bottom: 1px solid #2E2E2E;
 }
 
-/* sidebar left */
+/* Sidebar left */
 .navbar-helper .panel-sitename {
     padding-left: 20px;
 }
@@ -114,7 +114,7 @@ body {
     box-shadow: 0 0 2px 1px #7BC8D7 inset;
 }
 
-/* content */
+/* Content */
 .section {
     display: block;
     position: relative;
@@ -134,7 +134,7 @@ body {
     margin-left: -2.5%;
 }
 
-/* content-header */
+/* Content-header */
 .content > .content-header {
     padding: 10px 20px 12px 20px;
     border-bottom: 1px solid #CDCDCD;
@@ -150,7 +150,7 @@ body {
     font-weight: normal;
 }
 
-/* content-breadcrumb */
+/* Content-breadcrumb */
 .content-breadcrumb, .content-breadcrumb > .breadcrumb-nav, .content-breadcrumb > .breadcrumb-nav > li {
     margin: 0px;
     padding: 0px;
@@ -194,7 +194,7 @@ body {
     padding: 5px 15px;
 }
 
-/* case notice */
+/* Case notice */
 .notice-new {
     background: #B94A48;
     border-radius: 10px 10px 10px 10px;
@@ -207,7 +207,7 @@ body {
     color: #fff
 }
 
-/* content-body */
+/* Content-body */
 .content > .content-body{
     padding: 40px 20px 40px 20px;
     font-size: .9em;
@@ -215,7 +215,7 @@ body {
     min-height: 540px;
 }
 
-/* box tabs */
+/* Box tabs */
 .box-tab {
     border: 1px solid #CDCDCD;
     padding: 5px;
@@ -364,7 +364,7 @@ input[type='checkbox']{
     margin-top: 0px;
 }
 
-/*CUSTOM FORM SEARCH*/
+/* Custom form search */
 .form-model .controls input{
     width: 700px;
 }
@@ -393,7 +393,8 @@ input[type='checkbox']{
     width: 1140px;
     height: 600px;
 }
-/*GENERAL FORM*/
+
+/* General form */
 .controls input{
     height: 30px;
 }
@@ -417,7 +418,7 @@ input[type='checkbox']{
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
 }
 
-/* footer */
+/* Footer */
 #footer {
     padding: 50px 20px 0 90px;
     height:60px;
@@ -427,7 +428,7 @@ input[type='checkbox']{
 /*FIX TO TOOLTIP*/
 .btn-group > .tooltip + .btn,
 .btn-group > .popover + .btn{
-margin-left:-1px;
+    margin-left:-1px;
 }
 
 .btn-group > .btn:last-of-type {
@@ -439,6 +440,7 @@ margin-left:-1px;
     border-bottom-right-radius: 4px;
 }
 
+/* Tooltip map image */
 #img_container_map {
     position:relative;
     display:inline-block;
@@ -457,4 +459,14 @@ margin-left:-1px;
     position:absolute;
     bottom:1px;
     right:76px;
+}
+
+/* Custom popover */
+.popover-title{
+    font-weight:bold;
+    font-size: 11px;
+}
+
+.popover-content{
+    text-align: justify;
 }
