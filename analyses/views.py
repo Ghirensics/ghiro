@@ -28,7 +28,7 @@ from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 
 import analyses.forms as forms
-from analyses.models import Case, Analysis, Favorite
+from analyses.models import Case, Analysis, Favorite, Comment
 from users.models import Profile
 from analyzer.db import save_file, get_file
 from analyzer.utils import create_thumb
@@ -719,4 +719,28 @@ def favorite(request, id):
                  "Favorite image added: {0}".format(analysis.file_name),
                  request)
     #return HttpResponseRedirect(reverse("analyses.views.show_analysis", args=(analysis.id,)))
+    return HttpResponse("true")
+
+@login_required
+def add_comment(request, id):
+    """Comment image."""
+    analysis = get_object_or_404(Analysis, pk=id)
+
+    # Security check.
+    if not(request.user.is_superuser or request.user in analysis.case.users.all()):
+        return render_to_response("error.html",
+            {"error": "You are not authorized to view this."},
+            context_instance=RequestContext(request))
+
+    # Validation check.
+    if not request.POST.get("msg"):
+        return HttpResponse("Comment empty.")
+
+    Comment(owner=request.user, analysis=analysis, message=request.POST.get("msg")).save()
+
+    # Auditing.
+    log_activity("A",
+        "Comment on image added: {0}".format(analysis.file_name),
+        request)
+
     return HttpResponse("true")

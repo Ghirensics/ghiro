@@ -146,3 +146,11 @@ class Favorite(models.Model):
 
     analysis = models.ForeignKey(Analysis, null=False, blank=False, on_delete=models.CASCADE, db_index=True, editable=False, related_name="favorites")
     owner = models.ForeignKey(Profile, null=False, blank=False, on_delete=models.CASCADE, db_index=True, editable=False, related_name="owned_favorites")
+
+class Comment(models.Model):
+    """Add comments to image."""
+
+    analysis = models.ForeignKey(Analysis, null=False, blank=False, on_delete=models.CASCADE, db_index=True, editable=False, related_name="comments")
+    owner = models.ForeignKey(Profile, null=False, blank=False, on_delete=models.CASCADE, db_index=True, editable=False, related_name="owned_comments")
+    message = models.TextField(null=False, blank=False)
+    created_at = models.DateTimeField(auto_now_add=True, editable=False, db_index=True)
