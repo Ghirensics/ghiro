@@ -26,14 +26,14 @@
             <div class="container-fluid">
                 <div class="row-fluid">
                     <div class="media">
-                        <a class="pull-left" href="#"> 
+                        <a class="pull-left" href="#">
                             {% if analysis.thumb_id %}
                                 <span href="{% url "analyses.views.image" analysis.image_id %}" class="fancybox">
                                     <img src="{% url "analyses.views.image" analysis.thumb_id %}" class="img-rounded media-object">
-                                </span> 
-                            {% else %} 
+                                </span>
+                            {% else %}
                                 <img src="{{ STATIC_URL }}img/no_image_large.jpg" class="img-rounded media-object">
-                            {% endif %} 
+                            {% endif %}
                         </a>
                         <div class="media-body">
                             <h2 class="media-heading">Image analysis: {{ anal.hash.md5 }}</h2>
@@ -45,7 +45,7 @@
                                 {% endif %}
                                 <a href="{% url "analyses.views.image" analysis.image_id %}" class="btn"><i class="icon-download"></i> Download</a>
                                 <a href="{% url "analyses.views.image" analysis.image_id %}" class="action_print btn btn-info"><i class="icon-print"></i> Print</a>
-                                <a href="{% url "analyses.views.delete_analysis" analysis.image_id %}" class="btn btn-danger"><i class="icon-trash"></i> Delete</a>
+                                <a href="{% url "analyses.views.delete_analysis" analysis.id %}" class="btn btn-danger"><i class="icon-trash"></i> Delete</a>
                             </h1>
                         </div>
                     </div>
@@ -147,4 +147,43 @@
         </div>
     </div>
 </div>
+
+{# JS #}
+<script src="{{ STATIC_URL }}js/jquery.easing.1.3.js.js"></script>
+
+<div id="comment">
+    <div class="right_btn">
+        <img src="{{ STATIC_URL }}img/comment_right_btn.png" />
+    </div>
+    <div class="commentFormDiv">
+        <table>
+            <tr>
+                <td>
+                    <form method="post" action="{% url "analyses.views.add_comment" analysis.id %}">{% csrf_token %}
+                        <div>
+                            <small><em>Insert your comment</em></small>
+                        </div>
+                        <div>
+                            <textarea name="msg" id="msg"></textarea>
+                        </div>
+                        <div>
+                            <button class="btn btn-success btn-small">Save</button>
+                        </div>
+                        <div class="slimScrollDiv">
+                            <ul>
+                                {% for comment in analysis.comments.all %}
+                                <li>
+                                    <p class="title"><small class="text-info">Ashley Jacobs</small> <small class="pull-right">{{ comment.created_at }}</small></p>
+                                    <p>{{ comment.message }}</p>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
 {% endblock %}

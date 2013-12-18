@@ -743,4 +743,4 @@ def add_comment(request, id):
         "Comment on image added: {0}".format(analysis.file_name),
         request)
 
-    return HttpResponse("true")
+    return HttpResponseRedirect(reverse("analyses.views.show_analysis", args=(analysis.id,)))
