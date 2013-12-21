@@ -495,7 +495,6 @@ input[type='checkbox']{
     height: 80px;
     resize: none;  /* disable extending textarea in chrome */
 }
-
 #comment .right_btn{
     width: 26px;
     height: 100px;
