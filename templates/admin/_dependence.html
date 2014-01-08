@@ -1,0 +1,24 @@
+<table class="table table-bordered table-striped responsive datatables">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Dependence</th>
+            <th>Version</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for dependence in dependencies %}
+        <tr>
+            <td>name</td>
+            <td>
+                {% if dependence %}
+                    <i class="icon-ok-circle text-success"></i>
+                {% else %}
+                    <i class="icon-ban-circle text-error"></i>
+                {% endif %}
+            </td>
+            <td>versione</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
