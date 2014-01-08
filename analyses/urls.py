@@ -21,5 +21,6 @@ urlpatterns = patterns("",
     url(r"^images/file/(?P<id>[\d\w]+)/$", "analyses.views.image"),
     url(r"^images/favorite/(?P<id>[\d\w]+)/$", "analyses.views.favorite"),
     url(r"^images/comment/(?P<id>[\d]+)/$", "analyses.views.add_comment"),
+    url(r"^images/comment/delete/(?P<id>[\d]+)/$", "analyses.views.delete_comment"),
     url(r"^search/(?P<page_name>[\w]+)/$", "analyses.views.search"),
 )

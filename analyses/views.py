@@ -739,8 +739,28 @@ def add_comment(request, id):
     Comment(owner=request.user, analysis=analysis, message=request.POST.get("msg")).save()
 
     # Auditing.
-    log_activity("A",
+    log_activity("I",
         "Comment on image added: {0}".format(analysis.file_name),
         request)
 
     return HttpResponseRedirect(reverse("analyses.views.show_analysis", args=(analysis.id,)))
+
+@login_required
+def delete_comment(request, id):
+    """Delete a comment."""
+    comment = get_object_or_404(Comment, pk=id)
+
+    # Security check.
+    if request.user != comment.analysis.owner and not request.user.is_superuser:
+        return render_to_response("error.html",
+                                  {"error": "You are not authorized to delete this."},
+                                  context_instance=RequestContext(request))
+
+    comment.delete()
+
+    # Auditing.
+    log_activity("I",
+       "Comment on image deleted: {0}".format(comment.analysis.file_name),
+        request)
+
+    return HttpResponseRedirect(reverse("analyses.views.show_analysis", args=(comment.analysis.id,)))
