@@ -184,7 +184,8 @@
                             <ul>
                                 {% for comment in analysis.comments.all %}
                                 <li>
-                                    <p class="title"><small class="text-info">Ashley Jacobs</small> <small class="pull-right">{{ comment.created_at }}</small></p>
+                                    <p class="title"><small class="text-info">{{ comment.owner.username }}</small> <small class="pull-right">{{ comment.created_at }}</small></p>
+                                    <p class="pull-right"><a href=""><i class="icon-trash"></i> </a></p>
                                     <p>{{ comment.message }}</p>
                                 </li>
                                 {% endfor %}
@@ -197,6 +198,7 @@
     </div>
 </div>
 
+<script src="{{ STATIC_URL }}js/tag-it.js"></script>
 <script>
 $(document).ready(function() {
     $("#tag").tagit();

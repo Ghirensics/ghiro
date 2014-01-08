@@ -74,7 +74,7 @@ $(document).ready(function() {
 
     var feed_width = $('#comment').width();
     var scr_w = screen.width;
-    var btn_width = 26;
+    var btn_width = 42;
     var move_right = scr_w - btn_width;
     var slide_from_right = scr_w - (feed_width - btn_width);
 
