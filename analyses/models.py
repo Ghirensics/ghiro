@@ -154,3 +154,11 @@ class Comment(models.Model):
     owner = models.ForeignKey(Profile, null=False, blank=False, on_delete=models.CASCADE, db_index=True, editable=False, related_name="owned_comments")
     message = models.TextField(null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True, editable=False, db_index=True)
+
+class Tag(models.Model):
+    """Add tags to image."""
+
+    analysis = models.ManyToManyField(Analysis)
+    owner = models.ForeignKey(Profile, null=False, blank=False, on_delete=models.CASCADE, db_index=True, editable=False, related_name="owned_tags")
+    text = models.CharField(max_length=255, null=False, blank=False)
+    created_at = models.DateTimeField(auto_now_add=True, editable=False, db_index=True)

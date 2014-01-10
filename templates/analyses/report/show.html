@@ -205,8 +205,12 @@ $(document).ready(function() {
         afterTagAdded: function(event, ui) {
             $.ajax({
                 type: "POST",
-                url: /home/,
-                data: "tag_content=" + ui.tagLabel + "&analysis_id=" + {{ analysis.id }},
+                beforeSend: function(request)
+                {
+                    request.setRequestHeader("X-CSRFToken", '{{csrf_token}}');
+                },
+                url: "{% url "analyses.views.add_tag" analysis.id %}",
+                data: "tag_content=" + ui.tagLabel,
                 success : function (data) {
                     var cane = 2;
                 }

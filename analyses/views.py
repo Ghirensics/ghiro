@@ -28,7 +28,7 @@ from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 
 import analyses.forms as forms
-from analyses.models import Case, Analysis, Favorite, Comment
+from analyses.models import Case, Analysis, Favorite, Comment, Tag
 from users.models import Profile
 from analyzer.db import save_file, get_file
 from analyzer.utils import create_thumb
@@ -764,3 +764,29 @@ def delete_comment(request, id):
         request)
 
     return HttpResponseRedirect(reverse("analyses.views.show_analysis", args=(comment.analysis.id,)))
+
+@login_required
+def add_tag    (request, id):
+    """Tag image."""
+    analysis = get_object_or_404(Analysis, pk=id)
+
+    # Security check.
+    if not(request.user.is_superuser or request.user in analysis.case.users.all()):
+        return render_to_response("error.html",
+            {"error": "You are not authorized to tag this."},
+            context_instance=RequestContext(request))
+
+    # Validation check.
+    if not request.POST.get("tag_content"):
+        return HttpResponse("Tag empty.")
+
+    tag = Tag(owner=request.user, text=request.POST.get("tag_content"))
+    tag.save()
+    analysis.tag_set.add(tag)
+
+    # Auditing.
+    log_activity("I",
+        "Tag on image added: {0}".format(analysis.file_name),
+        request)
+
+    return HttpResponse(tag.id)
