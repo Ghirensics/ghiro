@@ -729,7 +729,7 @@ def add_comment(request, id):
     # Security check.
     if not(request.user.is_superuser or request.user in analysis.case.users.all()):
         return render_to_response("error.html",
-            {"error": "You are not authorized to view this."},
+            {"error": "You are not authorized to add this."},
             context_instance=RequestContext(request))
 
     # Validation check.
