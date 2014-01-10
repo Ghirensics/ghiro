@@ -150,8 +150,8 @@
 
 {# JS #}
 <script src="{{ STATIC_URL }}js/jquery.easing.1.3.js.js"></script>
-<script src="{{ STATIC_URL }}js/tag-it.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="{{ STATIC_URL }}js/tag-it.js"></script>
 {# CSS #}
 <link rel="stylesheet" href="{{ STATIC_URL }}css/jquery.tagit.css">
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
@@ -164,7 +164,7 @@
         <table>
             <tr>
                 <td>
-                    <small><em>Image tag</em></small> <small><span class="pull-right comment_close"><a href="#">Close</a></span></small>
+                    <small><em>Image tag</em> <span class="pull-right comment_close"><a href="#">Close</a></span></small>
                     <input name="tags" id="tag">
                 </td>
             </tr>
@@ -198,10 +198,26 @@
     </div>
 </div>
 
-<script src="{{ STATIC_URL }}js/tag-it.js"></script>
+
 <script>
 $(document).ready(function() {
-    $("#tag").tagit();
+    $("#tag").tagit({
+        afterTagAdded: function(event, ui) {
+            $.ajax({
+                type: "POST",
+                url: /home/,
+                data: "tag_content=" + ui.tagLabel + "&analysis_id=" + {{ analysis.id }},
+                success : function (data) {
+                    var cane = 2;
+                }
+            });
+        },
+        afterTagRemoved: function(event, ui) {
+            alert(cane);
+            $.get("", { tag_id: 2 });
+            // analysis/111/tag/remove/33
+        }
+    });
 });
 </script>
 
