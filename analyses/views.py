@@ -766,7 +766,7 @@ def delete_comment(request, id):
     return HttpResponseRedirect(reverse("analyses.views.show_analysis", args=(comment.analysis.id,)))
 
 @login_required
-def add_tag    (request, id):
+def add_tag(request, id):
     """Tag image."""
     analysis = get_object_or_404(Analysis, pk=id)
 
