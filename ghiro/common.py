@@ -44,6 +44,9 @@ user_logged_in.connect(log_logon)
 user_logged_out.connect(log_logout)
 
 def mongo_connect():
+    """Connects to Mongo, exits if unable to connect.
+    @return: connection handler
+    """
     try:
         db = Database(MongoClient(settings.MONGO_URI), settings.MONGO_DB)
     except ConnectionFailure:
