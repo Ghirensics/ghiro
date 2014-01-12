@@ -62,10 +62,24 @@ because you closed you out from the web interface, run the following command
 Upload images via command line utility
 --------------------------------------
 
-If you need to load tons of images you can do it from command line.
-For example if you want to add all images in folder /target/images to case with id
+You can analyze images from command line with the submit utility.
+It can load and submit for analysis: an image, a folder containing images, a folder containing
+images and other folders, and recurse inside them.
+
+If you want to add the image located at /target/imageimage.jpg to case with id
+2 and owner user name "foobar" run the following command (inside Ghiro's root)::
+
+    python manage.py submit -u foobar -c 2 -t /target/image.jpg
+
+If you want to add all images in folder /target/images to case with id
 2 and owner user name "foobar" run the following command (inside Ghiro's root)::
 
     python manage.py submit -u foobar -c 2 -t /target/images
 
-And all images will be loaded in a batch.
+If you want to add all images in folder /target/images and all subfolders to case with id
+2 and owner user name "foobar" run the following command (inside Ghiro's root)::
+
+    python manage.py submit -u foobar -c 2 -t /target/images -r
+
+If you need to load tons of images this utility is designed for you,
+all images could be loaded in a single batch.
