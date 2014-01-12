@@ -4,6 +4,7 @@
 
 import magic
 import os
+import sys
 from django.core.management.base import BaseCommand
 from optparse import make_option
 
@@ -31,6 +32,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         """Runs command."""
+        # Validation.
+        if not options["username"] or not options["case"] or not options["target"]:
+            print "Options -t (target), -c (case) and -u (user are mandatory. Exiting."
+            sys.exit(1)
+
         # Get options.
         user = Profile.objects.get(username=options["username"].strip())
         case = Case.objects.get(pk=options["case"].strip())
