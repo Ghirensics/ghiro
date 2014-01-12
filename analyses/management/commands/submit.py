@@ -45,7 +45,9 @@ class Command(BaseCommand):
         if os.path.isdir(options["target"]) and options["recurse"]:
             for dirname, dirnames, filenames in os.walk(options["target"]):
                 for filename in filenames:
-                    self._add_task(os.path.join(dirname, filename), case, user)
+                    target = os.path.join(dirname, filename)
+                    print "INFO: processing {0}".format(target)
+                    self._add_task(target, case, user)
         elif os.path.isdir(options["target"]):
             for file_name in os.listdir(options["target"]):
                 print "INFO: processing {0}".format(file_name)
