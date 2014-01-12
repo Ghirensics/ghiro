@@ -23,7 +23,6 @@ from django.utils.timezone import now
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count
 from django.utils.encoding import force_unicode
-from django.conf import settings
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 
