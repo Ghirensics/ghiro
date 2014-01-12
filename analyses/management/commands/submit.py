@@ -12,6 +12,7 @@ from analyses.models import Case, Analysis
 from users.models import Profile
 from analyzer.db import save_file
 from analyzer.utils import create_thumb
+from ghiro.common import check_allowed_content
 
 
 class Command(BaseCommand):
@@ -64,11 +65,17 @@ class Command(BaseCommand):
         @param case: case id
         @param user: user id
         """
-        task = Analysis()
-        task.owner = user
-        task.case = case
-        task.file_name = os.path.basename(file)
+        # File type check.
         mime = magic.Magic(mime=True)
-        task.image_id = save_file(file_path=file, content_type=mime.from_file(file))
-        task.thumb_id = create_thumb(file)
-        task.save()
+        content_type = mime.from_file(file)
+        if not check_allowed_content(content_type):
+            print "WARNING: Skipping %s: file type not allowed." % file
+        else:
+            # Add to analysis queue.
+            task = Analysis()
+            task.owner = user
+            task.case = case
+            task.file_name = os.path.basename(file)
+            task.image_id = save_file(file_path=file, content_type=content_type)
+            task.thumb_id = create_thumb(file)
+            task.save()
