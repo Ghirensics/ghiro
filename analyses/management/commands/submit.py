@@ -23,6 +23,8 @@ class Command(BaseCommand):
             help="Case ID, images will be attached to it"),
         make_option("--username", "-u", dest="username",
             help="Username"),
+        make_option("--recurse", "-r", dest="recurse", default=False,
+            action="store_true", help="Recurse inside subdirectories"),
     )
 
     help = "Task submission"
@@ -34,7 +36,11 @@ class Command(BaseCommand):
         case = Case.objects.get(pk=options["case"].strip())
 
         # Add directory or files.
-        if os.path.isdir(options["target"]):
+        if os.path.isdir(options["target"]) and options["recurse"]:
+            for dirname, dirnames, filenames in os.walk(options["target"]):
+                for filename in filenames:
+                    self._add_task(os.path.join(dirname, filename), case, user)
+        elif os.path.isdir(options["target"]):
             for file_name in os.listdir(options["target"]):
                 print "INFO: processing {0}".format(file_name)
                 self._add_task(os.path.join(options["target"], file_name), case, user)
