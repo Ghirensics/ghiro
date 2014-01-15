@@ -36,6 +36,10 @@ class Command(NoArgsCommand):
     def _process(self):
         """Starts processing waiting tasks."""
 
+        # Clean django model cache.
+        transaction.enter_transaction_management()
+        transaction.commit()
+
         # Processing pool.
         pool = Pool()
 
@@ -43,10 +47,6 @@ class Command(NoArgsCommand):
         Analysis.objects.filter(Q(state="P")|Q(state="Q")).update(state="W")
 
         while True:
-            # Clean django model cache.
-            transaction.enter_transaction_management()
-            transaction.commit()
-
             # Fetch tasks waiting processing.
             tasks = Analysis.objects.filter(state="W").order_by("id")
 
