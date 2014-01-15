@@ -47,6 +47,8 @@ class Analysis(models.Model):
     STATUSES = (
         ("W", "Waiting"),
         ("C", "Completed"),
+        ("P", "Processing"),
+        ("Q", "Queued"),
         ("F", "Failed")
     )
     image_id = models.CharField(max_length=72, editable=False, null=False, blank=False)

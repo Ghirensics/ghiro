@@ -443,7 +443,7 @@ def show_analysis(request, analysis_id):
             return render_to_response("error.html",
                                       {"error": "Analysis not found"},
                                       context_instance=RequestContext(request))
-    elif analysis.state == "W":
+    elif analysis.state == "W" or analysis.state == "P" or analysis.state == "Q":
         return render_to_response("analyses/images/waiting.html",
                                   {"analysis": analysis},
                                   context_instance=RequestContext(request))
