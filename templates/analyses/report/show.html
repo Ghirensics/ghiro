@@ -142,6 +142,31 @@
                             </div>
                         </div>
                     </div>
+                    <div class="comment controls">
+                        {% if analysis.comments.all %}
+                            <h3>Comments</h3>
+                            <ul>
+                                {% for comment in analysis.comments.all %}
+                                <li>
+                                    <p class="title"><small class="text-info">{{ comment.owner.username }}</small> <small class="pull-right">{{ comment.created_at }}</small></p>
+                                    <p class="pull-right"><a href="{% url "analyses.views.delete_comment" comment.id %}"><i class="icon-trash"></i> </a></p>
+                                    <p>{{ comment.message }}</p>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <form method="post" action="{% url "analyses.views.add_comment" analysis.id %}">{% csrf_token %}
+                            <div>
+                                <small><em>Insert your comment:</em></small>
+                            </div>
+                            <div>
+                                <textarea name="msg" id="msg"></textarea>
+                            </div>
+                            <div>
+                                <button class="btn btn-success btn-small">Save</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -157,41 +182,12 @@
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
 
 <div id="comment">
-    <div class="right_btn">
-        <img src="{{ STATIC_URL }}img/comment_right_btn.png" />
-    </div>
     <div class="commentFormDiv">
         <table>
             <tr>
                 <td>
                     <small><em>Image tag</em> <span class="pull-right comment_close"><a href="#">Close</a></span></small>
                     <input name="tags" id="tag">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <form method="post" action="{% url "analyses.views.add_comment" analysis.id %}">{% csrf_token %}
-                        <div>
-                            <small><em>Insert your comment</em></small>
-                        </div>
-                        <div>
-                            <textarea name="msg" id="msg"></textarea>
-                        </div>
-                        <div>
-                            <button class="btn btn-success btn-small">Save</button>
-                        </div>
-                        <div class="slimScrollDiv">
-                            <ul>
-                                {% for comment in analysis.comments.all %}
-                                <li>
-                                    <p class="title"><small class="text-info">{{ comment.owner.username }}</small> <small class="pull-right">{{ comment.created_at }}</small></p>
-                                    <p class="pull-right"><a href="{% url "analyses.views.delete_comment" comment.id %}"><i class="icon-trash"></i> </a></p>
-                                    <p>{{ comment.message }}</p>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </form>
                 </td>
             </tr>
         </table>

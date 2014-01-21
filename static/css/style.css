@@ -472,37 +472,12 @@ input[type='checkbox']{
 }
 
 /* Comment */
-#comment{
-    width: 385px;
-    position: absolute;
-    top: 100px;
-    display: none;
-}
-#comment .commentFormDiv{
-    width: 300px;
-    float: left;
-    border: 1px solid #CDCDCD;
-    background: #fff;
-    -moz-border-radius-bottomright: 6px;
-    -moz-border-radius-bottomleft: 6px;
-    border-bottom-right-radius:6px;
-    border-bottom-left-radius:6px;
-    min-height:100px;
-    margin-top: 80px;
-}
-#comment textarea{
-    width: 284px;
+.comment textarea{
+    width: 500px;
     height: 80px;
     resize: none;  /* disable extending textarea in chrome */
 }
-#comment .right_btn{
-    width: 26px;
-    height: 100px;
-    float: left;
-    cursor: pointer;
-    margin-top: 80px;
-}
-.slimScrollDiv li{
+.comment li{
     list-style: none;
     margin-left: -23px;
 }
