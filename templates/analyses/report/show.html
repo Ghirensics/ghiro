@@ -145,19 +145,21 @@
                     <div class="comment controls">
                         {% if analysis.comments.all %}
                             <h3>Comments</h3>
-                            <ul>
+                            <table class="table table-striped table-condensed ">
                                 {% for comment in analysis.comments.all %}
-                                <li>
-                                    <p class="title"><small class="text-info">{{ comment.owner.username }}</small> <small class="pull-right">{{ comment.created_at }}</small></p>
-                                    <p class="pull-right"><a href="{% url "analyses.views.delete_comment" comment.id %}"><i class="icon-trash"></i> </a></p>
-                                    <p>{{ comment.message }}</p>
-                                </li>
+                                <tr>
+                                    <td>
+                                        <p class="text-info">{{ comment.owner.username }} <small class="pull-right">{{ comment.created_at }}</small></p>
+                                        <p class="pull-right"><a href="{% url "analyses.views.delete_comment" comment.id %}" class="btn btn-danger btn-small"><i class="icon-trash"></i> Delete</a></p>
+                                        {{ comment.message }}
+                                    </td>
+                                </tr>
                                 {% endfor %}
-                            </ul>
+                            </table>
                         {% endif %}
                         <form method="post" action="{% url "analyses.views.add_comment" analysis.id %}">{% csrf_token %}
                             <div>
-                                <small><em>Insert your comment:</em></small>
+                                <em>Insert your comment:</em>
                             </div>
                             <div>
                                 <textarea name="msg" id="msg"></textarea>
