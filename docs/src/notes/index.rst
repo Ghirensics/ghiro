@@ -13,12 +13,15 @@ Join our mailing list to the `Ghiro Google Group`_.
 IRC Chat
 ^^^^^^^^
 
-You are welcome in our IRC chat on `Freenode`_, configure you client for::
+You are welcome in our IRC chat on `Freenode`_::
 
     Server: irc.freenode.net
     Channel: #ghiro
 
+Join using your favorite IRC client or using the Freenode `web client`_.
+
 .. _`Freenode`: http://freenode.net/
+.. _`web client`: http://webchat.freenode.net/?channels=ghirensics&uio=d4
 
 WTF mail
 ^^^^^^^^
