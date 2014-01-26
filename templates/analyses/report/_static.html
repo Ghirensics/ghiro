@@ -18,6 +18,9 @@
                 <a data-toggle="tab" href="#server-hash-match">Hash matched</a>
             </li>
             {% endif %}
+            <li>
+                <a data-toggle="tab" href="#server-hex">Hexview</a>
+            </li>
         </ul>
     </div>
     <div class="box-body">
@@ -118,6 +121,19 @@
                             </tr>
                             {% endfor %}
                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="server-hex">
+                <div class="row-fluid">
+                    <table class="table">
+                        <tbody>
+                            {% for line in lines %}
+                            <tr>
+                                <td></td>
+                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
