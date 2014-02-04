@@ -48,6 +48,9 @@
                                 <a href="{% url "analyses.views.delete_analysis" analysis.id %}" class="btn btn-danger"><i class="icon-trash"></i> Delete</a>
                             </h1>
                         </div>
+                        <div>
+                            <input type="text" name="tags" placeholder="Add tag..." class="tm-input"/>
+                        </div>
                     </div>
                 </div>
                 <br />
@@ -169,58 +172,20 @@
                             </div>
                         </form>
                     </div>
+                    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-tagsinput.css">
+                    {# JS #}
+                    <script src="{{ STATIC_URL }}js/bootstrap-tagsinput.js"></script>
+                    <script>
+                    jQuery(".tm-input").tagsManager({
+                        prefilled: ["Anale"],
+                        AjaxPush: '{% url "analyses.views.add_tag" analysis.id %}',
+                        AjaxPushAllTags: true,
+                        AjaxPushParameters: { 'csrfmiddlewaretoken': '{{csrf_token}}'}
+                    });
+                    </script>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-{# JS #}
-<script src="{{ STATIC_URL }}js/jquery.easing.1.3.js.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="{{ STATIC_URL }}js/tag-it.js"></script>
-{# CSS #}
-<link rel="stylesheet" href="{{ STATIC_URL }}css/jquery.tagit.css">
-<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
-
-<div id="comment">
-    <div class="commentFormDiv">
-        <table>
-            <tr>
-                <td>
-                    <small><em>Image tag</em> <span class="pull-right comment_close"><a href="#">Close</a></span></small>
-                    <input name="tags" id="tag">
-                </td>
-            </tr>
-        </table>
-    </div>
-</div>
-
-
-<script>
-$(document).ready(function() {
-    $("#tag").tagit({
-        afterTagAdded: function(event, ui) {
-            $.ajax({
-                type: "POST",
-                beforeSend: function(request)
-                {
-                    request.setRequestHeader("X-CSRFToken", '{{csrf_token}}');
-                },
-                url: "{% url "analyses.views.add_tag" analysis.id %}",
-                data: "tag_content=" + ui.tagLabel,
-                success : function (data) {
-                    var cane = 2;
-                }
-            });
-        },
-        afterTagRemoved: function(event, ui) {
-            alert(cane);
-            $.get("", { tag_id: 2 });
-            // analysis/111/tag/remove/33
-        }
-    });
-});
-</script>
-
 {% endblock %}
