@@ -78,7 +78,7 @@ def get_metadata_description(key):
     @return: metadata key description
     """
     try:
-        data =AnalysisMetadataDescription.objects.get(key=key.lower())
+        data = AnalysisMetadataDescription.objects.get(key=key.lower())
     except AnalysisMetadataDescription.DoesNotExist:
         return "Description not available."
     else:
