@@ -193,6 +193,8 @@ def show_case(request, case_id, page_name):
                 tasks.append(analyses.get(analysis_id=result["_id"]))
             except ObjectDoesNotExist:
                 continue
+    elif page_name == "search":
+        pass
     else:
         raise Exception
 
