@@ -25,9 +25,9 @@
                                     <i class="icon-list-alt"> </i>
                                 </a>
                                 {% if image.favorites.all %}
-                                    <a href="#" id="{% url "analyses.views.favorite" image.id %}" title="Favorite" rel="{{ image.id }}" class="btn tool favorite btn-warning star{{image.id}}"> <i class="icon-star"> </i></a>
+                                    <a id="{% url "analyses.views.favorite" image.id %}" title="Favorite" rel="{{ image.id }}" class="btn tool favorite btn-warning star{{image.id}}"> <i class="icon-star"> </i></a>
                                 {% else %}
-                                    <a href="#" id="{% url "analyses.views.favorite" image.id %}" title="Favorite" rel="{{ image.id }}" class="btn tool favorite star{{image.id}}"> <i class="icon-star"> </i></a>
+                                    <a id="{% url "analyses.views.favorite" image.id %}" title="Favorite" rel="{{ image.id }}" class="btn tool favorite star{{image.id}}"> <i class="icon-star"> </i></a>
                                 {% endif %}
                             </div>
                         </td>
