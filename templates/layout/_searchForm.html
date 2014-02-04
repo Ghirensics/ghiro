@@ -1,0 +1,110 @@
+<div class="content-body">
+    <ul class="nav nav-pills">
+        <li class="active">
+            <a href="#property" data-toggle="tab">Property</a>
+        </li>
+        <li>
+            <a href="#location" data-toggle="tab">Location</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        {% if error%}
+            <div class="alert alert-danger">
+                <b>Error</b>: {{ error }}
+            </div>
+        {% endif %}
+        <form id="property" action="{% url "analyses.views.search" "list" %}" method="get" class="form-horizontal form-model tab-pane active">{% csrf_token %}
+            <div class="control-group">
+                <label class="control-label" for="filename">Filename</label>
+                <div class="controls">
+                    <input id="filename" type="text" name="filename" class="height-large">
+                    <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by file name" data-content="Search for file names containing this string.">
+                        <span class="badge badge-info"><i class="icon-info"></i></span>
+                    </a>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="filetype">Filetype</label>
+                <div class="controls">
+                    <input id="filetype" type="text" name="filetype" class="height-large">
+                    <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by file type" data-content="Search for file type containing this string.">
+                        <span class="badge badge-info"><i class="icon-info"></i></span>
+                    </a>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="filetype">Hash</label>
+                <div class="controls">
+                    <select name="cipher" id="id_cipher">
+                        <option value="SHA1">SHA1</option>
+                        <option value="SHA224">SHA224</option>
+                        <option value="SHA384">SHA384</option>
+                        <option value="CRC32">CRC32</option>
+                        <option value="SHA256">SHA256</option>
+                        <option value="SHA512">SHA512</option>
+                        <option value="MD5">MD5</option>
+                    </select>
+                    <input id="hash" type="text" name="hash" class="height-large input-medium">
+                    <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by hash" data-content="Search for images with this hash.">
+                        <span class="badge badge-info"><i class="icon-info"></i></span>
+                    </a>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="metadata">Metadata</label>
+                <div class="controls">
+                    <input id="metadata_key" type="text" name="metadata_key" class="height-large input-small" placeholder="METADATA KEY">
+                    <input id="metadata_value" type="text" name="metadata_value" class="height-large input-small" placeholder="METADATA VALUE">
+                    <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by metadata value" data-content="Search for a value contained in a metadata key (key format example 'Exif.Photo.Camera').">
+                        <span class="badge badge-info"><i class="icon-info"></i></span>
+                    </a>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="signature">Signature</label>
+                <div class="controls">
+                    <input id="signature" type="text" name="signature" class="height-large">
+                    <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by signature" data-content="Search for signature containing this text.">
+                        <span class="badge badge-info"><i class="icon-info"></i></span>
+                    </a>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="metadata">Match condition</label>
+                <div class="controls">
+                   <label class="radio">
+                        <input type="radio" name="optionsRadios" id="and" value="and" checked>
+                        AND
+                   </label>
+                   <label class="radio">
+                        <input type="radio" name="optionsRadios" id="or" value="or">
+                        OR
+                    </label>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button id="btn_submit" type="submit" class="btn btn-large btn-success">
+                    Search
+                </button>
+            </div>
+        </form>
+        <form id="location" action="{% url "analyses.views.search" "list" %}" method="get" class="form-horizontal form-model tab-pane">{% csrf_token %}
+            <div class="control-group">
+                <label class="control-label" for="metadata">Location</label>
+                <div class="controls">
+                    <input id="lat" type="text" name="lat" value="LATITUDE" class="height-large input-small-three" onfocus="if(this.value == 'LATITUDE') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'LATITUDE'; }">
+                    <input id="long" type="text" name="long" value="LONGITUDE" class="height-large input-small-three" onfocus="if(this.value == 'LONGITUDE') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'LONGITUDE'; }">
+                    <input id="dist" type="text" name="dist" value="MAX DISTANCE" class="height-large input-small-three" onfocus="if(this.value == 'MAX DISTANCE') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'MAX DISTANCE'; }">
+                    <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by location" data-content="Search for photos near this point.">
+                        <span class="badge badge-info"><i class="icon-info"></i></span>
+                    </a>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button id="btn_submit" type="submit" class="btn btn-large btn-success">
+                    Search
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
