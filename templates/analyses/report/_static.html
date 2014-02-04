@@ -1,3 +1,4 @@
+{% load analyses_tags %}
 <div class="box-tab corner-all">
     <div class="box-header corner-top">
         <div class="header-control pull-right">
@@ -19,7 +20,7 @@
             </li>
             {% endif %}
             <li>
-                <a data-toggle="tab" href="#server-hex">Hexview</a>
+                <a data-toggle="tab" href="#server-hex">Hex view</a>
             </li>
         </ul>
     </div>
@@ -129,9 +130,11 @@
                 <div class="row-fluid">
                     <table class="table">
                         <tbody>
-                            {% for line in lines %}
+                            {% for line in analysis.image_id|hexview %}
                             <tr>
-                                <td></td>
+                                <td>{{ line.address }}</td>
+                                <td>{{ line.hex }}</td>
+                                <td>{{ line.text }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
