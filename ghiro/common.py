@@ -3,6 +3,9 @@
 # See the file 'docs/LICENSE.txt' for license terms.
 
 import sys
+import json
+import urllib
+import urllib2
 from pymongo import MongoClient
 from pymongo.database import Database
 from pymongo.errors import ConnectionFailure
@@ -10,6 +13,7 @@ from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.conf import settings
 
 from users.models import Activity
+from manage.models import UpdateCheck
 
 def log_activity(category, message, request):
     """Logs an activity for auditing.
@@ -62,5 +66,44 @@ def check_allowed_content(content_type):
     """
     if content_type in settings.ALLOWED_EXT:
         return True
+    else:
+        return False
+
+def check_version():
+    """Checks version of Ghiro."""
+
+    # Do i have to check?
+    if UpdateCheck.should_check():
+
+        # Create new check entry.
+        check = UpdateCheck.objects.create()
+
+        # Format request.
+        url = "http://update.getghiro.org/update/check/"
+        data = urllib.urlencode({"version": settings.GHIRO_VERSION})
+
+        try:
+            request = urllib2.Request(url, data)
+            response = urllib2.urlopen(request)
+        except (urllib2.URLError, urllib2.HTTPError) as e:
+            check.state = "E"
+            check.save()
+            raise Exception("Unable to establish connection: %s" % e)
+
+        try:
+            data = json.loads(response.read())
+        except ValueError:
+            check.state = "E"
+            check.save()
+            raise Exception("Invalid response.")
+
+        if data["new_release"]:
+            check.state = "A"
+            check.save()
+            return True
+        else:
+            check.state = "N"
+            check.save()
+            return False
     else:
         return False
