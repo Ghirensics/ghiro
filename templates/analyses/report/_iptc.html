@@ -18,7 +18,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for k, v in anal.metadata.Iptc.iteritems %}
+                            {% for k, v in analysis.report.metadata.Iptc.iteritems %}
                             <tr>
                                 <td><b>{{ k|upper }}</b></td>
                                 <td> {% include 'analyses/report/_visualize_value.html' with value=v subgroup=k group="Iptc" %} </td>

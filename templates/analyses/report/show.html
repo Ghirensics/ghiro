@@ -36,7 +36,7 @@
                             {% endif %}
                         </div>
                         <div class="media-body">
-                            <h2 class="media-heading">Image analysis: {{ anal.hash.md5 }}</h2>
+                            <h2 class="media-heading">Image analysis: {{ analysis.report.hash.md5 }}</h2>
                             <h1 class="btn-group">
                                 {% if analysis.favorites.all %}
                                     <a href="#" id="{% url "analyses.views.favorite" analysis.id %}" rel="{{ analysis.id }}" class="btn favorite btn-warning star{{ analysis.id }}"> <i class="icon-star"> </i></a>
@@ -64,37 +64,37 @@
                                 <li>
                                     <a href="#static" data-toggle="tab">Static</a>
                                 </li>
-                                {% if anal.metadata.Exif %}
+                                {% if analysis.report.metadata.Exif %}
                                 <li>
                                     <a href="#exif" data-toggle="tab">EXIF</a>
                                 </li>
                                 {% endif %}
-                                {% if anal.metadata.Iptc %}
+                                {% if analysis.report.metadata.Iptc %}
                                 <li>
                                     <a href="#iptc" data-toggle="tab">IPTC</a>
                                 </li>
                                 {% endif %}
-                                {% if anal.metadata.Xmp %}
+                                {% if analysis.report.metadata.Xmp %}
                                 <li>
                                     <a href="#xmp" data-toggle="tab">XMP</a>
                                 </li>
                                 {% endif %}
-                                {% if anal.metadata.preview and anal.metadata.preview|length > 0  %}
+                                {% if analysis.report.metadata.preview and analysis.report.metadata.preview|length > 0  %}
                                 <li>
                                     <a href="#thumb" data-toggle="tab">Thumb</a>
                                 </li>
                                 {% endif %}
-                                {% if anal.metadata.gps %}
+                                {% if analysis.report.metadata.gps %}
                                 <li>
                                     <a href="#map" data-toggle="tab">Map</a>
                                 </li>
                                 {% endif %}
-                                {% if anal.ela %}
+                                {% if analysis.report.ela %}
                                 <li>
                                     <a href="#ela" data-toggle="tab">ELA</a>
                                 </li>
                                 {% endif %}
-                                {% if anal.signatures and anal.signatures|length > 0 %}
+                                {% if analysis.report.signatures and analysis.report.signatures|length > 0 %}
                                 <li>
                                     <a href="#signs" data-toggle="tab">Signatures</a>
                                 </li>
@@ -107,37 +107,37 @@
                                 <div class="tab-pane" id="static">
                                     {% include 'analyses/report/_static.html' %}
                                 </div>
-                                {% if anal.metadata.Exif %}
+                                {% if analysis.report.metadata.Exif %}
                                 <div id="exif" class="tab-pane">
                                     {% include 'analyses/report/_exif.html' %}
                                 </div>
                                 {% endif %}
-                                {% if anal.metadata.Iptc %}
+                                {% if analysis.report.metadata.Iptc %}
                                 <div id="iptc" class="tab-pane">
                                     {% include 'analyses/report/_iptc.html' %}
                                 </div>
                                 {% endif %}
-                                {% if anal.metadata.Xmp %}
+                                {% if analysis.report.metadata.Xmp %}
                                 <div id="xmp" class="tab-pane">
                                     {% include 'analyses/report/_xmp.html' %}
                                 </div>
                                 {% endif %}
-                                {% if anal.metadata.preview and anal.metadata.preview|length > 0  %}
+                                {% if analysis.report.metadata.preview and analysis.report.metadata.preview|length > 0  %}
                                 <div id="thumb" class="tab-pane">
                                     {% include 'analyses/report/_previews.html' %}
                                 </div>
                                 {% endif %}
-                                {% if anal.metadata.gps %}
+                                {% if analysis.report.metadata.gps %}
                                 <div id="map" class="tab-pane">
                                     {% include 'analyses/report/_map.html' %}
                                 </div>
                                 {% endif %}
-                                {% if anal.ela %}
+                                {% if analysis.report.ela %}
                                 <div id="ela" class="tab-pane">
                                     {% include 'analyses/report/_ela.html' %}
                                 </div>
                                 {% endif %}
-                                {% if anal.signatures and anal.signatures|length > 0 %}
+                                {% if analysis.report.signatures and analysis.report.signatures|length > 0 %}
                                 <div id="signs" class="tab-pane">
                                     {% include 'analyses/report/_signature.html' %}
                                 </div>

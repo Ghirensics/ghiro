@@ -6,17 +6,17 @@
                 <a data-toggle="tab" href="#system-signature"><span class="badge">All</span></a>
             </li>
             {# Show only severities present. #}
-            {% if anal.signatures|has_severity:"3" %}
+            {% if analysis.report.signatures|has_severity:"3" %}
                 <li>
                     <a data-toggle="tab" href="#high-signature"><span class="badge badge-important">High</span></a>
                 </li>
             {% endif %}
-            {% if anal.signatures|has_severity:"2" %}
+            {% if analysis.report.signatures|has_severity:"2" %}
                 <li>
                     <a data-toggle="tab" href="#medium-signature"><span class="badge badge-warning">Medium</span></a>
                 </li>
             {% endif %}
-            {% if anal.signatures|has_severity:"1" %}
+            {% if analysis.report.signatures|has_severity:"1" %}
                 <li>
                     <a data-toggle="tab" href="#low-signature"><span class="badge badge-success">Low</span></a>
                 </li>
@@ -28,7 +28,7 @@
             <div class="tab-pane fade in active" id="system-signature">
                 <div class="row-fluid">
                     <div class="accordion" id="sign-accordion">
-                        {% for sign in anal.signatures %}
+                        {% for sign in analysis.report.signatures %}
                             {% include "analyses/report/_signatures_table.html" %}
                         {% endfor %}
                     </div>
@@ -37,7 +37,7 @@
             <div class="tab-pane fade" id="high-signature">
                 <div class="row-fluid">
                     <div class="accordion" id="sign3-accordion">
-                        {% for sign in anal.signatures %}
+                        {% for sign in analysis.report.signatures %}
                             {% if sign.severity == 3 %}
                                 {% include "analyses/report/_signatures_table.html" with segment=3 %}
                             {% endif %}
@@ -48,7 +48,7 @@
             <div class="tab-pane fade" id="medium-signature">
                 <div class="row-fluid">
                     <div class="accordion" id="sign2-accordion">
-                        {% for sign in anal.signatures %}
+                        {% for sign in analysis.report.signatures %}
                             {% if sign.severity == 2 %}
                                 {% include "analyses/report/_signatures_table.html" with segment=2 %}
                             {% endif %}
@@ -59,7 +59,7 @@
             <div class="tab-pane fade" id="low-signature">
                 <div class="row-fluid">
                     <div class="accordion" id="sign1-accordion">
-                        {% for sign in anal.signatures %}
+                        {% for sign in analysis.report.signatures %}
                             {% if sign.severity == 1 %}
                                 {% include "analyses/report/_signatures_table.html" with segment=1 %}
                             {% endif %}
