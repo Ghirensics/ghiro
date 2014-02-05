@@ -128,16 +128,24 @@
             </div>
             <div class="tab-pane fade" id="server-hex">
                 <div class="row-fluid">
-                    <table class="table">
-                        <tbody>
-                            {% for line in analysis.image_id|hexview %}
+                    <table class="hexview">
+                        {% for line in analysis.image_id|hexview %}
                             <tr>
-                                <td>{{ line.address }}</td>
-                                <td>{{ line.hex }}</td>
-                                <td>{{ line.text }}</td>
+                                <td>
+                                    <span class="address">{{ line.address }}</span>
+                                </td>
+                                <td  style="background: #C1DCFF;">
+                                    <table>
+                                        <tr>
+                                            <td>{{ line.hex }}</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <span class="lineText">{{ line.text }}</span>
+                                </td>
                             </tr>
-                            {% endfor %}
-                        </tbody>
+                        {% endfor %}
                     </table>
                 </div>
             </div>
