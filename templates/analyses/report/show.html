@@ -26,15 +26,15 @@
             <div class="container-fluid">
                 <div class="row-fluid">
                     <div class="media">
-                        <a class="pull-left" href="#">
+                        <div class="pull-left">
                             {% if analysis.thumb_id %}
-                                <span href="{% url "analyses.views.image" analysis.image_id %}" class="fancybox">
-                                    <img src="{% url "analyses.views.image" analysis.thumb_id %}" class="img-rounded media-object">
-                                </span>
+                                <a href="{% url "analyses.views.image" analysis.image_id %}" class="fancybox">
+                                    <img src="{% url "analyses.views.image" analysis.thumb_id %}" class="img-rounded media-object img-standard">
+                                </a>
                             {% else %}
                                 <img src="{{ STATIC_URL }}img/no_image_large.jpg" class="img-rounded media-object">
                             {% endif %}
-                        </a>
+                        </div>
                         <div class="media-body">
                             <h2 class="media-heading">Image analysis: {{ anal.hash.md5 }}</h2>
                             <h1 class="btn-group">
@@ -180,6 +180,7 @@
                         prefilled: ["Anale"],
                         AjaxPush: '{% url "analyses.views.add_tag" analysis.id %}',
                         AjaxPushAllTags: true,
+                        maxTags: 4,
                         AjaxPushParameters: { 'csrfmiddlewaretoken': '{{csrf_token}}'}
                     });
                     </script>
