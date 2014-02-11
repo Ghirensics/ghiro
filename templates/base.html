@@ -11,10 +11,10 @@
         <!--[if lt IE 9]>
         <script src="{{ STATIC_URL }}js/html5shiv.js"></script>
         <![endif]-->
-        
+
         {# Fav icons #}
         <link rel="shortcut icon" href="{{ STATIC_URL }}img/ico/favicon.ico">
-        
+
         {# Styles #}
         <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
         <link href="{{ STATIC_URL }}css/bootstrap-responsive.min.css" rel="stylesheet">
@@ -31,6 +31,22 @@
         <script src="{{ STATIC_URL }}js/DT_bootstrap.js"></script>
         <script src="{{ STATIC_URL }}js/jquery.fancybox.js"></script>
         <script src="{{ STATIC_URL }}js/highcharts.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+            $.ajax({
+                url : "manage.views.update_check",
+                type : "GET",
+                success : function(data) {
+                    if (date == "true"){
+                        $('.header').css('position','relative');
+                        $('.content-large').css('margin-top','-20px');
+                        $('#newVersion').show();
+                        $('#newVersionFooter').show();
+                    }
+                }
+            });
+        });
+        </script>
     </head>
     <body>
         <header class="header navbar navbar-inverse">
@@ -74,6 +90,10 @@
                 </div>
             </div>
         </header>
+        <div class="alert hide" id="newVersion">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <span><strong>Warning!</strong> Best check yo self, you're not looking too good.</span>
+        </div>
         <section class="section">
             <div class="row-fluid">
                 {% include "layout/_sidebar.html" %}
@@ -81,7 +101,7 @@
             </div>
         </section>
         <div id="footer">
-            <small class="pull-right"><strong>Ghiro 0.1 - &copy;</strong> With poetry, <a href="http://twitter.com/jekil" target="_blank">jekil</a> and <a href="">burlone</a>.</small>
+            <small class="pull-right"><strong>Ghiro 0.1 - &copy;</strong> With poetry, <a href="http://twitter.com/jekil" target="_blank">jekil</a> and <a href="">burlone</a>. <a href="http://getghiro.org" id="newVersionFooter" class="hide"><span class="badge badge-success">New version</span></a></small>
         </div>
     </body>
 </html>
