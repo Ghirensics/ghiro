@@ -36,32 +36,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% if anal.file_name %}
+                            {% if analysis.report.file_name %}
                             <tr>
                                 <td><b>Filename</b></td>
-                                <td>{{ anal.file_name }}</td>
+                                <td>{{ analysis.report.file_name }}</td>
                             </tr>
                             {% endif %}
-                            {% if anal.file_size|filesizeformat %}
+                            {% if analysis.report.file_size|filesizeformat %}
                             <tr>
                                 <td><b>Size</b></td>
-                                <td>{{ anal.file_size|filesizeformat }}</td>
+                                <td>{{ analysis.report.file_size|filesizeformat }}</td>
                             </tr>
                             {% endif %}
-                            {% if anal.metadata.dimensions %}
+                            {% if analysis.report.metadata.dimensions %}
                             <tr>
                                 <td><b>Dimensions</b></td>
-                                <td>{{ anal.metadata.dimensions }}</td>
+                                <td>{{ analysis.report.metadata.dimensions }}</td>
                             </tr>
                             {% endif %}
                             <tr>
                                 <td><b>Analyzed at</b></td>
                                 <td>{{ analysis.completed_at }}</td>
                             </tr>
-                            {% if anal.metadata.comment %}
+                            {% if analysis.report.metadata.comment %}
                             <tr>
                                 <td><b>Comment</b></td>
-                                <td>{{ anal.metadata.comment }}</td>
+                                <td>{{ analysis.report.metadata.comment }}</td>
                             </tr>
                             {% endif %}
                         </tbody>
@@ -78,7 +78,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{ anal.file_type }}</td>
+                                <td>{{ analysis.report.file_type }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -94,7 +94,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for k, v in anal.hash.iteritems %}
+                            {% for k, v in analysis.report.hash.iteritems %}
                             <tr>
                                 <td><b>{{ k|upper }}</b></td>
                                 <td>{{ v }}</td>
@@ -128,16 +128,24 @@
             </div>
             <div class="tab-pane fade" id="server-hex">
                 <div class="row-fluid">
-                    <table class="table">
-                        <tbody>
-                            {% for line in analysis.image_id|hexview %}
+                    <table class="hexview">
+                        {% for line in analysis.image_id|hexview %}
                             <tr>
-                                <td>{{ line.address }}</td>
-                                <td>{{ line.hex }}</td>
-                                <td>{{ line.text }}</td>
+                                <td>
+                                    <span class="address">{{ line.address }}</span>
+                                </td>
+                                <td  style="background: #C1DCFF;">
+                                    <table>
+                                        <tr>
+                                            <td>{{ line.hex }}</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <span class="lineText">{{ line.text }}</span>
+                                </td>
                             </tr>
-                            {% endfor %}
-                        </tbody>
+                        {% endfor %}
                     </table>
                 </div>
             </div>

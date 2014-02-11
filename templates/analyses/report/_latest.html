@@ -6,15 +6,15 @@
 {% for anal in anals %}
 <div class="row-fluid">
     <div class="media">
-        <a class="pull-left" href="#"> {% if anal.files.thumb100 %} <img class="media-object img-rounded" src="{% url "analyses.views.image" anal.files.thumb100 %}"> {% else %} <img src="{{ STATIC_URL }}img/no_image.jpg" class="media-object img-rounded"> {% endif %} </a>
+        <a class="pull-left" href="#"> {% if analysis.report.files.thumb100 %} <img class="media-object img-rounded" src="{% url "analyses.views.image" analysis.report.files.thumb100 %}"> {% else %} <img src="{{ STATIC_URL }}img/no_image.jpg" class="media-object img-rounded"> {% endif %} </a>
         <div class="media-body">
-            <h4 class="media-heading"><a href="{% url "analyses.views.show" anal.hash.md5 anal.uuid %}">{{ anal.hash.md5|upper }}</a></h4>
+            <h4 class="media-heading"><a href="{% url "analyses.views.show" analysis.report.hash.md5 analysis.report.uuid %}">{{ analysis.report.hash.md5|upper }}</a></h4>
             <p>
-                <b>Submitted at</b>: {{ anal.created_at }}
+                <b>Submitted at</b>: {{ analysis.report.created_at }}
                 <br />
-                {% if anal.signatures %}
+                {% if analysis.report.signatures %}
                 <b>Signatures</b>:
-                {% regroup anal.signatures|dictsort:"severity" by severity as signs %}
+                {% regroup analysis.report.signatures|dictsort:"severity" by severity as signs %}
                 {% for sign in signs %}
                 {% if sign.grouper == 1%}
                 <span class="badge badge-success">{{ sign.list|length }}</span>

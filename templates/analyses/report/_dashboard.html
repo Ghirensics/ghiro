@@ -8,7 +8,7 @@
         <ul class="nav nav-pills" id="tab-stat">
             <li class="active">
                 <a data-toggle="tab" href="#system-stat">Analysis results
-                {% if anal.private %} <small>(flagged as private)</small> {% endif %}</a>
+                {% if analysis.report.private %} <small>(flagged as private)</small> {% endif %}</a>
             </li>
             <li>
                 <a data-toggle="tab" href="#server-stat">Signature results</a>
@@ -33,31 +33,31 @@
                             </tr>
                             <tr>
                                 <td>EXIF metadata extraction</td>
-                                <td> {% if anal.metadata.Exif %} <span class="label label-success">EXIF Metadata</span> {% else %} <span class="label label-inverse">No EXIF metadata</span> {% endif %} </td>
+                                <td> {% if analysis.report.metadata.Exif %} <span class="label label-success">EXIF Metadata</span> {% else %} <span class="label label-inverse">No EXIF metadata</span> {% endif %} </td>
                             </tr>
                             <tr>
                                 <td>IPTC metadata extraction</td>
-                                <td> {% if anal.metadata.Iptc %} <span class="label label-success">IPTC Metadata</span> {% else %} <span class="label label-inverse">No IPTC metadata</span> {% endif %} </td>
+                                <td> {% if analysis.report.metadata.Iptc %} <span class="label label-success">IPTC Metadata</span> {% else %} <span class="label label-inverse">No IPTC metadata</span> {% endif %} </td>
                             </tr>
                             <tr>
                                 <td>XMP metadata extraction</td>
-                                <td> {% if anal.metadata.Xmp %} <span class="label label-success">XMP Metadata</span> {% else %} <span class="label label-inverse">No XMP metadata</span> {% endif %} </td>
+                                <td> {% if analysis.report.metadata.Xmp %} <span class="label label-success">XMP Metadata</span> {% else %} <span class="label label-inverse">No XMP metadata</span> {% endif %} </td>
                             </tr>
                             <tr>
                                 <td>Preview extraction from metadata</td>
-                                <td> {% if anal.metadata.preview and anal.metadata.preview|length > 0  %} <span class="label label-success">Preview found</span> {% else %} <span class="label label-inverse">No Preview</span> {% endif %} </td>
+                                <td> {% if analysis.report.metadata.preview and analysis.report.metadata.preview|length > 0  %} <span class="label label-success">Preview found</span> {% else %} <span class="label label-inverse">No Preview</span> {% endif %} </td>
                             </tr>
                             <tr>
                                 <td>Localization</td>
-                                <td> {% if anal.metadata.gps.pos %} <span class="label label-success">GPS position</span> {% else %} <span class="label label-inverse">No GPS data</span> {% endif %} </td>
+                                <td> {% if analysis.report.metadata.gps.pos %} <span class="label label-success">GPS position</span> {% else %} <span class="label label-inverse">No GPS data</span> {% endif %} </td>
                             </tr>
                             <tr>
                                 <td>Error Level Analysis (ELA)</td>
-                                <td> {% if anal.ela  %} <span class="label label-success">Applicable</span> {% else %} <span class="label label-inverse">Not applicable</span> {% endif %} </td>
+                                <td> {% if analysis.report.ela  %} <span class="label label-success">Applicable</span> {% else %} <span class="label label-inverse">Not applicable</span> {% endif %} </td>
                             </tr>
                             <tr>
                                 <td>Singature check</td>
-                                <td> {% if anal.signatures and anal.signatures|length > 0  %} <span class="label label-success">Signature matches</span> {% else %} <span class="label label-inverse">No signature match</span> {% endif %} </td>
+                                <td> {% if analysis.report.signatures and analysis.report.signatures|length > 0  %} <span class="label label-success">Signature matches</span> {% else %} <span class="label label-inverse">No signature match</span> {% endif %} </td>
                             </tr>
                         </tbody>
                     </table>
@@ -65,7 +65,7 @@
             </div>
             <div class="tab-pane fade" id="server-stat">
                 <div class="row-fluid">
-                    {% if anal.signatures %}
+                    {% if analysis.report.signatures %}
                     <table>
                         <tr>
                             <td>
@@ -82,22 +82,22 @@
                                     <tbody>
                                         <tr>
                                             <td><span class="badge badge-success">Low</span></td>
-                                            <td class="text-success right"><b>{{ anal.signatures|count_severity:"1" }}</b></td>
+                                            <td class="text-success right"><b>{{ analysis.report.signatures|count_severity:"1" }}</b></td>
                                         </tr>
                                         <tr>
                                             <td><span class="badge badge-warning">Medium</span></td>
-                                            <td class="text-warning right"><b>{{ anal.signatures|count_severity:"2" }}</b></td>
+                                            <td class="text-warning right"><b>{{ analysis.report.signatures|count_severity:"2" }}</b></td>
                                         </tr>
                                         <tr>
                                             <td><span class="badge badge-important">High</span></td>
-                                            <td class="text-error right"><b>{{ anal.signatures|count_severity:"3" }}</b></td>
+                                            <td class="text-error right"><b>{{ analysis.report.signatures|count_severity:"3" }}</b></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </td>
                         </tr>
                     </table>
-                    
+
                     <script type="text/javascript">
                     $(function () {
                         $('#container').highcharts({
@@ -133,17 +133,17 @@
                                 data: [
                                      {
                                         name: 'Low',
-                                        y: {{ anal.signatures|count_severity:"1" }},
+                                        y: {{ analysis.report.signatures|count_severity:"1" }},
                                         color: '#468847'
                                     },
                                     {
                                         name: 'Medium',
-                                        y: {{ anal.signatures|count_severity:"2" }},
+                                        y: {{ analysis.report.signatures|count_severity:"2" }},
                                         color: '#F89406'
                                     },
                                      {
                                         name: 'High',
-                                        y: {{ anal.signatures|count_severity:"3" }},
+                                        y: {{ analysis.report.signatures|count_severity:"3" }},
                                         color: '#B94A48'
                                     },
                                 ]
@@ -151,7 +151,7 @@
                         });
                     });
                     </script>
-                    
+
                     {% else %}
                     <div class="alert">
                         <strong>Warning!</strong> No signature matched.

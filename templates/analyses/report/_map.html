@@ -8,18 +8,18 @@
 
 <div id="mapinfo">
     <dl class="dl-horizontal pull-left">
-        {% for k, v in anal.metadata.Exif.GPSInfo.iteritems %}
+        {% for k, v in analysis.report.metadata.Exif.GPSInfo.iteritems %}
         <dt>{{ k|upper }}</dt>
         <dd>{% include 'analyses/report/_visualize_value.html' with value=v %}</dd>
         {% endfor %}
     </dl>
     <dl class="dl-horizontal pull-right">
         <dt>Latitude</dt>
-        <dd>{{ anal.metadata.gps.pos.Latitude }}</dd>
+        <dd>{{ analysis.report.metadata.gps.pos.Latitude }}</dd>
         <dt>Longitude</dt>
-        <dd>{{ anal.metadata.gps.pos.Longitude }}</dd>
+        <dd>{{ analysis.report.metadata.gps.pos.Longitude }}</dd>
         <dt>Altitude</dt>
-        <dd>{{ anal.metadata.gps.Altitude }}</dd>
+        <dd>{{ analysis.report.metadata.gps.Altitude }}</dd>
     </dl>
 </div>
 <script>
@@ -30,7 +30,7 @@ $(document).ready(function(){
 
 var map = null;
     function initialize() {
-        var pos = new google.maps.LatLng({{ anal.metadata.gps.pos.Latitude|floatformat:6 }}, {{ anal.metadata.gps.pos.Longitude|floatformat:6 }});
+        var pos = new google.maps.LatLng({{ analysis.report.metadata.gps.pos.Latitude|floatformat:6 }}, {{ analysis.report.metadata.gps.pos.Longitude|floatformat:6 }});
         var mapOptions = {
             center: pos,
             zoom: 7,

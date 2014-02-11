@@ -3,6 +3,14 @@ body {
     overflow-y: scroll;
 }
 
+/* Header - New Version */
+#newVersion{
+    margin-top: -20px;
+}
+#newVersion span{
+    padding-left: 86px;
+}
+
 /* Header */
 .header {
     position: fixed;
@@ -466,7 +474,6 @@ input[type='checkbox']{
     font-weight:bold;
     font-size: 11px;
 }
-
 .popover-content{
     text-align: justify;
 }
@@ -480,4 +487,20 @@ input[type='checkbox']{
 .comment li{
     list-style: none;
     margin-left: -23px;
+}
+
+/* HexView */
+
+.address{
+    color:red;
+    padding-left:10px;
+    padding-right:3px
+}
+.lineText{
+    padding-left:10px;
+}
+
+.img-standard{
+    height: 150px;
+    width: 200px;
 }
