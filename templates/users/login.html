@@ -26,9 +26,9 @@
         </div>
     </div>
 </form>
-{% if form.non_field_errors%}
+{% if form.errors %}
     <div class="alert alert-danger">
-        {{ form.non_field_errors }}
+        {{ form.non_field_errors|striptags }}
     </div>
 {% endif %}
 
