@@ -69,6 +69,24 @@
                     </a>
                 </div>
             </div>
+            {% if in_case_id %}
+                <input type="hidden" value="" name="" id="">
+            {% else %}
+                <div class="control-group">
+                    <label class="control-label" for="signature">Case</label>
+                    <div class="controls">
+                        <select class="span9">
+                            <option value="">ALL</option>
+                            {% for case in analysis.cases.all %}
+                                <option value="{{ case.id }}">{{ case.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search in the case" data-content="">
+                            <span class="badge badge-info"><i class="icon-info"></i></span>
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
             <div class="control-group">
                 <label class="control-label" for="metadata">Match condition</label>
                 <div class="controls">
