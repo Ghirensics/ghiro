@@ -778,10 +778,10 @@ def add_tag(request, id):
             context_instance=RequestContext(request))
 
     # Validation check.
-    if not request.POST.get("tag_content"):
+    if not request.POST.get("tagName"):
         return HttpResponse("Tag empty.")
 
-    tag = Tag(owner=request.user, text=request.POST.get("tag_content"))
+    tag = Tag(owner=request.user, text=request.POST.get("tagName"))
     tag.save()
     analysis.tag_set.add(tag)
 
@@ -791,3 +791,32 @@ def add_tag(request, id):
         request)
 
     return HttpResponse(tag.id)
+
+@login_required
+def delete_tag(request, id):
+    """Un-Tag image."""
+    analysis = get_object_or_404(Analysis, pk=id)
+
+    # Security check.
+    if not(request.user.is_superuser or request.user in analysis.case.users.all()):
+        return render_to_response("error.html",
+            {"error": "You are not authorized to tag this."},
+            context_instance=RequestContext(request))
+
+    # Validation check.
+    if not request.POST.get("tagName"):
+        return HttpResponse("Tag empty.")
+
+    try:
+        tag = Tag.objects.get(owner=request.user, text=request.POST.get("tagName"))
+    except ObjectDoesNotExist:
+        return HttpResponse(False)
+
+    analysis.tag_set.remove(tag)
+
+    # Auditing.
+    log_activity("I",
+        "Tag on image removed: {0}".format(analysis.file_name),
+        request)
+
+    return HttpResponse(True)
