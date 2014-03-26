@@ -3,7 +3,8 @@ Setup Ghiro
 
 Ghiro is supposed to run on a *GNU/Linux* native system.
 For the purpose of this documentation, we chose **latest Ubuntu Server** as
-reference system for the commands examples.
+reference system for the commands examples, although Ghiro works on any GNU/Linux
+distribution
 Probably Ghiro could work on other systems like MacOSX but this is not tested
 and out of scope of this documentation.
 
@@ -21,6 +22,7 @@ Ghiro has the following requirements:
     * Python-dateutil: for datetime manipulation
     * Pymongo: driver for MongoDB (at least release 2.5)
     * Django: for web interface (at least release 1.5)
+    * chardet
 
 If you choose MySQL or PostgrSQL as database you have to install their additional drivers.
 
