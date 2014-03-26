@@ -29,7 +29,7 @@
                         <div class="pull-left">
                             {% if analysis.thumb_id %}
                                 <a href="{% url "analyses.views.image" analysis.image_id %}" class="fancybox">
-                                    <img src="{% url "analyses.views.image" analysis.thumb_id %}" class="img-rounded media-object img-standard">
+                                    <img src="{% url "analyses.views.image" analysis.thumb_id %}" class="img-rounded media-object">
                                 </a>
                             {% else %}
                                 <img src="{{ STATIC_URL }}img/no_image_large.jpg" class="img-rounded media-object">
