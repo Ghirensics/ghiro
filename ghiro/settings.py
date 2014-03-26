@@ -10,6 +10,9 @@ TEMPLATE_DEBUG = DEBUG
 
 SITE_ID = 1
 
+# Actual Ghiro release.
+GHIRO_VERSION = "0.2-dev"
+
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
@@ -116,6 +119,7 @@ INSTALLED_APPS = (
     "users",
     "analyses",
     "hashes",
+    "manage",
 )
 
 # A sample logging configuration. The only tangible logging
