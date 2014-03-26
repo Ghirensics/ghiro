@@ -45,11 +45,9 @@
                                 {% endif %}
                                 <a href="{% url "analyses.views.image" analysis.image_id %}" class="btn"><i class="icon-download"></i> Download</a>
                                 <a href="{% url "analyses.views.image" analysis.image_id %}" class="action_print btn btn-info"><i class="icon-print"></i> Print</a>
-                                <a href="{% url "analyses.views.delete_analysis" analysis.id %}" class="btn btn-danger"><i class="icon-trash"></i> Delete</a>
+                                <a class="btn btn-danger btn-delete-report" id="{% url "analyses.views.delete_analysis" analysis.id %}" href="#deleteReport" role="button" data-toggle="modal"> <i class="icon-trash"></i> Delete</a>
+
                             </h1>
-                        </div>
-                        <div>
-                            <input type="text" name="tags" placeholder="Add tag..." class="tm-input"/>
                         </div>
                     </div>
                 </div>
@@ -144,7 +142,11 @@
                                 {% endif %}
                             </div>
                         </div>
+                        <div>
+                            <ul id="tags"></ul>
+                        </div>
                     </div>
+
                     <div class="comment controls">
                         {% if analysis.comments.all %}
                             <h3>Comments</h3>
@@ -160,33 +162,54 @@
                                 {% endfor %}
                             </table>
                         {% endif %}
-                        <form method="post" action="{% url "analyses.views.add_comment" analysis.id %}">{% csrf_token %}
+                        <form method="post" action="{% url "analyses.views.add_comment" analysis.id %}"  class="controls">{% csrf_token %}
                             <div>
-                                <em>Insert your comment:</em>
-                            </div>
-                            <div>
-                                <textarea name="msg" id="msg"></textarea>
+                                <textarea class="span12" name="msg" id="msg" class="height-large" type="text" placeholder="Insert your comment"></textarea>
                             </div>
                             <div>
                                 <button class="btn btn-success btn-small">Save</button>
                             </div>
                         </form>
                     </div>
-                    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-tagsinput.css">
+
+                    <link rel="stylesheet" href="{{ STATIC_URL }}css/jquery.tagit.css">
+                    <link rel="stylesheet" href="{{ STATIC_URL }}css/tagit.ui-zendesk.css">
                     {# JS #}
-                    <script src="{{ STATIC_URL }}js/bootstrap-tagsinput.js"></script>
-                    <script>
-                    jQuery(".tm-input").tagsManager({
-                        prefilled: ["Anale"],
-                        AjaxPush: '{% url "analyses.views.add_tag" analysis.id %}',
-                        AjaxPushAllTags: true,
-                        maxTags: 4,
-                        AjaxPushParameters: { 'csrfmiddlewaretoken': '{{csrf_token}}'}
-                    });
+                    <script src="{{ STATIC_URL }}js/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+                    <script src="{{ STATIC_URL }}js/tag-it.js"></script>
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            var eventTags = $('#tags');
+
+                            eventTags.tagit({
+                                placeholderText: 'Insert your tags',
+                                afterTagAdded: function(evt, ui) {
+                                    if (!ui.duringInitialization) {
+                                        var tag = eventTags.tagit('tagLabel', ui.tag);
+                                        $.ajax({
+                                            type:'POST',
+                                            url:'',
+                                            data:'tagName =' + tag
+                                        });
+                                    }
+                                },
+                                afterTagRemoved: function(evt, ui) {
+                                    var tag = eventTags.tagit('tagLabel', ui.tag);
+                                    $.ajax({
+                                        type:'POST',
+                                        url:'',
+                                        data:'tagName =' + tag
+                                    });
+                                }
+                            });
+                        });
                     </script>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+{% include "layout/_modalActionCase.html" %}
+
 {% endblock %}

@@ -56,6 +56,11 @@ $(document).ready(function() {
         $("#id-delete").attr({href: id});
     });
 
+    $('.btn-delete-report').click(function(){
+        var id = $(this).attr("id");
+        $("#id-delete-report").attr({href: id});
+    });
+
     $('.favorite').click(function(){
         var id = $(this).attr("id");
         var rel = $(this).attr("rel");
