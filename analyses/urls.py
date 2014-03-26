@@ -23,5 +23,6 @@ urlpatterns = patterns("",
     url(r"^images/comment/(?P<id>[\d]+)/$", "analyses.views.add_comment"),
     url(r"^images/comment/delete/(?P<id>[\d]+)/$", "analyses.views.delete_comment"),
     url(r"^search/(?P<page_name>[\w]+)/$", "analyses.views.search"),
-    url(r"^images/tag/(?P<id>[\d]+)/$", "analyses.views.add_tag"),
+    url(r"^images/tag/add/(?P<id>[\d]+)/$", "analyses.views.add_tag"),
+    url(r"^images/tag/delete/(?P<id>[\d]+)/$", "analyses.views.delete_tag"),
 )

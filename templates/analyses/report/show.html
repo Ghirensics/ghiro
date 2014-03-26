@@ -193,7 +193,7 @@
                                         var tag = eventTags.tagit('tagLabel', ui.tag);
                                         $.ajax({
                                             type:'POST',
-                                            url:'',
+                                            url:'{% url "analyses.views.add_tag" %}',
                                             data:'tagName=' + tag
                                         });
                                     }
@@ -202,7 +202,7 @@
                                     var tag = eventTags.tagit('tagLabel', ui.tag);
                                     $.ajax({
                                         type:'POST',
-                                        url:'',
+                                        url:'{% url "analyses.views.delete_tag" %}',
                                         data:'tagName=' + tag
                                     });
                                 }
