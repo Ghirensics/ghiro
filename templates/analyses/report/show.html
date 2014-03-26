@@ -143,7 +143,11 @@
                             </div>
                         </div>
                         <div>
-                            <ul id="tags"></ul>
+                            <ul id="tags">
+                                {% for tag in analysis.tags.all %}
+                                    <li>{{ tag.text }}</li>
+                                {% endfor %}
+                            </ul>
                         </div>
                     </div>
 
