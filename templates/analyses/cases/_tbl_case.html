@@ -284,7 +284,7 @@
 {% elif pagename == "favorites" %}
     {% include "analyses/cases/_favorites.html" with images=tasks %}
 {% elif pagename == "search" %}
-    {% include "layout/_searchForm.html" %}
+    {% include "layout/_searchForm.html" with in_case_id=case.id%}
 {% endif %}
 
 <script type="text/javascript">

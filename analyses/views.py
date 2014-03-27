@@ -641,6 +641,8 @@ def search(request, page_name):
                 analyses = Analysis.objects
                 if not request.user.is_superuser:
                     analyses = analyses.filter(Q(case__owner=request.user) | Q(case__users=request.user))
+                if request.GET.get("in_case") != "all":
+                    analyses = analyses.filter(case__id=request.GET.get("in_case"))
                 results.append(analyses.get(analysis_id=result["_id"]))
             except ObjectDoesNotExist:
                 continue
@@ -663,7 +665,14 @@ def search(request, page_name):
                                   {"images": results, "pagename": page_name, "get_params": queries_without_page},
                                   context_instance=RequestContext(request))
     else:
+        available_cases = Case.objects.all()
+
+        # Only superuser can see all cases.
+        if not request.user.is_superuser:
+            available_cases = available_cases.filter(Q(owner=request.user) | Q(users=request.user))
+
         return render_to_response("analyses/images/search.html",
+                                  {"available_cases": available_cases},
                                   context_instance=RequestContext(request))
 
 @require_safe
