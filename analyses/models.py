@@ -111,30 +111,33 @@ def delete_mongo_analysis(sender, instance, **kwargs):
 
     # Fetch analysis.
     analysis = db.analyses.find_one({"_id": ObjectId(instance.analysis_id)})
+
+    # If analysis data are available, delete them.
+    if analysis:
+        # Delete ELA image.
+        if "ela" in analysis:
+            useless_files.append(analysis["ela"]["ela_image"])
+        # Delete preview images.
+        if analysis["metadata"] and "preview" in analysis["metadata"]:
+            for preview in analysis["metadata"]["preview"]:
+                useless_files.append(preview["file"])
+        # Delete analysis data.
+        try:
+            db.analyses.remove({"_id": ObjectId(instance.analysis_id)})
+        except:
+            # TODO: add logging.
+            pass
     # Delete files created during analysis.
     useless_files = []
     # Delete thumbnail.
     if instance.thumb_id:
         useless_files.append(instance.thumb_id)
-    # Delete ELA image.
-    if analysis["ela"]:
-        useless_files.append(analysis["ela"]["ela_image"])
-    # Delete preview images.
-    if analysis["metadata"] and analysis["metadata"]["preview"]:
-        for preview in analysis["metadata"]["preview"]:
-            useless_files.append(preview["file"])
     # Delete original image if isn't used by other analyses.
     if Analysis.objects.filter(image_id=instance.image_id).count() == 1:
         useless_files.append(instance.image_id)
     # Delete all the shit.
     for file in useless_files:
         delete_file(file)
-    # Delete analysis data.
-    try:
-        db.analyses.remove({"_id": ObjectId(instance.analysis_id)})
-    except:
-        # TODO: add logging.
-        pass
 
 class AnalysisMetadataDescription(models.Model):
     """Descriptors for metadata keys."""

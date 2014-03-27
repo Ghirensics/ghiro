@@ -67,21 +67,22 @@
                     <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by signature" data-content="Search for signature containing this text.">
                         <span class="badge badge-info"><i class="icon-info"></i></span>
                     </a>
-                </div>
+                </div>  
             </div>
+            {# Detects if the search form is called inside a case or not. (Search scope) #}
             {% if in_case_id %}
-                <input type="hidden" value="" name="" id="">
+                <input type="hidden" value="in_case_id" name="in_case" id="in_case">
             {% else %}
                 <div class="control-group">
                     <label class="control-label" for="signature">Case</label>
                     <div class="controls">
-                        <select class="span9">
-                            <option value="">ALL</option>
-                            {% for case in analysis.cases.all %}
+                        <select class="span9" name="in_case">
+                            <option value="all">All cases</option>
+                            {% for case in available_cases %}
                                 <option value="{{ case.id }}">{{ case.name }}</option>
                             {% endfor %}
                         </select>
-                        <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search in the case" data-content="">
+                        <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search in case" data-content="Search only in selected case.">
                             <span class="badge badge-info"><i class="icon-info"></i></span>
                         </a>
                     </div>
