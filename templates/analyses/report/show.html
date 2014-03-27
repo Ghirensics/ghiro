@@ -145,7 +145,7 @@
                         <br>
                         <div>
                             <ul id="tags">
-                                {% for tag in analysis.tags.all %}
+                                {% for tag in analysis.tag_set.all %}
                                     <li>{{ tag.text }}</li>
                                 {% endfor %}
                             </ul>
@@ -177,6 +177,7 @@
                         </form>
                     </div>
 
+                    {# CSS #}
                     <link rel="stylesheet" href="{{ STATIC_URL }}css/jquery.tagit.css">
                     <link rel="stylesheet" href="{{ STATIC_URL }}css/tagit.ui-zendesk.css">
                     {# JS #}
@@ -188,12 +189,14 @@
 
                             eventTags.tagit({
                                 placeholderText: 'Insert your tags',
+
                                 afterTagAdded: function(evt, ui) {
                                     if (!ui.duringInitialization) {
                                         var tag = eventTags.tagit('tagLabel', ui.tag);
                                         $.ajax({
+                                            headers : {'X-Requested-With' : 'XMLHttpRequest', 'X-CSRFToken' : '{{csrf_token}}'},
                                             type:'POST',
-                                            url:'{% url "analyses.views.add_tag" %}',
+                                            url:'{% url "analyses.views.add_tag" analysis.id %}',
                                             data:'tagName=' + tag
                                         });
                                     }
@@ -201,8 +204,9 @@
                                 afterTagRemoved: function(evt, ui) {
                                     var tag = eventTags.tagit('tagLabel', ui.tag);
                                     $.ajax({
+                                        headers : {'X-Requested-With' : 'XMLHttpRequest', 'X-CSRFToken' : '{{csrf_token}}'},
                                         type:'POST',
-                                        url:'{% url "analyses.views.delete_tag" %}',
+                                        url:'{% url "analyses.views.delete_tag" analysis.id %}',
                                         data:'tagName=' + tag
                                     });
                                 }
