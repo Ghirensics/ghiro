@@ -34,10 +34,10 @@
         <script type="text/javascript">
         $(document).ready(function(){
             $.ajax({
-                url : "manage.views.update_check",
+                url : "{% url 'manage.views.update_check' %}",
                 type : "GET",
                 success : function(data) {
-                    if (date == "true"){
+                    if (data == "true"){
                         $('.header').css('position','relative');
                         $('.content-large').css('margin-top','-20px');
                         $('#newVersion').show();
