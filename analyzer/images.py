@@ -19,7 +19,7 @@ from PIL import Image, ImageChops, ImageEnhance
 from itertools import izip
 
 from analyzer.signatures import SignatureRunner
-from lib.utils import AutoVivification
+from lib.utils import AutoVivification, to_unicode
 
 logger = logging.getLogger("processor")
 
@@ -59,7 +59,7 @@ class MetadataAnalyzer():
     def _get_comment(self):
         """Extract comment."""
         if self.metadata.get_comment():
-            self.results["comment"] = utils.to_unicode(self.metadata.get_comment())
+            self.results["comment"] = to_unicode(self.metadata.get_comment())
 
     def _get_dimensions(self):
         """Extract image dimensions."""
@@ -73,7 +73,7 @@ class MetadataAnalyzer():
         family, group, tag = key.split(".")
         # Skipping keys wih empty values, they will not appear in report.
         if value and value != "" and value != "None":
-            self.results[family][group][tag] = utils.to_unicode(value)
+            self.results[family][group][tag] = to_unicode(value)
         # Add key description to database.
         utils.add_metadata_description(key, self.metadata.get_tag_description(key))
 
