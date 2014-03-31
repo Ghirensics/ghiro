@@ -11,7 +11,6 @@ import magic
 import zlib
 
 import analyzer.utils as utils
-import analyzer.db as db
 
 from gi.repository import GExiv2
 from copy import deepcopy
@@ -19,6 +18,7 @@ from PIL import Image, ImageChops, ImageEnhance
 from itertools import izip
 
 from analyzer.signatures import SignatureRunner
+from lib.db import save_file, get_file
 from lib.utils import AutoVivification, to_unicode
 
 logger = logging.getLogger("processor")
@@ -109,9 +109,9 @@ class MetadataAnalyzer():
                 try:
                     img = utils.str2image(self.metadata.get_preview_image(preview).get_data())
                     if preview.get_width() > 256 or preview.get_height() > 160:
-                        p["original_file"] = db.save_file(utils.image2str(img), content_type="image/jpeg")
+                        p["original_file"] = save_file(utils.image2str(img), content_type="image/jpeg")
                     img.thumbnail([256, 160], Image.ANTIALIAS)
-                    p["file"] = db.save_file(utils.image2str(img), content_type="image/jpeg")
+                    p["file"] = save_file(utils.image2str(img), content_type="image/jpeg")
                 except Exception as e:
                     logger.warning("Error reading preview: {0}".format(e))
                     continue
@@ -194,7 +194,7 @@ class ErrorLevelAnalyzer():
         # Save image.
         try:
             img = utils.image2str(ela_im)
-            self.results["ela_image"] = db.save_file(img, content_type="image/jpeg")
+            self.results["ela_image"] = save_file(img, content_type="image/jpeg")
         except Exception as e:
             logger.warning("ELA error saving image: {0}".format(e))
         finally:
@@ -229,16 +229,16 @@ class ImageComparer():
         @return: difference, difference percentage
         """
         try:
-            i1 = utils.str2image(db.get_file(original_image_id).read())
+            i1 = utils.str2image(get_file(original_image_id).read())
         except IOError as e:
             logger.warning("Comparer error reading image: {0}".format(e))
             return
 
         # Check if thumb was resized.
         if "original_file" in preview:
-            i2 = utils.str2image(db.get_file(preview["original_file"]).read())
+            i2 = utils.str2image(get_file(preview["original_file"]).read())
         else:
-            i2 = utils.str2image(db.get_file(preview["file"]).read())
+            i2 = utils.str2image(get_file(preview["file"]).read())
 
         # Resize.
         width, height = i2.size
@@ -293,7 +293,7 @@ class AnalyzerRunner():
 
         # Read image data.
         try:
-            self.file_data = db.get_file(self.orig_id).read()
+            self.file_data = get_file(self.orig_id).read()
         except gridfs.errors.NoFile:
             raise Exception("Image not found on GridFS storage")
 

@@ -2,10 +2,10 @@
 # This file is part of Ghiro.
 # See the file 'docs/LICENSE.txt' for license terms.
 
-import gridfs
 import hashlib
 import uuid
-from bson.objectid import ObjectId
+import gridfs
+from bson import ObjectId
 
 from ghiro.common import mongo_connect
 

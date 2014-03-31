@@ -7,9 +7,9 @@ import StringIO
 from PIL import Image
 from django.db.models import Q
 
-import analyzer.db as db
 from hashes.models import List
 from analyses.models import AnalysisMetadataDescription
+from lib.db import save_file
 
 
 class HashComparer():
@@ -53,7 +53,7 @@ def create_thumb(file_path):
     try:
         thumb = Image.open(file_path)
         thumb.thumbnail([200, 150], Image.ANTIALIAS)
-        return db.save_file(data=image2str(thumb), content_type="image/jpeg")
+        return save_file(data=image2str(thumb), content_type="image/jpeg")
     except:
         return None
 
