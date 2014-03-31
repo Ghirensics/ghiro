@@ -1,7 +1,12 @@
 # Ghiro - Copyright (C) 2013-2014 Ghiro Developers.
 # This file is part of Ghiro.
 # See the file 'docs/LICENSE.txt' for license terms.
-import chardet
+
+try:
+    import chardet
+    IS_CHARDET = True
+except ImportError:
+    IS_CHARDET = False
 
 
 class AutoVivification(dict):
@@ -20,7 +25,6 @@ class AutoVivification(dict):
 
     def to_dict(self):
         return self._convert_to_dict(self)
-
 
 def to_unicode(str):
     """Attempt to fix non uft-8 string into utf-8. It tries to guess input encoding,
@@ -61,7 +65,7 @@ def to_unicode(str):
     result = brute_enc(str)
 
     # Try via chardet.
-    if not result:
+    if not result and IS_CHARDET:
         result = chardet_enc(str)
 
     # If not possible to convert the input string, try again with
