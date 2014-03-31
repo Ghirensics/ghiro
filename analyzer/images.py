@@ -19,6 +19,7 @@ from PIL import Image, ImageChops, ImageEnhance
 from itertools import izip
 
 from analyzer.signatures import SignatureRunner
+from lib.utils import AutoVivification
 
 logger = logging.getLogger("processor")
 
@@ -53,7 +54,7 @@ class MetadataAnalyzer():
             logger.warning("Unable to read image metadata: {0}".format(e))
             self.metadata = None
 
-        self.results = utils.AutoVivification()
+        self.results = AutoVivification()
 
     def _get_comment(self):
         """Extract comment."""
@@ -98,7 +99,7 @@ class MetadataAnalyzer():
             self.results["preview"] = []
 
             for preview in self.metadata.get_preview_properties():
-                p = utils.AutoVivification()
+                p = AutoVivification()
                 p["mime_type"] = preview.get_mime_type()
                 p["size"] = len(self.metadata.get_preview_image(preview).get_data())
                 p["ext"] = preview.get_extension()
@@ -146,7 +147,7 @@ class ErrorLevelAnalyzer():
 
     def __init__(self, file_path):
         self.file_path = file_path
-        self.results = utils.AutoVivification()
+        self.results = AutoVivification()
 
     def run(self):
         """Run data analysis."""
@@ -204,7 +205,7 @@ class HashAnalyzer():
 
     def __init__(self, file_data):
         self.file_data = file_data
-        self.results = utils.AutoVivification()
+        self.results = AutoVivification()
 
     def run(self):
         """Run data analysis."""
@@ -277,7 +278,7 @@ class AnalyzerRunner():
 
     def __init__(self, mongo_id, file_name=None):
         # Results storage.
-        self.results = utils.AutoVivification()
+        self.results = AutoVivification()
 
         # Store image id.
         if mongo_id:
