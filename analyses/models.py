@@ -97,15 +97,17 @@ class Analysis(models.Model):
 
     @property
     def get_file_data(self):
+        """Returns image file binary data."""
         try:
-            return get_file(self.orig_id).read()
+            return get_file(self.image_id).read()
         except gridfs.errors.NoFile:
             raise Exception("Image not found on GridFS storage")
 
     @property
     def get_file_length(self):
+        """Return image file size."""
         try:
-            return get_file_length(self.orig_id)
+            return get_file_length(self.image_id)
         except gridfs.errors.NoFile:
             raise Exception("Image not found on GridFS storage")
 
