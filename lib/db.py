@@ -48,6 +48,13 @@ def get_file(id):
     obj_id = db.fs.files.find_one({"uuid": id})["_id"]
     return fs.get(ObjectId(obj_id))
 
+def get_file_length(id):
+    """Get a file lenght from GridFS.
+    @param id: file uuid
+    @return: integer"""
+
+    return db.fs.files.find_one({"uuid": id})["length"]
+
 def save_results(results):
     """Save results in mongo.
     @param results: data dict

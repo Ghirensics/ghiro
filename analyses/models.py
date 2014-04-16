@@ -12,7 +12,7 @@ from django.dispatch import receiver
 
 from ghiro.common import mongo_connect
 from users.models import Profile
-from lib.db import get_file
+from lib.db import get_file, get_file_length
 
 db = mongo_connect()
 fs = gridfs.GridFS(db)
@@ -98,7 +98,14 @@ class Analysis(models.Model):
     @property
     def get_file_data(self):
         try:
-            self.file_data = get_file(self.orig_id).read()
+            return get_file(self.orig_id).read()
+        except gridfs.errors.NoFile:
+            raise Exception("Image not found on GridFS storage")
+
+    @property
+    def get_file_length(self):
+        try:
+            return get_file_length(self.orig_id)
         except gridfs.errors.NoFile:
             raise Exception("Image not found on GridFS storage")
 
