@@ -169,7 +169,7 @@
                         {% endif %}
                         <form method="post" action="{% url "analyses.views.add_comment" analysis.id %}"  class="controls">{% csrf_token %}
                             <div>
-                                <textarea class="span12" name="msg" id="msg" class="height-large" type="text" placeholder="Insert your comment"></textarea>
+                                <textarea class="span12" name="message" id="id_message" class="height-large" type="text" placeholder="Insert your comment"></textarea>
                             </div>
                             <div>
                                 <button class="btn btn-success btn-small">Save</button>

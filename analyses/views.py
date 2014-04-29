@@ -13,7 +13,7 @@ from bson.son import SON
 from bson.objectid import ObjectId, InvalidId
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_safe
+from django.views.decorators.http import require_safe, require_POST
 from django.shortcuts import render_to_response, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect, HttpResponse
@@ -732,6 +732,7 @@ def favorite(request, id):
     return HttpResponse("true")
 
 @login_required
+@require_POST
 def add_comment(request, id):
     """Comment image."""
     analysis = get_object_or_404(Analysis, pk=id)
@@ -742,18 +743,22 @@ def add_comment(request, id):
             {"error": "You are not authorized to add this."},
             context_instance=RequestContext(request))
 
-    # Validation check.
-    if not request.POST.get("msg"):
-        return HttpResponse("Comment empty.")
+    form = forms.CommentForm(request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.owner = request.user
+        comment.save()
+        form.save_m2m()
 
-    Comment(owner=request.user, analysis=analysis, message=request.POST.get("msg")).save()
-
-    # Auditing.
-    log_activity("I",
-        "Comment on image added: {0}".format(analysis.file_name),
-        request)
-
-    return HttpResponseRedirect(reverse("analyses.views.show_analysis", args=(analysis.id,)))
+        # Auditing.
+        log_activity("I",
+            "Comment on image added: {0}".format(analysis.file_name),
+            request)
+        return HttpResponseRedirect(reverse("analyses.views.show_analysis", args=(analysis.id,)))
+    else:
+        return render_to_response("error.html",
+                                  {"error": "Error adding comment: %s" % form.errors},
+                                  context_instance=RequestContext(request))
 
 @login_required
 def delete_comment(request, id):
