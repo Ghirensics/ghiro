@@ -28,8 +28,8 @@ from django.core.files.temp import NamedTemporaryFile
 
 import analyses.forms as forms
 from analyses.models import Case, Analysis, Favorite, Comment, Tag
+from lib.db import save_file, get_file
 from users.models import Profile
-from analyzer.db import save_file, get_file
 from analyzer.utils import create_thumb
 from ghiro.common import log_activity, mongo_connect, check_allowed_content
 
