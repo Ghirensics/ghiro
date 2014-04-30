@@ -8,7 +8,7 @@ from dateutil import parser
 from bson.objectid import InvalidId
 
 from analyses.models import AnalysisMetadataDescription
-from analyzer.db import get_file
+from lib.db import get_file
 
 register = template.Library()
  
