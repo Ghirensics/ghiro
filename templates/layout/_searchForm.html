@@ -71,7 +71,7 @@
             </div>
             {# Detects if the search form is called inside a case or not. (Search scope) #}
             {% if in_case_id %}
-                <input type="hidden" value="in_case_id" name="in_case" id="in_case">
+                <input type="hidden" value="{{ case.id }}" name="in_case" id="in_case">
             {% else %}
                 <div class="control-group">
                     <label class="control-label" for="signature">Case</label>
