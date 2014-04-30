@@ -11,7 +11,6 @@ import magic
 import zlib
 
 import analyzer.utils as utils
-import analyzer.db as db
 
 from gi.repository import GExiv2
 from copy import deepcopy
@@ -19,6 +18,8 @@ from PIL import Image, ImageChops, ImageEnhance
 from itertools import izip
 
 from analyzer.signatures import SignatureRunner
+from lib.db import save_file, get_file
+from lib.utils import AutoVivification, to_unicode
 
 logger = logging.getLogger("processor")
 
@@ -53,12 +54,12 @@ class MetadataAnalyzer():
             logger.warning("Unable to read image metadata: {0}".format(e))
             self.metadata = None
 
-        self.results = utils.AutoVivification()
+        self.results = AutoVivification()
 
     def _get_comment(self):
         """Extract comment."""
         if self.metadata.get_comment():
-            self.results["comment"] = utils.to_unicode(self.metadata.get_comment())
+            self.results["comment"] = to_unicode(self.metadata.get_comment())
 
     def _get_dimensions(self):
         """Extract image dimensions."""
@@ -72,7 +73,7 @@ class MetadataAnalyzer():
         family, group, tag = key.split(".")
         # Skipping keys wih empty values, they will not appear in report.
         if value and value != "" and value != "None":
-            self.results[family][group][tag] = utils.to_unicode(value)
+            self.results[family][group][tag] = to_unicode(value)
         # Add key description to database.
         utils.add_metadata_description(key, self.metadata.get_tag_description(key))
 
@@ -98,7 +99,7 @@ class MetadataAnalyzer():
             self.results["preview"] = []
 
             for preview in self.metadata.get_preview_properties():
-                p = utils.AutoVivification()
+                p = AutoVivification()
                 p["mime_type"] = preview.get_mime_type()
                 p["size"] = len(self.metadata.get_preview_image(preview).get_data())
                 p["ext"] = preview.get_extension()
@@ -108,9 +109,9 @@ class MetadataAnalyzer():
                 try:
                     img = utils.str2image(self.metadata.get_preview_image(preview).get_data())
                     if preview.get_width() > 256 or preview.get_height() > 160:
-                        p["original_file"] = db.save_file(utils.image2str(img), content_type="image/jpeg")
+                        p["original_file"] = save_file(utils.image2str(img), content_type="image/jpeg")
                     img.thumbnail([256, 160], Image.ANTIALIAS)
-                    p["file"] = db.save_file(utils.image2str(img), content_type="image/jpeg")
+                    p["file"] = save_file(utils.image2str(img), content_type="image/jpeg")
                 except Exception as e:
                     logger.warning("Error reading preview: {0}".format(e))
                     continue
@@ -146,7 +147,7 @@ class ErrorLevelAnalyzer():
 
     def __init__(self, file_path):
         self.file_path = file_path
-        self.results = utils.AutoVivification()
+        self.results = AutoVivification()
 
     def run(self):
         """Run data analysis."""
@@ -193,7 +194,7 @@ class ErrorLevelAnalyzer():
         # Save image.
         try:
             img = utils.image2str(ela_im)
-            self.results["ela_image"] = db.save_file(img, content_type="image/jpeg")
+            self.results["ela_image"] = save_file(img, content_type="image/jpeg")
         except Exception as e:
             logger.warning("ELA error saving image: {0}".format(e))
         finally:
@@ -204,7 +205,7 @@ class HashAnalyzer():
 
     def __init__(self, file_data):
         self.file_data = file_data
-        self.results = utils.AutoVivification()
+        self.results = AutoVivification()
 
     def run(self):
         """Run data analysis."""
@@ -228,16 +229,16 @@ class ImageComparer():
         @return: difference, difference percentage
         """
         try:
-            i1 = utils.str2image(db.get_file(original_image_id).read())
+            i1 = utils.str2image(get_file(original_image_id).read())
         except IOError as e:
             logger.warning("Comparer error reading image: {0}".format(e))
             return
 
         # Check if thumb was resized.
         if "original_file" in preview:
-            i2 = utils.str2image(db.get_file(preview["original_file"]).read())
+            i2 = utils.str2image(get_file(preview["original_file"]).read())
         else:
-            i2 = utils.str2image(db.get_file(preview["file"]).read())
+            i2 = utils.str2image(get_file(preview["file"]).read())
 
         # Resize.
         width, height = i2.size
@@ -277,7 +278,7 @@ class AnalyzerRunner():
 
     def __init__(self, mongo_id, file_name=None):
         # Results storage.
-        self.results = utils.AutoVivification()
+        self.results = AutoVivification()
 
         # Store image id.
         if mongo_id:
@@ -292,7 +293,7 @@ class AnalyzerRunner():
 
         # Read image data.
         try:
-            self.file_data = db.get_file(self.orig_id).read()
+            self.file_data = get_file(self.orig_id).read()
         except gridfs.errors.NoFile:
             raise Exception("Image not found on GridFS storage")
 

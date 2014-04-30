@@ -2,10 +2,10 @@
 # This file is part of Ghiro.
 # See the file 'docs/LICENSE.txt' for license terms.
 
-import gridfs
 import hashlib
 import uuid
-from bson.objectid import ObjectId
+import gridfs
+from bson import ObjectId
 
 from ghiro.common import mongo_connect
 
@@ -47,6 +47,13 @@ def get_file(id):
     @return: file object"""
     obj_id = db.fs.files.find_one({"uuid": id})["_id"]
     return fs.get(ObjectId(obj_id))
+
+def get_file_length(id):
+    """Get a file lenght from GridFS.
+    @param id: file uuid
+    @return: integer"""
+
+    return db.fs.files.find_one({"uuid": id})["length"]
 
 def save_results(results):
     """Save results in mongo.
