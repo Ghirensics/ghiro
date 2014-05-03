@@ -2,6 +2,9 @@
 # This file is part of Ghiro.
 # See the file 'docs/LICENSE.txt' for license terms.
 
+import StringIO
+import tempfile
+
 try:
     import chardet
     IS_CHARDET = True
@@ -74,3 +77,14 @@ def to_unicode(str):
         result = unicode(str, errors="replace")
 
     return result
+
+def str2file(text_data):
+    strIO = StringIO.StringIO()
+    strIO.write(text_data)
+    strIO.seek(0)
+    return strIO
+
+def str2temp_file(text_data):
+    tmp = tempfile.NamedTemporaryFile()
+    tmp.write(text_data)
+    return tmp
