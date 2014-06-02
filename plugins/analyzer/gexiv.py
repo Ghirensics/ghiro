@@ -30,11 +30,11 @@ class GexivAnalyzer(BaseAnalyzerModule):
     def _get_comment(self):
         """Extract comment."""
         if self.metadata.get_comment():
-            self.results["comment"] = to_unicode(self.metadata.get_comment())
+            self.results["metadata"]["comment"] = to_unicode(self.metadata.get_comment())
 
     def _get_dimensions(self):
         """Extract image dimensions."""
-        self.results["dimensions"] = [self.metadata.get_pixel_width(), self.metadata.get_pixel_height()]
+        self.results["metadata"]["dimensions"] = [self.metadata.get_pixel_width(), self.metadata.get_pixel_height()]
 
     def _add_key(self, key, value):
         """Add a metadata key to results.
@@ -44,7 +44,7 @@ class GexivAnalyzer(BaseAnalyzerModule):
         family, group, tag = key.split(".")
         # Skipping keys wih empty values, they will not appear in report.
         if value and value != "" and value != "None":
-            self.results[family][group][tag] = to_unicode(value)
+            self.results["metadata"][family][group][tag] = to_unicode(value)
         # Add key description to database.
         add_metadata_description(key, self.metadata.get_tag_description(key))
 
@@ -67,7 +67,7 @@ class GexivAnalyzer(BaseAnalyzerModule):
         """Extract previews."""
         if len(self.metadata.get_preview_properties()) > 0:
             # Fetched previews key.
-            self.results["preview"] = []
+            self.results["metadata"]["preview"] = []
 
             for preview in self.metadata.get_preview_properties():
                 p = AutoVivification()
@@ -88,12 +88,12 @@ class GexivAnalyzer(BaseAnalyzerModule):
                     continue
                 finally:
                     # Save.
-                    self.results["preview"].append(p)
+                    self.results["metadata"]["preview"].append(p)
 
     def _get_gps_data(self):
         """Extract GPS data."""
         if self.metadata.get_gps_info() != (0.0, 0.0, 0.0):
-            self.results["gps"] = {
+            self.results["metadata"]["gps"] = {
                 # Longitude a latitude are in a separate key to be indexed in mongo spatial index.
                 "pos": {"Longitude": float(self.metadata.get_gps_longitude()),
                         "Latitude": float(self.metadata.get_gps_latitude())
