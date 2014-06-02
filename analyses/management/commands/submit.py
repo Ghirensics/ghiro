@@ -9,8 +9,8 @@ from django.core.management.base import BaseCommand
 from optparse import make_option
 
 from analyses.models import Case, Analysis
+from lib.db import save_file
 from users.models import Profile
-from analyzer.db import save_file
 from analyzer.utils import create_thumb
 from ghiro.common import check_allowed_content
 
