@@ -30,4 +30,3 @@ class HashAnalyzer(BaseAnalyzerModule):
         self.results["hash"]["crc32"] = "%08X".lower() % (zlib.crc32(task.get_file_data) & 0xFFFFFFFF,)
 
         return self.results
-    
