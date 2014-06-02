@@ -6,10 +6,12 @@ import StringIO
 import tempfile
 import logging
 import logging.handlers
+import Image
 
 from PIL import Image
 
 from analyses.models import AnalysisMetadataDescription
+from lib.db import save_file
 
 try:
     import chardet
@@ -140,3 +142,16 @@ def init_logging():
     ch.setFormatter(formatter)
     # Add the handlers to the logger.
     logger.addHandler(ch)
+
+
+def create_thumb(file_path):
+    """Create thumbnail
+    @param file_path: file path
+    @return: GridFS ID
+    """
+    try:
+        thumb = Image.open(file_path)
+        thumb.thumbnail([200, 150], Image.ANTIALIAS)
+        return save_file(data=image2str(thumb), content_type="image/jpeg")
+    except:
+        return None
