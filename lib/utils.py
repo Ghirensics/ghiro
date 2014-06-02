@@ -6,7 +6,6 @@ import StringIO
 import tempfile
 import logging
 import logging.handlers
-import Image
 
 from PIL import Image
 
