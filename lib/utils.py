@@ -4,6 +4,12 @@
 
 import StringIO
 import tempfile
+import logging
+import logging.handlers
+
+from PIL import Image
+
+from analyses.models import AnalysisMetadataDescription
 
 try:
     import chardet
@@ -88,3 +94,49 @@ def str2temp_file(text_data):
     tmp = tempfile.NamedTemporaryFile()
     tmp.write(text_data)
     return tmp
+
+def add_metadata_description(key, description):
+    """Adds key metadata description to lookup table.
+    @param key: fully qualified metadata key
+    @param description: key description
+    """
+    # Skip if no description is provided.
+    if description:
+        try:
+            AnalysisMetadataDescription.objects.get(key=key.lower())
+        except AnalysisMetadataDescription.DoesNotExist:
+            obj = AnalysisMetadataDescription(key=key.lower(), description=description)
+            obj.save()
+
+def str2image(data):
+    """Converts binary data to PIL Image object.
+    @param data: binarydata
+    @return: PIL Image object
+    """
+    output = StringIO.StringIO()
+    output.write(data)
+    output.seek(0)
+    return Image.open(output)
+
+def image2str(img):
+    """Converts PIL Image object to binary data.
+    @param img: PIL Image object
+    @return:  binary data
+    """
+    f = StringIO.StringIO()
+    img.save(f, "JPEG")
+    return f.getvalue()
+
+def init_logging():
+    """Initializes logging."""
+    logger = logging.getLogger('')
+    logger.setLevel(logging.DEBUG)
+
+    # Create console handler.
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.DEBUG)
+    # Create formatter and add it to the handlers.
+    formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+    ch.setFormatter(formatter)
+    # Add the handlers to the logger.
+    logger.addHandler(ch)
