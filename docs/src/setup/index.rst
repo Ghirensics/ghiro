@@ -18,7 +18,7 @@ Ghiro has the following requirements:
     * Python-magic: for MIME extraction
     * Python 2.x bindings for gobject-introspection libraries, required by Gexiv2
     * Gexiv2: for metadata extraction (at least release 0.6.1)
-    * Python Imaging Library (PIL): for image manipulation (at least release 1.1)
+    * Pillow (Python Imaging library - PIL fork): for image manipulation
     * Python-dateutil: for datetime manipulation
     * Pymongo: driver for MongoDB (at least release 2.5)
     * Django: for web interface (at least release 1.5)
@@ -51,7 +51,7 @@ If you don't have already it, install MongoDB with the following command (run as
 
 Install required libraries with the the following commands (run as root or with sudo)::
 
-    apt-get install python-pip libgexiv2-1 python-imaging python-dateutil
+    apt-get install python-pip libgexiv2-1 python-pillow python-dateutil
     apt-get install build-essential python-dev python-gi
 
 Install latest Django with the following command (run as root or with sudo)::
@@ -62,7 +62,7 @@ Install latest PyMongo with the following command (run as root or with sudo)::
 
     pip install pymongo
 
-Install latest Pytjon magic with the following command (run as root or with sudo)::
+Install latest Python magic with the following command (run as root or with sudo)::
 
     pip install  python-magic
 
