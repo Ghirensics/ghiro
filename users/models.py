@@ -2,12 +2,14 @@
 # This file is part of Ghiro.
 # See the file 'docs/LICENSE.txt' for license terms.
 
+from uuid import uuid4
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class Profile(AbstractUser):
     """User profile."""
-    pass
+
+    api_key = models.TextField(default=uuid4, null=False, blank=False, db_index=True)
 
 class Activity(models.Model):
     """Audits users activities."""
