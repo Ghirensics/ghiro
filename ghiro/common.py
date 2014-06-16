@@ -15,11 +15,12 @@ from django.conf import settings
 from users.models import Activity
 from manage.models import UpdateCheck
 
-def log_activity(category, message, request):
+def log_activity(category, message, request, user=None):
     """Logs an activity for auditing.
     @param category: message category (see model)
     @param message: message description
     @param request: request object
+    @param user: optional user instance
     """
 
     # Get forwarded for if exists.
@@ -29,10 +30,14 @@ def log_activity(category, message, request):
     else:
         forwarded_for_ip = None
 
+    # Fetch user from request object.
+    if not user:
+        user = request.user
+
     # Log.
     Activity.objects.create(category=category,
         message=message,
-        user=request.user,
+        user=user,
         source_ip=request.META.get("REMOTE_ADDR"),
         forwarded_for_ip=forwarded_for_ip)
 
