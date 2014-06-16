@@ -10,4 +10,5 @@ urlpatterns = patterns('',
     (r"^analyses/", include("analyses.urls")),
     (r"^hashes/", include("hashes.urls")),
     (r"^manage/", include("manage.urls")),
+    (r"^api/", include("api.urls")),
 )
