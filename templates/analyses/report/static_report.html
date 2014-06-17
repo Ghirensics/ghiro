@@ -1,0 +1,91 @@
+{% load analyses_tags %}
+<table>
+    <tr>
+        <td colspan="2">
+            <img src="/analyses/images/file/8a0d2029f211421b972a8ded0ebe0b35078464b4daa4a2feb65a8182cf34a3eb3b0c3184/">
+            <h2>Image analysis: d626fd0fd432ebc17f44311c78cad980</h2>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-top:30px">
+            <h2>Dashboard</h2>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table class="tftable" border="1">
+                <tr>
+                    <td>{% include 'analyses/report/_dashboardAnalysisResult.html' %}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-top:30px">
+            <h2>Static Info</h2>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table class="tftable" border="1">
+                <tr>
+                    <td>{% include 'analyses/report/_staticInfo.html' %}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-top:30px">
+            <h2>Static FileType</h2>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table class="tftable" border="1">
+                <tr>
+                    <td>{% include 'analyses/report/_staticFileType.html' %}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+        <tr>
+        <td style="padding-top:30px">
+            <h2>Static Hashes</h2>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table class="tftable" border="1">
+                <tr>
+                    <td>{% include 'analyses/report/_staticHashes.html' %}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-top:30px">
+           <h2>ELA</h2>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="/analyses/images/file/100e69167e2e43f1b0693ed0ba72ee60592a0e54326a5713524d082ca5fb555da569b14b/" />
+        </td>
+    </tr>
+</table>
+
+<style type="text/css">
+.tftable {font-size:12px;color:#333333;width:100%;border-width: 1px;border-color: #bcaf91;border-collapse: collapse;}
+.tftable th {font-size:12px;background-color:#ded0b0;border-width: 1px;padding: 8px;border-style: solid;border-color: #bcaf91;text-align:left;}
+.tftable tr {background-color:#ffffff;}
+.tftable td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: #bcaf91;}
+img {
+border: 0 none;
+height: auto;
+width: 100%;
+vertical-align: middle;
+}
+.master-tbl{
+width: 100%;
+}
+</style>
