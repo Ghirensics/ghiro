@@ -28,80 +28,17 @@
         <div class="tab-content">
             <div class="tab-pane fade in active" id="system-info">
                 <div class="row-fluid">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Type</th>
-                                <th>Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% if analysis.report.file_name %}
-                            <tr>
-                                <td><b>Filename</b></td>
-                                <td>{{ analysis.report.file_name }}</td>
-                            </tr>
-                            {% endif %}
-                            {% if analysis.report.file_size|filesizeformat %}
-                            <tr>
-                                <td><b>Size</b></td>
-                                <td>{{ analysis.report.file_size|filesizeformat }}</td>
-                            </tr>
-                            {% endif %}
-                            {% if analysis.report.metadata.dimensions %}
-                            <tr>
-                                <td><b>Dimensions</b></td>
-                                <td>{{ analysis.report.metadata.dimensions }}</td>
-                            </tr>
-                            {% endif %}
-                            <tr>
-                                <td><b>Analyzed at</b></td>
-                                <td>{{ analysis.completed_at }}</td>
-                            </tr>
-                            {% if analysis.report.metadata.comment %}
-                            <tr>
-                                <td><b>Comment</b></td>
-                                <td>{{ analysis.report.metadata.comment }}</td>
-                            </tr>
-                            {% endif %}
-                        </tbody>
-                    </table>
+                    {% include 'analyses/report/_staticInfo.html' %}
                 </div>
             </div>
             <div class="tab-pane fade" id="server-type">
                 <div class="row-fluid">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Type</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{{ analysis.report.file_type }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    {% include 'analyses/report/_staticFileType.html' %}
                 </div>
             </div>
             <div class="tab-pane fade" id="server-hash">
                 <div class="row-fluid">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Type</th>
-                                <th>Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for k, v in analysis.report.hash.iteritems %}
-                            <tr>
-                                <td><b>{{ k|upper }}</b></td>
-                                <td>{{ v }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                    {% include 'analyses/report/_staticHashes.html' %}
                 </div>
             </div>
             <div class="tab-pane fade" id="server-hash-match">

@@ -834,3 +834,9 @@ def delete_tag(request, id):
         request)
 
     return HttpResponse(True)
+
+@login_required
+def static_report(request):
+
+    return render_to_response("analyses/report/static_report.html",)
+
