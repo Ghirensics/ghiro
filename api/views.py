@@ -64,7 +64,7 @@ def new_image(request):
 
     # Auditing.
     log_activity("I",
-                 "Created new analysis {0}".format(task.file_name),
+                 "Created new analysis via API {0}".format(task.file_name),
                  request,
                  user=user)
 
