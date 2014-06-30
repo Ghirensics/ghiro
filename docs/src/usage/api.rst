@@ -12,7 +12,7 @@ All major funtionalities are accessible through API.
 
     **POST /api/cases/new**
 
-        Adds a new case with naem, description optional. Returns the ID of the newly created case.
+        Adds a new case with name, description optional. Returns the ID of the newly created case.
 
         **Example request**::
 
@@ -26,6 +26,29 @@ All major funtionalities are accessible through API.
             * ``name`` *(required)* - case name
             * ``api_key`` *(required)* - your API key (get it in your profile page)
             * ``description`` *(optional)* - case description
+
+        **Status codes**:
+            * ``200`` - success
+
+/api/images/new
+------------------
+
+    **POST /api/images/new**
+
+        Adds a new image to a case and enqueue it for analysis. Returns the ID of the newly created analysis.
+
+        **Example request**::
+
+            curl -kis -F case_id=1 -F image=@path_to_image.jpg -F api_key=YOUR_API_KEY http://127.0.0.1:8000/api/images/new
+
+        **Example response**::
+
+            {"id": 6}
+
+        **Form parameters**:
+            * ``case_id`` *(required)* - case ID
+            * ``image`` *(required)* - image file to upload for analysis
+            * ``api_key`` *(required)* - your API key (get it in your profile page)
 
         **Status codes**:
             * ``200`` - success

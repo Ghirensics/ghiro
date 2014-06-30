@@ -5,5 +5,6 @@
 from django.conf.urls import patterns, url
 
 urlpatterns = patterns("",
-    url(r"^cases/new", "api.views.new_case"),
+    url(r"^cases/new$", "api.views.new_case"),
+    url(r"^images/new$", "api.views.new_image"),
 )
