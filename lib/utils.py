@@ -92,7 +92,7 @@ def str2file(text_data):
     return strIO
 
 def str2temp_file(text_data):
-    tmp = tempfile.NamedTemporaryFile()
+    tmp = tempfile.NamedTemporaryFile(prefix="ghiro-")
     tmp.write(text_data)
     return tmp
 
