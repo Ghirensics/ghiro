@@ -852,7 +852,7 @@ def hex_dump(request, analysis_id):
 
     lines = 20
 
-    hex_data = hexdump(analysis.image_id)[page*lines:(page+1)*lines]
+    hex_data = hexdump(analysis.image_id, 32)[page*lines:(page+1)*lines]
 
     return render_to_response("analyses/report/_hexdump.html",
                                   {"hex_data": hex_data},
