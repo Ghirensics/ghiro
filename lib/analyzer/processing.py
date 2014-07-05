@@ -18,6 +18,7 @@ from lib.db import save_results
 
 logger = logging.getLogger(__name__)
 
+
 class AnalysisRunner(Process):
     """Run an analysis process."""
 
@@ -26,12 +27,6 @@ class AnalysisRunner(Process):
         self.tasks = tasks
         self.modules = modules
         logger.debug("AnalysisRunner started")
-
-    def set_modules(self, modules):
-        """Set modules for analysis.
-        @param modules: modules list
-        """
-        self.modules = modules
 
     def run(self):
         """ Start processing. """
