@@ -10,7 +10,8 @@ import logging.handlers
 from PIL import Image
 
 from analyses.models import AnalysisMetadataDescription
-from lib.db import save_file
+from lib.db import save_file, get_file
+
 
 try:
     import chardet
@@ -154,3 +155,39 @@ def create_thumb(file_path):
         return save_file(data=image2str(thumb), content_type="image/jpeg")
     except:
         return None
+
+def hexdump(image_id, length=8):
+    """Hexdump representation.
+    @param image_id: gridfs image id
+    @return: hexdump
+    @see: code inspired to http://code.activestate.com/recipes/142812/
+    """
+
+    # Get image from gridfs.
+    try:
+       file = get_file(image_id)
+    except (InvalidId, TypeError):
+        return  None
+
+    # Read data.
+    src = file.read()
+
+    hex_dump = []
+
+    # Deal with unicode.
+    if isinstance(src, unicode):
+        digits = 4
+    else:
+        digits = 2
+
+    # Create hex view.
+    for i in xrange(0, len(src), length):
+        line = {}
+        s = src[i:i+length]
+        hexa = b" ".join(["%0*X" % (digits, ord(x)) for x in s])
+        text = b"".join([x if 0x20 <= ord(x) < 0x7F else b"." for x in s])
+        line["address"] = b"%04X" % i
+        line["hex"] = b"%-*s" % (length*(digits + 1), hexa)
+        line["text"] = text
+        hex_dump.append(line)
+    return hex_dump

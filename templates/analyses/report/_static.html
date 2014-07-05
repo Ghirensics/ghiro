@@ -20,7 +20,7 @@
             </li>
             {% endif %}
             <li>
-                <a data-toggle="tab" href="#server-hex">Hex view</a>
+                <a data-toggle="tab" href="#server-hex">Hex dump</a>
             </li>
         </ul>
     </div>
@@ -129,28 +129,9 @@
             <div class="tab-pane fade" id="server-hex">
                 <div class="row-fluid">
                     <div class="hexview"></div>
-{#                    <table class="hexview">#}
-{#                        {% for line in analysis.image_id|hexview %}#}
-{#                            <tr>#}
-{#                                <td>#}
-{#                                    <span class="address">{{ line.address }}</span>#}
-{#                                </td>#}
-{#                                <td style="background: #C1DCFF;">#}
-{#                                    <table>#}
-{#                                        <tr>#}
-{#                                            <td>{{ line.hex }}</td>#}
-{#                                        </tr>#}
-{#                                    </table>#}
-{#                                </td>#}
-{#                                <td>#}
-{#                                    <span class="lineText">{{ line.text }}</span>#}
-{#                                </td>#}
-{#                            </tr>#}
-{#                        {% endfor %}#}
-{#                    </table>#}
                     <div>
-                        <a id="hexdown" class="btn btn-warning"> giu</a>
-                        <a id="hexup" class="btn btn-warning">su</a>
+                        <a id="hexdown" class="btn btn-warning">Prev</a>
+                        <a id="hexup" class="btn btn-warning">Next</a>
                     </div>
                 </div>
             </div>
@@ -159,24 +140,24 @@
 </div>
 
 <script type="text/javascript">
-    var id = 1;
+    var current_page = 0;
     $(document).ready(function() {
-        $('.hexview').load('hex/page/'+ id);
+        $('.hexview').load('{% url "analyses.views.hex_dump" analysis.id %}');
     });
 
-    function loadPage(id){
-        $.get('hex/page/'+ id, function(data) {
+    function loadPage(page){
+        $.get('{% url "analyses.views.hex_dump" analysis.id %}?page='+ page, function(data) {
             $('.hexview').html(data);
         });
     }
     $('#hexdown').click(function(){
-        id = (id - 1);
-        if(id > '0'){
-            loadPage(id);
+        current_page = (current_page - 1);
+        if(current_page > '0'){
+            loadPage(current_page);
         }
     });
     $('#hexup').click(function(){
-        id = (id + 1);
-        loadPage(id);
+        current_page = (current_page + 1);
+        loadPage(current_page);
     });
 </script>
