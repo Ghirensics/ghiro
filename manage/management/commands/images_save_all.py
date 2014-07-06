@@ -7,8 +7,8 @@ from bson.objectid import InvalidId
 from optparse import make_option
 
 from analyses.models import Analysis
-from ghiro.common import mongo_connect
-from lib.db import get_file
+from lib.db import get_file, mongo_connect
+
 
 class Command(NoArgsCommand):
 

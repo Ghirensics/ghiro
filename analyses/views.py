@@ -28,10 +28,10 @@ from django.core.files.temp import NamedTemporaryFile
 
 import analyses.forms as forms
 from analyses.models import Case, Analysis, Favorite, Comment, Tag
-from lib.db import save_file, get_file
+from lib.db import save_file, get_file, mongo_connect
 from lib.utils import create_thumb, hexdump
 from users.models import Profile
-from ghiro.common import log_activity, mongo_connect, check_allowed_content
+from ghiro.common import log_activity, check_allowed_content
 
 # Mongo connection.
 db = mongo_connect()

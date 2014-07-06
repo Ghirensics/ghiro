@@ -2,12 +2,28 @@
 # This file is part of Ghiro.
 # See the file 'docs/LICENSE.txt' for license terms.
 
+import sys
 import hashlib
 import uuid
+from django.conf import settings
 import gridfs
 from bson import ObjectId
+from pymongo import MongoClient
+from pymongo.database import Database
+from pymongo.errors import ConnectionFailure
 
-from ghiro.common import mongo_connect
+
+def mongo_connect():
+    """Connects to Mongo, exits if unable to connect.
+    @return: connection handler
+    """
+    try:
+        db = Database(MongoClient(settings.MONGO_URI), settings.MONGO_DB)
+    except ConnectionFailure:
+        print "ERROR: unable to connect to MongoDB. Please check the server availability."
+        sys.exit()
+    else:
+        return db
 
 # Mongo connection.
 db = mongo_connect()
