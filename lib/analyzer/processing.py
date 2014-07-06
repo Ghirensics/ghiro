@@ -50,7 +50,6 @@ class AnalysisRunner(Process):
                     else:
                         logger.warning("Module %s returned results not in dict format." % module)
 
-                print results
                 # Complete.
                 task.analysis_id = save_results(results)
                 task.state = "C"
@@ -61,7 +60,7 @@ class AnalysisRunner(Process):
             finally:
                 # Save.
                 task.completed_at = now()
-                #task.save()
+                task.save()
              #   self.tasks.task_done()
 
 
