@@ -21,10 +21,11 @@
         </table>
         <table>
             <tr>
-                <td>
-                     <img src="{% url "analyses.views.image" analysis.thumb_id %}" style="width: 314px">
-                    <span style="vertical-align: top">Ghiro automated digital image forensics</span>
-                    <span>Image analysis: d626fd0fd432ebc17f44311c78cad980</span>
+                <td style="text-align: left">
+                    <img src="{% url "analyses.views.image" analysis.thumb_id %}" style="width: 314px">
+                    <h2>Image analysis: {{ analysis.report.hash.md5 }}</h2>
+
+
                 </td>
             </tr>
             <tr>
@@ -69,7 +70,8 @@
                     </table>
                 </td>
             </tr>
-                <tr>
+            {% if analysis.report.metadata.Exif %}
+            <tr>
                 <td style="padding-top:30px">
                     <h3>Static Data - Hashes</h3>
                 </td>
@@ -83,6 +85,8 @@
                     </table>
                 </td>
             </tr>
+            {% endif %}
+            {% if analysis.report.metadata.Exif %}
             <tr>
                 <td style="padding-top:30px">
                    <h2>EXIF metadata extraction</h2>
@@ -97,6 +101,8 @@
                     </table>
                 </td>
             </tr>
+            {% endif %}
+            {% if analysis.report.metadata.Iptc %}
             <tr>
                 <td style="padding-top:30px">
                    <h2>IPTC metadata extraction</h2>
@@ -111,6 +117,8 @@
                     </table>
                 </td>
             </tr>
+            {% endif %}
+            {% if analysis.report.metadata.Xmp %}
             <tr>
                 <td style="padding-top:30px">
                    <h2>XMP metadata extraction</h2>
@@ -125,6 +133,8 @@
                     </table>
                 </td>
             </tr>
+            {% endif %}
+            {% if analysis.report.metadata.Xmp %}
             <tr>
                 <td style="padding-top:30px">
                    <h2>Preview extraction from metadata</h2>
@@ -139,6 +149,8 @@
                     </table>
                 </td>
             </tr>
+            {% endif %}
+            {% if analysis.report.metadata.gps %}
             <tr>
                 <td style="padding-top:30px">
                    <h2>Localization</h2>
@@ -153,6 +165,8 @@
                     </table>
                 </td>
             </tr>
+            {% endif %}
+            {% if analysis.report.ela %}
             <tr>
                 <td style="padding-top:30px">
                    <h2>Error Level Analysis (ELA)</h2>
@@ -160,9 +174,11 @@
             </tr>
             <tr>
                 <td>
-                    {% include 'analyses/report/_ela.html' %}
+                    {% include 'analyses/report/_staticEla.html' %}
                 </td>
             </tr>
+            {% endif %}
+            {% if analysis.report.signatures and analysis.report.signatures|length > 0 %}
             <tr>
                 <td style="padding-top:30px">
                    <h2>Signature check </h2>
@@ -171,6 +187,7 @@
             <tr>
                 <td></td>
             </tr>
+            {% endif %}
         </table>
     </body>
 </html>
