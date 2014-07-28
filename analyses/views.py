@@ -28,10 +28,10 @@ from django.core.files.temp import NamedTemporaryFile
 
 import analyses.forms as forms
 from analyses.models import Case, Analysis, Favorite, Comment, Tag
-from lib.db import save_file, get_file
+from lib.db import save_file, get_file, mongo_connect
+from lib.utils import create_thumb, hexdump
 from users.models import Profile
-from analyzer.utils import create_thumb
-from ghiro.common import log_activity, mongo_connect, check_allowed_content
+from ghiro.common import log_activity, check_allowed_content
 
 # Mongo connection.
 db = mongo_connect()
@@ -835,8 +835,25 @@ def delete_tag(request, id):
 
     return HttpResponse(True)
 
+@require_safe
 @login_required
-def static_report(request):
+def hex_dump(request, analysis_id):
+    """Shows image hex dump."""
+    analysis = get_object_or_404(Analysis, pk=analysis_id)
 
-    return render_to_response("analyses/report/static_report.html",)
+    # Security check.
+    if not(request.user.is_superuser or request.user in analysis.case.users.all()):
+        return render_to_response("error.html",
+                                  {"error": "You are not authorized to view this."},
+                                  context_instance=RequestContext(request))
 
+    #if analysis.state == "C":
+    page = int(request.GET.get("page", 0))
+
+    lines = 20
+
+    hex_data = hexdump(analysis.image_id, 32)[page*lines:(page+1)*lines]
+
+    return render_to_response("analyses/report/_hexdump.html",
+                                  {"hex_data": hex_data},
+                                  context_instance=RequestContext(request))

@@ -10,13 +10,18 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 
-from analyses.models import Case, Analysis
+from analyses.models import Case, Analysis, Comment
 from ghiro.common import check_allowed_content
 
 class CaseForm(forms.ModelForm):
     """Case form."""
     class Meta:
         model = Case
+
+class CommentForm(forms.ModelForm):
+    """Comment form."""
+    class Meta:
+        model = Comment
 
 class UploadImageForm(forms.ModelForm):
     """Image upload form."""

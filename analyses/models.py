@@ -10,9 +10,8 @@ from django.conf import settings
 from django.db.models.signals import pre_delete
 from django.dispatch import receiver
 
-from ghiro.common import mongo_connect
 from users.models import Profile
-from lib.db import get_file, get_file_length
+from lib.db import get_file, get_file_length, mongo_connect
 
 db = mongo_connect()
 fs = gridfs.GridFS(db)

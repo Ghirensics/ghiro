@@ -2,6 +2,17 @@
 # This file is part of Ghiro.
 # See the file 'docs/LICENSE.txt' for license terms.
 
+import StringIO
+import tempfile
+import logging
+import logging.handlers
+
+from PIL import Image
+
+from analyses.models import AnalysisMetadataDescription
+from lib.db import save_file, get_file
+
+
 try:
     import chardet
     IS_CHARDET = True
@@ -74,3 +85,109 @@ def to_unicode(str):
         result = unicode(str, errors="replace")
 
     return result
+
+def str2file(text_data):
+    strIO = StringIO.StringIO()
+    strIO.write(text_data)
+    strIO.seek(0)
+    return strIO
+
+def str2temp_file(text_data):
+    tmp = tempfile.NamedTemporaryFile(prefix="ghiro-")
+    tmp.write(text_data)
+    return tmp
+
+def add_metadata_description(key, description):
+    """Adds key metadata description to lookup table.
+    @param key: fully qualified metadata key
+    @param description: key description
+    """
+    # Skip if no description is provided.
+    if description:
+        try:
+            AnalysisMetadataDescription.objects.get(key=key.lower())
+        except AnalysisMetadataDescription.DoesNotExist:
+            obj = AnalysisMetadataDescription(key=key.lower(), description=description)
+            obj.save()
+
+def str2image(data):
+    """Converts binary data to PIL Image object.
+    @param data: binarydata
+    @return: PIL Image object
+    """
+    output = StringIO.StringIO()
+    output.write(data)
+    output.seek(0)
+    return Image.open(output)
+
+def image2str(img):
+    """Converts PIL Image object to binary data.
+    @param img: PIL Image object
+    @return:  binary data
+    """
+    f = StringIO.StringIO()
+    img.save(f, "JPEG")
+    return f.getvalue()
+
+def init_logging():
+    """Initializes logging."""
+    logger = logging.getLogger('')
+    logger.setLevel(logging.DEBUG)
+
+    # Create console handler.
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.DEBUG)
+    # Create formatter and add it to the handlers.
+    formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+    ch.setFormatter(formatter)
+    # Add the handlers to the logger.
+    logger.addHandler(ch)
+
+
+def create_thumb(file_path):
+    """Create thumbnail
+    @param file_path: file path
+    @return: GridFS ID
+    """
+    try:
+        thumb = Image.open(file_path)
+        thumb.thumbnail([200, 150], Image.ANTIALIAS)
+        return save_file(data=image2str(thumb), content_type="image/jpeg")
+    except:
+        return None
+
+def hexdump(image_id, length=8):
+    """Hexdump representation.
+    @param image_id: gridfs image id
+    @return: hexdump
+    @see: code inspired to http://code.activestate.com/recipes/142812/
+    """
+
+    # Get image from gridfs.
+    try:
+       file = get_file(image_id)
+    except (InvalidId, TypeError):
+        return  None
+
+    # Read data.
+    src = file.read()
+
+    hex_dump = []
+
+    # Deal with unicode.
+    if isinstance(src, unicode):
+        digits = 4
+    else:
+        digits = 2
+
+    # Create hex view.
+    for i in xrange(0, len(src), length):
+        line = {}
+        s = src[i:i+length]
+        hexa = b" ".join(["%0*X" % (digits, ord(x)) for x in s])
+        text = b"".join([x if 0x20 <= ord(x) < 0x7F else b"." for x in s])
+        line["address"] = b"%04X" % i
+        line["hex"] = b"%-*s" % (length*(digits + 1), hexa)
+        line["text"] = text
+        hex_dump.append(line)
+    return hex_dump

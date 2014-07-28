@@ -2,15 +2,7 @@
 # This file is part of Ghiro.
 # See the file 'docs/LICENSE.txt' for license terms.
 
-class BaseSignature(object):
-    pk = 0
-    severity = 0
-    category = None
-    name = None
-    description = None
-
-    def check(self, data):
-        raise NotImplementedError
+from lib.analyzer.base import BaseSignature
 
 class ExifCanonOwnerName(BaseSignature):
     pk = 1001
@@ -1743,31 +1735,3 @@ class IptcApplication2CaptionAvailable(BaseSignature):
     def check(self, data):
         if data['metadata']['Iptc']['Application2']['Caption']:
             return 'IPTC Application2 Caption', data['metadata']['Iptc']['Application2']['Caption']
-
-
-class SignatureRunner():
-    def run(self, results):
-        matches = []
-        for sign in BaseSignature.__subclasses__():
-            try:
-                sign = sign()
-                # Casting results to dict to avoid auto key creation.
-                match = sign.check(results.to_dict())
-            except KeyError:
-                continue
-            except Exception as e:
-                print e
-                continue
-
-            if match:
-                foo = {
-                       'id': sign.pk,
-                       'name': sign.name,
-                       'category': sign.category,
-                       'severity': sign.severity,
-                       'description': sign.description
-                       }
-                if isinstance(match, tuple):
-                    foo['data'] = match
-                matches.append(foo)
-        return matches

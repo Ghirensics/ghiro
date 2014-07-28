@@ -4,8 +4,9 @@
 
 from pymongo import GEO2D
 
-from ghiro.common import mongo_connect
 # Mongo connection.
+from lib.db import mongo_connect
+
 db = mongo_connect()
 
 # Indexes.
