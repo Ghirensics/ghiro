@@ -77,7 +77,9 @@
 </div>
 
 <script type="text/javascript">
+
     var current_page = 0;
+
     $(document).ready(function() {
         $('.hexview').load('{% url "analyses.views.hex_dump" analysis.id %}');
     });
@@ -87,12 +89,14 @@
             $('.hexview').html(data);
         });
     }
+
     $('#hexdown').click(function(){
-        current_page = (current_page - 1);
-        if(current_page > '0'){
+        if(current_page > 0){
+            current_page = (current_page - 1);
             loadPage(current_page);
         }
     });
+
     $('#hexup').click(function(){
         current_page = (current_page + 1);
         loadPage(current_page);
