@@ -10,22 +10,7 @@
         <div class="tab-content">
             <div class="tab-pane fade in active" id="system-iptc">
                 <div class="row-fluid">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Segment</th>
-                                <th>Key: Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for k, v in analysis.report.metadata.Iptc.iteritems %}
-                            <tr>
-                                <td><b>{{ k|upper }}</b></td>
-                                <td> {% include 'analyses/report/_visualize_value.html' with value=v subgroup=k group="Iptc" %} </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                    {% include 'analyses/report/_staticIptc.html' %}
                 </div>
             </div>
         </div>
