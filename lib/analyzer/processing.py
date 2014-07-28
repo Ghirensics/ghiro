@@ -87,8 +87,11 @@ class AnalysisManager():
 
     def get_parallelism(self):
         """Get the ghiro parallelism level for analysis processing."""
-        # Set it to total CPU minus one let or db and other use.
-        return cpu_count() - 1
+        if cpu_count() > 1:
+            # Set it to total CPU minus one let or db and other use.
+            return cpu_count() - 1
+        else:
+            return 1
 
     def load_modules(self):
         """Load modules."""
