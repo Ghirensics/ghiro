@@ -41,6 +41,9 @@ class AnalysisRunner(Process):
             try:
                 results = {}
 
+                # Save reference to image data on  GridFS.
+                results["file_data"] = task.image_id
+
                 for module in self.modules:
                     current = module()
                     current.data = results
