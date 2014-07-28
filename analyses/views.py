@@ -857,3 +857,43 @@ def hex_dump(request, analysis_id):
     return render_to_response("analyses/report/_hexdump.html",
                                   {"hex_data": hex_data},
                                   context_instance=RequestContext(request))
+@require_safe
+@login_required
+def static_report(request, analysis_id):
+    """Shows static report."""
+    analysis = get_object_or_404(Analysis, pk=analysis_id)
+
+    # Security check.
+    if not(request.user.is_superuser or request.user in analysis.case.users.all()):
+        return render_to_response("error.html",
+                                  {"error": "You are not authorized to view this."},
+                                  context_instance=RequestContext(request))
+
+    if analysis.state == "C":
+        try:
+            anal = db.analyses.find_one(ObjectId(analysis.analysis_id))
+
+            if anal:
+                return render_to_response("analyses/report/static_report.html",
+                                          {"anal": anal, "analysis": analysis},
+                                          context_instance=RequestContext(request))
+            else:
+                return render_to_response("error.html",
+                                          {"error": "Analysis not present in mongo database"},
+                                          context_instance=RequestContext(request))
+        except InvalidId:
+            return render_to_response("error.html",
+                                      {"error": "Analysis not found"},
+                                      context_instance=RequestContext(request))
+    elif analysis.state == "W" or analysis.state == "P" or analysis.state == "Q":
+        return render_to_response("analyses/images/waiting.html",
+                                  {"analysis": analysis},
+                                  context_instance=RequestContext(request))
+    elif analysis.state == "E":
+        return render_to_response("error.html",
+                                  {"error": "Analysis ended with error."},
+                                  context_instance=RequestContext(request))
+    else:
+        return render_to_response("error.html",
+                                  {"error": "Analysis not found"},
+                                  context_instance=RequestContext(request))
