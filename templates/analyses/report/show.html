@@ -25,32 +25,49 @@
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row-fluid">
-                    <div class="media">
-                        <div class="pull-left">
-                            {% if analysis.thumb_id %}
-                                <a href="{% url "analyses.views.image" analysis.image_id %}" class="fancybox">
-                                    <img src="{% url "analyses.views.image" analysis.thumb_id %}" class="img-rounded media-object">
-                                </a>
-                            {% else %}
-                                <img src="{{ STATIC_URL }}img/no_image_large.jpg" class="img-rounded media-object">
-                            {% endif %}
-                        </div>
-                        <div class="media-body">
-                            <h2 class="media-heading">Image analysis: {{ analysis.report.hash.md5 }}</h2>
-                            <h1 class="btn-group">
-                                {% if analysis.favorites.all %}
-                                    <a href="#" id="{% url "analyses.views.favorite" analysis.id %}" rel="{{ analysis.id }}" class="btn favorite btn-warning star{{ analysis.id }}"> <i class="icon-star"> </i></a>
-                                {% else %}
-                                    <a href="#" id="{% url "analyses.views.favorite" analysis.id %}" rel="{{ analysis.id }}" class="btn favorite star{{ analysis.id }}"> <i class="icon-star"> </i></a>
-                                {% endif %}
-                                <a href="{% url "analyses.views.image" analysis.image_id %}" class="action_print btn btn-info" title="Print"><i class="icon-print"></i> </a>
-                                <a class="btn btn-danger btn-delete-report" id="{% url "analyses.views.delete_analysis" analysis.id %}" href="#deleteReport" role="button" data-toggle="modal"> <i class="icon-trash"></i> </a>
-                            </h1>
-                            <h1 class="pull-right btn-group">
-                                <a href="{% url "analyses.views.image" analysis.image_id %}" class="btn"><i class="icon-download"></i> Download</a>
-                                <a href="{% url "analyses.views.static_report" analysis.id %}" class="btn" target="_blank"><i class="icon-download-alt"></i> Export</a>
-                            </h1>
-                        </div>
+                    <div class="pull-left" style="padding-right: 5px">
+                        {% if analysis.thumb_id %}
+                            <a href="{% url "analyses.views.image" analysis.image_id %}" class="fancybox">
+                                <img src="{% url "analyses.views.image" analysis.thumb_id %}" class="img-rounded media-object">
+                            </a>
+                        {% else %}
+                            <img src="{{ STATIC_URL }}img/no_image_large.jpg" class="img-rounded media-object">
+                        {% endif %}
+                    </div>
+                    <h2 class="media-heading">Image analysis: {{ analysis.report.hash.md5 }}</h2>
+                    <div class="btn-group">
+                        {% if analysis.favorites.all %}
+                            <a href="#" id="{% url "analyses.views.favorite" analysis.id %}" rel="{{ analysis.id }}" class="btn favorite btn-warning star{{ analysis.id }}"> <i class="icon-star"> </i></a>
+                        {% else %}
+                            <a href="#" id="{% url "analyses.views.favorite" analysis.id %}" rel="{{ analysis.id }}" class="btn favorite star{{ analysis.id }}"> <i class="icon-star"> </i></a>
+                        {% endif %}
+                        <a href="{% url "analyses.views.image" analysis.image_id %}" class="action_print btn btn-info" title="Print"><i class="icon-print"></i> </a>
+                        <a class="btn btn-danger btn-delete-report" id="{% url "analyses.views.delete_analysis" analysis.id %}" href="#deleteReport" role="button" data-toggle="modal"> <i class="icon-trash"></i> </a>
+                    </div>
+                    <div class="btn-group pull-right">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="icon-download-alt"></i> Export
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{% url "analyses.views.static_report" analysis.id "pdf" %}"><i class="icon-file-text-alt"></i> PDF report</a>
+                                <a href="{% url "analyses.views.static_report" analysis.id "html" %}"><i class="icon-file-text"></i> HTML report</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="btn-group pull-right">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="icon-download"></i> Download
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href=""><i class="icon-code"></i> JSON</a>
+                                <a href=""><i class="icon-table"></i> CSV</a>
+                                <a href="{% url "analyses.views.image" analysis.image_id %}"><i class="icon-picture"></i> Original Image</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <br />

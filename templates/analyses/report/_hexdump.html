@@ -2,13 +2,13 @@
     {% for line in hex_data %}
         <tr>
             <td>
-                <span class="address">{{ line.address }}</span>
+                <code id="address">{{ line.address }}</code>
             </td>
             <td>
-                <span class="lineHex">{{ line.hex }}</span>
+                <code>{{ line.hex }}</code>
             </td>
             <td>
-                <span class="lineText">{{ line.text }}</span>
+                <code>{{ line.text }}</code>
             </td>
         </tr>
     {% endfor %}
