@@ -5,7 +5,6 @@
 import logging
 from django.core.management.base import NoArgsCommand
 
-from lib.utils import init_logging
 from lib.analyzer.processing import AnalysisManager
 
 logger = logging.getLogger(__name__)
