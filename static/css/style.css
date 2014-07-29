@@ -490,15 +490,11 @@ input[type='checkbox']{
 }
 
 /* HexView */
-
-.address{
+.hexview code{
+    background-color: #fff;
+    border-color: #fff;
+    color: #000;
+}
+#address{
     color:red;
-    padding-left:10px;
-    padding-right:3px
-}
-.lineText{
-    padding-left:10px;
-}
-.lineHex{
-    word-spacing: 5px;
 }
