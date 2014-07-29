@@ -11,7 +11,7 @@ import urlparse
 import json
 from bson.son import SON
 from bson.objectid import ObjectId, InvalidId
-from django.template import RequestContext
+from django.template import RequestContext, loader, Context
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_safe, require_POST
 from django.shortcuts import render_to_response, get_object_or_404
@@ -32,6 +32,12 @@ from lib.db import save_file, get_file, mongo_connect
 from lib.utils import create_thumb, hexdump
 from users.models import Profile
 from ghiro.common import log_activity, check_allowed_content
+
+try:
+    import pdfkit
+    HAVE_PDFKIT = True
+except ImportError:
+    HAVE_PDFKIT = False
 
 # Mongo connection.
 db = mongo_connect()
@@ -859,7 +865,7 @@ def hex_dump(request, analysis_id):
                                   context_instance=RequestContext(request))
 @require_safe
 @login_required
-def static_report(request, analysis_id):
+def static_report(request, analysis_id, report_type):
     """Shows static report."""
     analysis = get_object_or_404(Analysis, pk=analysis_id)
 
@@ -874,8 +880,27 @@ def static_report(request, analysis_id):
             anal = db.analyses.find_one(ObjectId(analysis.analysis_id))
 
             if anal:
-                return render_to_response("analyses/report/static_report.html",
-                                          {"anal": anal, "analysis": analysis},
+                if report_type == "html":
+                    return render_to_response("analyses/report/static_report.html",
+                                              {"anal": anal, "analysis": analysis},
+                                              context_instance=RequestContext(request))
+                elif report_type == "pdf":
+                    if HAVE_PDFKIT:
+                        # Render HTML.
+                        t = loader.get_template("analyses/report/static_report.html")
+                        c = Context({"anal": anal, "analysis": analysis})
+                        rendered = t.render(c)
+                        # Convert to PDF.
+                        # False as second args means "return a string".
+                        pdf = pdfkit.from_string(rendered, False)
+                        # Create the HttpResponse object with the appropriate PDF headers.
+                        response = HttpResponse(content_type="application/pdf")
+                        response["Content-Disposition"] = 'attachment; filename="Ghiro_report_%s.pdf"' % analysis_id
+                        response.write(pdf)
+                        return response
+                    else:
+                        return render_to_response("error.html",
+                                          {"error": "Cannot render PDF, missing pdfkit. Please install it."},
                                           context_instance=RequestContext(request))
             else:
                 return render_to_response("error.html",

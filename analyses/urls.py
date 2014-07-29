@@ -26,5 +26,5 @@ urlpatterns = patterns("",
     url(r"^search/(?P<page_name>[\w]+)/$", "analyses.views.search"),
     url(r"^images/tag/add/(?P<id>[\d]+)/$", "analyses.views.add_tag"),
     url(r"^images/tag/delete/(?P<id>[\d]+)/$", "analyses.views.delete_tag"),
-    url(r"^show/(?P<analysis_id>[\d]+)/report/$", "analyses.views.static_report"),
+    url(r"^show/(?P<analysis_id>[\d]+)/report/(?P<report_type>[\w]+)/$", "analyses.views.static_report"),
 )
