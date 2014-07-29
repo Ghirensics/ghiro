@@ -1,78 +1,196 @@
-{% load analyses_tags %}
-<table>
-    <tr>
-        <td colspan="2">
-            <img src="/analyses/images/file/8a0d2029f211421b972a8ded0ebe0b35078464b4daa4a2feb65a8182cf34a3eb3b0c3184/">
-            <h2>Image analysis: d626fd0fd432ebc17f44311c78cad980</h2>
-        </td>
-    </tr>
-    <tr>
-        <td style="padding-top:30px">
-            <h2>Dashboard</h2>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <table class="tftable" border="1">
-                <tr>
-                    <td>{% include 'analyses/report/_dashboardAnalysisResult.html' %}</td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td style="padding-top:30px">
-            <h2>Static Info</h2>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <table class="tftable" border="1">
-                <tr>
-                    <td>{% include 'analyses/report/_staticInfo.html' %}</td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td style="padding-top:30px">
-            <h2>Static FileType</h2>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <table class="tftable" border="1">
-                <tr>
-                    <td>{% include 'analyses/report/_staticFileType.html' %}</td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-        <tr>
-        <td style="padding-top:30px">
-            <h2>Static Hashes</h2>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <table class="tftable" border="1">
-                <tr>
-                    <td>{% include 'analyses/report/_staticHashes.html' %}</td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td style="padding-top:30px">
-           <h2>ELA</h2>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <img src="/analyses/images/file/100e69167e2e43f1b0693ed0ba72ee60592a0e54326a5713524d082ca5fb555da569b14b/" />
-        </td>
-    </tr>
-</table>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>GHIRO</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Ghiro - automated image forensic tool">
+        <meta name="author" content="Ghiro developers">
+        <meta http-equiv="X-UA-Compatible" content="IE=9" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="shortcut icon" href="/static/img/ico/favicon.ico">
+    </head>
+    <body style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">
+        <table style="width: 100%; text-align: right;">
+            <tr>
+                <td>
+                    <img src="/static/img/logo/logo_ghiro314x143.png" style="width: 94px; margin-bottom: -20px;">
+                    <h5>automated digital image forensics</h5>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="text-align: left">
+                    <img src="{% url "analyses.views.image" analysis.thumb_id %}" style="width: 314px">
+                    <h2>Image analysis: {{ analysis.report.hash.md5 }}</h2>
+
+
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-top:30px">
+                    <h2>Dashboard</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                           <td class="tftable">{% include 'analyses/report/_dashboardAnalysisResult.html' %}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-top:30px">
+                    <h2>Static Data</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                           <td class="tftable">{% include 'analyses/report/_staticInfo.html' %}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-top:30px">
+                    <h3>Static Data - FileType</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                           <td class="tftable">{% include 'analyses/report/_staticFileType.html' %}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            {% if analysis.report.metadata.Exif %}
+            <tr>
+                <td style="padding-top:30px">
+                    <h3>Static Data - Hashes</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                           <td class="tftable">{% include 'analyses/report/_staticHashes.html' %}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            {% endif %}
+            {% if analysis.report.metadata.Exif %}
+            <tr>
+                <td style="padding-top:30px">
+                   <h2>EXIF metadata extraction</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                           <td class="tftable">{% include 'analyses/report/_staticExif.html' %}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            {% endif %}
+            {% if analysis.report.metadata.Iptc %}
+            <tr>
+                <td style="padding-top:30px">
+                   <h2>IPTC metadata extraction</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                           <td class="tftable">{% include 'analyses/report/_staticIptc.html' %}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            {% endif %}
+            {% if analysis.report.metadata.Xmp %}
+            <tr>
+                <td style="padding-top:30px">
+                   <h2>XMP metadata extraction</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                           <td class="tftable">{% include 'analyses/report/_staticXmp.html' %}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            {% endif %}
+            {% if analysis.report.metadata.Xmp %}
+            <tr>
+                <td style="padding-top:30px">
+                   <h2>Preview extraction from metadata</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                           <td class="tftable">{% include 'analyses/report/_staticXmp.html' %}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            {% endif %}
+            {% if analysis.report.metadata.gps %}
+            <tr>
+                <td style="padding-top:30px">
+                   <h2>Localization</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                           <td class="tftable">{% include 'analyses/report/_staticMap.html' %}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            {% endif %}
+            {% if analysis.report.ela %}
+            <tr>
+                <td style="padding-top:30px">
+                   <h2>Error Level Analysis (ELA)</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {% include 'analyses/report/_staticEla.html' %}
+                </td>
+            </tr>
+            {% endif %}
+            {% if analysis.report.signatures and analysis.report.signatures|length > 0 %}
+            <tr>
+                <td style="padding-top:30px">
+                   <h2>Signature check </h2>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+            {% endif %}
+        </table>
+    </body>
+</html>
 
 <style type="text/css">
 .tftable {font-size:12px;color:#333333;width:100%;border-width: 1px;border-color: #bcaf91;border-collapse: collapse;}

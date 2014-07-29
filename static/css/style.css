@@ -499,3 +499,6 @@ input[type='checkbox']{
 .lineText{
     padding-left:10px;
 }
+.lineHex{
+    word-spacing: 12px;
+}

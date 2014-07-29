@@ -10,22 +10,7 @@
         <div class="tab-content">
             <div class="tab-pane fade in active" id="system-metadata">
                 <div class="row-fluid">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Segment</th>
-                                <th>Key: Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for k, v in analysis.report.metadata.Exif.iteritems %}
-                            <tr>
-                                <td><b>{{ k|upper }}</b></td>
-                                <td> {% include 'analyses/report/_visualize_value.html' with value=v subgroup=k group="Exif" %} </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                    {% include 'analyses/report/_staticExif.html' %}
                 </div>
             </div>
         </div>

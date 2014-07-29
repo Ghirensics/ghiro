@@ -43,10 +43,12 @@
                                 {% else %}
                                     <a href="#" id="{% url "analyses.views.favorite" analysis.id %}" rel="{{ analysis.id }}" class="btn favorite star{{ analysis.id }}"> <i class="icon-star"> </i></a>
                                 {% endif %}
+                                <a href="{% url "analyses.views.image" analysis.image_id %}" class="action_print btn btn-info" title="Print"><i class="icon-print"></i> </a>
+                                <a class="btn btn-danger btn-delete-report" id="{% url "analyses.views.delete_analysis" analysis.id %}" href="#deleteReport" role="button" data-toggle="modal"> <i class="icon-trash"></i> </a>
+                            </h1>
+                            <h1 class="pull-right btn-group">
                                 <a href="{% url "analyses.views.image" analysis.image_id %}" class="btn"><i class="icon-download"></i> Download</a>
-                                <a href="{% url "analyses.views.image" analysis.image_id %}" class="action_print btn btn-info"><i class="icon-print"></i> Print</a>
-                                <a class="btn btn-danger btn-delete-report" id="{% url "analyses.views.delete_analysis" analysis.id %}" href="#deleteReport" role="button" data-toggle="modal"> <i class="icon-trash"></i> Delete</a>
-
+                                <a href="{% url "analyses.views.static_report" analysis.id %}" class="btn" target="_blank"><i class="icon-download-alt"></i> Export</a>
                             </h1>
                         </div>
                     </div>

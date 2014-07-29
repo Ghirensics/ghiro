@@ -66,9 +66,11 @@
             <div class="tab-pane fade" id="server-hex">
                 <div class="row-fluid">
                     <div class="hexview"></div>
-                    <div>
+                    <br>
+                    <div class="center">
                         <a id="hexdown" class="btn btn-warning">Prev</a>
                         <a id="hexup" class="btn btn-warning">Next</a>
+                        <img class="hide" id="wait" src="{{ STATIC_URL }}img/fancybox/fancybox_loading.gif">
                     </div>
                 </div>
             </div>
@@ -77,7 +79,9 @@
 </div>
 
 <script type="text/javascript">
+
     var current_page = 0;
+
     $(document).ready(function() {
         $('.hexview').load('{% url "analyses.views.hex_dump" analysis.id %}');
     });
@@ -85,15 +89,20 @@
     function loadPage(page){
         $.get('{% url "analyses.views.hex_dump" analysis.id %}?page='+ page, function(data) {
             $('.hexview').html(data);
+            $('#wait').hide();
         });
     }
+
     $('#hexdown').click(function(){
-        current_page = (current_page - 1);
-        if(current_page > '0'){
+        if(current_page > 0){
+            $('#wait').show();
+            current_page = (current_page - 1);
             loadPage(current_page);
         }
     });
+
     $('#hexup').click(function(){
+        $('#wait').show();
         current_page = (current_page + 1);
         loadPage(current_page);
     });

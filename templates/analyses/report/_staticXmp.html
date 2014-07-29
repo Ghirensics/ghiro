@@ -1,0 +1,16 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Segment</th>
+            <th>Key: Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for k, v in analysis.report.metadata.Xmp.iteritems %}
+        <tr>
+            <td><b>{{ k|upper }}</b></td>
+            <td> {% include 'analyses/report/_visualize_value.html' with value=v  subgroup=k group="Xmp" %} </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
