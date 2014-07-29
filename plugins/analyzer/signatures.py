@@ -3,6 +3,7 @@
 # See the file "docs/LICENSE.txt" for license terms.
 
 from lib.analyzer.base import BaseAnalyzerModule, BaseSignature
+from copy import deepcopy
 
 try:
     import plugins.signatures.default
@@ -25,7 +26,9 @@ class SignatureAnalyzer(BaseAnalyzerModule):
             try:
                 sign = sign()
                 # Casting results to dict to avoid auto key creation.
-                match = sign.check(self.data)
+                # NOTE: deepcopy is used to run signatures on a copy to avoid creation
+                # of empty Autovivification dict keys.
+                match = sign.check(deepcopy(self.data))
             except KeyError:
                 continue
             except Exception as e:
