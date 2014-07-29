@@ -5,7 +5,6 @@
 import logging
 from django.core.management.base import NoArgsCommand
 
-from lib.utils import init_logging
 from lib.analyzer.processing import AnalysisManager
 
 logger = logging.getLogger(__name__)
@@ -19,7 +18,6 @@ class Command(NoArgsCommand):
 
     def handle(self, *args, **options):
         """Runs command."""
-        init_logging()
         logger.debug("Starting processor...")
 
         try:
