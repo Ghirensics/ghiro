@@ -19,7 +19,6 @@ class Command(NoArgsCommand):
 
     def handle(self, *args, **options):
         """Runs command."""
-        init_logging()
         logger.debug("Starting processor...")
 
         try:

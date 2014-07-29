@@ -137,6 +137,9 @@ LOGGING = {
         'simple': {
             'format': '%(asctime)s %(levelname)s %(message)s'
         },
+        'management_command': {
+            'format': "%(asctime)s [%(levelname)s] %(name)s - %(message)s"
+        },
     },
     'filters': {
         'require_debug_false': {
@@ -154,6 +157,11 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'simple',
             },
+        'processing': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'management_command',
+            },
     },
     'loggers': {
         'django.request': {
@@ -161,8 +169,13 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
-        'processor': {
-            'handlers': ['console'],
+        'lib': {
+            'handlers': ['processing'],
+            'level': 'DEBUG',
+            'propagate': False,
+            },
+        'plugins': {
+            'handlers': ['processing'],
             'level': 'DEBUG',
             'propagate': False,
             },

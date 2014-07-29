@@ -129,21 +129,6 @@ def image2str(img):
     img.save(f, "JPEG")
     return f.getvalue()
 
-def init_logging():
-    """Initializes logging."""
-    logger = logging.getLogger('')
-    logger.setLevel(logging.DEBUG)
-
-    # Create console handler.
-    ch = logging.StreamHandler()
-    ch.setLevel(logging.DEBUG)
-    # Create formatter and add it to the handlers.
-    formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-    ch.setFormatter(formatter)
-    # Add the handlers to the logger.
-    logger.addHandler(ch)
-
-
 def create_thumb(file_path):
     """Create thumbnail
     @param file_path: file path
