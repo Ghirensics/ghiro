@@ -7,7 +7,7 @@ import pkgutil
 import inspect
 
 from time import sleep
-from multiprocessing import Pool, cpu_count, Process, Queue
+from multiprocessing import cpu_count, Process, JoinableQueue
 from django.utils.timezone import now
 
 import plugins.analyzer as modules
@@ -29,14 +29,10 @@ class AnalysisRunner(Process):
         logger.debug("AnalysisRunner started")
 
     def run(self):
-        """ Start processing. """
+        """Start processing. """
         while True:
             # Get a new task from queue.
             task = self.tasks.get()
-
-            logger.debug("Processing task %s" % task.id)
-            task.state = "P"
-            task.save()
 
             try:
                 results = {}
@@ -64,7 +60,7 @@ class AnalysisRunner(Process):
                 # Save.
                 task.completed_at = now()
                 task.save()
-             #   self.tasks.task_done()
+                self.tasks.task_done()
 
 
 class AnalysisManager():
@@ -79,7 +75,7 @@ class AnalysisManager():
         self.check_module_deps()
         # Starting worker pool.
         self.workers = []
-        self.tasks = Queue(self.get_parallelism())
+        self.tasks = JoinableQueue(self.get_parallelism())
         for _ in range(self.get_parallelism()):
             runner = AnalysisRunner(self.tasks, self.modules)
             runner.start()
@@ -123,7 +119,7 @@ class AnalysisManager():
             # NOTE: create the module class instance.
             if not plugin().check_deps():
                 self.modules.remove(plugin)
-                logger.info("Kicked module, requirements not found: %s" % plugin.__name__)
+                logger.warning("Kicked module, requirements not found: %s" % plugin.__name__)
 
     def run(self):
         """Start all analyses."""
@@ -138,10 +134,16 @@ class AnalysisManager():
                 # Fetch tasks waiting processing.
                 tasks = Analysis.objects.filter(state="W").order_by("id")
 
-                if tasks.exists():
+                if tasks.exists() and not self.tasks.full():
                     # Using iterator() to avoid caching.
                     for task in Analysis.objects.filter(state="W").order_by("id").iterator():
                         self.tasks.put(task)
+                        logger.debug("Processing task %s" % task.id)
+                        task.state = "P"
+                        task.save()
+                elif self.tasks.full():
+                    logger.debug("Queue full. Waiting...")
+                    sleep(1)
                 else:
                     logger.debug("No tasks. Waiting...")
                     sleep(1)
