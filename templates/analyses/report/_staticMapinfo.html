@@ -1,0 +1,34 @@
+<table style="width: 100%">
+    <tr>
+        <td>
+            <table>
+                {% for k, v in analysis.report.metadata.Exif.GPSInfo.iteritems %}
+                <tr>
+                    <td>
+                        <strong>{{ k|upper }}</strong>
+                    </td>
+                    <td style="text-align: right">
+                        {% include 'analyses/report/_visualize_value.html' with value=v %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </td>
+        <td style="vertical-align: top;">
+            <table class="pull-right">
+                <tr>
+                    <td><strong>Latitude</strong></td>
+                    <td style="text-align: right">{{ analysis.report.metadata.gps.pos.Latitude }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Longitude</strong></td>
+                    <td style="text-align: right">{{ analysis.report.metadata.gps.pos.Longitude }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Altitude</strong></td>
+                    <td style="text-align: right">{{ analysis.report.metadata.gps.Altitude }}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

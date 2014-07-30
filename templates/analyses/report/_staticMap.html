@@ -1,20 +1,7 @@
-<div  id="map_canvas" style="width:1100px; height:600px"></div>
+<div id="map_canvas" style="width:1100px; height:600px"></div>
 
 <div id="mapinfo">
-    <dl class="dl-horizontal pull-left">
-        {% for k, v in analysis.report.metadata.Exif.GPSInfo.iteritems %}
-        <dt>{{ k|upper }}</dt>
-        <dd>{% include 'analyses/report/_visualize_value.html' with value=v %}</dd>
-        {% endfor %}
-    </dl>
-    <dl class="dl-horizontal pull-right">
-        <dt>Latitude</dt>
-        <dd>{{ analysis.report.metadata.gps.pos.Latitude }}</dd>
-        <dt>Longitude</dt>
-        <dd>{{ analysis.report.metadata.gps.pos.Longitude }}</dd>
-        <dt>Altitude</dt>
-        <dd>{{ analysis.report.metadata.gps.Altitude }}</dd>
-    </dl>
+    {% include 'analyses/report/_staticMapinfo.html' %}
 </div>
 <script>
 $(document).ready(function(){
