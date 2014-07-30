@@ -11,7 +11,11 @@
                                 {% else %}
                                     <a class="fancybox" href="{% url "analyses.views.image" preview.file %}">
                                 {% endif %}
+                                {% if embed %}
+                                    <img src="{{ preview.file|to_base64 }}" />
+                                {% else %}
                                     <img src="{% url "analyses.views.image" preview.file %}">
+                                {% endif %}
                                 </a>
                             </th>
                         </tr>

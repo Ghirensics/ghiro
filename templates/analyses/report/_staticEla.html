@@ -1,1 +1,5 @@
-<img src="{% url "analyses.views.image" analysis.report.ela.ela_image %}" />
+{% if embed %}
+    <img src="{{ analysis.report.ela.ela_image|to_base64 }}" />
+{% else %}
+    <img src="{% url "analyses.views.image" analysis.report.ela.ela_image %}" />
+{% endif %}
