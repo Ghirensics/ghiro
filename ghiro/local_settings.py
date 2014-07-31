@@ -15,7 +15,7 @@ DATABASES = {
         # Set to empty string for default port.
         'PORT': '',
         # Set timeout (avoids SQLite "database is locked" errors).
-        'timeout': 120,
+        'timeout': 300,
     }
 }
 
