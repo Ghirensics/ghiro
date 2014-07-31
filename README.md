@@ -1,6 +1,8 @@
 Ghiro
 =====
 
+[![Build Status](https://travis-ci.org/Ghirensics/ghiro.svg?branch=master)](https://travis-ci.org/Ghirensics/ghiro)
+
 Sometime forensic investigators need to process digital images as evidence.
 There are some tools around, otherwise it is difficult to deal with forensic analysis with lot of images involved.
 Images contain tons of information, Ghiro extracts these information from provided images and display them in a
