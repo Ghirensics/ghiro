@@ -2,10 +2,12 @@
 # This file is part of Ghiro.
 # See the file 'docs/LICENSE.txt' for license terms.
 
+import base64
 import datetime
 from django import template
 from dateutil import parser
 from bson.objectid import InvalidId
+from lib.db import get_file
 
 from analyses.models import AnalysisMetadataDescription
 
@@ -84,3 +86,13 @@ def get_metadata_description(key):
         return "Description not available."
     else:
         return data.description
+
+@register.filter
+def to_base64(image_id):
+    """Return a base64 representation for an image to be used in html img tag.
+    @param image_id: mongo gridfs id
+    @return: base64 blob
+    """
+    image_obj = get_file(image_id)
+    image_encoded = base64.encodestring(image_obj.read())
+    return "data:%s;base64,%s" % (image_obj.content_type, image_encoded)
