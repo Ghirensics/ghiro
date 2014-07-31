@@ -7,4 +7,3 @@ pymongo==2.6.3
 python-dateutil==2.2
 python-magic==0.4.6
 six==1.6.1
-pdfkit==0.4.1
