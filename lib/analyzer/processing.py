@@ -29,38 +29,47 @@ class AnalysisRunner(Process):
         logger.debug("AnalysisRunner started")
 
     def run(self):
-        """Start processing. """
+        """Start processing."""
+        # Antani-finite loop.
         while True:
-            # Get a new task from queue.
-            task = self.tasks.get()
-
             try:
-                results = {}
+                # Get a new task from queue.
+                task = self.tasks.get()
+                self._process_image(task)
+            except KeyboardInterrupt:
+                break
 
-                # Save reference to image data on  GridFS.
-                results["file_data"] = task.image_id
+    def _process_image(self, task):
+        """Process an image.
+        @param task: image task
+        """
+        try:
+            results = {}
 
-                for module in self.modules:
-                    current = module()
-                    current.data = results
-                    output = current.run(task)
-                    if isinstance(output, AutoVivification):
-                        results.update(output)
-                    else:
-                        logger.warning("Module %s returned results not in dict format." % module)
+            # Save reference to image data on  GridFS.
+            results["file_data"] = task.image_id
 
-                # Complete.
-                task.analysis_id = save_results(results)
-                task.state = "C"
-                logger.info("Processed task {0} with success".format(task.id))
-            except Exception, e:
-                logger.exception("Error processing task {0}: {1}".format(task.id, e))
-                task.state = "F"
-            finally:
-                # Save.
-                task.completed_at = now()
-                task.save()
-                self.tasks.task_done()
+            for module in self.modules:
+                current = module()
+                current.data = results
+                output = current.run(task)
+                if isinstance(output, AutoVivification):
+                    results.update(output)
+                else:
+                    logger.warning("Module %s returned results not in dict format." % module)
+
+            # Complete.
+            task.analysis_id = save_results(results)
+            task.state = "C"
+            logger.info("Processed task {0} with success".format(task.id))
+        except Exception, e:
+            logger.exception("Error processing task {0}: {1}".format(task.id, e))
+            task.state = "F"
+        finally:
+            # Save.
+            task.completed_at = now()
+            task.save()
+            self.tasks.task_done()
 
 
 class AnalysisManager():
@@ -76,10 +85,20 @@ class AnalysisManager():
         # Starting worker pool.
         self.workers = []
         self.tasks = JoinableQueue(self.get_parallelism())
+        self.workers_start()
+
+    def workers_start(self):
+        """Start workers pool."""
         for _ in range(self.get_parallelism()):
             runner = AnalysisRunner(self.tasks, self.modules)
             runner.start()
             self.workers.append(runner)
+
+    def workers_stop(self):
+        """Stop workers pool."""
+        # Wait for.
+        for sex_worker in self.workers:
+            sex_worker.join()
 
     def get_parallelism(self):
         """Get the ghiro parallelism level for analysis processing."""
@@ -149,6 +168,7 @@ class AnalysisManager():
                     sleep(1)
         except KeyboardInterrupt:
             print "Exiting... (requested by user)"
-            #self.pool.terminate()
-        #finally:
-            #self.pool.join()
+        finally:
+            print "Waiting tasks to accomplish..."
+            self.workers_stop()
+            print "Processing done. Bye bye."
