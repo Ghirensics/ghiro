@@ -498,3 +498,12 @@ input[type='checkbox']{
 #address{
     color:red;
 }
+
+/* Alert Update */
+#yellow{
+    background-color: #faf2cc;
+    font-size: 12px;
+}
+#yellow a{
+    color: #626275;
+}
