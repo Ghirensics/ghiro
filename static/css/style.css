@@ -313,6 +313,9 @@ a {
     color: #5F5F5F;
     margin: 40px 0;
 }
+.stats-box a{
+    color: #5F5F5F;
+}
 .title{
     border-bottom-color:#CDCDCD;
     border-bottom-style:double;
