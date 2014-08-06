@@ -305,6 +305,9 @@ a {
     margin-top: 20px;
     text-align: center;
 }
+.stats-box-all-info a{
+    color: #5F5F5F;
+}
 .stats-box-title {
     font-weight: bold;
     text-align: center;
@@ -313,9 +316,7 @@ a {
     color: #5F5F5F;
     margin: 40px 0;
 }
-.stats-box a{
-    color: #5F5F5F;
-}
+
 .title{
     border-bottom-color:#CDCDCD;
     border-bottom-style:double;
