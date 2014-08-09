@@ -176,4 +176,4 @@ class AnalysisManager():
         finally:
             print "Waiting tasks to accomplish..."
             self.workers_stop()
-            print "Processing done. Bye bye."
+            print "Processing done. Have a nice day in the real world."
