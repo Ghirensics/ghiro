@@ -52,18 +52,23 @@ class AnalysisRunner(Process):
             for module in self.modules:
                 current = module()
                 current.data = results
-                output = current.run(task)
-                if isinstance(output, AutoVivification):
-                    results.update(output)
+                try:
+                    output = current.run(task)
+                except Exception as e:
+                    logger.exception("Critical error in plugin {0}, skipping: {1}".format(module, e))
+                    continue
                 else:
-                    logger.warning("Module %s returned results not in dict format." % module)
+                    if isinstance(output, AutoVivification):
+                        results.update(output)
+                    else:
+                        logger.warning("Module %s returned results not in dict format." % module)
 
             # Complete.
             task.analysis_id = save_results(results)
             task.state = "C"
             logger.info("Processed task {0} with success".format(task.id))
         except Exception, e:
-            logger.exception("Error processing task {0}: {1}".format(task.id, e))
+            logger.exception("Critical error processing task {0}, skipping task: {1}".format(task.id, e))
             task.state = "F"
         finally:
             # Save.
