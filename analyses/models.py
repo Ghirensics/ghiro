@@ -117,7 +117,7 @@ class Analysis(models.Model):
         data = self.report()
         # If result available converts it.
         if data:
-           json.dumps(data)
+            return json.dumps(data)
         else:
             return json.dumps({})
 
