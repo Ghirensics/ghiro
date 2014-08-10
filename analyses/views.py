@@ -922,3 +922,20 @@ def static_report(request, analysis_id, report_type):
         return render_to_response("error.html",
                                   {"error": "Analysis not found"},
                                   context_instance=RequestContext(request))
+
+@require_safe
+@login_required
+def export_json(request, analysis_id):
+    """Export JSON report."""
+    analysis = get_object_or_404(Analysis, pk=analysis_id)
+
+    # Security check.
+    if not(request.user.is_superuser or request.user in analysis.case.users.all()):
+        return render_to_response("error.html",
+                                  {"error": "You are not authorized to view this."},
+                                  context_instance=RequestContext(request))
+
+    response = HttpResponse(content_type="application/json")
+    response["Content-Disposition"] = 'attachment; filename="Ghiro_export_json_%s.json"' % analysis_id
+    response.write(analysis.to_json)
+    return response
