@@ -176,3 +176,14 @@ def hexdump(image_id, length=8):
         line["text"] = text
         hex_dump.append(line)
     return hex_dump
+
+def import_is_available(module_name):
+    """Checks if a module is available.
+    @param module_name: module name
+    @return: import status
+    """
+    try:
+        __import__(module_name, globals(), locals(), ["dummy"], -1)
+        return True
+    except ImportError:
+        return False
