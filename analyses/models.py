@@ -2,6 +2,7 @@
 # This file is part of Ghiro.
 # See the file 'docs/LICENSE.txt' for license terms.
 
+import json
 import gridfs
 
 from bson.objectid import ObjectId
@@ -109,6 +110,16 @@ class Analysis(models.Model):
             return get_file_length(self.image_id)
         except gridfs.errors.NoFile:
             raise Exception("Image not found on GridFS storage")
+
+    def to_json(self):
+        """Converts object to JSON."""
+        # Fetch report from mongo.
+        data = self.report()
+        # If result available converts it.
+        if data:
+           json.dumps(data)
+        else:
+            return json.dumps({})
 
 @receiver(pre_delete, sender=Analysis)
 def delete_mongo_analysis(sender, instance, **kwargs):
