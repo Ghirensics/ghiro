@@ -2,6 +2,7 @@
 # This file is part of Ghiro.
 # See the file 'docs/LICENSE.txt' for license terms.
 
+import re
 import base64
 import datetime
 from django import template
@@ -96,3 +97,15 @@ def to_base64(image_id):
     image_obj = get_file(image_id)
     image_encoded = base64.encodestring(image_obj.read())
     return "data:%s;base64,%s" % (image_obj.content_type, image_encoded)
+
+@register.filter
+def to_strings(image_id):
+    """Extract all strings.
+    @param image_id: mongo gridfs id
+    @return: strings list
+    """
+    data = get_file(image_id).read()
+    # This strings extraction code comes form Cuckoo Sandbox.
+    strings = re.findall("[\x1f-\x7e]{6,}", data)
+    strings += [str(ws.decode("utf-16le")) for ws in re.findall("(?:[\x1f-\x7e][\x00]){6,}", data)]
+    return strings
