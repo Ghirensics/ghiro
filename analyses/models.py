@@ -120,7 +120,7 @@ class Analysis(models.Model):
         del(data["_id"])
         # If result available converts it.
         if data:
-            return json.dumps(data)
+            return json.dumps(data, sort_keys=False, indent=4)
         else:
             return json.dumps({})
 
