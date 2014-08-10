@@ -111,10 +111,13 @@ class Analysis(models.Model):
         except gridfs.errors.NoFile:
             raise Exception("Image not found on GridFS storage")
 
+    @property
     def to_json(self):
         """Converts object to JSON."""
         # Fetch report from mongo.
-        data = self.report()
+        data = self.report
+        # Cleanup.
+        del(data["_id"])
         # If result available converts it.
         if data:
             return json.dumps(data)
