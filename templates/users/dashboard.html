@@ -13,6 +13,12 @@
                     Dashboard
                 </li>
             </ul>
+            <ul class="breadcrumb hide newVersion" id="yellow">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <li>
+                    <a href="http://getghiro.org"><strong>Info!</strong> Ghiro is back with a brand new version. <i class="icon-download-alt"></i></a>
+                </li>
+            </ul>
         </div>
         <div class="content-body">
             <div class="row-fluid stats-box">
@@ -21,7 +27,7 @@
                         <span class="badge">Users</span>
                     </div>
                     <div class="stats-box-all-info">
-                        <i class="icon-user"> </i> {{ users_count }}
+                        <a href="{% url "users.views.admin_list_users" %}"><i class="icon-user"> </i> {{ users_count }}</a>
                     </div>
                 </div>
                 <div class="span3">
@@ -29,7 +35,7 @@
                         <span class="badge badge-info">Open cases</span>
                     </div>
                     <div class="stats-box-all-info">
-                        <i class="icon-briefcase"> </i> {{ open_cases_count }}
+                        <a href="{% url "analyses.views.list_cases" %}"><i class="icon-briefcase"> </i> {{ open_cases_count }}</a>
                     </div>
                 </div>
                 <div class="span3">

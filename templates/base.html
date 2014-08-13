@@ -37,10 +37,8 @@
                 url : "{% url 'manage.views.update_check' %}",
                 type : "GET",
                 success : function(data) {
-                    if (data == "true"){
-                        $('.header').css('position','relative');
-                        $('.content-large').css('margin-top','-20px');
-                        $('#newVersion').show();
+                    if (data == "True"){
+                        $('.newVersion').show();
                         $('#newVersionFooter').show();
                     }
                 }
@@ -90,10 +88,6 @@
                 </div>
             </div>
         </header>
-        <div class="alert hide" id="newVersion">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <span><strong>Info!</strong> Ghiro is back with a brand new version. <i class="icon-download-alt"></i></span>
-        </div>
         <section class="section">
             <div class="row-fluid">
                 {% include "layout/_sidebar.html" %}
@@ -101,7 +95,7 @@
             </div>
         </section>
         <div id="footer">
-            <small class="pull-right"><strong>Ghiro 0.1 - &copy;</strong> With poetry, <a href="http://twitter.com/jekil" target="_blank">jekil</a> and <a href="">burlone</a>. <a href="http://getghiro.org" id="newVersionFooter" class="hide"><span class="badge badge-success">New version available</span></a></small>
+            <small class="pull-right"><strong>Ghiro 0.1 - &copy;</strong> With poetry, <a href="http://twitter.com/jekil" target="_blank">jekil</a> and <a href="http://burlone.info/">burlone</a>. <a href="http://getghiro.org" id="newVersionFooter" class="hide"><span class="badge badge-success">New version available</span></a></small>
         </div>
     </body>
 </html>

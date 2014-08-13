@@ -305,6 +305,9 @@ a {
     margin-top: 20px;
     text-align: center;
 }
+.stats-box-all-info a{
+    color: #5F5F5F;
+}
 .stats-box-title {
     font-weight: bold;
     text-align: center;
@@ -313,6 +316,7 @@ a {
     color: #5F5F5F;
     margin: 40px 0;
 }
+
 .title{
     border-bottom-color:#CDCDCD;
     border-bottom-style:double;
@@ -497,4 +501,13 @@ input[type='checkbox']{
 }
 #address{
     color:red;
+}
+
+/* Alert Update */
+#yellow{
+    background-color: #faf2cc;
+    font-size: 12px;
+}
+#yellow a{
+    color: #626275;
 }
