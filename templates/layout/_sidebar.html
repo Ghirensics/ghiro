@@ -37,13 +37,13 @@
                 </div> <span class="sidebar-text">Hashes</span></a>
             </li>
             {% if request.user.is_stuff or request.user.is_superuser %}
-            <li id="side-admin">
-                <span class="glow"> </span>
-                <a href="{% url "users.views.admin_list_users" %}" title="administrator">
-                <div class="helper-font-24">
-                    <i class="icon-lock"> </i>
-                </div> <span class="sidebar-text">Admin</span></a>
-            </li>
+                <li id="side-admin">
+                    <span class="glow"> </span>
+                    <a href="{% url "users.views.admin_list_users" %}" title="administrator">
+                    <div class="helper-font-24">
+                        <i class="icon-lock"> </i>
+                    </div> <span class="sidebar-text">Admin</span></a>
+                </li>
             {% endif %}
         </ul>
     </aside>
