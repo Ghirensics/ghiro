@@ -27,7 +27,11 @@
                         <span class="badge">Users</span>
                     </div>
                     <div class="stats-box-all-info">
-                        <a href="{% url "users.views.admin_list_users" %}"><i class="icon-user"> </i> {{ users_count }}</a>
+                        {% if request.user.is_stuff or request.user.is_superuser %}
+                            <a href="{% url "users.views.admin_list_users" %}"><i class="icon-user"> </i> {{ users_count }}</a>
+                        {% else %}
+                            <i class="icon-user"> </i> {{ users_count }}
+                        {% endif %}
                     </div>
                 </div>
                 <div class="span3">
