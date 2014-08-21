@@ -764,7 +764,7 @@ def add_comment(request, id):
         return HttpResponseRedirect(reverse("analyses.views.show_analysis", args=(analysis.id,)))
     else:
         return render_to_response("error.html",
-                                  {"error": "Error adding comment: %s" % form.errors},
+                                  {"error": "Error adding comment: %s" % form.errors.as_text()},
                                   context_instance=RequestContext(request))
 
 @login_required
