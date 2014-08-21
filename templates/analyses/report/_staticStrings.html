@@ -1,5 +1,13 @@
 {% load analyses_tags %}
 
+<h3>Relevant strings</h3>
+
+<p>
+{% for s in analysis.report.file_data|to_relevant_strings%}
+    {{ s }}<br />
+{% endfor %}
+</p>
+
 <h3>All strings</h3>
 
 <p>
