@@ -753,6 +753,7 @@ def add_comment(request, id):
     if form.is_valid():
         comment = form.save(commit=False)
         comment.owner = request.user
+        comment.analysis = analysis
         comment.save()
         form.save_m2m()
 
