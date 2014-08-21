@@ -575,6 +575,19 @@ def search(request, page_name):
         """
         return re.match("^[\d\.]+$", num) is not None
 
+    def search_form(error=None):
+        """Create default empty search form.
+        @param error: optional form errors
+        """
+        available_cases = Case.objects.all()
+
+        # Only superuser can see all cases.
+        if not request.user.is_superuser:
+            available_cases = available_cases.filter(Q(owner=request.user) | Q(users=request.user))
+
+        return render_to_response("analyses/images/search.html",
+                                  {"available_cases": available_cases, "error": error},
+                                  context_instance=RequestContext(request))
     # Set sidebar active tab.
     request.session["sidebar_active"] = "side-search"
 
@@ -636,9 +649,7 @@ def search(request, page_name):
         try:
             mongo_results = db.analyses.find(query)
         except TypeError:
-            return render_to_response("analyses/images/search.html",
-                {"error": "Empty search."},
-                context_instance=RequestContext(request))
+            return search_form("Empty search.")
 
         # Get results (run a bunch of queries to avoid too long sql queries).
         results = []
@@ -671,15 +682,8 @@ def search(request, page_name):
                                   {"images": results, "pagename": page_name, "get_params": queries_without_page},
                                   context_instance=RequestContext(request))
     else:
-        available_cases = Case.objects.all()
-
-        # Only superuser can see all cases.
-        if not request.user.is_superuser:
-            available_cases = available_cases.filter(Q(owner=request.user) | Q(users=request.user))
-
-        return render_to_response("analyses/images/search.html",
-                                  {"available_cases": available_cases},
-                                  context_instance=RequestContext(request))
+        # Default empty search page.
+        return search_form()
 
 @require_safe
 @login_required
