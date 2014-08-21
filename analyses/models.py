@@ -148,7 +148,7 @@ def delete_mongo_analysis(sender, instance, **kwargs):
     # If analysis data are available, delete them.
     if analysis:
         # Delete ELA image.
-        if "ela" in analysis:
+        if "ela" in analysis and "ela_image" in analysis["ela"]:
             useless_files.append(analysis["ela"]["ela_image"])
         # Delete preview images.
         if "metadata" in analysis and "preview" in analysis["metadata"]:
