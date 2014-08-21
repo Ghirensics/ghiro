@@ -1,17 +1,18 @@
 {% load analyses_tags %}
 
-<h3>Relevant strings</h3>
+{% include 'analyses/report/_staticRelevantStrings.html' %}
 
-<p>
-{% for s in analysis.report.file_data|to_relevant_strings%}
-    {{ s }}<br />
-{% endfor %}
-</p>
-
-<h3>All strings</h3>
-
-<p>
-{% for s in analysis.report.file_data|to_strings %}
-    {{ s }}<br />
-{% endfor %}
-</p>
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>All strings</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in analysis.report.file_data|to_strings %}
+        <tr>
+            <td>{{ s }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

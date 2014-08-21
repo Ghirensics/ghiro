@@ -89,6 +89,22 @@
             </table>
         </td>
     </tr>
+    {% if analysis.report.file_data|to_relevant_strings %}
+    <tr>
+        <td style="padding-top:30px">
+            <h3>Static Data - Strings</h3>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table>
+                <tr>
+                    <td class="tftable">{% include 'analyses/report/_staticRelevantStrings.html' %}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    {% endif %}
     {% if analysis.report.metadata.Exif %}
         <tr>
             <td style="padding-top:30px">
