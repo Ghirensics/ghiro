@@ -57,7 +57,7 @@ def new_case(request):
             case.users.add(request.user)
             # Auditing.
             log_activity("C",
-                         "Created new case {0}".format(case.name),
+                         "Created new case %s" % case.name,
                          request)
             return HttpResponseRedirect(reverse("analyses.views.show_case", args=(case.id, "list")))
     else:
@@ -95,7 +95,7 @@ def edit_case(request, case_id):
             case.users.add(request.user)
             # Auditing.
             log_activity("C",
-                         "Edited case {0}".format(case.name),
+                         "Edited case %s" % case.name,
                          request)
             return HttpResponseRedirect(reverse("analyses.views.show_case", args=(case.id, "list")))
     else:
@@ -130,7 +130,7 @@ def close_case(request, case_id):
     case.save()
     # Auditing.
     log_activity("C",
-                 "Closed case {0}".format(case.name),
+                 "Closed case %s" % case.name,
                  request)
     return HttpResponseRedirect(reverse("analyses.views.list_cases"))
 
@@ -150,7 +150,7 @@ def delete_case(request, case_id):
 
     # Auditing.
     log_activity("C",
-                 "Case {0} deleted".format(case.name),
+                 "Case %s deleted" % case.name,
                  request)
     return HttpResponseRedirect(reverse("analyses.views.list_cases"))
 
@@ -265,7 +265,7 @@ def new_image(request, case_id):
             task.save()
             # Auditing.
             log_activity("I",
-                         "Created new analysis {0}".format(task.file_name),
+                         "Created new analysis %s" % task.file_name,
                          request)
             # Response designed for Plupload component.
             response = HttpResponse('{"jsonrpc": "2.0", "result": null, "id": "id"}', content_type="application/json")
@@ -355,7 +355,7 @@ def new_url(request, case_id):
             task.save()
             # Auditing.
             log_activity("I",
-                "Created new analysis {0} from URL {1}".format(task.file_name, request.POST.get("url")),
+                "Created new analysis %s from URL %s" % (task.file_name, request.POST.get("url")),
                 request)
             return HttpResponseRedirect(reverse("analyses.views.show_case", args=(case.id, "list")))
     else:
@@ -414,7 +414,7 @@ def new_folder(request, case_id):
 
                 # Auditing.
                 log_activity("I",
-                             "Created new analysis {0}".format(task.file_name),
+                             "Created new analysis %s" % task.file_name,
                              request)
             return HttpResponseRedirect(reverse("analyses.views.show_case", args=(case.id, "list")))
     else:
@@ -736,7 +736,7 @@ def favorite(request, id):
 
     # Auditing.
     log_activity("A",
-                 "Favorite image added: {0}".format(analysis.file_name),
+                 "Favorite image added: %s" % analysis.file_name,
                  request)
     #return HttpResponseRedirect(reverse("analyses.views.show_analysis", args=(analysis.id,)))
     return HttpResponse("true")
@@ -763,7 +763,7 @@ def add_comment(request, id):
 
         # Auditing.
         log_activity("I",
-            "Comment on image added: {0}".format(analysis.file_name),
+            "Comment on image added: %s" % analysis.file_name,
             request)
         return HttpResponseRedirect(reverse("analyses.views.show_analysis", args=(analysis.id,)))
     else:
@@ -786,7 +786,7 @@ def delete_comment(request, id):
 
     # Auditing.
     log_activity("I",
-       "Comment on image deleted: {0}".format(comment.analysis.file_name),
+       "Comment on image deleted: %s" % comment.analysis.file_name,
         request)
 
     return HttpResponseRedirect(reverse("analyses.views.show_analysis", args=(comment.analysis.id,)))
@@ -812,7 +812,7 @@ def add_tag(request, id):
 
     # Auditing.
     log_activity("I",
-        "Tag on image added: {0}".format(analysis.file_name),
+        "Tag on image added: %s" % analysis.file_name,
         request)
 
     return HttpResponse(tag.id)
@@ -841,7 +841,7 @@ def delete_tag(request, id):
 
     # Auditing.
     log_activity("I",
-        "Tag on image removed: {0}".format(analysis.file_name),
+        "Tag on image removed: %s" % analysis.file_name,
         request)
 
     return HttpResponse(True)

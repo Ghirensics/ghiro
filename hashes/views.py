@@ -46,7 +46,7 @@ def new_hashes(request):
 
             # Auditing.
             log_activity("H",
-                         "Created new hash list {0}".format(list.name),
+                         "Created new hash list %s" % list.name,
                          request)
 
             return HttpResponseRedirect(reverse("hashes.views.show_hashes", args=(list.id,)))
@@ -87,7 +87,7 @@ def delete_hashes(request, list_id):
 
     # Auditing.
     log_activity("H",
-                 "Deleted hash list {0}".format(hash_list.name),
+                 "Deleted hash list %s" % hash_list.name,
                  request)
 
     return HttpResponseRedirect(reverse("hashes.views.list_hashes"))

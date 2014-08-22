@@ -41,11 +41,11 @@ def log_activity(category, message, request, user=None):
 
 def log_logon(sender, user, request, **kwargs):
     """Logs user logons."""
-    log_activity("A", "User logon for {0}".format(user.username), request)
+    log_activity("A", "User logon for %s" % user.username, request)
 
 def log_logout(sender, user, request, **kwargs):
     """Logs user logouts."""
-    log_activity("A", "User logout for {0}".format(user.username), request)
+    log_activity("A", "User logout for %s" % user.username, request)
 
 user_logged_in.connect(log_logon)
 user_logged_out.connect(log_logout)
