@@ -187,3 +187,18 @@ def import_is_available(module_name):
         return True
     except ImportError:
         return False
+
+def deps_check():
+    """Check for all dependencies."""
+    deps = [{"name": "Django", "module": "django"},
+            {"name": "GExiv2", "module": "gi.repository.GExiv2"},
+            {"name": "Pillow", "module": "PIL"},
+            {"name": "Pdfkit", "module": "pdfkit"},
+            {"name": "Pymongo", "module": "pymongo"},
+            {"name": "Chardet", "module": "chardet"}
+            ]
+
+    for dep in deps:
+        dep["available"] = import_is_available(dep["module"])
+
+    return deps

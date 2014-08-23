@@ -1,24 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
 <table class="table table-bordered table-striped responsive datatables">
     <thead>
         <tr>
             <th>Name</th>
-            <th>Dependence</th>
-            <th>Version</th>
+            <th>Available</th>
         </tr>
     </thead>
     <tbody>
-        {% for dependence in dependencies %}
+        {% for dependency in dependencies %}
         <tr>
-            <td>name</td>
+            <td>{{ dependency.name }}</td>
             <td>
-                {% if dependence %}
+                {% if dependency.available %}
                     <i class="icon-ok-circle text-success"></i>
                 {% else %}
                     <i class="icon-ban-circle text-error"></i>
                 {% endif %}
             </td>
-            <td>versione</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+{% endblock %}
