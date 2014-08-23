@@ -2,17 +2,9 @@
 
 {% include 'analyses/report/_staticRelevantStrings.html' %}
 
-<table class="table table-condensed">
-    <thead>
-        <tr>
-            <th>All strings</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for s in analysis.report.file_data|to_strings %}
-        <tr>
-            <td>{{ s }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<h4>All strings</h4>
+<div class="well">
+    {% for s in analysis.report.file_data|to_strings %}
+        {{ s }}<br>
+    {% endfor %}
+</div>

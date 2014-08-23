@@ -1,17 +1,10 @@
 {% load analyses_tags %}
+
 {% if analysis.report.file_data|to_relevant_strings %}
-    <table class="table table-condensed">
-        <thead>
-            <tr>
-                <th>Relevant strings</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for s in analysis.report.file_data|to_relevant_strings %}
-            <tr>
-                <td>{{ s }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <h4>Relevant strings</h4>
+    <div class="well">
+        {% for s in analysis.report.file_data|to_relevant_strings %}
+            {{ s }}<br>
+        {% endfor %}
+    </div>
 {% endif %}
