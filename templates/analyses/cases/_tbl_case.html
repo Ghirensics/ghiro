@@ -34,7 +34,11 @@
             Description:
         </dt>
         <dd>
-            {{ case.description }}
+            {% if case.description|length > 70 %}
+                {{ case.description|slice:":70" }} ...
+            {% else %}
+                {{ case.description }}
+            {% endif %}
         </dd>
         {% endif %}
         <dt>

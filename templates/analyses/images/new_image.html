@@ -16,7 +16,13 @@
                         <span class="divider">&rsaquo;</span>
                     </li>
                     <li>
-                        <a href="{% url "analyses.views.show_case" case.id "list" %}"><i class="icon-book"> </i> {{ case.name }}</a><span class="divider">&rsaquo;</span>
+                        <a href="{% url "analyses.views.show_case" case.id "list" %}"><i class="icon-book"> </i>
+                            {% if case.name|length > 70 %}
+                                {{ case.name|slice:":70" }} ...
+                            {% else %}
+                                {{ case.name }}
+                            {% endif %}
+                        </a><span class="divider">&rsaquo;</span>
                     </li>
                     <li class="active">
                         New Image

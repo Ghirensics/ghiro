@@ -15,7 +15,13 @@
                     <a href="{% url "analyses.views.list_cases" %}"><i class="icon-briefcase"></i> Cases</a><span class="divider">&rsaquo;</span>
                 </li>
                 <li>
-                    <a href="{% url "analyses.views.show_case" analysis.case.id "list" %}"><i class="icon-book"></i> {{ analysis.case.name }}</a><span class="divider">&rsaquo;</span>
+                    <a href="{% url "analyses.views.show_case" analysis.case.id "list" %}"><i class="icon-book"></i>
+                        {% if analysis.case.name|length > 70 %}
+                            {{ analysis.case.name|slice:":70" }} ...
+                        {% else %}
+                            {{ analysis.case.name }}
+                        {% endif %}
+                    </a><span class="divider">&rsaquo;</span>
                 </li>
                 <li class="active">
                     Report

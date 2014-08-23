@@ -75,7 +75,15 @@
                             {% if last_cases %}
                                 {% for case in last_cases %}
                                 <tr>
-                                    <td><a href="{% url "analyses.views.show_case" case.id "list" %}">{{ case.name }}</a></td>
+                                    <td>
+                                        <a href="{% url "analyses.views.show_case" case.id "list" %}">
+                                            {% if case.name|length > 30 %}
+                                                {{ case.name|slice:":30" }} ...
+                                            {% else %}
+                                                {{ case.name }}
+                                            {% endif %}
+                                        </a>
+                                    </td>
                                     <td>{{ case.created_at }}</td>
                                 </tr>
                                 {% endfor %}
