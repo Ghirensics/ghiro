@@ -57,7 +57,7 @@ def new_case(request):
             case.users.add(request.user)
             # Auditing.
             log_activity("C",
-                         "Created new case {0}".format(case.name),
+                         "Created new case %s" % case.name,
                          request)
             return HttpResponseRedirect(reverse("analyses.views.show_case", args=(case.id, "list")))
     else:
@@ -95,7 +95,7 @@ def edit_case(request, case_id):
             case.users.add(request.user)
             # Auditing.
             log_activity("C",
-                         "Edited case {0}".format(case.name),
+                         "Edited case %s" % case.name,
                          request)
             return HttpResponseRedirect(reverse("analyses.views.show_case", args=(case.id, "list")))
     else:
@@ -130,7 +130,7 @@ def close_case(request, case_id):
     case.save()
     # Auditing.
     log_activity("C",
-                 "Closed case {0}".format(case.name),
+                 "Closed case %s" % case.name,
                  request)
     return HttpResponseRedirect(reverse("analyses.views.list_cases"))
 
@@ -150,7 +150,7 @@ def delete_case(request, case_id):
 
     # Auditing.
     log_activity("C",
-                 "Case {0} deleted".format(case.name),
+                 "Case %s deleted" % case.name,
                  request)
     return HttpResponseRedirect(reverse("analyses.views.list_cases"))
 
@@ -265,7 +265,7 @@ def new_image(request, case_id):
             task.save()
             # Auditing.
             log_activity("I",
-                         "Created new analysis {0}".format(task.file_name),
+                         "Created new analysis %s" % task.file_name,
                          request)
             # Response designed for Plupload component.
             response = HttpResponse('{"jsonrpc": "2.0", "result": null, "id": "id"}', content_type="application/json")
@@ -355,7 +355,7 @@ def new_url(request, case_id):
             task.save()
             # Auditing.
             log_activity("I",
-                "Created new analysis {0} from URL {1}".format(task.file_name, request.POST.get("url")),
+                "Created new analysis %s from URL %s" % (task.file_name, request.POST.get("url")),
                 request)
             return HttpResponseRedirect(reverse("analyses.views.show_case", args=(case.id, "list")))
     else:
@@ -414,7 +414,7 @@ def new_folder(request, case_id):
 
                 # Auditing.
                 log_activity("I",
-                             "Created new analysis {0}".format(task.file_name),
+                             "Created new analysis %s" % task.file_name,
                              request)
             return HttpResponseRedirect(reverse("analyses.views.show_case", args=(case.id, "list")))
     else:
@@ -575,6 +575,19 @@ def search(request, page_name):
         """
         return re.match("^[\d\.]+$", num) is not None
 
+    def search_form(error=None):
+        """Create default empty search form.
+        @param error: optional form errors
+        """
+        available_cases = Case.objects.all()
+
+        # Only superuser can see all cases.
+        if not request.user.is_superuser:
+            available_cases = available_cases.filter(Q(owner=request.user) | Q(users=request.user))
+
+        return render_to_response("analyses/images/search.html",
+                                  {"available_cases": available_cases, "error": error},
+                                  context_instance=RequestContext(request))
     # Set sidebar active tab.
     request.session["sidebar_active"] = "side-search"
 
@@ -636,9 +649,7 @@ def search(request, page_name):
         try:
             mongo_results = db.analyses.find(query)
         except TypeError:
-            return render_to_response("analyses/images/search.html",
-                {"error": "Empty search."},
-                context_instance=RequestContext(request))
+            return search_form("Empty search.")
 
         # Get results (run a bunch of queries to avoid too long sql queries).
         results = []
@@ -671,15 +682,8 @@ def search(request, page_name):
                                   {"images": results, "pagename": page_name, "get_params": queries_without_page},
                                   context_instance=RequestContext(request))
     else:
-        available_cases = Case.objects.all()
-
-        # Only superuser can see all cases.
-        if not request.user.is_superuser:
-            available_cases = available_cases.filter(Q(owner=request.user) | Q(users=request.user))
-
-        return render_to_response("analyses/images/search.html",
-                                  {"available_cases": available_cases},
-                                  context_instance=RequestContext(request))
+        # Default empty search page.
+        return search_form()
 
 @require_safe
 @login_required
@@ -732,7 +736,7 @@ def favorite(request, id):
 
     # Auditing.
     log_activity("A",
-                 "Favorite image added: {0}".format(analysis.file_name),
+                 "Favorite image added: %s" % analysis.file_name,
                  request)
     #return HttpResponseRedirect(reverse("analyses.views.show_analysis", args=(analysis.id,)))
     return HttpResponse("true")
@@ -753,17 +757,18 @@ def add_comment(request, id):
     if form.is_valid():
         comment = form.save(commit=False)
         comment.owner = request.user
+        comment.analysis = analysis
         comment.save()
         form.save_m2m()
 
         # Auditing.
         log_activity("I",
-            "Comment on image added: {0}".format(analysis.file_name),
+            "Comment on image added: %s" % analysis.file_name,
             request)
         return HttpResponseRedirect(reverse("analyses.views.show_analysis", args=(analysis.id,)))
     else:
         return render_to_response("error.html",
-                                  {"error": "Error adding comment: %s" % form.errors},
+                                  {"error": "Error adding comment: %s" % form.errors.as_text()},
                                   context_instance=RequestContext(request))
 
 @login_required
@@ -781,7 +786,7 @@ def delete_comment(request, id):
 
     # Auditing.
     log_activity("I",
-       "Comment on image deleted: {0}".format(comment.analysis.file_name),
+       "Comment on image deleted: %s" % comment.analysis.file_name,
         request)
 
     return HttpResponseRedirect(reverse("analyses.views.show_analysis", args=(comment.analysis.id,)))
@@ -807,7 +812,7 @@ def add_tag(request, id):
 
     # Auditing.
     log_activity("I",
-        "Tag on image added: {0}".format(analysis.file_name),
+        "Tag on image added: %s" % analysis.file_name,
         request)
 
     return HttpResponse(tag.id)
@@ -836,7 +841,7 @@ def delete_tag(request, id):
 
     # Auditing.
     log_activity("I",
-        "Tag on image removed: {0}".format(analysis.file_name),
+        "Tag on image removed: %s" % analysis.file_name,
         request)
 
     return HttpResponse(True)

@@ -29,7 +29,7 @@ def new_case(request):
 
         # Auditing.
         log_activity("C",
-                     "Created new case via API {0}".format(case.name),
+                     "Created new case via API %s" % case.name,
                      request,
                      user)
 
@@ -64,7 +64,7 @@ def new_image(request):
 
     # Auditing.
     log_activity("I",
-                 "Created new analysis via API {0}".format(task.file_name),
+                 "Created new analysis via API %s" % task.file_name,
                  request,
                  user=user)
 

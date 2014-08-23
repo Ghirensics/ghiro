@@ -1,0 +1,10 @@
+{% load analyses_tags %}
+
+{% if analysis.report.file_data|to_relevant_strings %}
+    <h4>Relevant strings</h4>
+    <div class="well">
+        {% for s in analysis.report.file_data|to_relevant_strings %}
+            {{ s }}<br>
+        {% endfor %}
+    </div>
+{% endif %}

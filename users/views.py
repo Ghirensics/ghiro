@@ -59,7 +59,7 @@ def admin_new_user(request):
             user = form.save()
             # Auditing.
             log_activity("A",
-                         "Created new user {0}".format(user.username),
+                         "Created new user %s" % user.username,
                          request)
             return HttpResponseRedirect(reverse("users.views.admin_show_user", args=(user.id,)))
     else:
@@ -103,7 +103,7 @@ def admin_edit_user(request, user_id):
             user = form.save()
             # Auditing.
             log_activity("A",
-                         "Edited user {0}".format(user.username),
+                         "Edited user %s" % user.username,
                          request)
             return HttpResponseRedirect(reverse("users.views.admin_show_user", args=(user.id,)))
     else:
@@ -134,7 +134,7 @@ def admin_disable_user(request, user_id):
     user.save()
     # Auditing.
     log_activity("A",
-                 "Disabled user {0}".format(user.username),
+                 "Disabled user %s" % user.username,
                  request)
 
     return HttpResponseRedirect(reverse("users.views.admin_list_users"))

@@ -109,3 +109,16 @@ def to_strings(image_id):
     strings = re.findall("[\x1f-\x7e]{6,}", data)
     strings += [str(ws.decode("utf-16le")) for ws in re.findall("(?:[\x1f-\x7e][\x00]){6,}", data)]
     return strings
+
+@register.filter
+def to_relevant_strings(image_id):
+    """Extract all relevant strings.
+    @param image_id: mongo gridfs id
+    @return: strings list
+    """
+    data = "\n".join(to_strings(image_id))
+    # URLs.
+    strings = re.findall("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", data)
+    # IPs.
+    strings += re.findall(r"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b", data)
+    return strings

@@ -4,7 +4,14 @@
 <div class="span11">
     <div class="content content-large">
         <div class="content-header">
-            <h2><i class="icon-briefcase"> </i> Cases: <small>{{ case.name }}</small></h2>
+            <h2><i class="icon-briefcase"> </i> Cases:
+                <small>
+                    {% if case.name|length > 70 %}
+                        {{ case.name|slice:":70" }} ...
+                    {% else %}
+                        {{ case.name }}
+                    {% endif %}
+                </small></h2>
         </div>
         <div class="content-breadcrumb">
             <ul class="breadcrumb">
@@ -16,7 +23,11 @@
                     <span class="divider">&rsaquo;</span>
                 </li>
                 <li class="active">
-                    {{ case.name }}
+                    {% if case.name|length > 70 %}
+                        {{ case.name|slice:":70" }} ...
+                    {% else %}
+                        {{ case.name }}
+                    {% endif %}
                 </li>
             </ul>
         </div>

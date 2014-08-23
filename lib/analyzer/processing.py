@@ -132,7 +132,7 @@ class AnalysisManager():
                         # Load only modules which inherits BaseModule.
                         if issubclass(class_pkg, BaseAnalyzerModule) and class_pkg is not BaseAnalyzerModule:
                             self.modules.append(class_pkg)
-                            logger.debug("Loaded module: %s" % class_name)
+                            logger.debug("Found module: %s" % class_name)
 
         # Sort modules by execution order.
         self.modules.sort(key=lambda x: x.order)

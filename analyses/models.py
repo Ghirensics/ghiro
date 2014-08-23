@@ -142,13 +142,16 @@ def delete_mongo_analysis(sender, instance, **kwargs):
     # Fetch analysis.
     analysis = db.analyses.find_one({"_id": ObjectId(instance.analysis_id)})
 
+    # Delete files created during analysis.
+    useless_files = []
+
     # If analysis data are available, delete them.
     if analysis:
         # Delete ELA image.
-        if "ela" in analysis:
+        if "ela" in analysis and "ela_image" in analysis["ela"]:
             useless_files.append(analysis["ela"]["ela_image"])
         # Delete preview images.
-        if analysis["metadata"] and "preview" in analysis["metadata"]:
+        if "metadata" in analysis and "preview" in analysis["metadata"]:
             for preview in analysis["metadata"]["preview"]:
                 useless_files.append(preview["file"])
         # Delete analysis data.
@@ -157,8 +160,7 @@ def delete_mongo_analysis(sender, instance, **kwargs):
         except:
             # TODO: add logging.
             pass
-    # Delete files created during analysis.
-    useless_files = []
+
     # Delete thumbnail.
     if instance.thumb_id:
         useless_files.append(instance.thumb_id)

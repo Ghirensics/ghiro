@@ -15,7 +15,15 @@
                     <tbody>
                         {% for case in cases %}
                             <tr>
-                                <td><a href="{% url "analyses.views.show_case" case.id "list" %}">{{ case.name }}</a></td>
+                                <td>
+                                    <a href="{% url "analyses.views.show_case" case.id "list" %}">
+                                        {% if case.name|length > 70 %}
+                                            {{ case.name|slice:":70" }} ...
+                                        {% else %}
+                                            {{ case.name }}
+                                        {% endif %}
+                                    </a>
+                                </td>
                                 <td>{{ case.get_state_display }}</td>
                                 <td>{{ case.created_at }}</td>
                                 <td>{{ case.owner.username }}</td>
