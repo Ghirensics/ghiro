@@ -1,26 +1,73 @@
 {% extends "base.html" %}
 
 {% block content %}
-<table class="table table-bordered table-striped responsive datatables">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Available</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for dependency in dependencies %}
-        <tr>
-            <td>{{ dependency.name }}</td>
-            <td>
-                {% if dependency.available %}
-                    <i class="icon-ok-circle text-success"></i>
-                {% else %}
-                    <i class="icon-ban-circle text-error"></i>
-                {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="span11">
+    <div class="content content-large">
+        <div class="content-header">
+            <h2><i class="icon-lock"> </i> Administration <small>required modules</small></h2>
+        </div>
+        <div class="content-breadcrumb">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/"><i class="icon-home"> </i> Dashboard</a><span class="divider">&rsaquo;</span>
+                </li>
+                <li>
+                    <a href="{% url "users.views.admin_list_users" %}"><i class="icon-lock"> </i> Administration</a><span class="divider">&rsaquo;</span>
+                </li>
+                <li class="active">
+                    Requirements
+                </li>
+            </ul>
+        </div>
+        <div class="content-body">
+            <div class="box-header corner-top">
+                <ul class="nav nav-pills" id="cases_tab">
+                    <li>
+                        <a href="{% url "users.views.admin_list_users" %}">Users</a>
+                    </li>
+                    <li>
+                        <a href="{% url "users.views.admin_list_activity" %}">Activity</a>
+                    </li>
+                    <li class="active">
+                        <a href="{% url "manage.views.dependencies_list" %}">Requirements</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="users">
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="box corner-all">
+                                    <div class="box-body">
+                                        <table class="table table-bordered table-striped responsive datatables">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Available</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for dependency in dependencies %}
+                                                <tr>
+                                                    <td>{{ dependency.name }}</td>
+                                                    <td>
+                                                        {% if dependency.available %}
+                                                            <i class="icon-ok-circle text-success"></i>
+                                                        {% else %}
+                                                            <i class="icon-ban-circle text-error"></i>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
