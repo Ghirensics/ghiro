@@ -13,7 +13,13 @@
         {% for activity in activities %}
         <tr>
             <td>{{ activity.id }}</td>
-            <td>{{ activity.message }}</td>
+            <td>
+                {% if activity.message|length > 75 %}
+                    {{ activity.message|slice:":75" }} ...
+                {% else %}
+                    {{ activity.message }}
+                {% endif %}
+            </td>
             <td>{{ activity.get_category_display }}</td>
             <td>{{ activity.user.username }}</td>
             <td>{{ activity.source_ip }}</td>
