@@ -71,7 +71,7 @@ class UrlForm(forms.Form):
             validate = URLValidator()
             try:
                 validate(url)
-            except ValidationError as e:
-                raise ValidationError("Please enter a valid URL: %s" % e)
+            except ValidationError:
+                raise ValidationError("Please enter a valid URL")
         else:
             raise ValidationError("Path field is mandatory.")
