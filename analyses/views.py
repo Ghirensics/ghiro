@@ -117,7 +117,7 @@ def close_case(request, case_id):
     # Security check.
     if request.user != case.owner and not request.user.is_superuser:
         return render_to_response("error.html",
-                                  {"error": "You are not authorized to close this."},
+                                  {"error": "You are not authorized to close this. Only owner can close the case."},
                                   context_instance=RequestContext(request))
 
     if case.state == "C":
@@ -143,7 +143,7 @@ def delete_case(request, case_id):
     # Security check.
     if request.user != case.owner and not request.user.is_superuser:
         return render_to_response("error.html",
-                                  {"error": "You are not authorized to delete this."},
+                                  {"error": "You are not authorized to delete this. Only owner can delete the case."},
                                   context_instance=RequestContext(request))
 
     Case.objects.get(pk=case_id).delete()
