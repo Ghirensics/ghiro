@@ -401,7 +401,7 @@ def new_folder(request, case_id):
                 # Check if content type is allowed.
                 if not check_allowed_content(content_type):
                     # TODO: add some kind of feedback.
-                    pass
+                    continue
 
                 task = Analysis()
                 task.owner = request.user
