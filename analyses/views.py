@@ -605,17 +605,15 @@ def search(request, page_name):
             if validate_str(request.GET.get("cipher")):
                 query.append({"hash.{0}".format(request.GET.get("cipher").lower()): request.GET.get("hash").lower()})
             else:
-                return render_to_response("analyses/images/search.html",
-                                          {"error": "Cipher format not valid."},
-                                          context_instance=RequestContext(request))
+                return search_form("Cipher format not valid.")
+
         # Metadata search.
         if request.GET.get("metadata_key") and request.GET.get("metadata_value"):
             if validate_str(request.GET.get("metadata_key")):
                 query.append({"metadata.{0}".format(request.GET.get("metadata_key")): {"$regex": request.GET.get("metadata_value")}})
             else:
-                return render_to_response("analyses/images/search.html",
-                                          {"error": "Metadata key format not valid."},
-                                          context_instance=RequestContext(request))
+                return search_form("Metadata key format not valid.")
+
         # Signature filter.
         if request.GET.get("signature"):
             query.append({"signatures.name": {"$regex": request.GET.get("signature")}})
@@ -626,9 +624,7 @@ def search(request, page_name):
                 # SON is mandatory to deliver a ordered dict to mongo, otherwise it will fail.
                 query.append({"metadata.gps.pos": SON([("$near", {"Longitude": float(request.GET.get("long")), "Latitude": float(request.GET.get("lat"))}), ("$maxDistance", float(request.GET.get("dist")))])})
             else:
-                return render_to_response("analyses/images/search.html",
-                    {"error": "Character not allowed, allowed number and dots."},
-                    context_instance=RequestContext(request))
+                return search_form("Character not allowed, allowed number and dots.")
 
         # Compose query.
         if len(query) == 1:
