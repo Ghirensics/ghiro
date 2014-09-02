@@ -35,7 +35,7 @@ class Command(BaseCommand):
         """Runs command."""
         # Validation.
         if not options["username"] or not options["case"] or not options["target"]:
-            print "Options -t (target), -c (case) and -u (user are mandatory. Exiting."
+            print "Options -t (target), -c (case id) and -u (username) are mandatory. Exiting."
             sys.exit(1)
 
         # Get options.
@@ -47,11 +47,11 @@ class Command(BaseCommand):
             for dirname, dirnames, filenames in os.walk(options["target"]):
                 for filename in filenames:
                     target = os.path.join(dirname, filename)
-                    print "INFO: processing {0}".format(target)
+                    print "INFO: adding {0}".format(target)
                     self._add_task(target, case, user)
         elif os.path.isdir(options["target"]):
             for file_name in os.listdir(options["target"]):
-                print "INFO: processing {0}".format(file_name)
+                print "INFO: adding {0}".format(file_name)
                 self._add_task(os.path.join(options["target"], file_name), case, user)
         elif os.path.isfile(options["target"]):
             print "INFO: processing {0}".format(options["target"])
