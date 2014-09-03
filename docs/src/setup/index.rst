@@ -2,9 +2,9 @@ Setup Ghiro
 ===========
 
 Ghiro is supposed to run on a *GNU/Linux* native system.
-For the purpose of this documentation, we chose **latest Ubuntu Server** as
+For the purpose of this documentation, we choose **latest Ubuntu LTS Server** as
 reference system for the commands examples, although Ghiro works on any GNU/Linux
-distribution
+distribution.
 Probably Ghiro could work on other systems like MacOSX but this is not tested
 and out of scope of this documentation.
 
@@ -49,22 +49,22 @@ If you don't have already it, install MongoDB with the following command (run as
 
     apt-get install mongodb
 
-Install required libraries with the the following commands (run as root or with sudo)::
+Ghiro works with SQLite although it is strongly suggested to use MySQL or PostgreSQL
+aa database.
+Optionally, as an example, you can install MySQL with the following command (run as root or with sudo)::
 
-    apt-get install python-pip libgexiv2-1 python-pillow python-dateutil
-    apt-get install build-essential python-dev python-gi
+    apt-get install mysql-server
 
-Install latest Django with the following command (run as root or with sudo)::
+Install required libraries with the following commands (run as root or with sudo)::
 
-    pip install django
+    apt-get install python-pip build-essential python-dev python-gi
+    apt-get install libgexiv2-2 gir1.2-gexiv2-0.10
+    apt-get install libtiff4-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.5-dev tk8.5-dev python-tk
 
-Install latest PyMongo with the following command (run as root or with sudo)::
 
-    pip install pymongo
+Install updated libraries via pip with the following commands (run as root or with sudo)::
 
-Install latest Python magic with the following command (run as root or with sudo)::
-
-    pip install  python-magic
+    pip install -r requirements.txt
 
 Preparing
 ---------
