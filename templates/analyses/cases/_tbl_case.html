@@ -95,7 +95,12 @@
         <thead>
             <tr>
                 <th>File name</th>
-                <th>Status</th>
+                <th>Status
+                    {% if filtered %}
+                        <a href="{% url "analyses.views.show_case" case.id "list" %}?filter=all" class="tool" title="Show all reports"><i class="icon-eye-close"></i></a></th>
+                    {% else %}
+                        <a href="{% url "analyses.views.show_case" case.id "list" %}?filter=completed" class="tool" title="Show only completed reports"><i class="icon-eye-open"></i></a></th>
+                    {% endif %}
                 <th>Owner</th>
                 <th>Submitted at</th>
             </tr>
@@ -151,7 +156,13 @@
         <thead>
             <tr>
                 <th>File name</th>
-                <th>Status</th>
+                <th>Status
+                    {% if filtered %}
+                        <a href="{% url "analyses.views.show_case" case.id "owned" %}?filter=all" class="tool" title="Show all reports"><i class="icon-eye-close"></i></a></th>
+                    {% else %}
+                        <a href="{% url "analyses.views.show_case" case.id "owned" %}?filter=completed" class="tool" title="Show only completed reports"><i class="icon-eye-open"></i></a></th>
+                    {% endif %}
+                </th>
                 <th>Submitted at</th>
             </tr>
         </thead>
@@ -205,7 +216,13 @@
         <thead>
             <tr>
                 <th>File name</th>
-                <th>Status</th>
+                <th>Status
+                    {% if filtered %}
+                        <a href="{% url "analyses.views.show_case" case.id "others" %}?filter=all" class="tool" title="Show all reports"><i class="icon-eye-close"></i></a></th>
+                    {% else %}
+                        <a href="{% url "analyses.views.show_case" case.id "others" %}?filter=completed" class="tool" title="Show only completed reports"><i class="icon-eye-open"></i></a></th>
+                    {% endif %}
+                </th>
                 <th>Owner</th>
                 <th>Submitted at</th>
             </tr>
