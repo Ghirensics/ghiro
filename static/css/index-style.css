@@ -72,7 +72,7 @@ footer.footer {
     background: #333333;
 }
 .footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -83,7 +83,7 @@ footer.footer {
 
 @media (min-width: 768px) and (max-width: 979px) {
     .footer {
-        position: relative;
+        position: fixed;
         top: 10px;
         left: 0;
         width: 100%;
@@ -92,7 +92,7 @@ footer.footer {
 
 @media (max-width: 767px) {
     .footer {
-        position: relative;
+        position: fixed;
         top: 20px;
         left: 0;
         width: 100%;
@@ -108,7 +108,7 @@ footer.footer {
 
 @media (max-width: 480px) {
     .footer {
-        position: relative;
+        position: fixed;
         top: 20px;
         left: 0;
         width: 100%;
