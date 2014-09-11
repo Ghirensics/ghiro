@@ -209,7 +209,7 @@ def show_case(request, case_id, page_name):
         raise Exception
 
     return render_to_response("analyses/cases/show.html",
-                              {"case": case, "tasks": tasks, "last_image": last_image, "pagename": page_name, filtered: filtering},
+                              {"case": case, "tasks": tasks, "last_image": last_image, "pagename": page_name, "filtered": filtering},
                               context_instance=RequestContext(request))
 
 @require_safe
