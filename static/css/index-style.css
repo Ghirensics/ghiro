@@ -66,20 +66,19 @@ i.icon-bg-dark {
     top: 0px;
 }
 footer {
-    color: #7e7e7e;
+    color: #fff;
 }
 footer.footer {
-    background: #3a3a3a;
-}
-footer .subfooter {
-    padding-top: 10px;
-    background: #222;
+    background: #333333;
 }
 .footer {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
+}
+.footer a{
+    color: #cbcbcb;
 }
 
 @media (min-width: 768px) and (max-width: 979px) {
@@ -101,9 +100,6 @@ footer .subfooter {
     .cbp-af-header {
         width: 675px;
         left: 20px;
-    }
-    .subfooter {
-        padding-left: 10px;
     }
     .features {
         padding-bottom: 15px;

@@ -20,12 +20,30 @@ function initialize() {
 
         var contentString = '<div>'+
             '<a href="{% url "analyses.views.show_analysis" image.id %}">' +
-            '<h4>{{ image.file_name }}</h4>'+
-            '<div id="img_container_map">'+
+            '<h4>' +
+            {% if image.file_name|length > 20 %}
+                {{ image.file_name|slice:":20" }} '...' +
+            {% else %}
+                {{ image.file_name }}
+            {% endif %}
+            '</h4>' +
             '<img src="{% url "analyses.views.image" image.thumb_id %}" />' +
-            '<span class="badge badge-success badge-map-low">{{ image.report.signatures|count_severity:"1" }}</span>' +
-            '<span class="badge badge-warning badge-map-warning">{{ image.report.signatures|count_severity:"2" }}</span>' +
-            '<span class="badge badge-important badge-map-error">{{ image.report.signatures|count_severity:"3" }}</span>' +
+            '<div class="tags">' +
+                {% if image.report.signatures|count_severity:"1" %}
+                    '<span class="label-holder">' +
+                        '<span class="label label-success">{{ image.report.signatures|count_severity:"1" }}</span>' +
+                    '</span>' +
+                {% endif %}
+                {% if image.report.signatures|count_severity:"2" %}
+                    '<span class="label-holder">' +
+                        '<span class="label label-warning">{{ image.report.signatures|count_severity:"2" }}</span>' +
+                    '</span>' +
+                {% endif %}
+                {% if image.report.signatures|count_severity:"3" %}
+                    '<span class="label-holder">' +
+                        '<span class="label label-important">{{ image.report.signatures|count_severity:"3" }}</span>' +
+                    '</span>' +
+                {% endif %}
             '</div>' +
             '</a>';
 

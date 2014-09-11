@@ -453,24 +453,23 @@ input[type='checkbox']{
 }
 
 /* Tooltip map image */
-#img_container_map {
-    position:relative;
-    display:inline-block;
+.ghiro-thumbnails > li .tags {
+    background-color: transparent;
+    border-width: 0;
+    top: 110px;
+    direction: rtl;
+    display: inline-block;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    padding: 5px;
+    position: absolute;
+    left: 0;
+    vertical-align: inherit;
+    width: auto;
 }
-.badge-map-low {
-    position:absolute;
-    bottom:1px;
-    right:4px;
-}
-.badge-map-warning {
-    position:absolute;
-    bottom:1px;
-    right:40px;
-}
-.badge-map-error {
-    position:absolute;
-    bottom:1px;
-    right:76px;
+.label-holder{
+    margin-right: 2px;
 }
 
 /* Custom popover */
