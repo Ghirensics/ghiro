@@ -174,6 +174,10 @@ def show_case(request, case_id, page_name):
     else:
         last_image = 0
 
+    # Filter by status if requested.
+    filtering = request.GET.get("filtered")
+    if filtering == "completed":
+        tasks = tasks.filter(Q(state="C") | Q(state="F"))
     page = request.GET.get("page")
     if page_name == "list" or page_name == "thumb":
         tasks = _paginate(tasks, page, 20)
@@ -205,7 +209,7 @@ def show_case(request, case_id, page_name):
         raise Exception
 
     return render_to_response("analyses/cases/show.html",
-                              {"case": case, "tasks": tasks, "last_image": last_image, "pagename": page_name},
+                              {"case": case, "tasks": tasks, "last_image": last_image, "pagename": page_name, filtered: bool(filtering)},
                               context_instance=RequestContext(request))
 
 @require_safe
