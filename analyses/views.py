@@ -175,7 +175,7 @@ def show_case(request, case_id, page_name):
         last_image = 0
 
     # Filter by status if requested.
-    filtering = request.GET.get("filtered")
+    filtering = request.GET.get("filter")
     if filtering == "completed":
         tasks = tasks.filter(Q(state="C") | Q(state="F"))
     page = request.GET.get("page")
