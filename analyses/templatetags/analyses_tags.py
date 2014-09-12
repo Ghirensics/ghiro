@@ -56,9 +56,12 @@ def count_severity(value, severity):
     @return: count
     """
     counter = 0
-    for sign in value:
-        if sign["severity"] == int(severity):
-            counter += 1
+    # Check if there are signatures or it's none.
+    if value:
+        # Counter.
+        for sign in value:
+            if sign["severity"] == int(severity):
+                counter += 1
     return counter
 
 @register.filter
