@@ -137,7 +137,11 @@
             {% if tasks.has_previous %}
                 <ul>
                     <li>
-                        <a href="{% url "analyses.views.show_case" case.id "list" %}?page={{ tasks.previous_page_number }}">← Previous</a>
+                        {% if filtered %}
+                            <a href="{% url "analyses.views.show_case" case.id "list" %}?page={{ tasks.previous_page_number }}&filter=completed">← Previous</a>
+                        {% else %}
+                            <a href="{% url "analyses.views.show_case" case.id "list" %}?page={{ tasks.previous_page_number }}">← Previous</a>
+                        {% endif %}
                     </li>
                 </ul>
             {% endif %}
@@ -147,7 +151,11 @@
             {% if tasks.has_next %}
                 <ul>
                     <li>
-                        <a href="{% url "analyses.views.show_case" case.id "list" %}?page={{ tasks.next_page_number }}">Next → </a>
+                        {% if filtered %}
+                            <a href="{% url "analyses.views.show_case" case.id "list" %}?page={{ tasks.next_page_number }}&filter=completed">Next → </a>
+                        {% else %}
+                            <a href="{% url "analyses.views.show_case" case.id "list" %}?page={{ tasks.next_page_number }}">Next → </a>
+                        {% endif %}
                     </li>
                 </ul>
             {% endif %}
@@ -197,7 +205,11 @@
             {% if tasks.has_previous %}
                 <ul>
                     <li>
-                        <a href="{% url "analyses.views.show_case" case.id "owned" %}?page={{ tasks.previous_page_number }}">← Previous</a>
+                        {% if filtered %}
+                            <a href="{% url "analyses.views.show_case" case.id "owned" %}?page={{ tasks.previous_page_number }}&filter=completed">← Previous</a>
+                        {% else %}
+                            <a href="{% url "analyses.views.show_case" case.id "owned" %}?page={{ tasks.previous_page_number }}">← Previous</a>
+                        {% endif %}
                     </li>
                 </ul>
             {% endif %}
@@ -207,7 +219,11 @@
             {% if tasks.has_next %}
                 <ul>
                     <li>
-                        <a href="{% url "analyses.views.show_case" case.id "owned" %}?page={{ tasks.next_page_number }}">Next → </a>
+                        {% if filtered %}
+                            <a href="{% url "analyses.views.show_case" case.id "owned" %}?page={{ tasks.next_page_number }}&filter=completed">Next → </a>
+                        {% else %}
+                            <a href="{% url "analyses.views.show_case" case.id "owned" %}?page={{ tasks.next_page_number }}">Next → </a>
+                        {% endif %}
                     </li>
                 </ul>
             {% endif %}
@@ -259,7 +275,11 @@
             {% if tasks.has_previous %}
                 <ul>
                     <li>
-                        <a href="{% url "analyses.views.show_case" case.id "others" %}?page={{ tasks.previous_page_number }}">← Previous</a>
+                        {% if filtered %}
+                            <a href="{% url "analyses.views.show_case" case.id "others" %}?page={{ tasks.previous_page_number }}&filter=completed">← Previous</a>
+                        {% else %}
+                            <a href="{% url "analyses.views.show_case" case.id "others" %}?page={{ tasks.previous_page_number }}">← Previous</a>
+                        {% endif %}
                     </li>
                 </ul>
             {% endif %}
@@ -269,7 +289,11 @@
             {% if tasks.has_next %}
                 <ul>
                     <li>
-                        <a href="{% url "analyses.views.show_case" case.id "others" %}?page={{ tasks.next_page_number }}">Next → </a>
+                        {% if filtered %}
+                            <a href="{% url "analyses.views.show_case" case.id "others" %}?page={{ tasks.next_page_number }}&filter=completed">Next → </a>
+                        {% else %}
+                            <a href="{% url "analyses.views.show_case" case.id "others" %}?page={{ tasks.next_page_number }}">Next → </a>
+                        {% endif %}
                     </li>
                 </ul>
             {% endif %}
