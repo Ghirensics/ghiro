@@ -1,3 +1,5 @@
+{% load add_get_parameter %}
+
 {% if case.state == "O" %}
     <div class="pull-right btn-group">
         <a type="button" class="btn btn-success tool" title="Add" data-toggle="dropdown">
@@ -97,9 +99,9 @@
                 <th>File name</th>
                 <th>Status
                     {% if filtered %}
-                        <a href="{% url "analyses.views.show_case" case.id "list" %}?filter=all" class="tool" title="Show all reports"><i class="icon-eye-close"></i></a></th>
+                        <a href="{% url "analyses.views.show_case" case.id "list" %}" class="tool" title="Show all reports"><i class="icon-eye-close"></i></a></th>
                     {% else %}
-                        <a href="{% url "analyses.views.show_case" case.id "list" %}?filter=completed" class="tool" title="Show only completed reports"><i class="icon-eye-open"></i></a></th>
+                        <a href="{% add_get filter='completed' %}" class="tool" title="Show only completed reports"><i class="icon-eye-open"></i></a></th>
                     {% endif %}
                 <th>Owner</th>
                 <th>Submitted at</th>
@@ -158,9 +160,9 @@
                 <th>File name</th>
                 <th>Status
                     {% if filtered %}
-                        <a href="{% url "analyses.views.show_case" case.id "owned" %}?filter=all" class="tool" title="Show all reports"><i class="icon-eye-close"></i></a></th>
+                        <a href="{% url "analyses.views.show_case" case.id "owned" %}" class="tool" title="Show all reports"><i class="icon-eye-close"></i></a></th>
                     {% else %}
-                        <a href="{% url "analyses.views.show_case" case.id "owned" %}?filter=completed" class="tool" title="Show only completed reports"><i class="icon-eye-open"></i></a></th>
+                        <a href="{% add_get filter='completed' %}" class="tool" title="Show only completed reports"><i class="icon-eye-open"></i></a></th>
                     {% endif %}
                 </th>
                 <th>Submitted at</th>
@@ -218,9 +220,9 @@
                 <th>File name</th>
                 <th>Status
                     {% if filtered %}
-                        <a href="{% url "analyses.views.show_case" case.id "others" %}?filter=all" class="tool" title="Show all reports"><i class="icon-eye-close"></i></a></th>
+                        <a href="{% url "analyses.views.show_case" case.id "others" %}" class="tool" title="Show all reports"><i class="icon-eye-close"></i></a></th>
                     {% else %}
-                        <a href="{% url "analyses.views.show_case" case.id "others" %}?filter=completed" class="tool" title="Show only completed reports"><i class="icon-eye-open"></i></a></th>
+                        <a href="{% add_get filter='completed' %}" class="tool" title="Show only completed reports"><i class="icon-eye-open"></i></a></th>
                     {% endif %}
                 </th>
                 <th>Owner</th>
