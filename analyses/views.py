@@ -230,7 +230,7 @@ def list_cases(request):
 
     # Only superuser can see all.
     if not request.user.is_superuser:
-        last = last.filter(Q(owner=request.user) | Q(users=request.user))
+        last = last.filter(users=request.user)
 
     # Set sidebar active tab.
     request.session["sidebar_active"] = "side-cases"
