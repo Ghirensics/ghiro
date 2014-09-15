@@ -149,11 +149,13 @@ def delete_mongo_analysis(sender, instance, **kwargs):
     if analysis:
         # Delete ELA image.
         if "ela" in analysis and "ela_image" in analysis["ela"]:
-            useless_files.append(analysis["ela"]["ela_image"])
+            if db.analyses.find({"ela.ela_image": analysis["ela"]["ela_image"]}).count() == 1:
+                useless_files.append(analysis["ela"]["ela_image"])
         # Delete preview images.
         if "metadata" in analysis and "preview" in analysis["metadata"]:
             for preview in analysis["metadata"]["preview"]:
-                useless_files.append(preview["file"])
+                if db.analyses.find({"metadata.preview.file": preview["file"]}).count() == 1:
+                    useless_files.append(preview["file"])
         # Delete analysis data.
         try:
             db.analyses.remove({"_id": ObjectId(instance.analysis_id)})
@@ -162,7 +164,7 @@ def delete_mongo_analysis(sender, instance, **kwargs):
             pass
 
     # Delete thumbnail.
-    if instance.thumb_id:
+    if instance.thumb_id and Analysis.objects.filter(thumb_id=instance.thumb_id).count() == 1:
         useless_files.append(instance.thumb_id)
     # Delete original image if isn't used by other analyses.
     if Analysis.objects.filter(image_id=instance.image_id).count() == 1:
