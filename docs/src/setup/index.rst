@@ -22,7 +22,7 @@ Ghiro has the following requirements:
     * Python-dateutil: for datetime manipulation
     * Pymongo: driver for MongoDB (at least release 2.5)
     * Django: for web interface (at least release 1.5)
-    * chardet
+    * Chardet: for text encoding detection
 
 If you choose MySQL or PostgrSQL as database you have to install their additional drivers.
 
