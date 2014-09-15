@@ -2,11 +2,11 @@ Why Ghiro?
 ==========
 
 Sometime forensic investigators need to process digital images as evidence.
-There are some tools around, otherwise it is difficult to deal with forensic analysis with lot
-of images involved.
+There are some tools around, otherwise it is difficult to deal with forensic analysis with many
+images involved.
 Images contain tons of information, Ghiro extracts these information from provided images and
 display them in a nicely formatted report.
-Dealing  with tons of images is pretty easy, Ghiro is designed to scale to support gigs of images.
+Dealing  with tons of images has never been so easy, Ghiro is designed to scale to support gigs of images.
 All tasks are totally automated, you have just to upload you images and let Ghiro does the work.
 Understandable reports, and great search capabilities allows you to find a needle in a haystack.
 Ghiro is a multi user environment, different permissions can be assigned to each user.
@@ -71,18 +71,9 @@ Ghiro can be downloaded from the `official website`_, where the stable and
 packaged releases are distributed. Stable package is available in both
 .zip and .tar.gz format.
 The package above is strongly suggested for all users.
-Some people needs to keep updated with Ghiro's changes, they can download
+Some people need to keep updated with Ghiro's changes, they can download
 (git clone) from our `official GitHub page`_.
 There are two different releases available.
-
-Stable Branch
--------------
-
-The stable branch follows the last stable release but provide faster bug fixes,
-so it is pretty the same of downloading the stable package from the `official website`_.
-You can download it with the following command::
-
-    git clone https://github.com/ghirensics/ghiro.git
 
 Development Branch
 ------------------
@@ -92,7 +83,7 @@ You can download Ghiro from here if you need to keep it always at the
 cutting edge or if you want to hack on Ghiro.
 You can download it with the following command::
 
-    git clone -b development https://github.com/ghirensics/ghiro.git
+    git clone https://github.com/ghirensics/ghiro.git
 
 .. warning::
         While being more updated, the development branch should be
