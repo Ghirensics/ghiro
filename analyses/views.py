@@ -577,7 +577,7 @@ def search(request, page_name):
         @param s: input string
         @return: sanitized string
         """
-        return re.match("^[\d\.]+$", num) is not None
+        return re.match("^[\d\-\.]+$", num) is not None
 
     def search_form(error=None):
         """Create default empty search form.
