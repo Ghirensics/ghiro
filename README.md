@@ -1,4 +1,4 @@
-Ghiro
+![alt text](http://www.getghiro.org/static/img/logo_1_B_original.png)
 =====
 
 [![Build Status](https://travis-ci.org/Ghirensics/ghiro.svg?branch=master)](https://travis-ci.org/Ghirensics/ghiro)
