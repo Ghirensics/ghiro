@@ -112,7 +112,15 @@
                             {% if last_analyses %}
                                 {% for anal in last_analyses %}
                                     <tr>
-                                        <td><a href="{% url "analyses.views.show_analysis" anal.id %}">{{ anal.file_name }}</a></td>
+                                        <td>
+                                            <a href="{% url "analyses.views.show_analysis" anal.id %}">
+                                                {% if anal.file_name|length > 60 %}
+                                                    {{ anal.file_name|slice:":60" }} ...
+                                                {% else %}
+                                                    {{ case.name }}
+                                                {% endif %}
+                                            </a>
+                                        </td>
                                         <td>{{ anal.completed_at }}</td>
                                     </tr>
                                 {% endfor %}
