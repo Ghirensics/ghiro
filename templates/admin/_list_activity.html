@@ -32,6 +32,11 @@
 <script type="text/javascript">
 $('.datatables').dataTable({
     "sDom" : '<"top"f>t<"bottom"lp><"clear">',
-    "aaSorting": [[ 0, "desc" ]]
+    "aaSorting": [[ 0, "desc" ]],
+    "language": {
+        "search": "_INPUT_"
+    }
 });
+
+$('.dataTables_filter input').attr("placeholder", "Search...");
 </script>
