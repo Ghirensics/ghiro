@@ -574,10 +574,17 @@ def search(request, page_name):
 
     def validate_num(num):
         """Sanitize number.
-        @param s: input string
+        @param num: input string
         @return: sanitized string
         """
         return re.match("^[\d\-\.]+$", num) is not None
+
+    def validate_pos(num):
+        """Sanitize a longitude or latitude.
+        @param mum: input string
+        @return: boolean result
+        """
+        return validate_num(num) and -180 <= float(num) <= 180
 
     def search_form(error=None):
         """Create default empty search form.
@@ -624,11 +631,11 @@ def search(request, page_name):
         # GPS search.
         # NOTE: due to a bug in mongo the geo search must be separated. See: https://jira.mongodb.org/browse/SERVER-4572
         if request.GET.get("lat") and request.GET.get("long") and request.GET.get("dist"):
-            if validate_num(request.GET.get("lat")) and validate_num(request.GET.get("long")) and validate_num(request.GET.get("dist")):
+            if validate_pos(request.GET.get("lat")) and validate_pos(request.GET.get("long")) and validate_num(request.GET.get("dist")):
                 # SON is mandatory to deliver a ordered dict to mongo, otherwise it will fail.
                 query.append({"metadata.gps.pos": SON([("$near", {"Longitude": float(request.GET.get("long")), "Latitude": float(request.GET.get("lat"))}), ("$maxDistance", float(request.GET.get("dist")))])})
             else:
-                return search_form("Character not allowed, allowed number and dots.")
+                return search_form("Character not allowed, allowed number and dots. Coordinates should be between -180 and 180.")
 
         # Compose query.
         if len(query) == 1:
