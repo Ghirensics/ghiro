@@ -64,7 +64,7 @@ def check_version():
     """Checks version of Ghiro."""
 
     # Do i have to check?
-    if UpdateCheck.should_check():
+    if UpdateCheck.should_check() and settings.UPDATE_CHECK:
 
         # Create new check entry.
         check = UpdateCheck.objects.create()
