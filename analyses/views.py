@@ -574,7 +574,7 @@ def search(request, page_name):
 
     def validate_num(num):
         """Sanitize number.
-        @param s: input string
+        @param num: input string
         @return: sanitized string
         """
         return re.match("^[\d\.]+$", num) is not None
