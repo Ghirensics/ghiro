@@ -577,7 +577,7 @@ def search(request, page_name):
         @param num: input string
         @return: sanitized string
         """
-        return re.match("^[\d\.]+$", num) is not None
+        return re.match("^[\d\-\.]+$", num) is not None
 
     def validate_pos(num):
         """Sanitize a longitude or latitude.
