@@ -72,21 +72,21 @@ def check_version():
         # Format request.
         url = "http://update.getghiro.org/update/check/"
         data = urllib.urlencode({"version": settings.GHIRO_VERSION})
-
+        headers = {"User-Agent": "Ghiro update client"}
         try:
-            request = urllib2.Request(url, data)
-            response = urllib2.urlopen(request)
+            request = urllib2.Request(url, data=data, headers=headers)
+            response = urllib2.urlopen(request, timeout=60).read()
         except (urllib2.URLError, urllib2.HTTPError) as e:
             check.state = "E"
             check.save()
             raise Exception("Unable to establish connection: %s" % e)
 
         try:
-            data = json.loads(response.read())
-        except ValueError:
+            data = json.loads(response)
+        except ValueError as e:
             check.state = "E"
             check.save()
-            raise Exception("Invalid response.")
+            raise Exception("Invalid response: %s" % e)
 
         if data["new_release"]:
             check.state = "A"
