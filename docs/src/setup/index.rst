@@ -3,8 +3,8 @@ Setup Ghiro
 
 Ghiro is supposed to run on a *GNU/Linux* native system.
 For the purpose of this documentation, we choose **latest Ubuntu LTS Server** as
-reference system for the commands examples, although Ghiro works on any GNU/Linux
-distribution.
+reference system for the commands examples, although Ghiro works on any
+GNU/Linux distribution.
 Probably Ghiro could work on other systems like MacOSX but this is not tested
 and out of scope of this documentation.
 
@@ -42,27 +42,33 @@ Download and extract
 Download Ghiro as explained in this documentation, if you download the stable
 package extract it. Enter in the Ghiro folder.
 
-Requirements
-------------
+Preparing
+---------
 
-If you don't have already it, install MongoDB with the following command (run as root or with sudo)::
+If you don't have already it, install MongoDB with the following command
+(run as root or with sudo)::
 
     apt-get install mongodb
 
 Ghiro works with SQLite although it is strongly suggested to use MySQL or PostgreSQL
-aa database.
-Optionally, as an example, you can install MySQL with the following command (run as root or with sudo)::
+as database. If SQLite is used, Ghiro will automatically decrease processing
+pallellism to one because SQLite does not support concurrent operations.
+Optionally, as an example, you can install MySQL with the following command
+(run as root or with sudo)::
 
     apt-get install mysql-server
 
-Install required libraries with the following commands (run as root or with sudo)::
+Install required libraries with the following commands
+(run as root or with sudo)::
 
     apt-get install python-pip build-essential python-dev python-gi
     apt-get install libgexiv2-2 gir1.2-gexiv2-0.10
-    apt-get install libtiff4-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.5-dev tk8.5-dev python-tk
+    apt-get install libtiff4-dev libjpeg8-dev zlib1g-dev libfreetype6-dev
+    apt-get install liblcms2-dev libwebp-dev tcl8.5-dev tk8.5-dev python-tk
 
 
-Install updated libraries via pip with the following commands (run as root or with sudo)::
+Install updated libraries via pip with the following commands
+(run as root or with sudo)::
 
     pip install -r requirements.txt
 
@@ -111,73 +117,11 @@ The default settings will fit all common user needs.
 
 Following is the default *ghiro/local_settings.py* file::
 
-    LOCAL_SETTINGS = True
-    from settings import *
+.. literalinclude:: ../../../ghiro/local_settings.py
 
-    DATABASES = {
-        'default': {
-            # Engine type. Ends with 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-            'ENGINE': 'django.db.backends.sqlite3',
-            # Database name or path to database file if using sqlite3.
-            'NAME': 'db.sqlite',
-            # Credntials. The following settings are not used with sqlite3.
-            'USER': '',
-            'PASSWORD': '',
-            # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-            'HOST': '',
-            # Set to empty string for default port.
-            'PORT': '',
-        }
-    }
-
-    # MySQL tuning.
-    #DATABASE_OPTIONS = {
-    # "init_command": "SET storage_engine=INNODB",
-    #}
-
-    # Mongo database settings
-    MONGO_URI = "mongodb://localhost/"
-    MONGO_DB = "ghirodb"
-
-    # Max uploaded image size (in bytes).
-    # Default is 150MB.
-    MAX_FILE_UPLOAD = 157286400
-
-    # Allowed file types.
-    ALLOWED_EXT = ['image/bmp', 'image/x-canon-cr2', 'image/jpeg', 'image/png',
-                   'image/x-canon-crw', 'image/x-eps', 'image/x-nikon-nef',
-                   'application/postscript', 'image/gif', 'image/x-minolta-mrw',
-                   'image/x-olympus-orf', 'image/x-photoshop', 'image/x-fuji-raf',
-                   'image/x-panasonic-raw2', 'image/x-tga', 'image/tiff', 'image/pjpeg']
-
-    # Override default secret key stored in secret_key.py
-    # Make this unique, and don't share it with anybody.
-    # SECRET_KEY = "YOUR_RANDOM_KEY"
-
-    # Language code for this installation. All choices can be found here:
-    # http://www.i18nguy.com/unicode/language-identifiers.html
-    LANGUAGE_CODE = "en-us"
-
-    ADMINS = (
-        # ("Your Name", "your_email@example.com"),
-    )
-
-    MANAGERS = ADMINS
-
-    # Allow verbose debug error message in case of application fault.
-    # It's strongly suggested to set it to False if you are serving the
-    # web application from a web server front-end (i.e. Apache).
-    DEBUG = True
-
-    # A list of strings representing the host/domain names that this Django site
-    # can serve.
-    # Values in this list can be fully qualified names (e.g. 'www.example.com').
-    # When DEBUG is True or when running tests, host validation is disabled; any
-    # host will be accepted. Thus it's usually only necessary to set it in production.
-    ALLOWED_HOSTS = ["*"]
-
-If you change the configuration after the first setup, before editing this file you have to stop both Ghiro's web interface and
-processing deamon, you may restart them after the edit.
+If you change the configuration after the first setup, before editing this file
+you have to stop both Ghiro's web interface and processing deamon, you may
+restart them after the edit.
 
 If you changed any setting related to the database configuration you have to
 re-build your database with the command (inside Ghiro's root)::
@@ -187,12 +131,13 @@ re-build your database with the command (inside Ghiro's root)::
 Running Ghiro as service
 ========================
 
-If you want to run Ghiro as an enterprise service you have to get rid of Django web server and run
-Ghiro with a production ready tool.
+If you want to run Ghiro as a service you have to get rid of Django web server
+and run Ghiro inside a web server (i.e. Apache).
 
 Database
 --------
-We do not suggest SQLite3 for production environment, please go for MySQL or PostgreSQL.
+We do not suggest SQLite3 for production environment, please go for MySQL or
+PostgreSQL.
 In this example we are going to show you how to configure Ghiro with MySQL.
 
 Setup MySQL and Python drivers with the following command (run as root or with sudo)::
@@ -205,7 +150,8 @@ Configure Ghiro to use MySQL as explained in configuration paragraph.
 Apache as a front-end
 ---------------------
 
-Now we are going to configure Apache as a front end for Ghiro's django application.
+Now we are going to configure Apache as a front end for Ghiro's django
+application.
 
 Setup Apache and mod_wsgi with the following command (run as root or with sudo)::
 
@@ -233,8 +179,8 @@ An example of virtual host configuration is the following (Ghiro is extracted in
         CustomLog ${APACHE_LOG_DIR}/access.log combined
     </VirtualHost>
 
-Restart apache. Now the web application is listening on port 80/tcp, just put the IP
-address in your browser.
+Restart apache. Now the web application is listening on port 80/tcp, just put
+the IP address in your browser.
 
 Run the processor with upstart
 ------------------------------
