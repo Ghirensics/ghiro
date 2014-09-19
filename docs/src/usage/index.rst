@@ -92,3 +92,11 @@ update check.
 Anyway a command line command is available to manually check for updates::
 
     python manage.py update_check
+
+Save all images
+---------------
+
+If you need to dump all images in Ghiro's database, in their original format, to
+disk, you can save all to disk with::
+
+    python manage.py images_save_all -p /path/to/disk/
