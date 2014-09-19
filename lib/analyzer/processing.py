@@ -9,6 +9,7 @@ import inspect
 from time import sleep
 from multiprocessing import cpu_count, Process, JoinableQueue
 from django.utils.timezone import now
+from django.conf import settings
 
 import plugins.analyzer as modules
 from lib.utils import AutoVivification
@@ -107,7 +108,12 @@ class AnalysisManager():
 
     def get_parallelism(self):
         """Get the ghiro parallelism level for analysis processing."""
-        if cpu_count() > 1:
+        # Check database type. If we detect SQLite we slow down processing to
+        # only one process. SQLite does not support parallelism.
+        if settings.DATABASES["default"]["ENGINE"].endswith("sqlite3"):
+            logger.warning("Detected SQLite database, decreased parallelism to 1. SQLite doesn't support parallelism.")
+            return 1
+        elif cpu_count() > 1:
             # Set it to total CPU minus one let or db and other use.
             return cpu_count() - 1
         else:
