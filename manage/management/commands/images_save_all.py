@@ -27,6 +27,8 @@ class Command(NoArgsCommand):
                 print "ERROR: a folder 'ghiro_output' already exist in that path!"
                 sys.exit()
             else:
+                # Create destination folder.
+                os.mkdir(dst_path)
                 # Mongo connection.
                 db = mongo_connect()
                 fs = gridfs.GridFS(db)
@@ -34,11 +36,11 @@ class Command(NoArgsCommand):
                 for analysis in Analysis.objects.all():
                     try:
                        file = get_file(analysis.image_id)
-                    except (InvalidId, TypeError):
-                        print "Unable to dump %s" % analysis.id
+                    except (InvalidId, TypeError) as e:
+                        print "Unable to dump %s: %s" % (analysis.id, e)
                         continue
                     else:
                         with open(os.path.join(dst_path, "analysis_%s" % analysis.id), "a") as the_file:
-                            the_file.write(file)
+                            the_file.write(file.read())
         else:
             print "ERROR: path not found!"
