@@ -1,7 +1,29 @@
-Ghiro-0.2 (xx/xx/xxxx)
+Ghiro-0.2 (xx/09/2014)
 
- * Added case deletion.
+ * Added case deletion, you can now delete a case.
+ * Added analysis deletion, you can now delete an analysis.
  * Added favorited images.
+ * Added automatic update check and option to disable it.
+ * Added filter to show only completed analysis in task panel.
+ * Added an admin panel showing dependency status.
+ * Added image's hex view page.
+ * Added PDF and HTML static report download.
+ * Added image's strings extraction and important string highlight.
+ * Added requirements.txt for quick dependency setup with pip.
+ * Added JSON API to create cases and submit images.
+ * Added command to check for new releases via command line.
+ * Added search only inside cases, now you can specify in which case search.
+ * Added image's tags, now you can tag an image.
+ * Added image's comments, now you can comment an image.
+ * Added signatures count in Google Map and image thumbnails view.
+ * Added URL upload, now you can upload an image from an URL.
+ * Refactored image analyzer to be modular, rewritten all analysis features as
+   modular plugins.
+ * Fixed upload local folder feature, now unknown files are skipped.
+ * Fixed a bug when logging an activity containing UTF-8 chars.
+ * Many little refactorings.
+ * Documentation update.
+ * Bug fixes.
 
 Ghiro-0.1 (10/02/2013)
 
