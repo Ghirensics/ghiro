@@ -83,3 +83,12 @@ If you want to add all images in folder /target/images and all subfolders to cas
 
 If you need to load tons of images this utility is designed for you,
 all images could be loaded in a single batch.
+
+Check for updates
+-----------------
+
+Ghiro automatically checks for new updates every day, if you don't disable the
+update check.
+Anyway a command line command is available to manually check for updates::
+
+    python manage.py update_check
