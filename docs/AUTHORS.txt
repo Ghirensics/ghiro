@@ -1,5 +1,5 @@
-DEVELOPERS
-----------
+Ghiro Developers
+----------------
 
 Alessandro `jekil` Tanasi (@jekil) - alessandro at tanasi.it
 Lead Developer
