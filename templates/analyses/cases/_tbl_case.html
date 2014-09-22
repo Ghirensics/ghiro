@@ -99,9 +99,9 @@
                 <th>File name</th>
                 <th>Status
                     {% if filtered %}
-                        <a href="{% url "analyses.views.show_case" case.id "list" %}" class="tool" title="Show all reports"><i class="icon-eye-close"></i></a></th>
+                        <a href="{% url "analyses.views.show_case" case.id "list" %}" class="tool" title="Show all tasks"><i class="icon-eye-close"></i></a></th>
                     {% else %}
-                        <a href="{% add_get filter='completed' %}" class="tool" title="Show only completed reports"><i class="icon-eye-open"></i></a></th>
+                        <a href="{% add_get filter='completed' %}" class="tool" title="Show only completed tasks"><i class="icon-eye-open"></i></a></th>
                     {% endif %}
                 <th>Owner</th>
                 <th>Submitted at</th>
