@@ -21,6 +21,7 @@ Ghiro-0.2 (xx/09/2014)
    modular plugins.
  * Fixed upload local folder feature, now unknown files are skipped.
  * Fixed a bug when logging an activity containing UTF-8 chars.
+ * Updated Javascript libraries.
  * Many little refactorings.
  * Documentation update.
  * Bug fixes.
