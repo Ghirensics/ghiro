@@ -117,6 +117,12 @@ Hash list matching
 Suppose you are searching for an image and you have only the hash.
 You can provide a list of hashes and all images matching are reported.
 
+Strings extraction
+==================
+
+All text strings contained in the analyzed image are extracted, like in the unix
+strings tool. The more interesting (i.e. URLs) are highlighted.
+
 Signature engine
 ================
 
