@@ -115,7 +115,7 @@ If you want to change any setting the configuration file is located
 in *ghiro/local_settings.py*.
 The default settings will fit all common user needs.
 
-Following is the default *ghiro/local_settings.py* file::
+Following is the default *ghiro/local_settings.py* file:
 
 .. literalinclude:: ../../../ghiro/local_settings.py
 
