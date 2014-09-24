@@ -74,9 +74,9 @@
                 <input type="hidden" value="{{ case.id }}" name="in_case" id="in_case">
             {% else %}
                 <div class="control-group">
-                    <label class="control-label" for="signature">Case</label>
+                    <label class="control-label" for="case">Case</label>
                     <div class="controls">
-                        <select class="span9" name="in_case">
+                        <select style="width: 715px" name="in_case">
                             <option value="all">All cases</option>
                             {% for case in available_cases %}
                                 <option value="{{ case.id }}">{{ case.name }}</option>
