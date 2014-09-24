@@ -110,4 +110,47 @@ virtual machine, to start to analyze your images.
 It is an OVA file, you have to import in your virtualization software (like
 VirtualBox or VMWare) and configure the networking as explained in the
 documentation.
-Just unzip the archive and read the README.txt file!
+
+Getting Started
+---------------
+
+Download the appliance archive as described above and decompress it.
+Import the .OVA file in your virtualization software (VirtualBox or Vmware).
+For example in VirtualBox go in File > Import Appliance and select the .OVA
+file.
+Power on the virtual machine, you will see Ubuntu boot and after the console
+login.
+
+The appliance credentials are:
+Username: ghiro
+Password: ghiromanager
+
+For extra security, remember to change the password at your first access.
+
+The first time you have to properly configure the network.
+Select the virtual networking you like (for example
+bridged or NAT), by default the appliance is configured in bridged mode.
+Login in, and configure the networking card with your desired IP, for example to
+give the IP 192.168.0.10 use the following command:
+
+sudo ifconfig eth0 192.168.0.10 up
+
+Now the web interface is reachable on default HTTP port 80/tcp, just put the
+appliance address in your browser. For example:
+
+http://192.168.0.10
+
+The web interface credentials are:
+Username: ghiro
+Password: ghiromanager
+
+For extra security, remember to change the password at your first access.
+
+Now you can start analyzing images! Go in the "Cases" panel, create your first
+case, and add your images with the add button. You can now use Ghiro as
+described in this documentation.
+
+If you need to access remotely to the appliance you can use SSH.
+
+The appliance is shipped with a default disk of 50GB, if is not enough you can
+create another virtual disk and add that to the root volume using LVM.
