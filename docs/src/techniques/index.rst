@@ -109,7 +109,16 @@ Ghiro calculates error levels and detects differences between them.
 Hash digest generation
 ======================
 
-Most common hash are calculated for the image, to create an unique signature of it.
+Most common hash are calculated for the image, to create an unique identifier of it.
+The calculated hashes are:
+
+ * CRC32
+ * MD5
+ * SHA1
+ * SHA224
+ * SHA256
+ * SHA384
+ * SHA512
 
 Hash list matching
 ==================
