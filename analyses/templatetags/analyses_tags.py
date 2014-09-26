@@ -122,6 +122,8 @@ def to_relevant_strings(image_id):
     data = "\n".join(to_strings(image_id))
     # URLs.
     strings = re.findall("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", data)
+    # FTPs
+    strings += re.findall("ftp[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", data)
     # IPs.
     strings += re.findall(r"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b", data)
     return strings
