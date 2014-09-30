@@ -103,18 +103,25 @@ $(document).ready(function() {
 });
 
 function internetStatus(){
-    var status = navigator.onLine ? 'online' : 'offline';
-    if (status == 'offline'){
-        alert("To use the map feature you need to be connected to internet.");
-    }else{
-        $('#map_canvas').fadeIn();
-        loadScript();
+    var connected = true;
+    var img = document.createElement('img');
+    img.src = 'http://www.getghiro.org/static/img/logo_1_original.png?ver=' + (new Date()).getTime();
+    img.onerror = function() {
+        $("#noNet").show();
+        $("#map_canvas").hide();
     }
-};
+    if (connected){
+        loadScript()
+    }
+}
 
 function loadScript() {
     var script = document.createElement("script");
     script.type = "text/javascript";
     script.src = "http://maps.google.com/maps/api/js?sensor=false&callback=initialize";
     document.body.appendChild(script);
+    $('a[data-toggle="tab"]').on('shown', function (e) {
+        google.maps.event.trigger(map, 'resize');
+        map.setCenter(marker.getPosition());
+    });
 }
