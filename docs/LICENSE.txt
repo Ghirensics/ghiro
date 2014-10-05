@@ -625,26 +625,26 @@ copy of the Program in return for a fee.
 
 Components shipped with Ghiro are licensed as following.
 
-jQuery is copyrighted by jQuery Foundation, Inc. and released under the following
-license: GNU GPL, MIT License
+jQuery is copyrighted by jQuery Foundation, Inc. and released under the
+following license: GNU GPL, MIT License.
 
 fancyBox is copyrighted by Janis Skarnelis and released under the following
-license: Creative Commons Attribution-NonCommercial 3.0 License
+license: Creative Commons Attribution-NonCommercial 3.0 License.
 
 datatables is copyrighted by Allan Jardine and released under the following
-license: GPL v2 license or a BSD style License
+license: GPL v2 license or a BSD style License.
 
-HTML5 Shiv is copyrighted by @afarkas @jdalton @jon_neal @rem and released under the following
-license: MIT/GPL2 Licensed
+HTML5 Shiv is copyrighted by @afarkas @jdalton @jon_neal @rem and released under
+the following license: MIT/GPL2 License.
 
 Highcharts is copyrighted by Torstein Hønsi and released under the following
-license: Creative Commons Attribution-NonCommercial 3.0 License
+license: Creative Commons Attribution-NonCommercial 3.0 License.
 
 Bootstrap is copyrighted by Twitter and released under the following
-license: Apache License Version 2.0
+license: Apache License Version 2.0.
 
 Font Awesome is copyrighted by Dave Gandy and released under the following
-license: SIL OFL 1.1 - http://scripts.sil.org/OFL
+license: SIL OFL 1.1 - http://scripts.sil.org/OFL.
 
 Plupload is copyrighted by Moxiecode Systems AB and released under the following
-license: GPL2 Licensed
+license: GPL2 License.
