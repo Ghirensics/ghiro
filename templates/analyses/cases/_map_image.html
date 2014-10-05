@@ -1,5 +1,9 @@
 {% load analyses_tags %}
 
+<div class="alert hide" id="noNet">
+    <strong>Warning!</strong> To use the map feature you need to be connected to internet.
+</div>
+
 <div id="map_canvas"></div>
 
 <script type="text/javascript">
@@ -19,17 +23,14 @@ function initialize() {
     {% for image in images %}
 
         var contentString = '<div><a href="{% url "analyses.views.show_analysis" image.id %}"><h4>{% if image.file_name|length > 20 %}{{ image.file_name|slice:":20" }} ...{% else %}{{ image.file_name }}{% endif %}</h4><img src="{% url "analyses.views.image" image.thumb_id %}" /><div class="tags">{% if image.report.signatures|count_severity:"1" %}<span class="label-holder"><span class="label label-success">{{ image.report.signatures|count_severity:"1" }}</span></span>{% endif %}{% if image.report.signatures|count_severity:"2" %}<span class="label-holder"><span class="label label-warning">{{ image.report.signatures|count_severity:"2" }}</span></span>{% endif %}{% if image.report.signatures|count_severity:"3" %}<span class="label-holder"><span class="label label-important">{{ image.report.signatures|count_severity:"3" }}</span></span>{% endif %}</div></a>';
-
         var infowindow_{{ forloop.counter }} = new google.maps.InfoWindow({
             content: contentString
         });
-
         marker_{{ forloop.counter }} = new google.maps.Marker({
             position: new google.maps.LatLng({{ image.latitude|floatformat:6 }}, {{ image.longitude|floatformat:6 }}),
             map: map,
             title: "{{ image.file_name }}"
         });
-
         google.maps.event.addListener(marker_{{ forloop.counter }}, 'click', function() {
             infowindow_{{ forloop.counter }}.open(map,marker_{{ forloop.counter }});
         });
