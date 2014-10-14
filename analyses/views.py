@@ -638,7 +638,7 @@ def search(request, page_name):
                 else:
                     distance = float(request.GET.get("dist"))
                 # SON is mandatory to deliver a ordered dict to mongo, otherwise it will fail.
-                query.append({"metadata.gps.pos": SON([("$near", {"Longitude": float(request.GET.get("long")), "Latitude": float(request.GET.get("lat"))}), ("$maxDistance", distance))])})
+                query.append({"metadata.gps.pos": SON([("$near", {"Longitude": float(request.GET.get("long")), "Latitude": float(request.GET.get("lat"))}), ("$maxDistance", distance)])})
             else:
                 return search_form("Character not allowed, allowed number and dots. Coordinates should be between -180 and 180.")
 
