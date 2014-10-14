@@ -633,10 +633,10 @@ def search(request, page_name):
         if request.GET.get("lat") and request.GET.get("long") and request.GET.get("dist"):
             if validate_pos(request.GET.get("lat")) and validate_pos(request.GET.get("long")) and validate_num(request.GET.get("dist")):
                 # Avoid distance = 0
-                if float(request.GET.get("dist") < 1:
+                if float(request.GET.get("dist")) < 1:
                     distance = 1
                 else:
-                    distance = float(request.GET.get("dist")
+                    distance = float(request.GET.get("dist"))
                 # SON is mandatory to deliver a ordered dict to mongo, otherwise it will fail.
                 query.append({"metadata.gps.pos": SON([("$near", {"Longitude": float(request.GET.get("long")), "Latitude": float(request.GET.get("lat"))}), ("$maxDistance", distance))])})
             else:
