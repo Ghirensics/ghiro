@@ -9,7 +9,7 @@ from django.contrib.auth.models import AbstractUser
 class Profile(AbstractUser):
     """User profile."""
 
-    api_key = models.TextField(default=uuid4, null=False, blank=False, unique=True, db_index=True)
+    api_key = models.CharField(default=uuid4, max_length=36, null=False, blank=False, unique=True, db_index=True)
 
 class Activity(models.Model):
     """Audits users activities."""
