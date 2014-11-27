@@ -16,5 +16,3 @@ install:
   - pip install -r requirements_dev.txt
 script:
   - python manage.py test
-notifications:
-  flowdock: 24d24248da89d66fdfa26110e9eb0197
