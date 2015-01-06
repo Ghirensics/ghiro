@@ -23,6 +23,8 @@ Ghiro has the following requirements:
     * Pymongo: driver for MongoDB (at least release 2.5)
     * Django: for web interface (at least release 1.5, suggested django 1.6.x)
     * Chardet: for text encoding detection
+    * Pdfkit: used for PDF report generation (at least release 0.4)
+    * Wkhtmltopdf: used by pdfkit
 
 If you choose MySQL or PostgrSQL as database you have to install their additional drivers.
 
@@ -63,10 +65,18 @@ Install required libraries with the following commands
 (run as root or with sudo)::
 
     apt-get install python-pip build-essential python-dev python-gi
-    apt-get install libgexiv2-2 gir1.2-gexiv2-0.10
+    apt-get install libgexiv2-2 gir1.2-gexiv2-0.10 wkhtmltopdf
     apt-get install libtiff4-dev libjpeg8-dev zlib1g-dev libfreetype6-dev
     apt-get install liblcms2-dev libwebp-dev tcl8.5-dev tk8.5-dev python-tk
 
+
+The wkhtmltopdf tool used for PDF report generation needs a X server running, if
+you don't have one just install XFVB and configure wkhtmltopdf to use it with::
+
+    apt-get install xvfb
+    printf '#!/bin/bash\nxvfb-run --server-args="-screen 0, 1024x768x24" /usr/bin/wkhtmltopdf $*' > /usr/bin/wkhtmltopdf.sh
+    chmod a+x /usr/bin/wkhtmltopdf.sh
+    ln -s /usr/bin/wkhtmltopdf.sh /usr/local/bin/wkhtmltopdf
 
 Install updated libraries via pip with the following commands
 (run as root or with sudo)::
