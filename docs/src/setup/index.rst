@@ -21,12 +21,13 @@ Ghiro has the following requirements:
     * Pillow (Python Imaging library - PIL fork): for image manipulation
     * Python-dateutil: for datetime manipulation
     * Pymongo: driver for MongoDB (at least release 2.5)
-    * Django: for web interface (at least release 1.5)
+    * Django: for web interface (at least release 1.5, suggested django 1.6.x)
     * Chardet: for text encoding detection
 
 If you choose MySQL or PostgrSQL as database you have to install their additional drivers.
 
 Ghiro web application is tested and working on the following browsers:
+
     * Internet Explorer 8, Internet Explorer 9, Internet Explorer 10
     * Mozilla Firefox 24
     * Opera 17
