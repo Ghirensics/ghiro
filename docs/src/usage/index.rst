@@ -16,6 +16,7 @@ Cases
 Image analysis are grouped in cases. Different users and permissions can be
 assigned to each case.
 You can upload images via an upload in many ways:
+
  * You can add some images using your browser using the "Add image" method
  * You can add an image from an URL using the "Add URL" method
  * You can add images from a folder in Ghiro's server giving his path with the "Add folder" method
@@ -30,7 +31,7 @@ Search
 ------
 
 You can search for several image properties or for image location.
-Search is available also inside a case, to have the search scope resticted to
+Search is available also inside a case, to have the search scope restricted to
 the case.
 
 Hashes
@@ -46,6 +47,7 @@ Administration
 --------------
 
 In Ghiro's administration panel you can:
+
  * Administer all Ghiro's users
  * See user's activity log
  * Check for required dependencies
@@ -58,7 +60,7 @@ Some hints about Ghiro administration.
 Run processor in debug mode
 ---------------------------
 
-If you need to run the image processor deamon in debug mode to debug tracebacks
+If you need to run the image processor daemon in debug mode to debug tracebacks
 run the following command (inside Ghiro's root)::
 
     python manage.py process --traceback
@@ -79,7 +81,7 @@ You can analyze images from command line with the submit utility.
 It can load and submit for analysis: an image, a folder containing images, a folder containing
 images and other folders, and recurse inside them.
 
-If you want to add the image located at /target/imageimage.jpg to case with id
+If you want to add the image located at /target/image.jpg to case with id
 2 and owner user name "foobar" run the following command (inside Ghiro's root)::
 
     python manage.py submit -u foobar -c 2 -t /target/image.jpg
