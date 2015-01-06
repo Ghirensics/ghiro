@@ -16,3 +16,10 @@ install:
   - pip install -r requirements_dev.txt
 script:
   - python manage.py test
+notifications:
+  irc:
+    channels: "irc.freenode.org#ghiro"
+    template:
+      - "%{repository}@%{branch}: %{message} (%{build_url})"
+    on_success: change
+    on_failure: change
