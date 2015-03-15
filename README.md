@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="http://www.getghiro.org/static/img/logo_1_B_original.png" />
+    <img src="http://www.getghiro.org/asset/img/logo_1_original.png" />
 </p>
 =====
 
