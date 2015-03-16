@@ -17,7 +17,7 @@ Ghiro is a multi user environment, different permissions can be assigned to each
 user.
 Cases allow you to group image analyses by topic, you can choose which user
 allow to see your case with a permission schema. Every team in your forensic lab
-could work in their own cases with priviledges separation.
+could work in their own cases with privileges separation.
 
 Use Case
 ========
@@ -62,7 +62,7 @@ Architecture
 Ghiro is composed by the following components:
 
  * The web interface: to interact with all features, this is the component used by users to work with Ghiro
- * The processor deamon: it fetches waiting tasks from the queue, process and analyze images
+ * The processor daemon: it fetches waiting tasks from the queue, process and analyze images
  * The relation database: it stores relational data, you can choose between MySQL, PostgreSQL and SQLite3
  * The MongoDB database: it stores analysis data
 
@@ -136,11 +136,11 @@ give the IP 192.168.0.10 use the following command:
 
 sudo ifconfig eth0 192.168.0.10 up
 
-When Ghiro apppliance has an IP address, via DHCP or via manual configuration,
+When Ghiro appliance has an IP address, via DHCP or via manual configuration,
 the web interface is reachable on default HTTP port 80/tcp, just put the
 appliance address in your browser. For example:
 
-http://192.168.0.10 (or other DHCP or manually configured adress)
+http://192.168.0.10 (or other DHCP or manually configured address)
 
 The web interface credentials are:
 Username: ghiro
