@@ -103,15 +103,11 @@ $(document).ready(function() {
 });
 
 function internetStatus(){
-    var connected = true;
-    var img = document.createElement('img');
-    img.src = 'http://www.getghiro.org/static/img/logo_1_original.png?ver=' + (new Date()).getTime();
-    img.onerror = function() {
+    if (navigator.onLine){
+        loadScript();
+    }else{
         $("#noNet").show();
         $("#map_canvas").hide();
-    }
-    if (connected){
-        loadScript()
     }
 }
 
