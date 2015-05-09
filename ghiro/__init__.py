@@ -10,6 +10,6 @@ from lib.db import mongo_connect
 db = mongo_connect()
 
 # Indexes.
-db.fs.files.ensure_index("sha1", unique=True, name="sha1_unique")
-db.fs.files.ensure_index("uuid", unique=True, name="uuid_unique")
-db.analyses.ensure_index([("metadata.gps.pos", GEO2D)])
+db.fs.files.create_index("sha1", unique=True, name="sha1_unique")
+db.fs.files.create_index("uuid", unique=True, name="uuid_unique")
+db.analyses.create_index([("metadata.gps.pos", GEO2D)])
