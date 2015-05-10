@@ -140,6 +140,9 @@ LOGGING = {
         'management_command': {
             'format': "%(asctime)s [%(levelname)s] %(name)s - %(message)s"
         },
+        'audit_formatter': {
+            'format': "%(asctime)s %(message)s"
+        },
     },
     'filters': {
         'require_debug_false': {
@@ -162,6 +165,15 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'management_command',
             },
+        # Audit log file, it keeps logs of all users actions.
+        'audit_file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'log/audit.log',
+            'maxBytes': 1024*1024*16, # 16 megabytes
+            'backupCount': 3, # keep 3 copies
+            'formatter': 'audit_formatter'
+        },
     },
     'loggers': {
         'django.request': {
@@ -179,6 +191,10 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': False,
             },
+        'audit': {
+            'handlers': ['audit_file'],
+            'level': 'DEBUG',
+        },
     }
 }
 

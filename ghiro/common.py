@@ -3,6 +3,7 @@
 # See the file 'docs/LICENSE.txt' for license terms.
 
 import json
+import logging
 import urllib
 import urllib2
 
@@ -11,6 +12,8 @@ from django.conf import settings
 
 from users.models import Activity
 from manage.models import UpdateCheck
+
+logger = logging.getLogger("audit")
 
 
 def log_activity(category, message, request, user=None):
@@ -32,12 +35,17 @@ def log_activity(category, message, request, user=None):
     if not user:
         user = request.user
 
+    ip = request.META.get("REMOTE_ADDR")
+
     # Log.
     Activity.objects.create(category=category,
         message=message,
         user=user,
-        source_ip=request.META.get("REMOTE_ADDR"),
+        source_ip=ip,
         forwarded_for_ip=forwarded_for_ip)
+
+    # Log sto standard log.
+    logger.info('"%s" "%s" "%s"', ip, user, message)
 
 def log_logon(sender, user, request, **kwargs):
     """Logs user logons."""
