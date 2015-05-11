@@ -69,3 +69,6 @@ ALLOWED_HOSTS = ["*"]
 # Automatically checks once a day for updates.
 # Set it to False to disable update check.
 UPDATE_CHECK = True
+
+# Log directory. Here is where Ghiro puts all logs.
+LOG_DIR = os.path.join(PROJECT_DIR, "log")
