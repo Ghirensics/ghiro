@@ -25,6 +25,9 @@ USE_L10N = True
 USE_TZ = False
 TIME_ZONE = None
 
+# Project directory.
+PROJECT_DIR = os.getcwd()
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
 MEDIA_ROOT = ''
@@ -122,6 +125,15 @@ INSTALLED_APPS = (
     "manage",
 )
 
+# Hack to import local settings.
+try:
+    LOCAL_SETTINGS
+except NameError:
+    try:
+        from local_settings import *
+    except ImportError:
+        pass
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
@@ -169,7 +181,7 @@ LOGGING = {
         'audit_file': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': 'log/audit.log',
+            'filename': os.path.join(LOG_DIR, 'audit.log'),
             'maxBytes': 1024*1024*16, # 16 megabytes
             'backupCount': 3, # keep 3 copies
             'formatter': 'audit_formatter'
@@ -205,11 +217,9 @@ LOGIN_URL = "/users/login/"
 LOGOUT_URL = "/users/logout/"
 LOGIN_REDIRECT_URL = "/"
 
-# Hack to import local settings.
-try:
-    LOCAL_SETTINGS
-except NameError:
+# Create log directory.
+if not os.path.exists(LOG_DIR):
     try:
-        from local_settings import *
-    except ImportError:
-        pass
+        os.mkdir(LOG_DIR)
+    except Exception as e:
+        print "Unable to create log directory: %s" % e
