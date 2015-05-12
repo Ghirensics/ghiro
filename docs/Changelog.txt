@@ -1,3 +1,7 @@
+Ghiro-0.3 (TBD)
+
+ * Added audit log file.
+
 Ghiro-0.2 (09/01/2015)
 
  * Added case deletion, you can now delete a case.
