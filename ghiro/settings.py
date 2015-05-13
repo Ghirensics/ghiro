@@ -177,6 +177,15 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'management_command',
             },
+        # Image processing log file.
+        'processing_file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(LOG_DIR, 'processing.log'),
+            'maxBytes': 1024*1024*16, # 16 megabytes
+            'backupCount': 3, # keep 3 copies
+            'formatter': 'management_command'
+        },
         # Audit log file, it keeps logs of all users actions.
         'audit_file': {
             'level': 'DEBUG',
@@ -194,12 +203,12 @@ LOGGING = {
             'propagate': True,
         },
         'lib': {
-            'handlers': ['processing'],
+            'handlers': ['processing', 'processing_file'],
             'level': 'DEBUG',
             'propagate': False,
             },
         'plugins': {
-            'handlers': ['processing'],
+            'handlers': ['processing', 'processing_file'],
             'level': 'DEBUG',
             'propagate': False,
             },
