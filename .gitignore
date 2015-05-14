@@ -49,3 +49,4 @@ Thumbs.db
 # Ghiro custom files #
 ######################
 ghiro/secret_key.py
+log/*
