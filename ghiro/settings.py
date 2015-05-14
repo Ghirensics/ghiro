@@ -181,18 +181,18 @@ LOGGING = {
         'processing_file': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(LOG_DIR, 'processing.log'),
-            'maxBytes': 1024*1024*16, # 16 megabytes
-            'backupCount': 3, # keep 3 copies
+            'filename': os.path.join(LOG_DIR, LOG_PROCESSING_NAME),
+            'maxBytes': LOG_PROCESSING_SIZE,
+            'backupCount': LOG_PROCESSING_NUM,
             'formatter': 'management_command'
         },
         # Audit log file, it keeps logs of all users actions.
         'audit_file': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(LOG_DIR, 'audit.log'),
-            'maxBytes': 1024*1024*16, # 16 megabytes
-            'backupCount': 3, # keep 3 copies
+            'filename': os.path.join(LOG_DIR, LOG_AUDIT_NAME),
+            'maxBytes': LOG_AUDIT_SIZE,
+            'backupCount': LOG_AUDIT_NUM,
             'formatter': 'audit_formatter'
         },
     },
