@@ -102,13 +102,13 @@ Running
 
 To start the web interface run the following command (inside Ghiro's root)::
 
-    python manage runserver
+    python manage.py runserver
 
 A web server running Ghiro will be available on http://127.0.0.1:8000/
 If you need to listen expose Ghiro to all addresses or change the port (in this
 example is 9000) run the following command (inside Ghiro's root)::
 
-    python manage runserver 0.0.0.0:9000
+    python manage.py runserver 0.0.0.0:9000
 
 To start processing images you have to start the processing deamon, run the
 following command (inside Ghiro's root)::
