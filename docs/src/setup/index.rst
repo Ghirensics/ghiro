@@ -139,6 +139,42 @@ re-build your database with the command (inside Ghiro's root)::
 
     python manage.py syncdb
 
+Logging
+-------
+
+Ghiro provieds several types of logging divided in the following categories:
+
+ * Audit logging: tracks all users actions for audit purposes.
+ * Processing logging: logs all steps of image analysis, this helps debugging stuff.
+
+You can change the behavior of logging editing `ghiro/local_settings.py`:
+
+    * LOG_DIR: log directory. Here is where Ghiro puts all logs.
+
+Audit log
+^^^^^^^^^
+
+The audit log contains all users actions (i.e. case creation, image analysis
+actions) to keep track of user activity.
+By default it is located in `audit.log` in the Ghiro log directory.
+You can change the behavior of this log editing `ghiro/local_settings.py`:
+
+    * LOG_AUDIT_NAME: audit log file name.
+    * LOG_AUDIT_SIZE: audit log maximum size.
+    * LOG_AUDIT_NUM: how many copies of audit log keep while rotating logs.
+
+Processing log
+^^^^^^^^^^^^^^
+
+The processing log contains image analysis logs, it is of great help when
+debugging Ghiro or trying to understand what happen under the hood.
+By default it is located in `processing.log` in the Ghiro log directory.
+You can change the behavior of this log editing `ghiro/local_settings.py`:
+
+    * LOG_PROCESSING_NAME: processing log file name.
+    * LOG_PROCESSING_SIZE: processing log maximum size.
+    * LOG_PROCESSING_NUM: how many copies of processing log keep while rotating logs.
+
 Running Ghiro as service
 ========================
 
