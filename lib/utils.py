@@ -190,12 +190,15 @@ def import_is_available(module_name):
 
 def deps_check():
     """Check for all dependencies."""
+    # TODO: move the dict to a configuration file.
     deps = [{"name": "Django", "module": "django"},
             {"name": "GExiv2", "module": "gi.repository.GExiv2"},
             {"name": "Pillow", "module": "PIL"},
             {"name": "Pdfkit", "module": "pdfkit"},
             {"name": "Pymongo", "module": "pymongo"},
-            {"name": "Chardet", "module": "chardet"}
+            {"name": "Chardet", "module": "chardet"},
+            {"name": "Python Dateutil", "module": "dateutil"},
+            {"name": "Python Magic", "module": "magic"},
             ]
 
     for dep in deps:
