@@ -131,7 +131,7 @@ Following is the default *ghiro/local_settings.py* file:
 .. literalinclude:: ../../../ghiro/local_settings.py
 
 If you change the configuration after the first setup, before editing this file
-you have to stop both Ghiro's web interface and processing deamon, you may
+you have to stop both Ghiro's web interface and processing daemon, you may
 restart them after the edit.
 
 If you changed any setting related to the database configuration you have to
