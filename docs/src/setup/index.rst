@@ -110,7 +110,7 @@ example is 9000) run the following command (inside Ghiro's root)::
 
     python manage.py runserver 0.0.0.0:9000
 
-To start processing images you have to start the processing deamon, run the
+To start processing images you have to start the processing daemon, run the
 following command (inside Ghiro's root)::
 
     python manage.py process
