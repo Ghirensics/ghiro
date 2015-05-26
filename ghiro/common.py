@@ -69,9 +69,14 @@ def check_allowed_content(content_type):
         return False
 
 def check_version():
-    """Checks version of Ghiro."""
+    """Checks version of Ghiro.
+    It connects to Ghiro update website to check if a new release is available.
+    You can optionally disable this via configuration file.
+    @return: boolean status of update available
+    """
 
-    # Do i have to check?
+    # Do i have to check? It checks only out of a time frame.
+    # Disable with "UPDATE_CHECK" option in configuration file.
     if UpdateCheck.should_check() and settings.UPDATE_CHECK:
 
         # Create new check entry.
