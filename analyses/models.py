@@ -35,6 +35,7 @@ class Case(models.Model):
 
     class Meta:
         ordering = ["-created_at"]
+        get_latest_by = "created_at"
 
     def save(self, *args, **kwargs):
         self.name = self.name.strip()
@@ -64,6 +65,7 @@ class Analysis(models.Model):
 
     class Meta:
         ordering = ["-created_at"]
+        get_latest_by = "created_at"
 
     @property
     def latitude(self):
