@@ -37,6 +37,34 @@ class Case(models.Model):
         ordering = ["-created_at"]
         get_latest_by = "created_at"
 
+    def is_owner(self, user):
+        """Checks if an user is the owner of this object.
+        @param user: user instance
+        @return: boolean permission
+        """
+        return user == self.owner
+
+    def is_in_users(self, user):
+        """Checks if an user is allowed list of users for this object.
+        @param user: user instance
+        @return: boolean permission
+        """
+        return user in self.users
+
+    def can_read(self, user):
+        """Checks if an user is allowed to read this object.
+        @param user: user instance
+        @return: boolean permission
+        """
+        return user.is_superuser or self.is_in_users(user) or self.is_owner(user)
+
+    def can_write(self, user):
+        """Checks if an user is allowed to write (create, edit, delete) this object.
+        @param user: user instance
+        @return: boolean permission
+        """
+        return user.is_superuser or self.is_owner(user)
+
     def save(self, *args, **kwargs):
         self.name = self.name.strip()
         if self.description:
@@ -125,6 +153,27 @@ class Analysis(models.Model):
             return json.dumps(data, sort_keys=False, indent=4)
         else:
             return json.dumps({})
+
+    def is_owner(self, user):
+        """Checks if an user is the owner of this object.
+        @param user: user instance
+        @return: boolean permission
+        """
+        return user == self.owner
+
+    def can_read(self, user):
+        """Checks if an user is allowed to read this object.
+        @param user: user instance
+        @return: boolean permission
+        """
+        return user.is_superuser or self.is_owner(user)
+
+    def can_write(self, user):
+        """Checks if an user is allowed to write (create, edit, delete) this object.
+        @param user: user instance
+        @return: boolean permission
+        """
+        return user.is_superuser or self.is_owner(user)
 
 @receiver(pre_delete, sender=Analysis)
 def delete_mongo_analysis(sender, instance, **kwargs):
