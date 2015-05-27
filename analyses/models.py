@@ -66,16 +66,17 @@ class Case(models.Model):
         """
         return user.is_superuser or self.is_owner(user)
 
-    def save(self, *args, **kwargs):
-        self.name = self.name.strip()
-        if self.description:
-            self.description = self.description.strip()
-        super(Case, self).save(*args, **kwargs)
-
 @receiver(pre_save, sender=Case)
 def set_updated_at(sender, instance, **kwargs):
     """Hook to set updated_at date every time the model is saved."""
     instance.updated_at = datetime.now()
+
+@receiver(pre_save, sender=Case)
+def set_updated_at(sender, instance, **kwargs):
+    """Hook to strip fields."""
+    instance.name = instance.name.strip()
+    if instance.description:
+        instance.description = instance.description.strip()
 
 class Analysis(models.Model):
     """Image analysis."""
