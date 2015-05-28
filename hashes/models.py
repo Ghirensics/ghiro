@@ -25,6 +25,27 @@ class List(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False, db_index=True)
     matches = models.ManyToManyField(Analysis, null=True, blank=True)
 
+    def is_owner(self, user):
+        """Checks if an user is the owner of this object.
+        @param user: user instance
+        @return: boolean permission
+        """
+        return user == self.owner
+
+    def can_read(self, user):
+        """Checks if an user is allowed to read this object.
+        @param user: user instance
+        @return: boolean permission
+        """
+        return user.is_superuser or self.is_owner(user) or self.public
+
+    def can_write(self, user):
+        """Checks if an user is allowed to write (create, edit, delete) this object.
+        @param user: user instance
+        @return: boolean permission
+        """
+        return user.is_superuser or self.is_owner(user)
+
 class Hash(models.Model):
     """Hashes."""
     value = models.CharField(max_length=255)
