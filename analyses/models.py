@@ -92,7 +92,7 @@ class Analysis(models.Model):
     thumb_id = models.CharField(max_length=72, editable=False, null=True, blank=True)
     file_name = models.CharField(max_length=255, editable=False, null=False, blank=False)
     analysis_id = models.CharField(max_length=24, db_index=True, editable=False, null=True, blank=True)
-    case = models.ForeignKey(Case, null=False, blank=False, on_delete=models.CASCADE, db_index=True, editable=False, related_name="images")
+    case = models.ForeignKey(Case, null=True, blank=True, on_delete=models.SET_NULL, db_index=True, editable=False, related_name="images")
     owner = models.ForeignKey(Profile, null=False, blank=False, on_delete=models.CASCADE, db_index=True, editable=False, related_name="owned_images")
     state = models.CharField(max_length=1, choices=STATUSES, default="W", db_index=True, editable=False)
     created_at = models.DateTimeField(auto_now_add=True, editable=False, db_index=True)
