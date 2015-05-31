@@ -1,13 +1,12 @@
 import os
 import sys
-import gridfs
 
 from django.core.management.base import NoArgsCommand
 from bson.objectid import InvalidId
 from optparse import make_option
 
 from analyses.models import Analysis
-from lib.db import get_file, mongo_connect
+from lib.db import get_file
 
 
 class Command(NoArgsCommand):
@@ -29,9 +28,7 @@ class Command(NoArgsCommand):
             else:
                 # Create destination folder.
                 os.mkdir(dst_path)
-                # Mongo connection.
-                db = mongo_connect()
-                fs = gridfs.GridFS(db)
+
                 # We are fine, run!
                 for analysis in Analysis.objects.all():
                     try:
