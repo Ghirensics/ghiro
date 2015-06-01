@@ -35,10 +35,14 @@ All major functionalities are accessible through API, although API will be expan
 
     **POST /api/images/new**
 
-        Adds a new image to a case and enqueue it for analysis. Returns the ID of the newly created analysis.
+        Adds a new image and enqueue it for analysis. Returns the ID of the newly created analysis.
         This is an example, you should put your Ghiro's server IP address and port in the url.
 
-        **Example request**::
+        **Example request (image not added to a case)**::
+
+            curl -kis -F image=@path_to_image.jpg -F api_key=YOUR_API_KEY http://127.0.0.1:8000/api/images/new
+
+        **Example request (image added to case ID 1)**::
 
             curl -kis -F case_id=1 -F image=@path_to_image.jpg -F api_key=YOUR_API_KEY http://127.0.0.1:8000/api/images/new
 
@@ -47,7 +51,7 @@ All major functionalities are accessible through API, although API will be expan
             {"id": 6}
 
         **Form parameters**:
-            * ``case_id`` *(required)* - case ID
+            * ``case_id`` *(optional)* - case ID
             * ``image`` *(required)* - image file to upload for analysis
             * ``api_key`` *(required)* - your API key (get it in your profile page)
 
