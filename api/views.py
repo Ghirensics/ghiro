@@ -44,14 +44,17 @@ def new_image(request):
     """Upload a new image."""
     user = api_authenticate(request.POST.get("api_key"))
 
-    case = get_object_or_404(Case, pk=request.POST.get("case_id"))
+    if request.POST.get("case_id"):
+        case = get_object_or_404(Case, pk=request.POST.get("case_id"))
 
-    # Security check.
-    if not user.is_superuser and not user in case.users.all():
-        return HttpResponse("You are not authorized to add image to this", status=400)
+        # Security check.
+        if not user.is_superuser and not user in case.users.all():
+            return HttpResponse("You are not authorized to add image to this", status=400)
 
-    if case.state == "C":
-        return HttpResponse("You cannot add an image to a closed case", status=400)
+        if case.state == "C":
+            return HttpResponse("You cannot add an image to a closed case", status=400)
+    else:
+        case = None
 
     task = Analysis(owner=user,
                     case=case,
