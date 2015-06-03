@@ -56,14 +56,12 @@ def new_image(request):
     else:
         case = None
 
-    task = Analysis(owner=user,
-                    case=case,
-                    file_name=request.FILES["image"].name,
+    task = Analysis.add_task(request.FILES["image"].temporary_file_path(),
+                    file_name=request.FILES["image"].name, case=case, user=user,
+                    content_type=request.FILES["image"].content_type,
                     image_id=save_file(file_path=request.FILES["image"].temporary_file_path(),
                               content_type=request.FILES["image"].content_type),
-                    thumb_id=create_thumb(request.FILES["image"].temporary_file_path())
-    )
-    task.save()
+                    thumb_id=create_thumb(request.FILES["image"].temporary_file_path()))
 
     # Auditing.
     log_activity("I",
