@@ -142,7 +142,7 @@ re-build your database with the command (inside Ghiro's root)::
 Logging
 -------
 
-Ghiro provieds several types of logging divided in the following categories:
+Ghiro provides several types of logging divided in the following categories:
 
  * Audit logging: tracks all users actions for audit purposes.
  * Processing logging: logs all steps of image analysis, this helps debugging stuff.
