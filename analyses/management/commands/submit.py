@@ -72,10 +72,6 @@ class Command(BaseCommand):
             print "WARNING: Skipping %s: file type not allowed." % file
         else:
             # Add to analysis queue.
-            task = Analysis()
-            task.owner = user
-            task.case = case
-            task.file_name = os.path.basename(file)
-            task.image_id = save_file(file_path=file, content_type=content_type)
-            task.thumb_id = create_thumb(file)
-            task.save()
+            Analysis(onwer=user, case=case, file_name=os.path.basename(file),
+                    image_id=save_file(file_path=file, content_type=content_type),
+                    thumb_id=create_thumb(file)).save()
