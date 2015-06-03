@@ -16,26 +16,32 @@ from manage.models import UpdateCheck
 logger = logging.getLogger("audit")
 
 
-def log_activity(category, message, request, user=None):
+def log_activity(category, message, request=None, user=None):
     """Logs an activity for auditing.
     @param category: message category (see model)
     @param message: message description
-    @param request: request object
+    @param request: optional request object
     @param user: optional user instance
     """
 
-    # Get forwarded for if exists.
-    x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
-    if x_forwarded_for:
-        forwarded_for_ip = x_forwarded_for.split(",")[0]
+    # In local submissions the request object could be missing.
+    if request:
+        # Get forwarded for if exists.
+        x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
+        if x_forwarded_for:
+            forwarded_for_ip = x_forwarded_for.split(",")[0]
+        else:
+            forwarded_for_ip = None
+
+        # Fetch user from request object.
+        if not user:
+            user = request.user
+
+        ip = request.META.get("REMOTE_ADDR")
     else:
+        ip = "127.0.0.1"
+        user = None
         forwarded_for_ip = None
-
-    # Fetch user from request object.
-    if not user:
-        user = request.user
-
-    ip = request.META.get("REMOTE_ADDR")
 
     # Log.
     Activity.objects.create(category=category,
