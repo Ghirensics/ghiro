@@ -2,10 +2,18 @@ API Usage
 =========
 
 External systems might like to interact with Ghiro and share data with it.
-For example you might integrate Ghiro with your analysis environment, have a system
-sending images to Ghiro and fetch results.
+For example you might be intrested in integrating Ghiro with your analysis environment or
+your scripts; for example you would have a system sending images to Ghiro and a script to
+fetch analysis results and process them.
 Ghiro comes with a set of JSON API to help automation and integration with external systems.
-All major functionalities are accessible through API, although API will be expanded and enriched in the future.
+All major functionalities are accessible through API, although API will be expanded and
+enriched in future releases.
+The available API methods are:
+
+    * Create a new case
+    * Image upload for analysis (create a new analysis)
+
+You can use these API as follows.
 
 /api/cases/new
 --------------
