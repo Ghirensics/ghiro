@@ -2,17 +2,14 @@
 # This file is part of Ghiro.
 # See the file 'docs/LICENSE.txt' for license terms.
 
-import magic
 import os
 import sys
 from django.core.management.base import BaseCommand
 from optparse import make_option
 
 from analyses.models import Case, Analysis
-from lib.db import save_file
-from lib.utils import create_thumb
 from users.models import Profile
-from ghiro.common import check_allowed_content
+from lib.exceptions import GhiroValidationException
 
 
 class Command(BaseCommand):
@@ -59,19 +56,9 @@ class Command(BaseCommand):
         else:
             print "ERROR: target is not a file or directory"
 
-    def _add_task(self, file, case, user):
-        """Adds a new task to database.
-        @param file: file path
-        @param case: case id
-        @param user: user id
-        """
-        # File type check.
-        mime = magic.Magic(mime=True)
-        content_type = mime.from_file(file)
-        if not check_allowed_content(content_type):
-            print "WARNING: Skipping %s: file type not allowed." % file
-        else:
-            # Add to analysis queue.
-            Analysis(onwer=user, case=case, file_name=os.path.basename(file),
-                    image_id=save_file(file_path=file, content_type=content_type),
-                    thumb_id=create_thumb(file)).save()
+    def _add_task(self, target, case, user):
+        """Wraps add_task() to catch errors."""
+        try:
+            Analysis.add_task(target, case=case, user=user)
+        except GhiroValidationException as e:
+            print "ERROR: " % e
