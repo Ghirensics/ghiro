@@ -279,6 +279,19 @@ class AnalysisMetadataDescription(models.Model):
     key = models.CharField(max_length=255, editable=False, null=False, blank=False, db_index=True, unique=True)
     description = models.TextField(editable=False, null=False, blank=False)
 
+    @staticmethod
+    def add(key, description):
+        """Adds key metadata description to lookup table.
+        @param key: fully qualified metadata key
+        @param description: key description
+        """
+        # Skip if no description is provided.
+        if description:
+            try:
+                AnalysisMetadataDescription.objects.get(key=key.lower())
+            except AnalysisMetadataDescription.DoesNotExist:
+                obj = AnalysisMetadataDescription(key=key.lower(), description=description)
+                obj.save()
 
 class Favorite(models.Model):
     """Add favorite to image."""

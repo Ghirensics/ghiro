@@ -8,7 +8,8 @@ from PIL import Image
 
 from lib.db import save_file
 from lib.analyzer.base import BaseAnalyzerModule
-from lib.utils import str2temp_file, to_unicode, add_metadata_description, AutoVivification, str2image, image2str
+from lib.utils import str2temp_file, to_unicode, AutoVivification, str2image, image2str
+from analyses.models import AnalysisMetadataDescription
 
 try:
     from gi.repository import GExiv2
@@ -46,7 +47,7 @@ class GexivAnalyzer(BaseAnalyzerModule):
         if value and value != "" and value != "None":
             self.results["metadata"][family][group][tag] = to_unicode(value)
         # Add key description to database.
-        add_metadata_description(key, self.metadata.get_tag_description(key))
+        AnalysisMetadataDescription.add(key, self.metadata.get_tag_description(key))
 
     def _get_xmp(self):
         """Extract XMP metadata."""

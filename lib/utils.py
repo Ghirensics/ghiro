@@ -4,12 +4,11 @@
 
 import StringIO
 import tempfile
-import logging
-import logging.handlers
 
 from PIL import Image
 
-from analyses.models import AnalysisMetadataDescription
+
+#from analyses.models import AnalysisMetadataDescription
 from lib.db import save_file, get_file
 
 
@@ -96,19 +95,6 @@ def str2temp_file(text_data):
     tmp = tempfile.NamedTemporaryFile(prefix="ghiro-")
     tmp.write(text_data)
     return tmp
-
-def add_metadata_description(key, description):
-    """Adds key metadata description to lookup table.
-    @param key: fully qualified metadata key
-    @param description: key description
-    """
-    # Skip if no description is provided.
-    if description:
-        try:
-            AnalysisMetadataDescription.objects.get(key=key.lower())
-        except AnalysisMetadataDescription.DoesNotExist:
-            obj = AnalysisMetadataDescription(key=key.lower(), description=description)
-            obj.save()
 
 def str2image(data):
     """Converts binary data to PIL Image object.
