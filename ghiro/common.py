@@ -74,7 +74,7 @@ def check_allowed_content(content_type):
     else:
         return False
 
-def check_version():
+def check_version(url="http://update.getghiro.org/update/check/"):
     """Checks version of Ghiro.
     It connects to Ghiro update website to check if a new release is available.
     You can optionally disable this via configuration file.
@@ -89,7 +89,6 @@ def check_version():
         check = UpdateCheck.objects.create()
 
         # Format request.
-        url = "http://update.getghiro.org/update/check/"
         data = urllib.urlencode({"version": settings.GHIRO_VERSION})
         headers = {"User-Agent": "Ghiro update client"}
         try:
