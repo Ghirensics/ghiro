@@ -8,7 +8,6 @@ import gridfs
 from datetime import datetime
 from bson.objectid import ObjectId
 from django.db import models
-from django.conf import settings
 from django.db.models.signals import pre_delete, pre_save
 from django.dispatch import receiver
 
