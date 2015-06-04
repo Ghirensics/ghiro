@@ -259,14 +259,13 @@ def new_image(request, case_id):
         form = forms.UploadImageForm(request.POST, request.FILES)
 
         if form.is_valid():
-            task = form.save(commit=False)
-            task.owner = request.user
-            task.case = case
-            task.file_name = request.FILES["image"].name
-            task.image_id = save_file(file_path=request.FILES["image"].temporary_file_path(),
-                                      content_type=request.FILES["image"].content_type)
-            task.thumb_id = create_thumb(request.FILES["image"].temporary_file_path())
-            task.save()
+            task = Analysis.add_task(request.FILES["image"].temporary_file_path(), case=case,
+                    user=request.user, content_type=request.FILES["image"].content_type,
+                    image_id=save_file(file_path=request.FILES["image"].temporary_file_path(),
+                              content_type=request.FILES["image"].content_type),
+                    thumb_id=create_thumb(request.FILES["image"].temporary_file_path()),
+                    file_name=request.FILES["image"].name)
+
             # Auditing.
             log_activity("I",
                          "Created new analysis %s" % task.file_name,
@@ -350,13 +349,10 @@ def new_url(request, case_id):
                     context_instance=RequestContext(request))
 
             # Create analysis task.
-            task = Analysis()
-            task.owner = request.user
-            task.case = case
-            task.file_name = os.path.basename(urlparse.urlparse(request.POST.get("url")).path)
-            task.image_id = save_file(file_path=url_file, content_type=content_type)
-            task.thumb_id = create_thumb(url_file)
-            task.save()
+            task = Analysis.add_task(os.path.basename(urlparse.urlparse(request.POST.get("url")).path),
+                        case=case, user=request.user, content_type=content_type,
+                        image_id=save_file(file_path=url_file, content_type=content_type),
+                        thumb_id=create_thumb(url_file))
             # Auditing.
             log_activity("I",
                 "Created new analysis %s from URL %s" % (task.file_name, request.POST.get("url")),
