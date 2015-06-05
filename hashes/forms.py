@@ -19,6 +19,7 @@ class ListForm(forms.ModelForm):
         cipher = self.cleaned_data["cipher"].lower()
 
         # Checks file for validation line by line.
+        line_count = 1
         for row in file.readlines():
             # Skip comments.
             if row.startswith("#"):
@@ -29,30 +30,32 @@ class ListForm(forms.ModelForm):
             # MD5.
             if cipher == "md5":
                 if not re.match(r"^([a-fA-F\d]{32})$", row):
-                    raise forms.ValidationError("Uploaded file does not met MD5 hash format: [a-fA-F\\d]{32}")
+                    raise forms.ValidationError("Uploaded file does not met MD5 hash format: [a-fA-F\\d]{32} in line %s" % line_count)
             # CRC32
             elif cipher == "crc32":
                 if not re.match(r"^([a-fA-F\d]{8})$", row):
-                    raise forms.ValidationError("Uploaded file does not met CRC32 hash format: [a-fA-F\\d]{8}")
+                    raise forms.ValidationError("Uploaded file does not met CRC32 hash format: [a-fA-F\\d]{8} in line %s" % line_count)
             # SHA1.
             elif cipher == "sha1":
                 if not re.match(r"^([a-fA-F\d]{40})$", row):
-                    raise forms.ValidationError("Uploaded file does not met SHA1 hash format: [a-fA-F\\d]{40}")
+                    raise forms.ValidationError("Uploaded file does not met SHA1 hash format: [a-fA-F\\d]{40} in line %s" % line_count)
             # SHA224.
             elif cipher == "sha224":
                 if not re.match(r"^([a-fA-F\d]{56})$", row):
-                    raise forms.ValidationError("Uploaded file does not met SHA224 hash format: [a-fA-F\\d]{56}")
+                    raise forms.ValidationError("Uploaded file does not met SHA224 hash format: [a-fA-F\\d]{56} in line %s" % line_count)
             # SHA384.
             elif cipher == "sha384":
                 if not re.match(r"^([a-fA-F\d]{96})$", row):
-                    raise forms.ValidationError("Uploaded file does not met SHA386 hash format: [a-fA-F\\d]{96}")
+                    raise forms.ValidationError("Uploaded file does not met SHA386 hash format: [a-fA-F\\d]{96} in line %s" % line_count)
             # SHA256.
             elif cipher == "sha256":
                 if not re.match(r"^([a-fA-F\d]{64})$", row):
-                    raise forms.ValidationError("Uploaded file does not met SHA256 hash format: [a-fA-F\\d]{64}")
+                    raise forms.ValidationError("Uploaded file does not met SHA256 hash format: [a-fA-F\\d]{64} in line %s" % line_count)
             # SHA512.
             elif cipher == "sha512":
                 if not re.match(r"^([a-fA-F\d]{128})$", row):
-                    raise forms.ValidationError("Uploaded file does not met SHA512 hash format: [a-fA-F\\d]{128}")
+                    raise forms.ValidationError("Uploaded file does not met SHA512 hash format: [a-fA-F\\d]{128} in line %s" % line_count)
+
+            line_count += 1
 
         return file
