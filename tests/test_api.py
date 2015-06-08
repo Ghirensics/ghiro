@@ -2,11 +2,12 @@
 # This file is part of Ghiro.
 # See the file 'docs/LICENSE.txt' for license terms.
 
+import os
 from django.test import Client
 from django.test import TestCase
 
 from users.models import Profile
-from analyses.models import Case
+from analyses.models import Case, Analysis
 
 class AuthenticationTest(TestCase):
     def setUp(self):
@@ -42,3 +43,48 @@ class NewCaseTest(TestCase):
         response = self.c.post("/api/cases/new", {"name": "test2", "api_key": self.user.api_key})
         self.assertEqual(response.status_code, 200)
         self.assertTrue(Case.objects.filter(name="test2").exists())
+
+class NewImageTest(TestCase):
+    def setUp(self):
+        self.image = os.path.join("tests", "fixtures", "images", "1x1.png")
+        self.user = Profile.objects.create_user(username="test", email="a@a.cp,", password="Test")
+        self.case = Case.objects.create(name="aaa", owner=self.user)
+        self.c = Client()
+
+    def test_success_new_image_no_case(self):
+        """Uploads an image to any case."""
+        with open(self.image) as fd:
+            response = self.c.post("/api/images/new", {"image": fd, "api_key": self.user.api_key})
+            self.assertEqual(response.status_code, 200)
+            self.assertTrue(Analysis.objects.filter(file_name="1x1.png").exists())
+
+    def test_success_new_image_to_case(self):
+        with open(self.image) as fd:
+            response = self.c.post("/api/images/new", {"image": fd, "case_id": self.case.pk, "api_key": self.user.api_key})
+            self.assertEqual(response.status_code, 200)
+            self.assertTrue(Analysis.objects.filter(file_name="1x1.png").exists())
+
+    def test_fail_new_image_wrong_case(self):
+        """Uploads an image to a case you have no permissions."""
+        user = Profile.objects.create_user(username="test2", email="a@a.cp,", password="Test")
+        case = Case.objects.create(name="bbb", owner=user)
+        with open(self.image) as fd:
+            response = self.c.post("/api/images/new", {"image": fd, "case_id": case.pk, "api_key": self.user.api_key})
+            self.assertEqual(response.status_code, 400)
+
+    def test_fail_new_image_closed_case(self):
+        """Uploads an image to a closed case."""
+        case = Case.objects.create(name="ccc", owner=self.user, state="C")
+        with open(self.image) as fd:
+            response = self.c.post("/api/images/new", {"image": fd, "case_id": case.pk, "api_key": self.user.api_key})
+            self.assertEqual(response.status_code, 400)
+
+    def test_fail_auth_wrong_key(self):
+        with open(self.image) as fd:
+            response = self.c.post("/api/images/new", {"image": fd, "api_key": "aaa"})
+            self.assertEqual(response.status_code, 403)
+
+    def test_fail_auth_no_key(self):
+        with open(self.image) as fd:
+            response = self.c.post("/api/images/new", {"image": fd})
+            self.assertEqual(response.status_code, 403)
