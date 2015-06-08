@@ -69,7 +69,7 @@ class Case(models.Model):
         @param user: user instance
         @return: boolean permission
         """
-        return user.is_superuser or self.is_owner(user)
+        return user.is_superuser or self.is_in_users(user) or self.is_owner(user)
 
 @receiver(pre_save, sender=Case)
 def set_updated_at(sender, instance, **kwargs):
