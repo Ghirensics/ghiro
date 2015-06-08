@@ -48,7 +48,7 @@ def new_image(request):
         case = get_object_or_404(Case, pk=request.POST.get("case_id"))
 
         # Security check.
-        if not user.is_superuser and not user in case.users.all():
+        if not case.can_write(user):
             return HttpResponse("You are not authorized to add image to this", status=400)
 
         if case.state == "C":
