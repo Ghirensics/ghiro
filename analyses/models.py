@@ -55,7 +55,7 @@ class Case(models.Model):
         @param user: user instance
         @return: boolean permission
         """
-        return user in self.users
+        return user in self.users.all()
 
     def can_read(self, user):
         """Checks if an user is allowed to read this object.
