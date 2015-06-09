@@ -77,7 +77,7 @@ def set_updated_at(sender, instance, **kwargs):
     instance.updated_at = datetime.now()
 
 @receiver(pre_save, sender=Case)
-def set_updated_at(sender, instance, **kwargs):
+def strip_attributes(sender, instance, **kwargs):
     """Hook to strip fields."""
     instance.name = instance.name.strip()
     if instance.description:
