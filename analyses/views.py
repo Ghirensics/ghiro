@@ -29,7 +29,7 @@ from django.core.files.temp import NamedTemporaryFile
 import analyses.forms as forms
 from analyses.models import Case, Analysis, Favorite, Comment, Tag
 from lib.db import save_file, get_file, mongo_connect
-from lib.utils import create_thumb, hexdump
+from lib.utils import create_thumb, hexdump, get_content_type_from_file
 from users.models import Profile
 from ghiro.common import log_activity, check_allowed_content
 
@@ -341,8 +341,7 @@ def new_url(request, case_id):
             url_file = File(url_temp).name
 
             # Check content type.
-            mime = magic.Magic(mime=True)
-            content_type = mime.from_file(url_file)
+            content_type = get_content_type_from_file(url_file)
             if not check_allowed_content(content_type):
                 return render_to_response("error.html",
                     {"error": "File type not supported"},
@@ -395,9 +394,8 @@ def new_folder(request, case_id):
                     {"error": "Folder is not a directory."},
                     context_instance=RequestContext(request))
             # Add all files in directory.
-            mime = magic.Magic(mime=True)
             for file in os.listdir(request.POST.get("path")):
-                content_type = mime.from_file(os.path.join(request.POST.get("path"), file))
+                content_type = get_content_type_from_file(os.path.join(request.POST.get("path"), file))
                 # Check if content type is allowed.
                 if not check_allowed_content(content_type):
                     # TODO: add some kind of feedback.

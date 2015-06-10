@@ -4,7 +4,6 @@
 
 import os
 import json
-import magic
 import gridfs
 
 from datetime import datetime
@@ -18,7 +17,7 @@ from lib.db import get_file, get_file_length, mongo_connect
 from lib.exceptions import GhiroValidationException
 from ghiro.common import check_allowed_content
 from lib.db import save_file
-from lib.utils import create_thumb
+from lib.utils import create_thumb, get_content_type_from_file
 
 db = mongo_connect()
 fs = gridfs.GridFS(db)
@@ -206,8 +205,7 @@ class Analysis(models.Model):
 
         # File type check.
         if not content_type:
-            mime = magic.Magic(mime=True)
-            content_type = mime.from_file(file_path)
+            content_type = get_content_type_from_file(file_path)
 
         # If image is not already stored on gridfs.
         if not image_id:
