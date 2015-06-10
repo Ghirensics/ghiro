@@ -7,8 +7,6 @@ import tempfile
 
 from PIL import Image
 
-
-#from analyses.models import AnalysisMetadataDescription
 from lib.db import save_file, get_file
 
 
