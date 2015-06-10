@@ -190,9 +190,13 @@ class Analysis(models.Model):
     @staticmethod
     def add_task(file_path, file_name=None, case=None, user=None, content_type=None, image_id=None, thumb_id=None):
         """Adds a new task to database.
-        @param file: file path
+        @param file_path: file path
+        @param file_name: file name
         @param case: case id
         @param user: user id
+        @param content_type: file content type
+        @param image_id: original image gridfs id
+        @param thumb_id: thumbnail gridfs id
         """
         assert isinstance(file_path, basestring)
 
