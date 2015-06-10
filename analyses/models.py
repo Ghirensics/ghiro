@@ -222,11 +222,8 @@ class Analysis(models.Model):
             raise GhiroValidationException("Skipping %s: file type not allowed." % file_name)
         else:
             # Add to analysis queue.
-            task = Analysis(owner=user, case=case, file_name=file_name,
-                            image_id=image_id,
-                            thumb_id=thumb_id)
-            task.save()
-            return task
+            return Analysis.objects.create(owner=user, case=case, file_name=file_name,
+                                           image_id=image_id, thumb_id=thumb_id)
 
 @receiver(pre_delete, sender=Analysis)
 def delete_mongo_analysis(sender, instance, **kwargs):
