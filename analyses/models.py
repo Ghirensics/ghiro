@@ -4,7 +4,6 @@
 
 import os
 import json
-import magic
 import gridfs
 
 from datetime import datetime
@@ -18,7 +17,7 @@ from lib.db import get_file, get_file_length, mongo_connect
 from lib.exceptions import GhiroValidationException
 from ghiro.common import check_allowed_content
 from lib.db import save_file
-from lib.utils import create_thumb
+from lib.utils import create_thumb, get_content_type_from_file
 
 db = mongo_connect()
 fs = gridfs.GridFS(db)
@@ -190,9 +189,13 @@ class Analysis(models.Model):
     @staticmethod
     def add_task(file_path, file_name=None, case=None, user=None, content_type=None, image_id=None, thumb_id=None):
         """Adds a new task to database.
-        @param file: file path
+        @param file_path: file path
+        @param file_name: file name
         @param case: case id
         @param user: user id
+        @param content_type: file content type
+        @param image_id: original image gridfs id
+        @param thumb_id: thumbnail gridfs id
         """
         assert isinstance(file_path, basestring)
 
@@ -202,8 +205,7 @@ class Analysis(models.Model):
 
         # File type check.
         if not content_type:
-            mime = magic.Magic(mime=True)
-            content_type = mime.from_file(file_path)
+            content_type = get_content_type_from_file(file_path)
 
         # If image is not already stored on gridfs.
         if not image_id:
@@ -218,11 +220,8 @@ class Analysis(models.Model):
             raise GhiroValidationException("Skipping %s: file type not allowed." % file_name)
         else:
             # Add to analysis queue.
-            task = Analysis(owner=user, case=case, file_name=file_name,
-                            image_id=image_id,
-                            thumb_id=thumb_id)
-            task.save()
-            return task
+            return Analysis.objects.create(owner=user, case=case, file_name=file_name,
+                                           image_id=image_id, thumb_id=thumb_id)
 
 @receiver(pre_delete, sender=Analysis)
 def delete_mongo_analysis(sender, instance, **kwargs):

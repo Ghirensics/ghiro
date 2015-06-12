@@ -4,11 +4,10 @@
 
 import StringIO
 import tempfile
+import magic
 
 from PIL import Image
 
-
-#from analyses.models import AnalysisMetadataDescription
 from lib.db import save_file, get_file
 
 
@@ -191,3 +190,11 @@ def deps_check():
         dep["available"] = import_is_available(dep["module"])
 
     return deps
+
+def get_content_type_from_file(file_path):
+    """Returns content type of a file.
+    @param file_path: file path
+    @return: content type
+    """
+    mime = magic.Magic(mime=True)
+    return mime.from_file(file_path)

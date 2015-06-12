@@ -12,6 +12,7 @@ from django.core.validators import URLValidator
 
 from analyses.models import Case, Analysis, Comment
 from ghiro.common import check_allowed_content
+from lib.utils import get_content_type_from_file
 
 class CaseForm(forms.ModelForm):
     """Case form."""
@@ -38,8 +39,7 @@ class UploadImageForm(forms.ModelForm):
             if image._size > settings.MAX_FILE_UPLOAD:
                 raise ValidationError("Image file too large")
             # Type check.
-            mime = magic.Magic(mime=True)
-            file_type = mime.from_file(image.temporary_file_path())
+            file_type = get_content_type_from_file(image.temporary_file_path())
             if not check_allowed_content(file_type):
                 raise ValidationError("Image type not supported.")
         else:
