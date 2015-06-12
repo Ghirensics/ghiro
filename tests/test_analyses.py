@@ -5,7 +5,7 @@
 from django.test import TestCase
 
 from users.models import Profile
-from analyses.models import Case
+from analyses.models import Case, Analysis
 
 
 class CaseModelTest(TestCase):
@@ -67,3 +67,35 @@ class CaseModelTest(TestCase):
         # Save again, updated_at should be updated.
         case.save()
         self.assertNotEqual(t1, case.updated_at)
+
+class AnalysisModelTest(TestCase):
+    def setUp(self):
+        self.user = Profile.objects.create_user(username="test", email="a@a.cp,", password="Test")
+        self.user2 = Profile.objects.create_user(username="test2", email="b@a.cp,", password="Test")
+
+    def test_is_owner(self):
+        anal = Analysis.objects.create(owner=self.user)
+        self.assertTrue(anal.is_owner(self.user))
+        self.assertFalse(anal.is_owner(self.user2))
+
+    def test_can_read(self):
+        """Owner and superuser have to read the analysis."""
+        anal = Analysis.objects.create(owner=self.user)
+        # User.
+        self.assertTrue(anal.can_read(self.user))
+        # Superuser.
+        superuser = Profile.objects.create_superuser(username="test3", email="a@a.cp,", password="Test")
+        self.assertTrue(anal.can_read(superuser))
+        # Fail.
+        self.assertFalse(anal.can_read(self.user2))
+
+    def test_can_write(self):
+        """Owner and superuser have to write the analysis."""
+        anal = Analysis.objects.create(owner=self.user)
+        # User.
+        self.assertTrue(anal.can_write(self.user))
+        # Superuser.
+        superuser = Profile.objects.create_superuser(username="test3", email="a@a.cp,", password="Test")
+        self.assertTrue(anal.can_write(superuser))
+        # Fail.
+        self.assertFalse(anal.can_write(self.user2))
