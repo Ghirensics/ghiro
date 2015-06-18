@@ -7,7 +7,7 @@ import tempfile
 import magic
 
 from PIL import Image
-
+from pymongo.errors import InvalidId
 from lib.db import save_file, get_file
 
 
