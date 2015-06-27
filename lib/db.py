@@ -65,7 +65,7 @@ def get_file(id):
     return fs.get(ObjectId(obj_id))
 
 def get_file_length(id):
-    """Get a file lenght from GridFS.
+    """Get a file length from GridFS.
     @param id: file uuid
     @return: integer"""
 
