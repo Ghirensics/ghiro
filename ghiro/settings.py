@@ -108,7 +108,7 @@ ROOT_URLCONF = 'ghiro.urls'
 WSGI_APPLICATION = 'ghiro.wsgi.application'
 
 TEMPLATE_DIRS = (
-    "templates"
+    "templates",
 )
 
 INSTALLED_APPS = (
