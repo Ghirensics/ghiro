@@ -49,4 +49,4 @@ class List(models.Model):
 class Hash(models.Model):
     """Hashes."""
     value = models.CharField(max_length=255)
-    list = models.ForeignKey(List, null=False, blank=False, on_delete=models.CASCADE, db_index=True, editable=False)
+    list = models.ForeignKey(List, blank=False, on_delete=models.CASCADE, db_index=True, editable=False)
