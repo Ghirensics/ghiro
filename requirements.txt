@@ -1,4 +1,4 @@
-Django==1.6.7
+Django>=1.8
 Pillow>=2.4.0
 argparse>=1.2.1
 chardet>=2.2.1
