@@ -18,11 +18,13 @@ class CaseForm(forms.ModelForm):
     """Case form."""
     class Meta:
         model = Case
+        fields = "__all__"
 
 class CommentForm(forms.ModelForm):
     """Comment form."""
     class Meta:
         model = Comment
+        fields = "__all__"
 
 class UploadImageForm(forms.ModelForm):
     """Image upload form."""
