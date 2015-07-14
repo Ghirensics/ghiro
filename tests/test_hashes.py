@@ -8,7 +8,7 @@ from users.models import Profile
 from hashes.models import List
 
 
-class HashModelTest(TestCase):
+class ListModelTest(TestCase):
     def setUp(self):
         self.user = Profile.objects.create_user(username="test", email="a@a.cp,", password="Test")
         self.user2 = Profile.objects.create_user(username="test2", email="b@a.cp,", password="Test")
