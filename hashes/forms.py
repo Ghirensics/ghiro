@@ -13,6 +13,7 @@ class ListForm(forms.ModelForm):
 
     class Meta:
         model = List
+        fields = "__all__"
 
     def clean_hash_list(self):
         file = self.cleaned_data["hash_list"]
