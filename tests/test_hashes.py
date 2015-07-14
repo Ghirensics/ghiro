@@ -5,7 +5,7 @@
 from django.test import TestCase
 
 from users.models import Profile
-from hashes.models import List
+from hashes.models import List, Hash
 
 
 class ListModelTest(TestCase):
@@ -50,3 +50,11 @@ class ListModelTest(TestCase):
         # Superuser.
         superuser = Profile.objects.create_superuser(username="test3", email="a@a.cp,", password="Test")
         self.assertTrue(hash.can_write(superuser))
+
+    def test_m2m_hash(self):
+        """Tests M2M relation with hash."""
+        l = List.objects.create(name="aaa", owner=self.user)
+        h1 = Hash.objects.create(value="a", list=l)
+        h2 = Hash.objects.create(value="a", list=l)
+        self.assertIn(h1, l.hash_set.all())
+        self.assertIn(h2, l.hash_set.all())
