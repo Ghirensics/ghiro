@@ -34,7 +34,7 @@ class Case(models.Model):
     description = models.TextField(null=True, blank=True)
     state = models.CharField(max_length=1, choices=STATUSES, default="O", db_index=True, editable=False, null=False, blank=False)
     owner = models.ForeignKey(Profile, null=False, blank=False, on_delete=models.CASCADE, db_index=True, editable=False, related_name="owned_cases")
-    users = models.ManyToManyField(Profile, null=True, blank=True, db_index=True, related_name="cases")
+    users = models.ManyToManyField(Profile, blank=True, db_index=True, related_name="cases")
     created_at = models.DateTimeField(auto_now_add=True, editable=False, db_index=True)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
