@@ -23,7 +23,7 @@ class List(models.Model):
     public = models.BooleanField(default=False)
     owner = models.ForeignKey(Profile, null=False, blank=False, on_delete=models.CASCADE, db_index=True, editable=False, related_name="owned_hashes")
     created_at = models.DateTimeField(auto_now_add=True, editable=False, db_index=True)
-    matches = models.ManyToManyField(Analysis, null=True, blank=True)
+    matches = models.ManyToManyField(Analysis, blank=True)
 
     def is_owner(self, user):
         """Checks if an user is the owner of this object.
