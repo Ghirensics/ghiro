@@ -7,6 +7,7 @@ branches:
 python:
   - "2.7"
 before_install:
+    - export PIP_USE_MIRRORS=true
     - sudo apt-get update -qq
     # Start X for selenium tests.
     - "export DISPLAY=:99.0"
