@@ -6,6 +6,7 @@
 [![Build Status](https://travis-ci.org/Ghirensics/ghiro.svg?branch=master)](https://travis-ci.org/Ghirensics/ghiro)
 [![Requirements Status](https://requires.io/github/Ghirensics/ghiro/requirements.svg?branch=master)](https://requires.io/github/Ghirensics/ghiro/requirements/?branch=master)
 [![Code Health](https://landscape.io/github/Ghirensics/ghiro/master/landscape.svg?style=flat)](https://landscape.io/github/Ghirensics/ghiro/master)
+[![Coverage Status](https://coveralls.io/repos/Ghirensics/ghiro/badge.svg?branch=master&service=github)](https://coveralls.io/github/Ghirensics/ghiro?branch=master)
 
 Sometime forensic investigators need to process digital images as evidence.
 There are some tools around, otherwise it is difficult to deal with forensic analysis with lot of images involved.
