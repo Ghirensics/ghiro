@@ -36,20 +36,7 @@
     <script src="{{ STATIC_URL }}js/jquery.fancybox.js"></script>
     <script src="{{ STATIC_URL }}js/highcharts.js"></script>
     <script src="{{ STATIC_URL }}js/jquery.colorbox.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $.ajax({
-                url : "{% url 'manage.views.update_check' %}",
-                type : "GET",
-                success : function(data) {
-                    if (data == "False"){
-                        $('#newVersion').show();
-                        $('#newVersionFooter').show();
-                    }
-                }
-            });
-        });
-    </script>
+
 </head>
 <body>
     <div class="cntnr">
