@@ -1,101 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>GHIRO</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Ghiro - automated image forensic tool">
-        <meta name="author" content="Ghiro developers">
-        <meta http-equiv="X-UA-Compatible" content="IE=9" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!--[if lt IE 9]>
+<head>
+    <meta charset="utf-8">
+    <title>GHIRO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ghiro - automated image forensic tool">
+    <meta name="author" content="Ghiro developers">
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--[if lt IE 9]>
         <script src="{{ STATIC_URL }}js/html5shiv.js"></script>
         <![endif]-->
 
-        {# Fav icons #}
-        <link rel="shortcut icon" href="{{ STATIC_URL }}img/ico/favicon.ico">
+    {# Fav icons #}
+    <link rel="shortcut icon" href="{{ STATIC_URL }}img/ico/favicon.ico">
 
-        {# Styles #}
-        <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
-        <link href="{{ STATIC_URL }}css/bootstrap-responsive.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.min.css">
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/responsive.css">
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/DT_bootstrap.css">
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/jquery.fancybox.css">
-        {# JS #}
-        <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
-        <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-        <script src="{{ STATIC_URL }}js/application.js"></script>
-        <script src="{{ STATIC_URL }}js/jquery.dataTables.min.js"></script>
-        <script src="{{ STATIC_URL }}js/DT_bootstrap.js"></script>
-        <script src="{{ STATIC_URL }}js/jquery.fancybox.js"></script>
-        <script src="{{ STATIC_URL }}js/highcharts.js"></script>
-        <script type="text/javascript">
+    {# Styles #}
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+    <!--<link href="{{ STATIC_URL }}css/bootstrap-responsive.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/fonts.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/colorbox.css">
+    <!--<link rel="stylesheet" href="{{ STATIC_URL }}css/responsive.css">-->
+    <!--<link rel="stylesheet" href="{{ STATIC_URL }}css/DT_bootstrap.css">-->
+    <!--<link rel="stylesheet" href="{{ STATIC_URL }}css/jquery.fancybox.css">-->
+    {# JS #}
+    <!--<script src="{{ STATIC_URL }}js/jquery.min.js"></script>-->
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}js/application.js"></script>
+    <!--<script src="{{ STATIC_URL }}js/jquery.dataTables.min.js"></script>-->
+    <!--<script src="{{ STATIC_URL }}js/DT_bootstrap.js"></script>-->
+    <script src="{{ STATIC_URL }}js/jquery.fancybox.js"></script>
+    <script src="{{ STATIC_URL }}js/highcharts.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.colorbox.js"></script>
+    <script type="text/javascript">
         $(document).ready(function(){
             $.ajax({
                 url : "{% url 'manage.views.update_check' %}",
                 type : "GET",
                 success : function(data) {
-                    if (data == "True"){
-                        $('.newVersion').show();
+                    if (data == "False"){
+                        $('#newVersion').show();
                         $('#newVersionFooter').show();
                     }
                 }
             });
         });
-        </script>
-    </head>
-    <body>
-        <header class="header navbar navbar-inverse">
-            <div class="navbar-helper">
-                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <div class="row-fluid">
-                    <div class="span2">
-                        <div class="panel-sitename">
-                            <h2><a href="/"><span class="color-teal"><img src="/static/img/logo/logo_ghiro77x35.png"></span></a></h2>
-                        </div>
-                    </div>
-                    <div class="pull-right">
-                        <div class="panel-ext">
-                            <div class="nav-collapse collapse">
-                                <ul class="nav pull-right">
-                                    <li class="dropdown user-avatar">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span>Welcome, <b>{{ request.user.username }}</b> <i class="icon-caret-down"></i></span> </a>
-                                        <ul class="dropdown-menu">
-                                            <li>
-                                                <a href="{% url "users.views.profile" %}"><i class="icon-user"></i> <span>Profile</span></a>
-                                            </li>
-                                            {% if user.is_superuser %}
-                                                <li>
-                                                    <a href="{% url "users.views.admin_show_activity" user.id %}"><i class="icon-list"></i> <span>Activity</span></a>
-                                                </li>
-                                            {% endif %}
-                                            <li class="divider"></li>
-                                            <li>
-                                                <a href="{% url "django.contrib.auth.views.logout" %}"><i class="icon-off"></i> <span>Logout</span></a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <section class="section">
-            <div class="row-fluid">
-                {% include "layout/_sidebar.html" %}
-                {% block content %}{% endblock %}
-            </div>
-        </section>
-        <div id="footer">
-            <small class="pull-right"><strong>Ghiro 0.3-dev - &copy;</strong> With poetry, <a href="http://twitter.com/jekil" target="_blank">jekil</a> and <a href="http://burlone.info/">burlone</a>. <a href="http://getghiro.org" id="newVersionFooter" class="hide"><span class="badge badge-success">New version available</span></a></small>
-        </div>
-    </body>
+    </script>
+</head>
+<body>
+    <div class="cntnr">
+        {% include "layout/_sidebar.html" %}
+        {% block content %}{% endblock %}
+    </div>
+</body>
 </html>

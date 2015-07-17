@@ -2,200 +2,187 @@
 {% load analyses_tags %}
 
 {% block content %}
-<div class="span11">
-    <div class="content content-large">
-        <div class="content-header">
-            <h2><i class="icon-dashboard"> </i> Dashboard<small> welcome to ghiro</small></h2>
-        </div>
-        <div class="content-breadcrumb">
-            <ul class="breadcrumb">
-                <li class="active icon-home">
-                    Dashboard
-                </li>
-            </ul>
-            <ul class="breadcrumb hide newVersion" id="yellow">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <li>
-                    <a href="http://getghiro.org"><strong>Info!</strong> Ghiro is back with a brand new version. <i class="icon-download-alt"></i></a>
-                </li>
-            </ul>
-        </div>
-        <div class="content-body">
-            <div class="row-fluid stats-box">
-                <div class="span3">
-                    <div class="stats-box-title">
-                        <span class="badge">Users</span>
-                    </div>
-                    <div class="stats-box-all-info">
-                        {% if request.user.is_stuff or request.user.is_superuser %}
-                            <a href="{% url "users.views.admin_list_users" %}"><i class="icon-user"> </i> {{ users_count }}</a>
-                        {% else %}
-                            <i class="icon-user"> </i> {{ users_count }}
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="span3">
-                    <div class="stats-box-title">
-                        <span class="badge badge-info">Open cases</span>
-                    </div>
-                    <div class="stats-box-all-info">
-                        <a href="{% url "analyses.views.list_cases" %}"><i class="icon-briefcase"> </i> {{ open_cases_count }}</a>
-                    </div>
-                </div>
-                <div class="span3">
-                    <div class="stats-box-title">
-                        <span class="badge badge-success">Analyses completed</span>
-                    </div>
-                    <div class="stats-box-all-info">
-                        <i class="icon-book"> </i> {{ analyses_complete_count }}
-                    </div>
-                </div>
-                <div class="span3">
-                    <div class="stats-box-title">
-                        <span class="badge badge-warning">Analyses waiting</span>
-                    </div>
-                    <div class="stats-box-all-info">
-                        <i class="icon-time"> </i> {{ analyses_wait_count }}
-                    </div>
-                </div>
-            </div>
-            <div class="row-fluid stats-box">
-                <div class="span6">
-                    <blockquote>
-                        <p>Last opened cases</p>
-                    </blockquote>
-                    <table class="table table-bordered table-striped responsive">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Created at</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% if last_cases %}
-                                {% for case in last_cases %}
-                                <tr>
-                                    <td>
-                                        <a href="{% url "analyses.views.show_case" case.id "list" %}">
-                                            {% if case.name|length > 30 %}
-                                                {{ case.name|slice:":30" }} ...
-                                            {% else %}
-                                                {{ case.name }}
-                                            {% endif %}
-                                        </a>
-                                    </td>
-                                    <td>{{ case.created_at }}</td>
-                                </tr>
-                                {% endfor %}
-                            {% else %}
-                                <tr>
-                                    <td colspan="2">
-                                        No data available in table
-                                    </td>
-                                </tr>
-                            {% endif %}
-                        </tbody>
-                    </table>
-                </div>
-                <div class="span6">
-                    <blockquote>
-                        <p>Last analyses completed</p>
-                    </blockquote>
-                    <table class="table table-bordered table-striped responsive">
-                        <thead>
-                            <tr>
-                                <th>File name</th>
-                                <th>Completed at</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% if last_analyses %}
-                                {% for anal in last_analyses %}
-                                    <tr>
-                                        <td>
-                                            <a href="{% url "analyses.views.show_analysis" anal.id %}">
-                                                {% if anal.file_name|length > 60 %}
-                                                    {{ anal.file_name|slice:":60" }} ...
-                                                {% else %}
-                                                    {{ anal.file_name }}
-                                                {% endif %}
-                                            </a>
-                                        </td>
-                                        <td>{{ anal.completed_at }}</td>
-                                    </tr>
-                                {% endfor %}
-                            {% else %}
-                                <tr>
-                                    <td colspan="2">
-                                        No data available in table
-                                    </td>
-                                </tr>
-                            {% endif %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-        </div>
+    <div class="crumbs">
+        <ol class="breadcrumb hidden-xs">
+            <li class="active"><i class="fa fa-home"></i> Dashboard</li>
+        </ol>
     </div>
 </div>
 
-<script type="text/javascript">
-$(function () {
-    $('#container').highcharts({
-        chart: {
-            type: 'area'
-        },
-        credits: {
-            enabled: false
-        },
-        title: {
-            text: 'Last 30 days'
-        },
-        subtitle: {
-            text: 'Analyses processing trend'
-        },
-         xAxis: {
-            type: 'datetime'
-        },
-        yAxis: {
-            title: {
-                text: 'Analyses'
-            }
-        },
-        tooltip: {
-            enabled: false
-        },
-        series: [{
-            name: 'Completed analyses',
-            color: "#A8CD59",
-            data: [
-                {% for item in completed_graph %}
-                    [Date.parse("{{item.created_at|to_date|date:"m/d/Y"}}","MM/dd/yyyy"), {{item.counter}}]
-                    {% if not forloop.last %}{% ifequal forloop.revcounter 2 %}, {% else %}, {% endifequal %}{% else %}{% endif %}
-                {% endfor %}
-            ]
-        }, {
-            name: 'Failed analyses',
-            color: "#AC4040",
-            data: [
-                {% for item in failed_graph %}
-                    [Date.parse("{{item.created_at|to_date|date:"m/d/Y"}}","MM/dd/yyyy"), {{item.counter}}]
-                    {% if not forloop.last %}{% ifequal forloop.revcounter 2 %}, {% else %}, {% endifequal %}{% else %}{% endif %}
-                {% endfor %}
-            ]
-        }, {
-            name: 'Waiting analyses',
-            color: "#FFC90E",
-            data: [
-                {% for item in waiting_graph %}
-                    [Date.parse("{{item.created_at|to_date|date:"m/d/Y"}}","MM/dd/yyyy"), {{item.counter}}]
-                    {% if not forloop.last %}{% ifequal forloop.revcounter 2 %}, {% else %}, {% endifequal %}{% else %}{% endif %}
-                {% endfor %}
-            ]
-        }]
-    });
-});
-</script>
+    <div class="content">
+        <div class="page-h1">
+            <h1>Dashboard <small>welcome to ghiro</small></h1>
+        </div>
+        <div id="newVersion" class="col-md-12">
+            <div class="alert alert-info" style="margin-bottom:0px;margin-top:10px;">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <span class="icon icon-exclamation-sign"></span> <strong>Info!</strong> Ghiro is back with a brand new version.
+            </div>
+        </div>
+        <div class="tbl">
+            <div class="col-md-12">
+                <div class="wdgt wdgt-primary">
+                    <div class="wdgt-header">Chart</div>
+                    <div class="wdgt-body" style="padding-bottom:10px;">
+                        <div id="container" style="height: 346px; margin: 20px 5px; padding: 0px; position: relative;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tbl">
+            <div class="col-md-6">
+                <div class="wdgt wdgt-warning" hide-btn="true">
+                    <div class="wdgt-header">Last opened cases</div>
+                    <div class="wdgt-body wdgt-table">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Created at</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% if last_cases %}
+                                    {% for case in last_cases %}
+                                    <tr>
+                                        <td>
+                                            <a href="{% url "analyses.views.show_case" case.id "list" %}">
+                                                {% if case.name|length > 30 %}
+                                                    {{ case.name|slice:":30" }} ...
+                                                {% else %}
+                                                    {{ case.name }}
+                                                {% endif %}
+                                            </a>
+                                        </td>
+                                        <td>{{ case.created_at }}</td>
+                                        <td>
+                                            <a href="{% url "analyses.views.show_case" case.id "thumb" %}" type="button" class="btn btn-primary btn-xs" data-tooltip="tooltip" title="Show photo case"><i class="icon icon-camera"></i></a>
+                                            <a href="{% url "analyses.views.show_case" case.id "list" %}" type="button" class="btn btn-info btn-xs" data-tooltip="tooltip" title="View case"><i class="icon icon-book"></i></a>
+                                            <a href="{% url "analyses.views.edit_case" case.id %}" type="button" class="btn btn-soft btn-xs" data-tooltip="tooltip" title="Edit case"><i class="fa fa-pencil"></i></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="2">
+                                            No data available in table
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="wdgt wdgt-success" hide-btn="true">
+                    <div class="wdgt-header">Last analyses completed</div>
+                    <div class="wdgt-body wdgt-table">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>File name</th>
+                                <th>Created at</th>
+                                <th>Signature</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% if last_analyses %}
+                                    {% for anal in last_analyses %}
+                                        <tr>
+                                            <td>
+                                                <a href="{% url "analyses.views.show_analysis" anal.id %}">
+                                                    {% if anal.file_name|length > 60 %}
+                                                        {{ anal.file_name|slice:":60" }} ...
+                                                    {% else %}
+                                                        {{ anal.file_name }}
+                                                    {% endif %}
+                                                </a>
+                                            </td>
+                                            <td>{{ anal.completed_at }}</td>
+                                            <td>
+                                                <span class="label label-success">2</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary btn-xs"><i class="icon icon-camera"></i></button>
+                                                <button type="button" class="btn btn-info btn-xs"><i class="icon icon-bookmark"></i></button>
+                                                <button type="button" class="btn btn-soft btn-xs"><i class="icon icon-edit"></i></button>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="2">
+                                            No data available in table
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $('#container').highcharts({
+                chart: {
+                    type: 'area'
+                },
+                credits: {
+                    enabled: false
+                },
+                title: {
+                    text: 'Last 30 days'
+                },
+                subtitle: {
+                    text: 'Analyses processing trend'
+                },
+                xAxis: {
+                    type: 'datetime'
+                },
+                yAxis: {
+                    title: {
+                        text: 'Analyses'
+                    }
+                },
+                tooltip: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Completed analyses',
+                    color: "#A8CD59",
+                    data: [
+                        {% for item in completed_graph %}
+                            [Date.parse("{{item.created_at|to_date|date:"m/d/Y"}}","MM/dd/yyyy"), {{item.counter}}]
+                            {% if not forloop.last %}{% ifequal forloop.revcounter 2 %}, {% else %}, {% endifequal %}{% else %}{% endif %}
+                        {% endfor %}
+                    ]
+                }, {
+                    name: 'Failed analyses',
+                    color: "#AC4040",
+                    data: [
+                        {% for item in failed_graph %}
+                            [Date.parse("{{item.created_at|to_date|date:"m/d/Y"}}","MM/dd/yyyy"), {{item.counter}}]
+                            {% if not forloop.last %}{% ifequal forloop.revcounter 2 %}, {% else %}, {% endifequal %}{% else %}{% endif %}
+                        {% endfor %}
+                    ]
+                }, {
+                    name: 'Waiting analyses',
+                    color: "#FFC90E",
+                    data: [
+                        {% for item in waiting_graph %}
+                            [Date.parse("{{item.created_at|to_date|date:"m/d/Y"}}","MM/dd/yyyy"), {{item.counter}}]
+                            {% if not forloop.last %}{% ifequal forloop.revcounter 2 %}, {% else %}, {% endifequal %}{% else %}{% endif %}
+                        {% endfor %}
+                    ]
+                }]
+            });
+        });
+    </script>
 
 {% endblock %}
+

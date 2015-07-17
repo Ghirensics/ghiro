@@ -1,11 +1,11 @@
 {% load analyses_tags %}
 
-<div class="row-fluid">
-    <ul class="ghiro-thumbnails">
+<div class="box">
+    <ul class="thumbnails">
         {% for image in images %}
             <li>
                 {% if image.thumb_id %}
-                    <a class="fancybox" rel="group" href="{% url "analyses.views.image" image.image_id %}" title="{{ image.file_name }}">
+                    <a class="group1" rel="group1" href="{% url "analyses.views.image" image.image_id %}" title="{{ image.file_name }}">
                         <img src="{% url "analyses.views.image" image.thumb_id %}" />
                     </a>
                     <div class="tags">
@@ -25,7 +25,7 @@
                             </span>
                         {% endif %}
                     </div>
-                    <div class="tools">
+                    <div class="icns">
                         <a href="{% url "analyses.views.show_analysis" image.id %}" title="Show report"> <i class="icon-list-alt"> </i></a>
                         {% if image.favorites.all %}
                             <a id="{% url "analyses.views.favorite" image.id %}" rel="{{ image.id }}" class="favorite btn-warning star{{image.id}}" title="Un-set as favorite"> <i class="icon-star"> </i></a>
@@ -45,3 +45,12 @@
         {% endfor %}
     </ul>
 </div>
+
+<script>
+$(document).ready(function(){
+    $(".group1").colorbox({
+        rel:'group1',
+
+    });
+});
+</script>

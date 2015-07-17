@@ -1,67 +1,42 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="span11">
-    <div class="content content-large">
-        <div class="content-header">
-            <h2><i class="icon-briefcase"> </i> Cases <small>browse all cases</small></h2>
+    <div class="crumbs">
+        <ol class="breadcrumb hidden-xs">
+            <li><i class="fa fa-home"></i> <a href="/">Dashboard</a></li>
+            <li class="active">Cases</li>
+        </ol>
+    </div>
+</div>
+
+    <div class="content">
+        <div class="page-h1">
+            <h1>Cases <small>browse all cases</small></h1>
         </div>
-        <div class="content-breadcrumb">
-            <ul class="breadcrumb">
-                <li>
-                    <a href="/"><i class="icon-home"> </i> Dashboard</a><span class="divider">&rsaquo;</span>
-                </li>
-                <li class="active">
-                    Cases
-                </li>
-            </ul>
-        </div>
-        <div class="content-body">
-            <div>
-                <h3><a href="{% url "analyses.views.new_case" %}"></a></h3>
-            </div>
-            <div class="corner-all">
-                <div class="header-control pull-right">
-                    <a href="{% url "analyses.views.new_case" %}" class="btn btn-success tool" title="Add case">
-                        <i class="icon-plus"> </i>
-                    </a>
-                </div>
-                <div class="box-header corner-top">
-                    <ul class="nav nav-pills" id="cases_tab">
-                        <li class="active">
-                            <a href="#all" data-toggle="tab">All</a>
-                        </li>
-                        <li>
-                            <a href="#owned" data-toggle="tab">Owned</a>
-                        </li>
-                        <li>
-                            <a href="#others" data-toggle="tab">Not owned</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="all">
-                            {% include "layout/_indexCase.html" with cases=last_cases %}
-                        </div>
-                        <div class="tab-pane" id="owned">
-                            {% include "layout/_indexCase.html" with cases=my_cases %}
-                        </div>
-                        <div class="tab-pane" id="others">
-                            {% include "layout/_indexCase.html" with cases=others_cases %}
-                        </div>
-                    </div>
+        <div class="col-md-12">
+            <div class="wdgt">
+                    <a href="{% url "analyses.views.new_case" %}" class="btn btn-success pull-right" type="button" data-tooltip="tooltip" data-placement="left" title="Add new case"><i class="fa fa-plus"></i></a>
+                <ul class="nav nav-pills nav-primary">
+                    <li class="active"><a href="#all" data-toggle="tab">All</a></li>
+                    <li><a href="#owned" data-toggle="tab">Owned</a></li>
+                    <li><a href="#others" data-toggle="tab">Not owned</a></li>
+                </ul>
+                <div class="tab-content ">
+                    <div class="tab-pane active" id="all">{% include "layout/_indexCase.html" with cases=last_cases %}</div>
+                    <div class="tab-pane" id="owned">{% include "layout/_indexCase.html" with cases=my_cases %}</div>
+                    <div class="tab-pane" id="others">{% include "layout/_indexCase.html" with cases=others_cases %}</div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-{% include "layout/_modalActionCase.html" %}
+    {% include "layout/_modalActionCase.html" %}
 
-<script type="text/javascript">
-$('.datatables').dataTable({
-"sDom" : '<"top">t<"bottom"lp><"clear">',
-"aaSorting": [[ 2, "desc" ]]
-});
-</script>
+    <script type="text/javascript">
+    $('.datatables').dataTable({
+        "sDom" : '<"top">t<"bottom"lp><"clear">',
+        "aaSorting": [[ 2, "desc" ]]
+    });
+    </script>
 
 {%  endblock %}

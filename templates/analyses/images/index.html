@@ -1,41 +1,41 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="span11">
-        <div class="content content-large">
-            <div class="content-header">
-                <h2><i class="icon-picture"> </i> Images <small>browse all images</small></h2>
-            </div>
-            <div class="content-breadcrumb">
-                <ul class="breadcrumb">
-                    <li>
-                        <a href="/"><i class="icon-home"> </i> Dashboard</a><span class="divider">&rsaquo;</span>
+    <div class="crumbs">
+        <ol class="breadcrumb hidden-xs">
+            <li>
+                <i class="fa fa-home"></i><a href="/">Dashboard</a>
+            </li>
+            <li class="active">
+                Images
+            </li>
+        </ol>
+    </div>
+</div>
+
+    <div class="content">
+        <div class="page-h1">
+            <h1>Images <small>browse all images</small></h1>
+        </div>
+        <div class="col-md-12">
+            <div class="wdgt">
+                <ul class="nav nav-pills nav-primary">
+                    <li {% if pagename == "list" %} class="active" {% endif %}>
+                        <a href="{% url "analyses.views.list_images" "list"%}">List</a>
                     </li>
-                    <li class="active">
-                        Images
+                    {% if not hide_thumb %}
+                        <li {% if pagename == "thumb" %} class="active" {% endif %}>
+                            <a href="{% url "analyses.views.list_images" "thumb" %}">Thumbnails</a>
+                        </li>
+                    {% endif %}
+                    <li {% if pagename == "map" %} class="active" {% endif %}>
+                        <a href="{% url "analyses.views.list_images" "map" %}">Map</a>
+                    </li>
+                    <li {% if pagename == "favorites" %} class="active" {% endif %}>
+                        <a href="{% url "analyses.views.list_images" "favorites" %}">Favorites</a>
                     </li>
                 </ul>
-            </div>
-            <div class="content-body">
-                <div class="row-fluid">
-                    <ul class="nav nav-pills">
-                        <li {% if pagename == "list" %} class="active" {% endif %}>
-                            <a href="{% url "analyses.views.list_images" "list"%}">List</a>
-                        </li>
-                        {% if not hide_thumb %}
-                            <li {% if pagename == "thumb" %} class="active" {% endif %}>
-                                <a href="{% url "analyses.views.list_images" "thumb" %}">Thumbnails</a>
-                            </li>
-                        {% endif %}
-                        <li {% if pagename == "map" %} class="active" {% endif %}>
-                            <a href="{% url "analyses.views.list_images" "map" %}">Map</a>
-                        </li>
-                        <li {% if pagename == "favorites" %} class="active" {% endif %}>
-                            <a href="{% url "analyses.views.list_images" "favorites" %}">Favorites</a>
-                        </li>
-                    </ul>
-                </div>
-                <div>
+            <div>
                     {% if pagename == "list" %}
                         {% include "analyses/cases/_list_image.html" %}
                         {% if images %}
@@ -95,4 +95,5 @@
             </div>
         </div>
     </div>
+
 {% endblock %}

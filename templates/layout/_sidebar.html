@@ -1,53 +1,165 @@
-<div class="span1">
-    <aside class="side-left">
-        <ul class="sidebar">
-            <li id="side-dashboard">
-                <span class="glow"> </span>
-                <a href="/" title="dashboard">
-                <div class="helper-font-24">
-                    <i class="icon-dashboard"> </i>
-                </div> <span class="sidebar-text">Dashboard</span></a>
-            </li>
-            <li id="side-cases">
-                <span class="glow"> </span>
-                <a href="{% url "analyses.views.list_cases" %}" title="cases">
-                <div class="helper-font-24">
-                    <i class="icon-briefcase"> </i>
-                </div> <span class="sidebar-text">Cases</span></a>
-            </li>
-            <li id="side-images">
-                <span class="glow"> </span>
-                <a href="{% url "analyses.views.list_images" "list" %}" title="images">
-                <div class="helper-font-24">
-                    <i class="icon-picture"> </i>
-                </div> <span class="sidebar-text">Images</span></a>
-            </li>
-            <li id="side-search">
-                <span class="glow"> </span>
-                <a href="{% url "analyses.views.search" "form" %}" title="search">
-                <div class="helper-font-24">
-                    <i class="icon-search"> </i>
-                </div> <span class="sidebar-text">Search</span></a>
-            </li>
-            <li id="side-hashes">
-                <span class="glow"> </span>
-                <a href="{% url "hashes.views.list_hashes" %}" title="hashes">
-                <div class="helper-font-24">
-                    <i class="icon-table"> </i>
-                </div> <span class="sidebar-text">Hashes</span></a>
-            </li>
-            {% if request.user.is_stuff or request.user.is_superuser %}
-                <li id="side-admin">
-                    <span class="glow"> </span>
-                    <a href="{% url "users.views.admin_list_users" %}" title="administrator">
-                    <div class="helper-font-24">
-                        <i class="icon-lock"> </i>
-                    </div> <span class="sidebar-text">Admin</span></a>
-                </li>
-            {% endif %}
-        </ul>
-    </aside>
+<div class="left hidden-xs">
+    <div class="logo"><img id="logo" src="/static/img/logo/logo_ghiro176x80.png" style="width:159px !important; height:52px; !important"></div>
+    <div class="sidebar">
+        <div>
+            <input class="typeahead" type="text" placeholder="Search">
+            <span id="search-icon" class="glyphicon glyphicon-search"></span>
+        </div>
+        <div class="">
+            <div class="">
+                <a href="/" class="btn btn-primary btn-lg-sd" type="button">
+                    <i class="fa fa-dashboard fa-2x"></i>
+                </a>
+                <a href="{% url "analyses.views.list_cases" %}" class="btn btn-dark btn-lg-sd" type="button">
+                    <i class="fa fa-book fa-2x"></i>
+                </a>
+            </div>
+            <div class="">
+                <a href="{% url "analyses.views.list_images" "list" %}" class="btn btn-dark btn-lg-sd" type="button">
+                    <i class="fa fa-picture-o fa-2x"></i>
+                </a>
+                <a href="{% url "analyses.views.search" "form" %}" class="btn btn-dark btn-lg-sd" type="button">
+                    <i class="fa fa-search fa-2x"></i>
+                </a>
+            </div>
+            <div class="">
+                <a href="{% url "hashes.views.list_hashes" %}" class="btn btn-dark btn-lg-sd" type="button">
+                    <i class="fa fa-list fa-2x"></i>
+                </a>
+                {% if request.user.is_stuff or request.user.is_superuser %}
+                    <a href="{% url "users.views.admin_list_users" %}" class="btn btn-dark btn-lg-sd" type="button">
+                        <i class="fa fa-cogs fa-2x"></i>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </div>
-<script type="text/javascript">
-    $("#{{ request.session.sidebar_active }}").addClass("active");
-</script>
+
+<!-- RESPONSIVE NAVIGATION -->
+<div id="secondary" class="btn-group visible-xs">
+    <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown"><span class="icon icon-th-large"></span>&nbsp;&nbsp;Navigation&nbsp;&nbsp;<span class="caret"></span></button>
+    <ul class="dropdown-menu dropdown-info pull-right" role="menu">
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="#">Labels</a></li>
+        <li><a href="#">Admin</a></li>
+        <li class="divider" style="border-bottom:1px solid #ddd; margin:0px; margin-top:5px;"></li>
+        <li><a href="typography.html">Typography</a></li>
+        <li><a href="charts.html">Charts</a></li>
+        <li><a href="widgets.html">Widgets</a></li>
+        <li class="divider" style="border-bottom:1px solid #ddd; margin:0px; margin-top:5px;"></li>
+        <li class="dropdown-header">UI Elements</li>
+        <li><a href="alerts_notifications.html">Alerts & Notifications</a></li>
+        <li><a href="tabs_accordion.html">Tabs & Accordions</a></li>
+        <li><a href="buttons.html">Buttons & Icons</a></li>
+        <li class="divider" style="border-bottom:1px solid #ddd; margin:0px; margin-top:5px;"></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li class="divider" style="border-bottom:1px solid #ddd; margin:0px; margin-top:5px;"></li>
+        <li class="dropdown-header">Forms</li>
+        <li><a href="form_basic.html">Basic Form Elements</a></li>
+        <li><a href="form_advanced.html">Advanced Form Elements</a></li>
+        <li><a href="form_wysiwyg.html">WYSIWYG</a></li>
+        <li><a href="form_validation.html">Form Validation</a></li>
+        <li class="divider" style="border-bottom:1px solid #ddd; margin:0px; margin-top:5px;"></li>
+        <li class="dropdown-header">Tables</li>
+        <li><a href="form_basic.html">Static Tables</a></li>
+        <li><a href="form_advanced.html">jQuery Datatables</a></li>
+        <li class="divider" style="border-bottom:1px solid #ddd; margin:0px; margin-top:5px;"></li>
+        <li><a href="storyboard.html">Storyboard</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
+        <li><a href="maps.html">Maps</a></li>
+        <li class="divider" style="border-bottom:1px solid #ddd; margin:0px; margin-top:5px;"></li>
+        <li class="dropdown-header">Pages</li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="FAQ.html">F.A.Q.</a></li>
+        <li><a href="grid.html">Grid</a></li>
+        <li><a href="grid.html">404 Error Template</a></li>
+        <li><a href="invoice.html">Invoice</a></li>
+    </ul>
+</div>
+<div id="secondary-search" class="input-icon visible-xs">
+    <i class="icon icon-search"></i>
+    <input class="form-control form-warning input-sm" type="text">
+</div>
+<div class="right">
+    <div class="nav">
+        <div class="bar">
+            <div class="logo-small visible-xs"><img src="lib/img/logo3.png"></div>
+            <ul class="nav nav-pills hidden-xs">
+                <li class="active"><a href="index.html"><span class="fa fa-dashboard"></span>Dashboard</a></li>
+                <li><a href="#"><span class="icon icon-barcode"></span>Labels <span class="label label-primary">1,078</span></a></li>
+                <li><a href="#"><span class="icon icon-cog"></span>Admin</a></li>
+            </ul>
+            <div class="hov">
+                <div class="btn-group">
+                    <a class="con" href="" data-toggle="dropdown"><span class="icon icon-bell"></span><span class="label label-danger">55</span></a>
+                    <ul class="dropdown-menu pull-right dropdown-alerts" role="menu">
+                        <li class="title"><span class="icon icon-bell"></span>&nbsp;&nbsp;There are 5 new alerts in the system...</li>
+                        <li class="alert">
+                            <div class="alert-icon alt-default"><span class="fa fa-check-square"></span></div>
+                            <div class="alert-content">Quality check was successful</div>
+                            <div class="alert-time">32 sec ago</div>
+                        </li>
+                        <li class="alert">
+                            <div class="alert-icon alt-primary"><span class="fa fa-plus-square"></span></div>
+                            <div class="alert-content">New user added (Bob Grassle)</div>
+                            <div class="alert-time">11 min ago</div>
+                        </li>
+                        <li class="alert">
+                            <div class="alert-icon alt-warning"><span class="fa fa-pencil-square"></span></div>
+                            <div class="alert-content">User profile updated (Steve Jones)</div>
+                            <div class="alert-time">3 hours ago</div>
+                        </li>
+                        <li class="alert">
+                            <div class="alert-icon alt-danger"><span class="fa fa-warning"></span></div>
+                            <div class="alert-content">System failure reported</div>
+                            <div class="alert-time">2 days ago</div>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#">View all recent alerts</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <a class="con" href="" data-toggle="dropdown"><span class="icon icon-envelope"></span><span class="label label-success">5</span></a>
+                    <ul class="dropdown-menu pull-right dropdown-messages" role="menu">
+                        <li class="title"><span class="icon icon-envelope"></span>&nbsp;&nbsp;You have 13 new messages to read...</li>
+                        <li class="message">
+                            <div class="message-icon"><img src="lib/img/users/1.png"></div>
+                            <div class="message-content"><a href="#">Steve</a> Lorem ipsum dolor sit amet...</div>
+                            <div class="message-time">32 sec ago</div>
+                        </li>
+                        <li class="message">
+                            <div class="message-icon"><img src="lib/img/users/2.png"></div>
+                            <div class="message-content"><a href="#">John</a> Quisque commodo sed ipsum...</div>
+                            <div class="message-time">11 min ago</div>
+                        </li>
+                        <li class="message">
+                            <div class="message-icon"><img src="lib/img/users/3.png"></div>
+                            <div class="message-content"><a href="#">Susan</a> Consectetur adipiscing elit...</div>
+                            <div class="message-time">3 hours ago</div>
+                        </li>
+                        <li class="message">
+                            <div class="message-icon"><img src="lib/img/users/4.png"></div>
+                            <div class="message-content"><a href="#">Barbara</a> Quisque commodo sed ipsum...</div>
+                            <div class="message-time">2 days ago</div>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#">View all new messages...</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <a class="con" href="" data-toggle="dropdown"><span class="icon icon-user"></span><span class="label label-primary">+5</span></a>
+                    <ul class="dropdown-menu pull-right dropdown-profile" role="menu">
+                        <li class="title"><span class="icon icon-user"></span>&nbsp;&nbsp;Welcome, {{ request.user.username }}!</li>
+                        <li><a href="{% url "users.views.profile" %}"><span class="fa fa-user"></span>Profile</a></li>
+                        <li><a href="{% url "users.views.admin_show_activity" user.id %}"><span class="fa fa-list"></span>Activity</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{% url "django.contrib.auth.views.logout" %}"><span class="fa fa-power-off"></span>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            $("#{{ request.session.sidebar_active }}").addClass("active");
+        </script>

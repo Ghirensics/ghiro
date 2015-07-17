@@ -1,49 +1,48 @@
-<div class="row-fluid">
-    <div class="span12">
-        <div class="box corner-all">
-            <div class="box-body">
-                <table class="table table-bordered table-striped responsive datatables">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Status</th>
-                            <th>Created at</th>
-                            <th>Owner</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for case in cases %}
-                            <tr>
-                                <td>
-                                    <a href="{% url "analyses.views.show_case" case.id "list" %}">
-                                        {% if case.name|length > 70 %}
-                                            {{ case.name|slice:":70" }} ...
-                                        {% else %}
-                                            {{ case.name }}
-                                        {% endif %}
-                                    </a>
-                                </td>
-                                <td>{{ case.get_state_display }}</td>
-                                <td>{{ case.created_at }}</td>
-                                <td>{{ case.owner.username }}</td>
-                                <td>
-                                <div class="btn-group">
-                                    {% if case.state == "C" %}
-                                        <a class="btn tool" title="No actions available" disabled="disabled"> <i class="icon-edit"></i> </a>
-                                        <a class="btn btn-warning tool" disabled="disabled" title="Case already closed"> <i class="icon-remove"></i> </a>
-                                        <a class="btn btn-danger tool btn-delete-case" id="{% url "analyses.views.delete_case" case.id %}" title="Delete case" href="#delete" role="button" data-toggle="modal"> <i class="icon-trash"></i> </a>
-                                    {% else %}
-                                        <a class="btn tool" title="Edit case" href="{% url "analyses.views.edit_case" case.id %}"> <i class="icon-edit"></i> </a>
-                                        <a class="btn btn-warning tool btn-close-case" id="{% url "analyses.views.close_case" case.id %}" title="Close case" href="#close" role="button" data-toggle="modal"> <i class="icon-remove"></i> </a>
-                                        <a class="btn btn-danger tool btn-delete-case" id="{% url "analyses.views.delete_case" case.id %}" title="Delete case" href="#delete" role="button" data-toggle="modal"> <i class="icon-trash"></i> </a>
-                                    {% endif %}
-                                </div></td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+<div class="box">
+    <table class="table table-hover datatables">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Created at</th>
+                <th>Owner</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if cases %}
+                {% for case in cases %}
+                    <tr>
+                        <td>
+                            <a href="{% url "analyses.views.show_case" case.id "list" %}">
+                                {% if case.name|length > 70 %}
+                                    {{ case.name|slice:":70" }} ...
+                                {% else %}
+                                    {{ case.name }}
+                                {% endif %}
+                            </a>
+                        </td>
+                        <td>{{ case.get_state_display }}</td>
+                        <td>{{ case.created_at }}</td>
+                        <td>{{ case.owner.username }}</td>
+                        <td>
+                            {% if case.state == "C" %}
+                                <a class="btn btn-soft" title="No actions available" disabled="disabled" ><i class="fa fa-pencil"></i></a>
+                                <a class="btn btn-warning" title="Case already closed" disabled="disabled"><i class="fa fa-times"></i></a>
+                                <a class="btn btn-danger btn-delete-case" id="{% url "analyses.views.delete_case" case.id %}" data-tooltip="tooltip" title="Delete case" href="#delete" data-target="#delete" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+                            {% else %}
+                                <a class="btn btn-tbl btn-soft" href="{% url "analyses.views.edit_case" case.id %}" data-tooltip="tooltip" title="Edit case"> <i class="fa fa-pencil"></i> </a>
+                                <a class="btn btn-tbl btn-warning btn-close-case" id="{% url "analyses.views.close_case" case.id %}" data-tooltip="tooltip" title="Close case" data-target="#close" data-toggle="modal"><i class="fa fa-times"></i></a>
+                                <a class="btn btn-tbl btn-danger btn-delete-case" id="{% url "analyses.views.delete_case" case.id %}" data-tooltip="tooltip"title="Delete case" data-target="#delete" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td>No data available in table </td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
 </div>

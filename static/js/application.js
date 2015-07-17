@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $('.tool').tooltip();
+    $('[data-tooltip="tooltip"]').tooltip();
 
     $('.pop').popover();
 
