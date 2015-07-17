@@ -2,7 +2,7 @@
     {{ form.non_field_errors }}
     <div class="fieldWrapper">
         <label for="id_name">Name:</label>
-        {{ form.name }}<span class="help-inline">{{ form.name.errors }}</span>
+        <span style="height: 20px">{{ form.name }}</span><span class="help-inline">{{ form.name.errors }}</span>
     </div>
     <div class="fieldWrapper">
         <label for="id_description">Description:</label>
@@ -13,9 +13,9 @@
         {{ form.users }}<span class="help-inline">{{ form.users.errors }}</span><em>Use the CTRL key to select multiple users.</em>
     </div>
     <div class="form-actions">
-        <button id="btn_submit" type="submit" class="btn btn-large btn-success">
+        <button id="btn_submit" type="submit" class="btn btn-success">
             Save
         </button>
-        <a href="{% url "analyses.views.list_cases" %}" class="btn btn-large"> Back </a>
+        <a href="{% url "analyses.views.list_cases" %}" class="btn btn-dark btn-large"> Back </a>
     </div>
 </div>

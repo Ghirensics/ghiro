@@ -1,4 +1,4 @@
-<div class="content-body">
+<div class="box">
     <ul class="nav nav-pills">
         <li class="active">
             <a href="#property" data-toggle="tab">Property</a>
@@ -14,26 +14,22 @@
             </div>
         {% endif %}
         <form id="property" action="{% url "analyses.views.search" "list" %}" method="get" class="form-horizontal form-model tab-pane active">{% csrf_token %}
-            <div class="control-group">
-                <label class="control-label" for="filename">Filename</label>
-                <div class="controls">
-                    <input id="filename" type="text" name="filename" class="height-large">
-                    <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by file name" data-content="Search for file names containing this string.">
-                        <span class="badge badge-info"><i class="icon-info"></i></span>
-                    </a>
-                </div>
+            <div class="col-md-4">
+                <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by file name" data-content="Search for file names containing this string.">
+                    <label class="control-label" for="filename">Filename</label>
+                </a>
+                <input id="filename" type="text" name="filename" class="form-control">
             </div>
-            <div class="control-group">
-                <label class="control-label" for="filetype">Filetype</label>
-                <div class="controls">
-                    <input id="filetype" type="text" name="filetype" class="height-large">
-                    <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by file type" data-content="Search for file type containing this string.">
-                        <span class="badge badge-info"><i class="icon-info"></i></span>
-                    </a>
-                </div>
+            <div class="col-md-2">
+                <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by file type" data-content="Search for file type containing this string.">
+                    <label class="control-label" for="filetype">Filetype</label>
+                </a>
+                <input id="filetype" type="text" name="filetype" class="form-control">
             </div>
-            <div class="control-group">
-                <label class="control-label" for="filetype">Hash</label>
+            <div class="col-md-4">
+                <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by hash" data-content="Search for images with this hash.">
+                    <label class="control-label" for="filetype">Hash</label>
+                </a>
                 <div class="controls">
                     <select name="cipher" id="id_cipher">
                         <option value="SHA1">SHA1</option>
@@ -45,9 +41,6 @@
                         <option value="MD5">MD5</option>
                     </select>
                     <input id="hash" type="text" name="hash" class="height-large input-medium">
-                    <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by hash" data-content="Search for images with this hash.">
-                        <span class="badge badge-info"><i class="icon-info"></i></span>
-                    </a>
                 </div>
             </div>
             <div class="control-group">
