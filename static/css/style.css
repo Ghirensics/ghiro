@@ -167,6 +167,11 @@ border-top-left-radius: 0;
     vertical-align: middle;
 }
 
+/* IMAGE URL CUSTOM */
+#id_path{
+    width: 400px;
+}
+
 /* PAGE HEADER */
 .page-h1 h1 { font-size:24px; font-weight:200; color:#448FBA; margin: 5px 15px; border-bottom:1px solid #E6E6E6; padding-bottom:10px; }
 
@@ -2032,8 +2037,33 @@ fieldset[disabled] .btn-link:focus {
 td.center { text-align:center; }
 .pagination > li.active > a { background: #7DB4D8 !important; border-color: #73A8C6 !important; }
 
-/* ----- FORM OVERRIDES ----- */
+/* ----- Case notice ----- */
+.notice-new {
+    background: #B94A48;
+    border-radius: 10px 10px 10px 10px;
+    font-size: 12px;
+    height: 16px;
+    left: -8px;
+    padding: 1px 5px 2px;
+    position: relative;
+    top: -8px;
+    color: #fff
+}
 
+/* ----- HELP ----- */
+.help-inline li{
+    list-style: none;
+    color:red;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 20px;
+}
+
+.errorlist{
+    padding-left: 0px;
+}
+
+/* ----- FORM OVERRIDES ----- */
 
 .form-control {
   display: block;

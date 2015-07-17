@@ -1,49 +1,55 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="span11">
-    <div class="content content-large">
-        <div class="content-header">
-            <h2><i class="icon-briefcase"> </i> Cases</h2>
-        </div>
-        <div class="content-breadcrumb">
-            <ul class="breadcrumb">
-                <li>
-                    <a href="/"><i class="icon-home"> </i> Dashboard</a><span class="divider">&rsaquo;</span>
-                </li>
-                <li>
-                    <a href="{% url "analyses.views.list_cases" %}"><i class="icon-briefcase"> </i> Cases</a>
-                    <span class="divider">&rsaquo;</span>
-                </li>
-                <li>
-                    <a href="{% url "analyses.views.show_case" case.id "list" %}"><i class="icon-book"> </i>
-                        {% if case.name|length > 70 %}
-                            {{ case.name|slice:":70" }} ...
-                        {% else %}
-                            {{ case.name }}
-                        {% endif %}
-                    </a><span class="divider">&rsaquo;</span>
-                </li>
-                <li class="active">
-                    New image URL
-                </li>
-            </ul>
-        </div>
-        <div class="content-body">
-            <blockquote>
-                <p>Add image URL: this will fetch URL data and process it as image</p>
-            </blockquote>
-            <form action="{% url "analyses.views.new_url" case.id %}" method="post" class="form-inline">{% csrf_token %}
-                <div class="input-append">
-                    <input id="id_path" type="text" name="url" class="height-large" placeholder="http://example.com/image.jpg">
-                    <button id="btn_submit" type="submit" class="btn btn-large btn-success">
-                        Add
-                    </button>
-                    <a href="{% url "analyses.views.show_case" case.id "list" %}" class="btn btn-large"> Back </a>
-                </div>
-                <span class="help-inline">{{ form.url.errors }}</span>
-            </form>
-        </div>
+    <div class="crumbs">
+        <ol class="breadcrumb hidden-xs">
+            <li>
+                <i class="fa fa-home"></i><a href="/">Dashboard</a>
+            </li>
+            <li>
+                <a href="{% url "analyses.views.list_cases" %}"><i class="fa fa-book"> </i> Cases</a>
+            </li>
+             <li>
+                <a href="{% url "analyses.views.show_case" case.id "list" %}"><i class="fa fa-th-list"> </i>
+                    {% if case.name|length > 70 %}
+                        {{ case.name|slice:":70" }} ...
+                    {% else %}
+                        {{ case.name }}
+                    {% endif %}
+                </a>
+            </li>
+            <li class="active">
+                New image URL
+            </li>
+        </ol>
     </div>
 </div>
+
+    <div class="content">
+        <div class="page-h1">
+            <h1>New image in
+                <span style="color: salmon">{% if case.name|length > 70 %}
+                    {{ case.name|slice:":70" }} ...
+                {% else %}
+                    {{ case.name }}
+                {% endif %}</span> case
+            </h1>
+        </div>
+        <div class="col-md-12">
+            <div class="wdgt">
+                <blockquote>
+                    <p>Add image URL: this will fetch URL data and process it as image</p>
+                </blockquote>
+                <form action="{% url "analyses.views.new_url" case.id %}" method="post" class="form-inline">{% csrf_token %}
+                    <div class="input-append">
+                        <input id="id_path" type="text" name="url" class="form-control" placeholder="http://example.com/image.jpg">
+                        <button id="btn_submit" type="submit" class="btn btn-success">Add</button>
+                        <a href="{% url "analyses.views.show_case" case.id "list" %}" class="btn btn-default">Back</a>
+                    </div>
+                    <span class="help-inline">{{ form.url.errors }}</span>
+                </form>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
