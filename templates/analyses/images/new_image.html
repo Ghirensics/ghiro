@@ -31,9 +31,7 @@
         </div>
         <div class="col-md-12">
             <div class="wdgt">
-                <p>
-                    <div id="uploader"></div>
-                </p>
+                <div id="uploader"></div>
                 <div id="filelist" class="hide">
                     <strong id="generic_error">
                         <i class="icon-warning-sign text-error"></i>
@@ -51,14 +49,11 @@
     {# Styles #}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/plupload/jquery.plupload.queue.css">
     {# JS #}
-    <script src="{{ STATIC_URL }}js/plupload/jquery-migrate-1.0.0.js"></script>
-    <script src="{{ STATIC_URL }}js/plupload/elfinder.min.js"></script>
+    <script src="{{ STATIC_URL }}js/plupload/moxie.min.js"></script>
     <script src="{{ STATIC_URL }}js/plupload/jquery.plupload.queue.js"></script>
     <script src="{{ STATIC_URL }}js/plupload/plupload.full.js"></script>
     <script type="text/javascript">
-
         $(document).ready(function() {
-
             $("#uploader").pluploadQueue({
                 runtimes : 'html5,flash',
                 url : '{% url "analyses.views.new_image" case.id %}',
