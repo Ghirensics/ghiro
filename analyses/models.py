@@ -9,8 +9,9 @@ import gridfs
 from datetime import datetime
 from bson.objectid import ObjectId
 from django.db import models
-from django.db.models.signals import pre_delete, pre_save
+from django.db.models.signals import pre_delete, pre_save, post_save
 from django.dispatch import receiver
+from django.conf import settings
 
 from users.models import Profile
 from lib.db import get_file, get_file_length, mongo_connect
@@ -81,6 +82,20 @@ def strip_attributes(sender, instance, **kwargs):
     instance.name = instance.name.strip()
     if instance.description:
         instance.description = instance.description.strip()
+
+@receiver(post_save, sender=Case)
+def auto_upload_sync(sender, instance, **kwargs):
+    """When a new case is created syncs file system auto upload directories."""
+    # If auto upload is enabled sync the case folders.
+    if settings.AUTO_UPLOAD_DIR:
+        dir_name = "Case_id_%s" % instance.id
+        dir_path = os.path.join(settings.AUTO_UPLOAD_DIR, dir_name)
+        if not os.path.exists(dir_path):
+            try:
+                os.mkdir(dir_path)
+            except IOError as e:
+                # TODO: add error tracking.
+                pass
 
 class Analysis(models.Model):
     """Image analysis."""
