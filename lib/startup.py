@@ -35,5 +35,5 @@ def create_auto_upload_dirs():
                 except IOError as e:
                     logger.error("Unable to create auto upload case directory %s reason %s" % (dir_path, e))
                     continue
-        else:
-            return False
+    else:
+        return False
