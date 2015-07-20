@@ -21,6 +21,7 @@ def create_auto_upload_dirs():
                 os.mkdir(settings.AUTO_UPLOAD_DIR)
             except IOError as e:
                 logger.error("Unable to create auto upload main directory %s reason %s" % (settings.AUTO_UPLOAD_DIR, e))
+                return False
 
         # Create cases dirs.
         for case in Case.objects.all():
@@ -32,3 +33,6 @@ def create_auto_upload_dirs():
                     os.mkdir(dir_path)
                 except IOError as e:
                     logger.error("Unable to create auto upload case directory %s reason %s" % (dir_path, e))
+                    continue
+        else:
+            return False
