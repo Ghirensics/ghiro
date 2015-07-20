@@ -14,9 +14,10 @@ def create_auto_upload_dirs():
     """Creates the directory tree used in upload from file system feature."""
     # Sync cases if auto upload is enabled.
     if settings.AUTO_UPLOAD_DIR:
-        logger.debug("Auto upload from directory is enabled.")
+        logger.debug("Auto upload from directory is enabled on %s.", settings.AUTO_UPLOAD_DIR)
         # Create the directory if it doesn't exist.
         if not os.path.exists(settings.AUTO_UPLOAD_DIR):
+            logger.debug("Auto upload directory is missing, creating it.")
             try:
                 os.mkdir(settings.AUTO_UPLOAD_DIR)
             except IOError as e:
