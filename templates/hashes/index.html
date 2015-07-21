@@ -36,82 +36,84 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="my">
                         <div class="box">
-                            <table class="table datatables">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Cipher</th>
-                                        <th>Created at</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% if list %}
+                            {% if list %}
+                                <table class="table datatables">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Cipher</th>
+                                            <th>Created at</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                         {% for list in my_lists %}
-                                        <tr>
-                                            <td><a href="{% url "hashes.views.show_hashes" list.id %}">{{ list.name }}</a></td>
-                                            <td>{{ list.get_cipher_display }}</td>
-                                            <td>{{ list.created_at }}</td>
-                                            <td>
-                                            <div class="btn-group">
-                                                {% if request.user == list.owner or request.user.is_superuser %}
-                                                    <a class="btn btn-danger btn-trash tool" href="#trash" role="button" data-toggle="modal" id="{% url "hashes.views.delete_hashes" list.id %}" title="Delete list">
-                                                        <i class="icon-trash"> </i>
-                                                    </a>
-                                                {% else %}
-                                                    <a class="btn btn-danger tool" title="You are not authorized to delete this" disabled="disabled">
-                                                        <i class="icon-trash"> </i>
-                                                    </a>
-                                                {% endif %}
-                                            </div></td>
-                                        </tr>
+                                            <tr>
+                                                <td><a href="{% url "hashes.views.show_hashes" list.id %}">{{ list.name }}</a></td>
+                                                <td>{{ list.get_cipher_display }}</td>
+                                                <td>{{ list.created_at }}</td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        {% if request.user == list.owner or request.user.is_superuser %}
+                                                            <a class="btn btn-danger btn-trash tool" href="#trash" role="button" data-toggle="modal" id="{% url "hashes.views.delete_hashes" list.id %}" title="Delete list">
+                                                                <i class="icon-trash"> </i>
+                                                            </a>
+                                                        {% else %}
+                                                            <a class="btn btn-danger tool" title="You are not authorized to delete this" disabled="disabled">
+                                                                <i class="icon-trash"> </i>
+                                                            </a>
+                                                        {% endif %}
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         {% endfor %}
-                                    {% else %}
-                                        <tr>
-                                            <td>
-                                                No data available in table
-                                            </td>
-                                        </tr>
-                                    {% endif %}
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            {% else %}
+                                <div class="alert alert-info">
+                                    <span class="icon icon-exclamation-sign"></span>
+                                    <strong>Info!</strong>
+                                    No data available
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="tab-pane" id="all">
                         <div class="box">
-                           <table class="table datatables">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Cipher</th>
-                                        <th>Created at</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% if list %}
+                            {% if list %}
+                               <table class="table datatables">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Cipher</th>
+                                            <th>Created at</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                         {% for list in public_lists %}
                                         <tr>
                                             <td><a href="{% url "hashes.views.show_hashes" list.id %}">{{ list.name }}</a></td>
                                             <td>{{ list.get_cipher_display }}</td>
                                             <td>{{ list.created_at }}</td>
                                             <td>
-                                            <div class="btn-group">
-                                                <a class="btn btn-danger btn-trash tool" href="#trash" role="button" data-toggle="modal" id="" title="Delete hash">
-                                                    <i class="icon-trash"></i>
-                                                </a>
-                                            </div></td>
-                                        </tr>
-                                        {% endfor %}
-                                    {% else %}
-                                        <tr>
-                                            <td>
-                                                No data available in table
+                                                <div class="btn-group">
+                                                    <a class="btn btn-danger btn-trash tool" href="#trash" role="button" data-toggle="modal" id="" title="Delete hash">
+                                                        <i class="icon-trash"></i>
+                                                    </a>
+                                                </div>
                                             </td>
                                         </tr>
-                                    {% endif %}
-                                </tbody>
-                            </table>
+                                            {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% else %}
+                                <div class="alert alert-info">
+                                    <span class="icon icon-exclamation-sign"></span>
+                                    <strong>Info!</strong>
+                                    No data available
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
