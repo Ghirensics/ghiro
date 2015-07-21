@@ -3,7 +3,6 @@
 # See the file 'docs/LICENSE.txt' for license terms.
 
 import os
-import magic
 
 from django import forms
 from django.conf import settings
