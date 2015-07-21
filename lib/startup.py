@@ -11,7 +11,16 @@ from analyses.models import Case
 logger = logging.getLogger(__name__)
 
 def create_auto_upload_dirs():
-    """Creates the directory tree used in upload from file system feature."""
+    """Creates the directory tree used in upload from file system feature.
+    It creates the AUTO_UPLOAD_DIR directory and a folder for each case with the Syntax 'Case_id_1' where 1 is
+    the case ID.
+    Folders have the following structure:
+        AUTO_UPLOAD_DIR
+            |
+            |--- Case_id_1
+            |--- Case_id_2
+            |--- etc. (one for each case)
+    """
     # Sync cases if auto upload is enabled.
     if settings.AUTO_UPLOAD_DIR:
         logger.debug("Auto upload from directory is enabled on %s.", settings.AUTO_UPLOAD_DIR)
