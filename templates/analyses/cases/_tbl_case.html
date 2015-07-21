@@ -1,8 +1,8 @@
 {% load add_get_parameter %}
 
 {% if case.state == "O" %}
-    <div class="pull-right">
-        <a type="button" class="btn btn-success" data-tooltip="tooltip" title="Add" data-toggle="dropdown">
+    <div class="pull-right dropdown">
+        <a type="button" class="btn btn-success dropdown-toggle" data-tooltip="tooltip" title="Add" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <i class="fa fa-plus"></i> <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
@@ -69,7 +69,7 @@
         </dd>
     </dl>
 </div>
-<ul class="nav nav-pills">
+<ul class="nav nav-pills nav-primary">
     <li {% if pagename == "list" %} class="active" {% endif %}>
         <a href="{% url "analyses.views.show_case" case.id "list" %}">Tasks</a>
     </li>

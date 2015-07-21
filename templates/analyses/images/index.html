@@ -36,63 +36,39 @@
                     </li>
                 </ul>
             <div>
-                    {% if pagename == "list" %}
-                        {% include "analyses/cases/_list_image.html" %}
-                        {% if images %}
-                            <div class="pagination text-center">
-                                {% if images.has_previous %}
-                                    <ul>
-                                        <li>
-                                            <a href="{% url "analyses.views.list_images" "list" %}?page={{ images.previous_page_number }}">← Previous</a>
-                                        </li>
-                                    </ul>
-                                {% endif %}
-                                <span class="current pull-left">
-                                <small>Page {{ images.number }} of {{ images.paginator.num_pages }}</small>
-                            </span>
-                                {% if images.has_next %}
-                                    <ul>
-                                        <li>
-                                            <a href="{% url "analyses.views.list_images" "list" %}?page={{ images.next_page_number }}">Next → </a>
-                                        </li>
-                                    </ul>
-                                {% endif %}
-                            </div>
+            {% if pagename == "list" %}
+                {% include "analyses/cases/_list_image.html" %}
+                {% if images %}
+                        {% if images.has_previous %}
+                            <a href="{% url "analyses.views.list_images" "list" %}?page={{ images.previous_page_number }}" class="btn btn-default">← Previous</a>
                         {% endif %}
-                    {% elif pagename == "thumb" %}
-                        {% include "analyses/cases/_thum_image.html" %}
-                        {% if images %}
-                            <div class="pagination text-center">
-                                {% if images.has_previous %}
-                                    <ul>
-                                        <li>
-                                            <a href="{% url "analyses.views.list_images" "thumb" %}?page={{ images.previous_page_number }}">← Previous</a>
-                                        </li>
-                                    </ul>
-                                {% endif %}
-                                <span class="current pull-left">
-                                <small>Page {{ images.number }} of {{ images.paginator.num_pages }}</small>
-                            </span>
-                                {% if images.has_next %}
-                                    <ul>
-                                        <li>
-                                            <a href="{% url "analyses.views.list_images" "thumb" %}?page={{ images.next_page_number }}">Next → </a>
-                                        </li>
-                                    </ul>
-                                {% endif %}
-                            </div>
-                        {% else %}
-                            <div class="alert">
-                                <strong>Warning!</strong> there are not any photos.
-                            </div>
+                        {% if images.has_next %}
+                            <a href="{% url "analyses.views.list_images" "list" %}?page={{ images.next_page_number }}" class="btn btn-default">Next → </a>
                         {% endif %}
-                    {% elif pagename == "map" %}
-                        {% include "analyses/cases/_map_image.html" %}
-                    {% elif pagename == "favorites" %}
-                        {% include "analyses/cases/_favorites.html" %}
+                        <small class="pull-right">Page {{ images.number }} of {{ images.paginator.num_pages }}</small>
+                {% endif %}
+            {% elif pagename == "thumb" %}
+                {% include "analyses/cases/_thum_image.html" %}
+                {% if images %}
+                    {% if images.has_previous %}
+                        <a href="{% url "analyses.views.list_images" "thumb" %}?page={{ images.previous_page_number }}" class="btn btn-default">← Previous</a>
                     {% endif %}
-                </div>
-            </div>
+                    {% if images.has_next %}
+                        <a href="{% url "analyses.views.list_images" "thumb" %}?page={{ images.next_page_number }}" class="btn btn-default">Next → </a>
+                    {% endif %}
+                    <small class="pull-right">Page {{ images.number }} of {{ images.paginator.num_pages }}</small>
+                {% else %}
+                    <div class="alert alert-info">
+                        <span class="fa fa-info-circle"></span>
+                        <strong>Info!</strong>
+                        There are not any photos
+                    </div>
+                {% endif %}
+            {% elif pagename == "map" %}
+                {% include "analyses/cases/_map_image.html" %}
+            {% elif pagename == "favorites" %}
+                {% include "analyses/cases/_favorites.html" %}
+            {% endif %}
         </div>
     </div>
 

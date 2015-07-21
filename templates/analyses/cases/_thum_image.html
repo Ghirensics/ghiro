@@ -28,17 +28,17 @@
                     <div class="icns">
                         <a href="{% url "analyses.views.show_analysis" image.id %}" title="Show report"> <i class="icon-list-alt"> </i></a>
                         {% if image.favorites.all %}
-                            <a id="{% url "analyses.views.favorite" image.id %}" rel="{{ image.id }}" class="favorite btn-warning star{{image.id}}" title="Un-set as favorite"> <i class="icon-star"> </i></a>
+                            <a id="{% url "analyses.views.favorite" image.id %}" rel="{{ image.id }}" class="favorite btn-warning star{{image.id}}" title="Un-set as favorite"> <i class="fa fa-star"> </i></a>
                         {% else %}
-                            <a id="{% url "analyses.views.favorite" image.id %}" rel="{{ image.id }}" class="favorite star{{image.id}}" title="Set as favorite"> <i class="icon-star"> </i></a>
+                            <a id="{% url "analyses.views.favorite" image.id %}" rel="{{ image.id }}" class="favorite star{{image.id}}" title="Set as favorite"> <i class="fa fa-star"> </i></a>
                         {% endif %}
-                        <a class="fancybox" href="{% url "analyses.views.image" image.image_id %}" title="View image: {{ image.file_name }}"><i class="icon-picture"> </i></a>
+                        <a class="fancybox" href="{% url "analyses.views.image" image.image_id %}" title="View image: {{ image.file_name }}"><i class="fa fa-photo"> </i></a>
                     </div>
                 {% else %}
                     <img src="{{ STATIC_URL }}img/no_image_large.jpg" />
                     <div class="tools">
                         <a href="{% url "analyses.views.show_analysis" image.id %}"> <i class="icon-list-alt"> </i></a>
-                        <a class="fancybox" href="{% url "analyses.views.image" image.image_id %}" title="{{ image.file_name }}"><i class="icon-picture"> </i></a>
+                        <a class="fancybox" href="{% url "analyses.views.image" image.image_id %}" title="{{ image.file_name }}"><i class="fa fa-photo"> </i></a>
                     </div>
                 {% endif %}
             </li>
@@ -48,9 +48,7 @@
 
 <script>
 $(document).ready(function(){
-    $(".group1").colorbox({
-        rel:'group1',
-
-    });
+//Examples of how to assign the Colorbox event to elements
+$(".group1").colorbox({rel:'group1'});
 });
 </script>

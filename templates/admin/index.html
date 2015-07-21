@@ -1,11 +1,123 @@
 {% extends "base.html" %}
 
 {% block content %}
+
     <div class="crumbs">
         <ol class="breadcrumb hidden-xs">
-            <li><i class="fa fa-home"></i> <a href="/">Home</a></li>
-            <li class="active">Cases</li>
+            <li><i class="fa fa-home"></i><a href="/">Dashboard</a></li>
+            <li class="active">Administration</li>
         </ol>
     </div>
 </div>
+
+     <div class="content">
+        <div class="page-h1">
+            <h1>Administration <small>modify </small></h1>
+        </div>
+        <div class="col-md-12">
+            <div class="wdgt">
+                <div class="box">
+                <a href="{% url "users.views.admin_new_user" %}" class="btn btn-success pull-right" data-tooltip="tooltip" title="Add user"><i class="fa fa-plus"></i></a>
+                    <ul class="nav nav-pills nav-primary" id="cases_tab">
+                        <li class="active">
+                            <a href="{% url "users.views.admin_list_users" %}">Users</a>
+                        </li>
+                        <li>
+                            <a href="{% url "users.views.admin_list_activity" %}">Activity</a>
+                        </li>
+                        <li>
+                            <a href="{% url "manage.views.dependencies_list" %}">Requirements</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active box" id="users">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Username</th>
+                                        <th>Actived</th>
+                                        <th>Superuser</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for user in users %}
+                                        <tr>
+                                            <td><a href="{% url "users.views.admin_show_user" user.id %}">{{ user.username }}</a></td>
+                                            <td>
+                                                {% if user.is_active %}
+                                                    <i class="fa fa-check-circle-o fa-lg text-success"> </i>
+                                                {% else %}
+                                                    <i class="fa fa-remove fa-lg text-error"> </i>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if user.is_superuser %}
+                                                    <i class="fa fa-check-circle-o fa-lg text-success"> </i>
+                                                {% else %}
+                                                    <i class="fa fa-remove fa-lg text-error"> </i>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <a class="btn" data-tooltip="tooltip" title="View user" href="{% url "users.views.admin_show_user" user.id %}">
+                                                    <i class="fa fa-eye"> </i>
+                                                </a>
+                                                <a class="btn" data-tooltip="tooltip" title="View user activity" href="{% url "users.views.admin_show_activity" user.id %}">
+                                                    <i class="fa fa-list"> </i>
+                                                </a>
+                                                <a class="btn btn-soft" data-tooltip="tooltip" title="Edit user" href="{% url "users.views.admin_edit_user" user.id %}">
+                                                    <i class="fa fa-pencil"> </i>
+                                                </a>
+                                                {% if user.is_active %}
+                                                    <a class="btn btn-danger" data-tooltip="tooltip" title="Disable user" href="#disable" role="button" data-toggle="modal" id="{% url "users.views.admin_disable_user" user.id %}">
+                                                        <i class="fa fa-times-circle"> </i>
+                                                    </a>
+                                                {% else %}
+                                                    <a class="btn btn-danger" data-tooltip="tooltip" disabled="disabled" title="User disabled">
+                                                       <i class="fa fa-times-circle"> </i>
+                                                    </a>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div id="disable" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true"> 
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×
+        </button>
+        <h3>Disable user</h3>
+    </div>
+    <div class="modal-body">
+        <p>
+            Disabling an user the related account will be marked as inactive.
+            So the user will not be able to logon in Ghiro, until an administrator
+            will re-enable he.
+            The user account and the user data will not be deleted.
+        </p>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-danger" id="id">
+            Disable
+        </a>
+        <a class="btn" data-dismiss="modal" aria-hidden="true">
+            Cancel
+        </a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('.btn-disable').click(function(){
+        var id = $(this).attr("id");
+        $("#id").attr({href: id});
+    });
+</script>
 {% endblock %}
