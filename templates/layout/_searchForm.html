@@ -1,5 +1,5 @@
 <div class="box">
-    <ul class="nav nav-pills">
+    <ul class="nav nav-pills nav-primary">
         <li class="active">
             <a href="#property" data-toggle="tab">Property</a>
         </li>
@@ -13,7 +13,44 @@
                 <b>Error</b>: {{ error }}
             </div>
         {% endif %}
-        <form id="property" action="{% url "analyses.views.search" "list" %}" method="get" class="form-horizontal form-model tab-pane active">{% csrf_token %}
+        <form id="property" action="{% url "analyses.views.search" "list" %}" method="get" class="tab-pane active">{% csrf_token %}
+            <div class="form-group form-inline">
+                <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by file name" data-content="Search for file names containing this string.">
+                    Filename
+                </a>
+                <input id="filename" type="text" name="filename" class="form-control">
+                <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by file type" data-content="Search for file type containing this string.">
+                    Filetype
+                </a>
+                <input id="filetype" type="text" name="filetype" class="form-control">
+            </div>
+            <div class="form-group form-inline">
+                <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by hash" data-content="Search for images with this hash.">
+                    Hash
+                </a>
+                <div class="controls">
+                    <select name="cipher" id="id_cipher">
+                        <option value="SHA1">SHA1</option>
+                        <option value="SHA224">SHA224</option>
+                        <option value="SHA384">SHA384</option>
+                        <option value="CRC32">CRC32</option>
+                        <option value="SHA256">SHA256</option>
+                        <option value="SHA512">SHA512</option>
+                        <option value="MD5">MD5</option>
+                    </select>
+                    <input id="hash" type="text" name="hash" class="height-large input-medium">
+                </div>
+                <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by metadata value" data-content="Search for a value contained in a metadata key (key format example 'Exif.Photo.Camera').">
+                    Metadata
+                </a>
+                <div class="controls">
+                    <input id="metadata_key" type="text" name="metadata_key" class="height-large input-small" placeholder="METADATA KEY">
+                    <input id="metadata_value" type="text" name="metadata_value" class="height-large input-small" placeholder="METADATA VALUE">
+                </div>
+            </div>
+
+
+
             <div class="col-md-4">
                 <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by file name" data-content="Search for file names containing this string.">
                     <label class="control-label" for="filename">Filename</label>
