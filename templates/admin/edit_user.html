@@ -19,47 +19,38 @@
             <div class="wdgt">
                 <div class="wdgt-header">Insert details for {{ user.username }}'s profile </div>
                     <div class="wdgt-body" style="padding-bottom:10px;">
-                        <form action="{% url "users.views.admin_edit_user" user.id %}" method="POST" id="defaultForm" class="form-horizontal">{% csrf_token %}
+
+                        <form action="{% url "users.views.admin_edit_user" user.id %}" method="POST">{% csrf_token %}
                             <div class="form-group">
-                                <label class="col-lg-3 control-label">Username: (<small><em>Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only</em></small>)</label>
-                                <div class="col-lg-7">
-                                    {{ form.username }}<span class="help-inline">{{ form.username.errors }}</span>
-                                </div>
+                                Username: (<small><em>Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only</em></small>)
+                                {{ form.username }}<span class="help-inline">{{ form.username.errors }}</span>
                             </div>
                             <div class="form-group">
-                                <label class="col-lg-3 control-label">Email:</label>
-                                <div class="col-lg-7">
-                                    {{ form.email }}<span class="help-inline">{{ form.email.errors }}</span>
-                                </div>
+                                Email:
+                                {{ form.email }}<span class="help-inline">{{ form.email.errors }}</span>
                             </div>
                             <div class="form-group">
-                                <label class="col-lg-3 control-label">Last name:</label>
-                                <div class="col-lg-7">
-                                    {{ form.last_name }}<span class="help-inline">{{ form.last_name.errors }}</span>
-                                </div>
+                                Last name:
+                                {{ form.last_name }}<span class="help-inline">{{ form.last_name.errors }}</span>
                             </div>
                             <div class="form-group">
-                                <label class="col-lg-3 control-label">First name:</label>
-                                <div class="col-lg-7">
-                                    {{ form.first_name }}<span class="help-inline">{{ form.first_name.errors }}</span>
-                                </div>
+                                First name:
+                                {{ form.first_name }}<span class="help-inline">{{ form.first_name.errors }}</span>
                             </div>
                             <div class="form-group">
-                                <label class="col-lg-3 control-label">{{ form.is_active }} Active<span class="help-inline">{{ form.is_active.errors }} - Designates whether this user should be treated as active. Unselect this instead of deleting accounts.</label>
+                                {{ form.is_active }} Active<span class="help-inline">{{ form.is_active.errors }} - Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
                             </div>
                             <div class="form-group">
-                                <label class="col-lg-3 control-label">{{ form.is_superuser }} Superuser<span class="help-inline">{{ form.is_superuser.errors }} - Designates that this user has all permissions without explicitly assigning them.</label>
+                                {{ form.is_superuser }} Superuser<span class="help-inline">{{ form.is_superuser.errors }} - Designates that this user has all permissions without explicitly assigning them.
                             </div>
                             <div class="form-group">
-                                <label class="col-lg-3 control-label">{{ form.is_staff }} Staff<span class="help-inline">{{ form.is_staff.errors }} - Designates whether the user can log into this admin site.</label>
+                                {{ form.is_staff }} Staff<span class="help-inline">{{ form.is_staff.errors }} - Designates whether the user can log into this admin site.
                             </div>
                             <div class="form-group">
-                                <div class="col-lg-7">
-                                    <button id="btn_submit" type="submit" class="btn btn-success">
-                                        Save
-                                    </button>
-                                    <a href="{% url "users.views.admin_show_user" user.id %}" class="btn btn-default"> Back </a>
-                                </div>
+                                <button id="btn_submit" type="submit" class="btn btn-success">
+                                    Save
+                                </button>
+                                <a href="{% url "users.views.admin_show_user" user.id %}" class="btn btn-default"> Back </a>
                             </div>
                         </form>
                     </div>
