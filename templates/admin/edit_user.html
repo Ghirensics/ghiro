@@ -1,71 +1,71 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="span11">
-    <div class="content content-large">
-        <div class="content-header">
-            <h2><i class="icon-edit"> </i> Edit profile</h2>
-        </div>
-        <div class="content-breadcrumb">
-            <ul class="breadcrumb">
-                <li>
-                    <a href="/"><i class="icon-home"> </i> Dashboard</a><span class="divider">&rsaquo;</span>
-                </li>
-                <li>
-                    <a href="{% url "users.views.admin_list_users" %}"><i class="icon-lock"> </i> Administration</a>
-                        <span class="divider">&rsaquo;</span>
-                </li>
-                <li class="active">
-                    Edit
-                </li>
-            </ul>
-        </div>
-        <div class="content-body">
-            <form action="{% url "users.views.admin_edit_user" user.id %}" method="POST">{% csrf_token %}
-                <div class="control-group">
-                    <div class="controls">
-                        <div class="fieldWrapper">
-                            <label for="id_username">Username: (
-                                <span class="helptext">
-                                    <small><em>Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only</em></small>
-                                </span> )
-                            </label>
-                            {{ form.username }}<span class="help-inline">{{ form.username.errors }}</span>
-                        </div>
-                        <div class="fieldWrapper">
-                            <label for="id_email">Email:</label>
-                            {{ form.email }}<span class="help-inline">{{ form.email.errors }}</span>
-                        </div>
-                        <div class="fieldWrapper">
-                            <label for="id_last_name">Last name:</label>
-                            {{ form.last_name }}<span class="help-inline">{{ form.last_name.errors }}</span>
-                        </div>
-                        <div class="fieldWrapper">
-                            <label for="id_first_name">First name:</label>
-                            {{ form.first_name }}<span class="help-inline">{{ form.first_name.errors }}</span>
-                        </div>
-                        <div class="fieldWrapper">
-                            <label for="id_is_active">{{ form.is_active }} Active<span class="help-inline">{{ form.is_active.errors }}</span>
-                            <span class="helptext">- Designates whether this user should be treated as active. Unselect this instead of deleting accounts.</span></label>
-                        </div>
-                        <div class="fieldWrapper">
-                            <label for="id_is_superuser">{{ form.is_superuser }} Superuser<span class="help-inline">{{ form.is_superuser.errors }}</span>
-                            <span class="helptext">- Designates that this user has all permissions without explicitly assigning them.</span></label>
-                        </div>
-                        <div class="fieldWrapper">
-                            <label for="id_is_staff">{{ form.is_staff }} Staff<span class="help-inline">{{ form.is_staff.errors }}</span>
-                            <span class="helptext">- Designates whether the user can log into this admin site.</span></label>
-                        </div>
-                        <div class="form-actions">
-                            <button id="btn_submit" type="submit" class="btn btn-large btn-success">
-                                Save
-                            </button>
-                            <a href="{% url "users.views.admin_show_user" user.id %}" class="btn btn-large"> Back </a>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
+
+    <div class="crumbs">
+        <ol class="breadcrumb hidden-xs">
+            <li><i class="fa fa-home"></i><a href="/">Dashboard</a></li>
+            <li><i class="fa fa-lock"></i><a href="{% url "users.views.admin_list_users" %}">Administration</a></li>
+            <li class="active">Edit</li>
+        </ol>
     </div>
 </div>
+
+    <div class="content">
+        <div class="page-h1">
+            <h1>Edit profile</h1>
+        </div>
+        <div class="col-md-12">
+            <div class="wdgt">
+                <div class="wdgt-header">Insert details for {{ user.username }}'s profile </div>
+                    <div class="wdgt-body" style="padding-bottom:10px;">
+                        <form action="{% url "users.views.admin_edit_user" user.id %}" method="POST" id="defaultForm" class="form-horizontal">{% csrf_token %}
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Username: (<small><em>Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only</em></small>)</label>
+                                <div class="col-lg-7">
+                                    {{ form.username }}<span class="help-inline">{{ form.username.errors }}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Email:</label>
+                                <div class="col-lg-7">
+                                    {{ form.email }}<span class="help-inline">{{ form.email.errors }}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Last name:</label>
+                                <div class="col-lg-7">
+                                    {{ form.last_name }}<span class="help-inline">{{ form.last_name.errors }}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">First name:</label>
+                                <div class="col-lg-7">
+                                    {{ form.first_name }}<span class="help-inline">{{ form.first_name.errors }}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">{{ form.is_active }} Active<span class="help-inline">{{ form.is_active.errors }} - Designates whether this user should be treated as active. Unselect this instead of deleting accounts.</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">{{ form.is_superuser }} Superuser<span class="help-inline">{{ form.is_superuser.errors }} - Designates that this user has all permissions without explicitly assigning them.</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">{{ form.is_staff }} Staff<span class="help-inline">{{ form.is_staff.errors }} - Designates whether the user can log into this admin site.</label>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-7">
+                                    <button id="btn_submit" type="submit" class="btn btn-success">
+                                        Save
+                                    </button>
+                                    <a href="{% url "users.views.admin_show_user" user.id %}" class="btn btn-default"> Back </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
