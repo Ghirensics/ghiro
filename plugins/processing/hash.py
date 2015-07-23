@@ -2,7 +2,7 @@
 # This file is part of Ghiro.
 # See the file 'docs/LICENSE.txt' for license terms.
 
-from lib.analyzer.base import BaseAnalyzerModule
+from lib.analyzer.base import BaseProcessingModule
 
 try:
     import hashlib
@@ -12,7 +12,7 @@ except ImportError:
     IS_HASH = False
 
 
-class HashAnalyzer(BaseAnalyzerModule):
+class HashProcessing(BaseProcessingModule):
     """Calculates some hashes."""
 
     order = 10

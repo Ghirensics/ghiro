@@ -6,7 +6,7 @@ import tempfile
 import os
 import logging
 
-from lib.analyzer.base import BaseAnalyzerModule
+from lib.analyzer.base import BaseProcessingModule
 from lib.db import save_file
 from lib.utils import image2str, str2temp_file
 
@@ -19,7 +19,7 @@ except ImportError:
 logger = logging.getLogger(__name__)
 
 
-class ElaAnalyzer(BaseAnalyzerModule):
+class ElaProcessing(BaseProcessingModule):
     """Calculates ELA."""
 
     order = 20

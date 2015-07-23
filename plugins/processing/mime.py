@@ -2,7 +2,7 @@
 # This file is part of Ghiro.
 # See the file 'docs/LICENSE.txt' for license terms.
 
-from lib.analyzer.base import BaseAnalyzerModule
+from lib.analyzer.base import BaseProcessingModule
 
 try:
     import magic
@@ -11,7 +11,7 @@ except ImportError:
     IS_MAGIC = False
 
 
-class MimeAnalyzer(BaseAnalyzerModule):
+class MimeProcessing(BaseProcessingModule):
     """Extracts MIME information."""
 
     order = 10

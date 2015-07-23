@@ -5,7 +5,7 @@
 from django.db.models import Q
 
 from hashes.models import List
-from lib.analyzer.base import BaseAnalyzerModule
+from lib.analyzer.base import BaseProcessingModule
 
 try:
     import hashlib
@@ -13,7 +13,7 @@ try:
 except ImportError:
     IS_HASH = False
 
-class HashComparerAnalyzer(BaseAnalyzerModule):
+class HashComparerProcessing(BaseProcessingModule):
     """Compares hashes with hashes lists."""
 
     order = 20

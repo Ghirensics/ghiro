@@ -2,10 +2,10 @@
 # This file is part of Ghiro.
 # See the file 'docs/LICENSE.txt' for license terms.
 
-from lib.analyzer.base import BaseAnalyzerModule
+from lib.analyzer.base import BaseProcessingModule
 
 
-class InfoAnalyzer(BaseAnalyzerModule):
+class InfoProcessing(BaseProcessingModule):
     """Collect basic information."""
 
     order = 10

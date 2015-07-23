@@ -7,7 +7,7 @@ import logging
 from PIL import Image
 
 from lib.db import save_file
-from lib.analyzer.base import BaseAnalyzerModule
+from lib.analyzer.base import BaseProcessingModule
 from lib.utils import str2temp_file, to_unicode, AutoVivification, str2image, image2str
 from analyses.models import AnalysisMetadataDescription
 
@@ -20,7 +20,7 @@ except ImportError:
 logger = logging.getLogger(__name__)
 
 
-class GexivAnalyzer(BaseAnalyzerModule):
+class GexivProcessing(BaseProcessingModule):
     """Extracts image metadata."""
 
     order = 10

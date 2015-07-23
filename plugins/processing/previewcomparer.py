@@ -5,7 +5,7 @@
 import logging
 from itertools import izip
 
-from lib.analyzer.base import BaseAnalyzerModule
+from lib.analyzer.base import BaseProcessingModule
 from lib.utils import str2image
 from lib.db import get_file
 
@@ -74,7 +74,7 @@ class ImageComparer():
         return diff, diff_perc
 
 
-class PreviewComparerAnalyzer(BaseAnalyzerModule):
+class PreviewComparerProcessing(BaseProcessingModule):
     """Compares previews extracted with the original image."""
 
     order = 20

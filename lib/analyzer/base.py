@@ -4,8 +4,10 @@
 
 from lib.utils import AutoVivification
 
-class BaseAnalyzerModule(object):
-
+class BaseProcessingModule(object):
+    """Abstract class for processing modules.
+    It provides basic methods to check dependencies, run the module and store results.
+    """
     # Module execution order.
     order = 0
 
@@ -16,9 +18,11 @@ class BaseAnalyzerModule(object):
         self.data = None
 
     def check_deps(self):
+        """Checks if all the module dependencies are installed."""
         raise NotImplementedError
 
     def run(self, task):
+        """Run the module."""
         raise NotImplementedError
 
 class BaseSignature(object):

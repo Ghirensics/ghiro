@@ -14,7 +14,7 @@ from django.conf import settings
 import plugins.processing as modules
 from lib.utils import AutoVivification
 from analyses.models import Analysis
-from lib.analyzer.base import BaseAnalyzerModule
+from lib.analyzer.base import BaseProcessingModule
 from lib.db import save_results
 
 logger = logging.getLogger(__name__)
@@ -136,7 +136,7 @@ class AnalysisManager():
                 for class_name, class_pkg in inspect.getmembers(module):
                     if inspect.isclass(class_pkg):
                         # Load only modules which inherits BaseModule.
-                        if issubclass(class_pkg, BaseAnalyzerModule) and class_pkg is not BaseAnalyzerModule:
+                        if issubclass(class_pkg, BaseProcessingModule) and class_pkg is not BaseProcessingModule:
                             self.modules.append(class_pkg)
                             logger.debug("Found module: %s" % class_name)
 

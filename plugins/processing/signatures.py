@@ -2,7 +2,7 @@
 # This file is part of Ghiro.
 # See the file "docs/LICENSE.txt" for license terms.
 
-from lib.analyzer.base import BaseAnalyzerModule, BaseSignature
+from lib.analyzer.base import BaseProcessingModule, BaseSignature
 from copy import deepcopy
 
 try:
@@ -12,7 +12,7 @@ except ImportError:
     HAS_SIGNS = False
 
 
-class SignatureAnalyzer(BaseAnalyzerModule):
+class SignatureProcessing(BaseProcessingModule):
     """Run signatures on results data."""
 
     order = 80
