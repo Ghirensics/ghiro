@@ -79,9 +79,10 @@ The thumbnails and data related to them are extracted from image metadata and st
 Preview thumbnail consistency
 =============================
 
-Sometimes when a photo is edited, if the image editing software does not support image preview,
+This check compares an image with the embedded thumbnail to spot differences.
+Sometimes when a photo is edited, if the image editing software does not support embedded thumbnail automatic editing,
 the original image is edited but the thumbnail not. A simple comparison between the original image and
-the thumbnail could detect image edits.
+the thumbnail could detect image alteration or show the original image.
 
 GPS Localization
 ================
