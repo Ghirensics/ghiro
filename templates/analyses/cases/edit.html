@@ -20,11 +20,14 @@
         <div class="page-h1">
             <h1>Edit case: <small>{{ case.name }}</small></h1>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-12">
             <div class="wdgt">
-                <form action="{% url "analyses.views.edit_case" case.id %}" method="POST">{% csrf_token %}
-                    {% include "layout/_form.html" %}
-                </form>
+                <div class="wdgt-header">Modified the case</div>
+                <div class="wdgt-body">
+                    <form action="{% url "analyses.views.edit_case" case.id %}" method="POST">{% csrf_token %}
+                        {% include "layout/_form.html" %}
+                    </form>
+                </div>
             </div>
         </div>
     </div>

@@ -70,7 +70,7 @@
                                     </tbody>
                                 </table>
                             {% else %}
-                                <div class="alert alert-info">
+                                <div class="alert">
                                     <span class="fa fa-info-circle"></span>
                                     <strong>Info!</strong>
                                     No data available
@@ -108,7 +108,7 @@
                                     </tbody>
                                 </table>
                             {% else %}
-                                <div class="alert alert-info">
+                                <div class="alert">
                                     <span class="fa fa-info-circle"></span>
                                     <strong>Info!</strong>
                                     No data available
@@ -145,15 +145,15 @@
     </div>
 
     <script type="text/javascript">
-    $('.datatables').dataTable({
-        "sDom" : '<"top">t<"bottom"lp><"clear">',
-        "aaSorting" : [[2, "desc"]]
-    });
+        $('.datatables').dataTable({
+            "sDom" : '<"top">t<"bottom"lp><"clear">',
+            "aaSorting" : [[2, "desc"]]
+        });
 
-    $('.btn-trash').click(function(){
-        var id = $(this).attr("id");
-        $("#id").attr({href: id});
-    });
+        $('.btn-trash').click(function(){
+            var id = $(this).attr("id");
+            $("#id").attr({href: id});
+        });
     </script>
 
 {%  endblock %}

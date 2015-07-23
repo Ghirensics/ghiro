@@ -1,11 +1,11 @@
 <div class="form-group">
     {{ form.non_field_errors }}
     <div>
-        Name:<br>
-        <span style="height: 20px">{{ form.name }}</span><span class="help-inline">{{ form.name.errors }}</span>
+        Name:
+        {{ form.name }}<span class="help-inline">{{ form.name.errors }}</span>
     </div>
     <div>
-        Description:<br>
+        Description:
         {{ form.description }}<span class="help-inline">{{ form.description.errors }}</span>
     </div>
     <div>

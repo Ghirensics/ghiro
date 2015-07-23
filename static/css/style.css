@@ -167,6 +167,10 @@ border-top-left-radius: 0;
     vertical-align: middle;
 }
 
+.table{
+    margin-bottom: 0px !important;;
+}
+
 /* IMAGE URL CUSTOM */
 #id_path{
     width: 400px;
