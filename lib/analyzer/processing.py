@@ -11,7 +11,7 @@ from multiprocessing import cpu_count, Process, JoinableQueue
 from django.utils.timezone import now
 from django.conf import settings
 
-import plugins.analyzer as modules
+import plugins.processing as modules
 from lib.utils import AutoVivification
 from analyses.models import Analysis
 from lib.analyzer.base import BaseAnalyzerModule
