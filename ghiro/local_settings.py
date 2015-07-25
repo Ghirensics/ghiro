@@ -76,10 +76,15 @@ UPDATE_CHECK = True
 # It should be an absolute path.
 # Example: "/home/ghiro_share"
 AUTO_UPLOAD_DIR = None
-# Delete a file after upload.
+# Delete a file after upload and submission.
+# The default behaviour is True.
+# WARNING: It is not suggested to set it to False, because you will re-submit images
+# each startup.
 AUTO_UPLOAD_DEL_ORIGINAL = True
 # Clean up AUTO_UPLOAD_DIR when startup.
-# WARNING: This will delete all contents, please use an empty.
+# The default behaviour is True.
+# WARNING: It is not suggested to set it to False, because you will re-submit images
+# each startup.
 AUTO_UPLOAD_STARTUP_CLEANUP = True
 
 # Log directory. Here is where Ghiro puts all logs.
