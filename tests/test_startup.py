@@ -56,3 +56,26 @@ class CreateAutoUploadDirTest(TestCase):
             self.assertTrue(os.path.exists(case_path))
         # Cleanup.
         shutil.rmtree(tmp_path)
+
+    def test_cleanup_auto_upload_dir(self):
+        """Test for AUTO_UPLOAD_STARTUP_CLEANUP."""
+        # Create temporary directory to store everything.
+        tmp_path = tempfile.mkdtemp()
+        # Build the ghiro path for auto upload.
+        ghiro_path = os.path.join(tmp_path, "ghiro-test")
+        # Set path and create folders.
+        settings.AUTO_UPLOAD_DIR = ghiro_path
+        os.mkdir(ghiro_path)
+        # Test folder.
+        test_path = os.path.join(ghiro_path, "test")
+        os.mkdir(test_path)
+        # Test 1: not cleaning.
+        settings.AUTO_UPLOAD_STARTUP_CLEANUP = False
+        create_auto_upload_dirs()
+        self.assertTrue(os.path.exists(test_path))
+        # Test 2: cleaning.
+        settings.AUTO_UPLOAD_STARTUP_CLEANUP = True
+        create_auto_upload_dirs()
+        self.assertFalse(os.path.exists(test_path))
+        # Cleanup.
+        shutil.rmtree(tmp_path)
