@@ -50,6 +50,16 @@ class Command(NoArgsCommand):
         if settings.AUTO_UPLOAD_DEL_ORIGINAL:
             os.remove(path)
 
+    def parse_dir_name(self, path):
+        """Parses case directory name.
+        @param path: directory path.
+        @return: case instance
+        """
+        case_match = re.search("Case_id_([\d]+)$", path)
+        case_id = case_match.group(1)
+        case = Case.objects.get(pk=case_id)
+        return case
+
     def run(self, path):
         """Starts directory monitoring for new images.
         @param path: auto upload directory path"""
@@ -66,10 +76,8 @@ class Command(NoArgsCommand):
                         logger.debug("Found new file %s" % target)
 
                         # Parse case ID from directory name.
-                        case_match = re.search("Case_id_([\d]+)$", dir_name)
-                        if case_match:
-                            case_id = case_match.group(1)
-                            case = Case.objects.get(pk=case_id)
+                        case = self.parse_dir_name(target)
+                        if case:
                             # Submit image.
                             self.submit_file(target, case)
 
