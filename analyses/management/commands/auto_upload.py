@@ -9,6 +9,7 @@ import sys
 from time import sleep
 from django.conf import settings
 from django.core.management.base import NoArgsCommand
+from django.core.exceptions import ObjectDoesNotExist
 
 from analyses.models import Analysis, Case
 
@@ -55,10 +56,20 @@ class Command(NoArgsCommand):
         @param path: directory path.
         @return: case instance
         """
+        # Regexp on folder name.
         case_match = re.search("Case_id_([\d]+)$", path)
-        case_id = case_match.group(1)
-        case = Case.objects.get(pk=case_id)
-        return case
+        try:
+            case_id = case_match.group(1)
+        except AttributeError:
+            return None
+
+        # Search.
+        try:
+            case = Case.objects.get(pk=case_id)
+        except ObjectDoesNotExist:
+            return None
+        else:
+            return case
 
     def run(self, path):
         """Starts directory monitoring for new images.
