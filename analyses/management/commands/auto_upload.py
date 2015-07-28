@@ -71,7 +71,7 @@ class Command(NoArgsCommand):
         else:
             return case
 
-    def run(self, path):
+    def run(self, path, sleep_time=30):
         """Starts directory monitoring for new images.
         @param path: auto upload directory path"""
         # List of already scanned files.
@@ -98,4 +98,4 @@ class Command(NoArgsCommand):
                     files_found.remove(file)
 
             # Wait for next cycle.
-            sleep(30)
+            sleep(sleep_time)
