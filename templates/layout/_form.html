@@ -1,21 +1,26 @@
-<div class="form-group">
-    {{ form.non_field_errors }}
-    <div>
-        Name:
+<div class="form-group form-inline">
+    <a>Name</a>
+    <div class="controls box">
         {{ form.name }}<span class="help-inline">{{ form.name.errors }}</span>
     </div>
-    <div>
-        Description:
+    <a>Description</a>
+    <div class="controls box">
         {{ form.description }}<span class="help-inline">{{ form.description.errors }}</span>
     </div>
-    <div>
-        Users:
-        {{ form.users }}<span class="help-inline">{{ form.users.errors }}</span><em>Use the CTRL key to select multiple users.</em>
+    <a>Users</a>
+    <div class="controls box">
+        {{ form.users }}<span class="help-inline">{{ form.users.errors }}</span> <em>Use the CTRL key to select multiple users.</em>
     </div>
-    <div>
+    <div class="controls box">
         <button id="btn_submit" type="submit" class="btn btn-success">
             Save
         </button>
         <a href="{% url "analyses.views.list_cases" %}" class="btn btn-default">Back</a>
     </div>
 </div>
+
+<style>
+    #id_users {
+        width: 310px
+    }
+</style>

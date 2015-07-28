@@ -22,7 +22,7 @@
         </div>
         <div class="col-md-12">
             <div class="wdgt">
-                <div class="wdgt-header">Modified the case</div>
+                <div class="wdgt-header">Modify the case</div>
                 <div class="wdgt-body">
                     <form action="{% url "analyses.views.edit_case" case.id %}" method="POST">{% csrf_token %}
                         {% include "layout/_form.html" %}

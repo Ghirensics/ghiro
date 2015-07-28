@@ -9,27 +9,33 @@
     </ul>
     <div class="tab-content">
         {% if error%}
-            <div class="alert alert-danger">
+            <div class="alert alert-danger box">
                 <b>Error</b>: {{ error }}
             </div>
         {% endif %}
         <form id="property" action="{% url "analyses.views.search" "list" %}" method="get" class="tab-pane active">{% csrf_token %}
-            <div class="form-group form-inline">
+            <div class="form-group form-inline box">
                 <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by file name" data-content="Search for file names containing this string.">
                     Filename
                 </a>
-                <input id="filename" type="text" name="filename" class="form-control">
+                <div class="controls">
+                    <input id="filename" type="text" name="filename" class="form-control">
+                </div>
+            </div>
+            <div class="form-group form-inline box">
                 <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by file type" data-content="Search for file type containing this string.">
                     Filetype
                 </a>
-                <input id="filetype" type="text" name="filetype" class="form-control">
+                <div class="controls">
+                    <input id="filetype" type="text" name="filetype" class="form-control">
+                </div>
             </div>
-            <div class="form-group form-inline">
+            <div class="form-group form-inline box">
                 <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by hash" data-content="Search for images with this hash.">
                     Hash
                 </a>
                 <div class="controls">
-                    <select name="cipher" id="id_cipher">
+                    <select name="cipher" id="id_cipher" style="height: 35px;">
                         <option value="SHA1">SHA1</option>
                         <option value="SHA224">SHA224</option>
                         <option value="SHA384">SHA384</option>
@@ -38,73 +44,34 @@
                         <option value="SHA512">SHA512</option>
                         <option value="MD5">MD5</option>
                     </select>
-                    <input id="hash" type="text" name="hash" class="height-large input-medium">
+                    <input id="hash" type="text" name="hash" class="form-control">
                 </div>
+            </div>
+            <div class="form-group form-inline box">
                 <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by metadata value" data-content="Search for a value contained in a metadata key (key format example 'Exif.Photo.Camera').">
                     Metadata
                 </a>
                 <div class="controls">
-                    <input id="metadata_key" type="text" name="metadata_key" class="height-large input-small" placeholder="METADATA KEY">
-                    <input id="metadata_value" type="text" name="metadata_value" class="height-large input-small" placeholder="METADATA VALUE">
+                    <input id="metadata_key" type="text" name="metadata_key" class="form-control" placeholder="METADATA KEY">
+                    <input id="metadata_value" type="text" name="metadata_value" class="form-control" placeholder="METADATA VALUE">
                 </div>
             </div>
-
-
-
-            <div class="col-md-4">
-                <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by file name" data-content="Search for file names containing this string.">
-                    <label class="control-label" for="filename">Filename</label>
-                </a>
-                <input id="filename" type="text" name="filename" class="form-control">
-            </div>
-            <div class="col-md-2">
-                <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by file type" data-content="Search for file type containing this string.">
-                    <label class="control-label" for="filetype">Filetype</label>
-                </a>
-                <input id="filetype" type="text" name="filetype" class="form-control">
-            </div>
-            <div class="col-md-4">
-                <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by hash" data-content="Search for images with this hash.">
-                    <label class="control-label" for="filetype">Hash</label>
+            <div class="form-group form-inline box">
+                <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by signature" data-content="Search for file names containing this string.">
+                    Signature
                 </a>
                 <div class="controls">
-                    <select name="cipher" id="id_cipher">
-                        <option value="SHA1">SHA1</option>
-                        <option value="SHA224">SHA224</option>
-                        <option value="SHA384">SHA384</option>
-                        <option value="CRC32">CRC32</option>
-                        <option value="SHA256">SHA256</option>
-                        <option value="SHA512">SHA512</option>
-                        <option value="MD5">MD5</option>
-                    </select>
-                    <input id="hash" type="text" name="hash" class="height-large input-medium">
+                    <input id="signature" type="text" name="signature" class="form-control">
                 </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="metadata">Metadata</label>
-                <div class="controls">
-                    <input id="metadata_key" type="text" name="metadata_key" class="height-large input-small" placeholder="METADATA KEY">
-                    <input id="metadata_value" type="text" name="metadata_value" class="height-large input-small" placeholder="METADATA VALUE">
-                    <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by metadata value" data-content="Search for a value contained in a metadata key (key format example 'Exif.Photo.Camera').">
-                        <span class="badge badge-info"><i class="icon-info"></i></span>
-                    </a>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="signature">Signature</label>
-                <div class="controls">
-                    <input id="signature" type="text" name="signature" class="height-large">
-                    <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search by signature" data-content="Search for signature containing this text.">
-                        <span class="badge badge-info"><i class="icon-info"></i></span>
-                    </a>
-                </div>  
             </div>
             {# Detects if the search form is called inside a case or not. (Search scope) #}
             {% if in_case_id %}
                 <input type="hidden" value="{{ case.id }}" name="in_case" id="in_case">
             {% else %}
                 <div class="control-group">
-                    <label class="control-label" for="case">Case</label>
+                    <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search in case" data-content="Search only in selected case.">
+                        Case
+                    </a>
                     <div class="controls">
                         <select style="width: 715px" name="in_case">
                             <option value="all">All cases</option>
@@ -112,14 +79,11 @@
                                 <option value="{{ case.id }}">{{ case.name }}</option>
                             {% endfor %}
                         </select>
-                        <a href="#" data-trigger="hover" class="pop" data-toggle="popover" title="Search in case" data-content="Search only in selected case.">
-                            <span class="badge badge-info"><i class="icon-info"></i></span>
-                        </a>
                     </div>
                 </div>
             {% endif %}
             <div class="control-group">
-                <label class="control-label" for="metadata">Match condition</label>
+                <a>Match condition</a>
                 <div class="controls">
                    <label class="radio">
                         <input type="radio" name="optionsRadios" id="and" value="and" checked>
