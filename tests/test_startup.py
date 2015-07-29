@@ -39,6 +39,24 @@ class CreateAutoUploadDirTest(TestCase):
         # Cleanup.
         shutil.rmtree(tmp_path)
 
+    def test_existent_auto_upload_dir(self):
+        """Test for AUTO_UPLOAD_DIR creation when it already exist."""
+        # Create cases.
+        case1 = Case.objects.create(name="aaa", owner=self.user)
+        case2 = Case.objects.create(name="aab", owner=self.user)
+        # Create temporary directory to store everything.
+        tmp_path = tempfile.mkdtemp()
+        # Build the ghiro path for auto upload.
+        ghiro_path = os.path.join(tmp_path, "ghiro-test")
+        # Create AUTO_UPLOAD_DIR.
+        os.mkdir(ghiro_path)
+        # Set path and test.
+        settings.AUTO_UPLOAD_DIR = ghiro_path
+        self.assertNotEqual(create_auto_upload_dirs(), False)
+        #self.assertTrue(os.path.exists(ghiro_path))
+        # Cleanup.
+        shutil.rmtree(tmp_path)
+
     def test_case_folders_creation(self):
         # Create cases.
         case1 = Case.objects.create(name="aaa", owner=self.user)
@@ -52,7 +70,7 @@ class CreateAutoUploadDirTest(TestCase):
         create_auto_upload_dirs()
         # Test.
         for case in [case1, case2]:
-            case_path = os.path.join(ghiro_path, "Case_id_%s" % case.id)
+            case_path = os.path.join(ghiro_path, case.directory_name)
             self.assertTrue(os.path.exists(case_path))
         # Cleanup.
         shutil.rmtree(tmp_path)
