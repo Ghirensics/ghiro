@@ -1,73 +1,69 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="span11">
-    <div class="content content-large">
-        <div class="content-header">
-            <h2><i class="icon-lock"> </i> Administration <small>required modules</small></h2>
+
+    <div class="crumbs">
+        <ol class="breadcrumb hidden-xs">
+            <li>
+                <i class="fa fa-home"></i><a href="/">Dashboard</a>
+            </li>
+            <li>
+                <a href="{% url "analyses.views.list_cases" %}"><i class="fa fa-lock"> </i> Administration</a>
+            </li>
+            <li class="active">
+                Requirements
+            </li>
+        </ol>
+    </div>
+</div>
+
+    <div class="content">
+        <div class="page-h1">
+            <h1>Administration: <small>required modules<</small></h1>
         </div>
-        <div class="content-breadcrumb">
-            <ul class="breadcrumb">
-                <li>
-                    <a href="/"><i class="icon-home"> </i> Dashboard</a><span class="divider">&rsaquo;</span>
-                </li>
-                <li>
-                    <a href="{% url "users.views.admin_list_users" %}"><i class="icon-lock"> </i> Administration</a><span class="divider">&rsaquo;</span>
-                </li>
-                <li class="active">
-                    Requirements
-                </li>
-            </ul>
-        </div>
-        <div class="content-body">
-            <div class="box-header corner-top">
-                <ul class="nav nav-pills" id="cases_tab">
-                    <li>
-                        <a href="{% url "users.views.admin_list_users" %}">Users</a>
-                    </li>
-                    <li>
-                        <a href="{% url "users.views.admin_list_activity" %}">Activity</a>
-                    </li>
-                    <li class="active">
-                        <a href="{% url "manage.views.dependencies_list" %}">Requirements</a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="users">
-                        <div class="row-fluid">
-                            <div class="span12">
-                                <div class="box corner-all">
-                                    <div class="box-body">
-                                        <table class="table table-bordered table-striped responsive datatables">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Available</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% for dependency in dependencies %}
-                                                <tr>
-                                                    <td>{{ dependency.name }}</td>
-                                                    <td>
-                                                        {% if dependency.available %}
-                                                            <i class="icon-ok-circle text-success"></i>
-                                                        {% else %}
-                                                            <i class="icon-ban-circle text-error"></i>
-                                                        {% endif %}
-                                                    </td>
-                                                </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+        <div class="col-md-12">
+            <div class="wdgt">
+                    <ul class="nav nav-pills nav-primary" id="cases_tab">
+                        <li>
+                            <a href="{% url "users.views.admin_list_users" %}">Users</a>
+                        </li>
+                        <li>
+                            <a href="{% url "users.views.admin_list_activity" %}">Activity</a>
+                        </li>
+                        <li class="active">
+                            <a href="{% url "manage.views.dependencies_list" %}">Requirements</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="users">
+                            <div class="box">
+                                <table class="table datatables">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Available</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for dependency in dependencies %}
+                                        <tr>
+                                            <td>{{ dependency.name }}</td>
+                                            <td>
+                                                {% if dependency.available %}
+                                                    <i class="fa fa-check-circle-o fa-lg text-success"></i>
+                                                {% else %}
+                                                    <i class="fa fa-times-circle-o fa-lg text-danger"></i>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>
-</div>
+
 {% endblock %}
