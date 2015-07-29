@@ -12,7 +12,7 @@ $(document).ready(function() {
             }
         },
         tpl : {
-            error : 'Can not dispaly preview, unsupported format.'
+            error : 'Can not display preview, unsupported format.'
         },
         'autoSize': 'false'
     });

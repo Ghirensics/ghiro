@@ -5,7 +5,7 @@
         {% for image in images %}
             <li>
                 {% if image.thumb_id %}
-                    <a class="group1" rel="group1" href="{% url "analyses.views.image" image.image_id %}" title="{{ image.file_name }}">
+                    <a href="{% url "analyses.views.image" image.image_id %}" title="{{ image.file_name }}">
                         <img src="{% url "analyses.views.image" image.thumb_id %}" />
                     </a>
                     <div class="tags">
@@ -28,11 +28,11 @@
                     <div class="icns">
                         <a href="{% url "analyses.views.show_analysis" image.id %}" title="Show report"> <i class="icon-list-alt"> </i></a>
                         {% if image.favorites.all %}
-                            <a id="{% url "analyses.views.favorite" image.id %}" rel="{{ image.id }}" class="favorite btn-warning star{{image.id}}" title="Un-set as favorite"> <i class="fa fa-star"> </i></a>
+                            <a id="{% url "analyses.views.favorite" image.id %}" rel="{{ image.id }}" class="favorite btn-warning star{{image.id}}" title="Un-set as favorite"> <i class="icon icon-star"> </i></a>
                         {% else %}
-                            <a id="{% url "analyses.views.favorite" image.id %}" rel="{{ image.id }}" class="favorite star{{image.id}}" title="Set as favorite"> <i class="fa fa-star"> </i></a>
+                            <a id="{% url "analyses.views.favorite" image.id %}" rel="{{ image.id }}" class="favorite star{{image.id}}" title="Set as favorite"> <i class="icon icon-star"> </i></a>
                         {% endif %}
-                        <a class="fancybox" href="{% url "analyses.views.image" image.image_id %}" title="View image: {{ image.file_name }}"><i class="fa fa-photo"> </i></a>
+                        <a class="fancybox" href="{% url "analyses.views.image" image.image_id %}" title="View image: {{ image.file_name }}"><i class="icon icon-camera"> </i></a>
                     </div>
                 {% else %}
                     <img src="{{ STATIC_URL }}img/no_image_large.jpg" />
