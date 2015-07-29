@@ -71,6 +71,11 @@ class Case(models.Model):
         """
         return user.is_superuser or self.is_in_users(user) or self.is_owner(user)
 
+    @property
+    def directory_name(self):
+        """Returns directory name used in auto upload."""
+        return "Case_id_%s" % self.id
+
 @receiver(pre_save, sender=Case)
 def set_updated_at(sender, instance, **kwargs):
     """Hook to set updated_at date every time the model is saved."""
