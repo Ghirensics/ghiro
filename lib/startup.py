@@ -26,17 +26,17 @@ def create_auto_upload_dirs():
     if settings.AUTO_UPLOAD_DIR:
         logger.debug("Auto upload from directory is enabled on %s.", settings.AUTO_UPLOAD_DIR)
 
-        if os.path.exists(settings.AUTO_UPLOAD_DIR):
-            # Cleanup auto upload directory:
-            if settings.AUTO_UPLOAD_STARTUP_CLEANUP:
-                logger.debug("Cleaning up %s.", settings.AUTO_UPLOAD_DIR)
-                try:
-                    shutil.rmtree(settings.AUTO_UPLOAD_DIR)
-                except IOError as e:
-                    logger.error("Unable to clean auto upload directory %s reason %s" % (settings.AUTO_UPLOAD_DIR, e))
-                    return False
-        else:
-            # Create directory if it's missing.
+        # Cleanup auto upload directory:
+        if settings.AUTO_UPLOAD_STARTUP_CLEANUP and os.path.exists(settings.AUTO_UPLOAD_DIR):
+            logger.debug("Cleaning up %s.", settings.AUTO_UPLOAD_DIR)
+            try:
+                shutil.rmtree(settings.AUTO_UPLOAD_DIR)
+            except IOError as e:
+                logger.error("Unable to clean auto upload directory %s reason %s" % (settings.AUTO_UPLOAD_DIR, e))
+                return False
+
+        # Create directory if it's missing.
+        if not os.path.exists(settings.AUTO_UPLOAD_DIR):
             logger.debug("Auto upload directory is missing, creating it.")
             try:
                 os.mkdir(settings.AUTO_UPLOAD_DIR)
