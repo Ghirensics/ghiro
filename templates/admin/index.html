@@ -69,7 +69,7 @@
                                                     <i class="fa fa-pencil"> </i>
                                                 </a>
                                                 {% if user.is_active %}
-                                                    <a class="btn btn-danger" data-tooltip="tooltip" title="Disable user" href="#disable" role="button" data-toggle="modal" id="{% url "users.views.admin_disable_user" user.id %}">
+                                                    <a class="btn btn-danger btn-disable" data-tooltip="tooltip" title="Disable user" href="#disable" role="button" data-toggle="modal" id="{% url "users.views.admin_disable_user" user.id %}">
                                                         <i class="fa fa-times-circle"> </i>
                                                     </a>
                                                 {% else %}
@@ -89,35 +89,31 @@
         </div>
     </div>
 
-<div id="disable" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true"> 
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-            ×
-        </button>
-        <h3>Disable user</h3>
-    </div>
-    <div class="modal-body">
-        <p>
-            Disabling an user the related account will be marked as inactive.
-            So the user will not be able to logon in Ghiro, until an administrator
-            will re-enable he.
-            The user account and the user data will not be deleted.
-        </p>
-    </div>
-    <div class="modal-footer">
-        <a class="btn btn-danger" id="id">
-            Disable
-        </a>
-        <a class="btn" data-dismiss="modal" aria-hidden="true">
-            Cancel
-        </a>
+<div class="modal fade" id="disable" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Disable user</h4>
+            </div>
+            <div class="modal-body">
+                Disabling an user the related account will be marked as inactive.
+                So the user will not be able to logon in Ghiro, until an administrator
+                will re-enable he.
+                The user account and the user data will not be deleted.
+            </div>
+            <div class="modal-footer">
+                <a type="button" class="btn btn-danger" id="id-disable">Disable</a>
+                <a type="button" class="btn btn-default" data-dismiss="modal">Cancel</a>
+            </div>
+        </div>
     </div>
 </div>
 
 <script type="text/javascript">
     $('.btn-disable').click(function(){
         var id = $(this).attr("id");
-        $("#id").attr({href: id});
+        $("#id-disable").attr({href: id});
     });
 </script>
 {% endblock %}

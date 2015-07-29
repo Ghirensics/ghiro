@@ -1,34 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="span11">
-    <div class="content content-large">
-        <div class="content-body">
-            <section id="main">
-                <div class="container-fluid">
-                    <div class="row-fluid">
-                        <div class="span12">
-                            <div class="error-container center">
-                                <div class="info-text text-transparent">
-                                    Sorry! Something went wrong here!
-                                </div>
-                                <hr class="main">
-                                <div class="error-text text-transparent">
-                                    <i class="icon-warning-sign"> </i>
-                                </div>
-                                <hr class="main">
-                                <div class="info-text text-transparent">
-                                    <div class="error">{{error}}</div>
-                                </div>
-                                <div>
-                                    <a class="btn medium-blue" href="javascript:history.back();"><i class="icon-ok-sign"> </i> Back </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
+
+    <div class="crumbs">
+        <ol class="breadcrumb hidden-xs">
+            <li><i class="fa fa-home"></i><a href="/">Dashboard</a></li>
+            <li class="active">Error</li>
+        </ol>
     </div>
 </div>
+
+    <div class="content">
+        <div class="page-h1">
+            <h1>Sorry! Something went wrong here!</h1>
+        </div>
+        <div class="col-md-12">
+            <div class="wdgt">
+                <div class="alert alert-warning" role="alert"><i class="fa fa-lg fa-info-circle"></i> {{error}}</div>
+                <a class="btn btn-default" href="javascript:history.back();">Back</a>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
