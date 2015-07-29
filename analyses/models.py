@@ -93,7 +93,7 @@ def auto_upload_sync(sender, instance, **kwargs):
         if not os.path.exists(dir_path):
             try:
                 os.mkdir(dir_path)
-            except IOError as e:
+            except (IOError, OSError) as e:
                 # TODO: add error tracking.
                 pass
 
