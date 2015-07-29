@@ -87,7 +87,7 @@ class Command(NoArgsCommand):
                         logger.debug("Found new file %s" % target)
 
                         # Parse case ID from directory name.
-                        case = self.parse_dir_name(target)
+                        case = self.parse_dir_name(dir_name)
                         if case:
                             # Submit image.
                             self.submit_file(target, case)
