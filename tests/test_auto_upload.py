@@ -28,7 +28,8 @@ class ParseDirNameTest(TestCase):
     def test_parse_dir_name_absolute_path(self):
         """Tests parsing of directory name, expected cases: absolute path."""
         case = Case.objects.create(name="aaa", owner=self.user, id=4)
-        self.assertEqual(self.c.parse_dir_name(case.directory_name), case)
+        dir_name = os.path.join("/tmp/ghiro", case.directory_name)
+        self.assertEqual(self.c.parse_dir_name(dir_name), case)
 
     def test_parse_dir_name_many_digits(self):
         """Tests parsing of directory name, expected cases: many digits."""
