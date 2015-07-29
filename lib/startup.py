@@ -46,8 +46,7 @@ def create_auto_upload_dirs():
 
         # Create cases dirs.
         for case in Case.objects.all():
-            dir_name = "Case_id_%s" % case.id
-            dir_path = os.path.join(settings.AUTO_UPLOAD_DIR, dir_name)
+            dir_path = os.path.join(settings.AUTO_UPLOAD_DIR, case.directory_name)
             if not os.path.exists(dir_path):
                 try:
                     logger.debug("Creating directory %s" % dir_path)

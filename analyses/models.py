@@ -93,8 +93,7 @@ def auto_upload_sync(sender, instance, **kwargs):
     """When a new case is created syncs file system auto upload directories."""
     # If auto upload is enabled sync the case folders.
     if settings.AUTO_UPLOAD_DIR:
-        dir_name = "Case_id_%s" % instance.id
-        dir_path = os.path.join(settings.AUTO_UPLOAD_DIR, dir_name)
+        dir_path = os.path.join(settings.AUTO_UPLOAD_DIR, instance.directory_name)
         if not os.path.exists(dir_path):
             try:
                 os.mkdir(dir_path)
