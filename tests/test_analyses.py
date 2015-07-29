@@ -71,6 +71,11 @@ class CaseModelTest(TestCase):
         case.save()
         self.assertNotEqual(t1, case.updated_at)
 
+    def test_directory_name(self):
+        """Test directory name syntax."""
+        case = Case.objects.create(name="a", owner=self.user, id=42)
+        self.assertEqual(case.directory_name, "Case_id_%s" % case.id)
+
     def test_auto_upload_sync_creation(self):
         """Tests automated case folder creation."""
         case = Case.objects.create(name="a", owner=self.user)
