@@ -70,6 +70,23 @@ ALLOWED_HOSTS = ["*"]
 # Set it to False to disable update check.
 UPDATE_CHECK = True
 
+# Auto upload is used to upload ana analyze files from a directory, monitoring
+# it for changes.
+# It is usually used to upload images via a shared folder or FTP.
+# It should be an absolute path.
+# Example: "/home/ghiro_share"
+AUTO_UPLOAD_DIR = None
+# Delete a file after upload and submission.
+# The default behaviour is True.
+# WARNING: It is not suggested to set it to False, because you will re-submit images
+# each startup.
+AUTO_UPLOAD_DEL_ORIGINAL = True
+# Clean up AUTO_UPLOAD_DIR when startup.
+# The default behaviour is True.
+# WARNING: It is not suggested to set it to False, because you will re-submit images
+# each startup.
+AUTO_UPLOAD_STARTUP_CLEANUP = True
+
 # Log directory. Here is where Ghiro puts all logs.
 LOG_DIR = os.path.join(PROJECT_DIR, "log")
 # File name used for image processor log.

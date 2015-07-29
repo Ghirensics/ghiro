@@ -57,6 +57,38 @@ Administration
 
 Some hints about Ghiro administration.
 
+Auto Upload
+-----------
+
+Auto Upload is a feature to automatically upload images written in a default directory; you can
+share the default directory over FTP, Samba (Windows shared folder) or other file sharing technologies
+so you can simply launch a Ghiro analysis copying a file in a shared folder.
+
+To configure Auto Upload you have to edit `local_settings.py` and configure:
+
+ * `AUTO_UPLOAD_DIR` to the directory you want to use for Ghiro Auto Upload
+ * (optional) `AUTO_UPLOAD_DEL_ORIGINAL` if you want to keep the original files (it is suggested to keep the default value, files will be deleted after being submitted to Ghiro)
+ * (optional) `AUTO_UPLOAD_STARTUP_CLEANUP` if you don't want to clean `AUTO_UPLOAD_DIR` at startup (it is suggested to keep the default value, `AUTO_UPLOAD_DIR` will be cleaned up at startup)
+
+After configuration, you have to start the directory monitoring with the following command::
+
+    python manage.py auto_upload
+
+Now directory monitoring is running, a tree of folder related to cases in your system will be created,
+for example:
+
+.. image:: ../_images/auto_upload_folders.png
+
+As you can see there are many folder, one for each case stored, with the case id in the folder name.
+You should only put the images you want to be analyzed inside a case folder, ghiro will automatically
+process them, store inside the case with the same id of the folder name, and remove the original file
+from disk.
+
+This feature comes to help in many situations:
+
+ * When you need to provide people an easy way to submit images to Ghiro, you could just setup a shared folder.
+ * If you need to analyze a large amount of data, you could submit with a files copy command.
+
 Run processor in debug mode
 ---------------------------
 
