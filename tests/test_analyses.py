@@ -9,6 +9,7 @@ from django.conf import settings
 
 from users.models import Profile
 from analyses.models import Case, Analysis
+from analyses.management.commands.auto_upload import Command
 
 
 class CaseModelTest(TestCase):
@@ -78,6 +79,9 @@ class CaseModelTest(TestCase):
 
     def test_auto_upload_sync_creation(self):
         """Tests automated case folder creation."""
+        # Create base dir.
+        Command.create_auto_upload_dirs()
+        # Create case.
         case = Case.objects.create(name="a", owner=self.user)
         self.assertTrue(os.path.exists(os.path.join(settings.AUTO_UPLOAD_DIR, case.directory_name)))
 
