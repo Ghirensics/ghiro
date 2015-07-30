@@ -89,6 +89,11 @@ This feature comes to help in many situations:
  * When you need to provide people an easy way to submit images to Ghiro, you could just setup a shared folder.
  * If you need to analyze a large amount of data, you could submit with a files copy command.
 
+.. warning::
+        Don't use the Auto Upload directory configured in `AUTO_UPLOAD_DIR` as a permanent storage!
+        Depending on the configuration, it will be cleaned up each time you run `manage.py auto_upload`.
+        Auto Upload directory is designed as temporary storage to submit images only.
+
 Run processor in debug mode
 ---------------------------
 
