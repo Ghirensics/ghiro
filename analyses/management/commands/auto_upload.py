@@ -123,7 +123,7 @@ class Command(NoArgsCommand):
         """Starts directory monitoring for new images.
         @param path: auto upload directory path"""
         # Create tree.
-        create_auto_upload_dirs()
+        self.create_auto_upload_dirs()
         # List of already scanned files.
         files_found = []
 
