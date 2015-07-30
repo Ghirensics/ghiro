@@ -3,6 +3,8 @@
 # See the file 'docs/LICENSE.txt' for license terms.
 
 import os
+import tempfile
+import shutil
 
 from django.test import TestCase
 from django.conf import settings
@@ -79,11 +81,20 @@ class CaseModelTest(TestCase):
 
     def test_auto_upload_sync_creation(self):
         """Tests automated case folder creation."""
+        # Create temporary directory to store everything.
+        tmp_path = tempfile.mkdtemp()
+        # Build the ghiro path for auto upload.
+        ghiro_path = os.path.join(tmp_path, "ghiro-test")
+        # Set path and test.
+        settings.AUTO_UPLOAD_DIR = ghiro_path
         # Create base dir.
         Command.create_auto_upload_dirs()
         # Create case.
         case = Case.objects.create(name="a", owner=self.user)
-        self.assertTrue(os.path.exists(os.path.join(settings.AUTO_UPLOAD_DIR, case.directory_name)))
+        dir_name = os.path.join(settings.AUTO_UPLOAD_DIR, case.directory_name)
+        self.assertTrue(os.path.exists(dir_name))
+        # Cleanup.
+        shutil.rmtree(tmp_path)
 
 class AnalysisModelTest(TestCase):
     def setUp(self):
