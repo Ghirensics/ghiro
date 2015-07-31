@@ -109,9 +109,9 @@
                                                 <a href="{% url "analyses.views.image" anal.image_id %}" type="button" class="btn btn-primary btn-xs fancybox" data-tooltip="tooltip" title="Show photo"><i class="fa fa-photo"></i></a>
                                                 <a href="{% url "analyses.views.show_analysis" anal.id %}" type="button" class="btn btn-info btn-xs" data-tooltip="tooltip" title="View report"><i class="fa fa-file-text"></i></a>
                                                 {% if anal.image.favorites.all %}
-                                                    <a id="{% url "analyses.views.favorite" anal.image_id %}" rel="{{ anal.image_id }}" type="button" class="favorite btn btn-xs btn-warning star{{image.id}}" data-tooltip="tooltip" title="Un-set as favorite"> <i class="fa fa-star"> </i></a>
+                                                    <a id="{% url "analyses.views.favorite" anal.id %}" rel="{{ anal.id }}" type="button" class="favorite btn btn-xs btn-warning star{{anal.id}}" data-tooltip="tooltip" title="Un-set as favorite"> <i class="fa fa-star"> </i></a>
                                                 {% else %}
-                                                    <a id="{% url "analyses.views.favorite" anal.image_id %}" rel="{{ anal.image_id }}" type="button" class="favorite btn btn-xs star{{image.id}}" data-tooltip="tooltip" title="Set as favorite"> <i class="fa fa-star"> </i></a>
+                                                    <a id="{% url "analyses.views.favorite" anal.id %}" rel="{{ anal.id }}" type="button" class="favorite btn btn-xs btn-default star{{anal.id}}" data-tooltip="tooltip" title="Set as favorite"> <i class="fa fa-star"> </i></a>
                                                 {% endif %}
                                             </td>
                                         </tr>
