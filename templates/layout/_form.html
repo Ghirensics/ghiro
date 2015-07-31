@@ -1,13 +1,13 @@
 <div class="form-group form-inline">
-    <a>Name</a>
+    Name
     <div class="controls box">
         {{ form.name }}<span class="help-inline">{{ form.name.errors }}</span>
     </div>
-    <a>Description</a>
+    Description
     <div class="controls box">
         {{ form.description }}<span class="help-inline">{{ form.description.errors }}</span>
     </div>
-    <a>Users</a>
+    Users
     <div class="controls box">
         {{ form.users }}<span class="help-inline">{{ form.users.errors }}</span> <em>Use the CTRL key to select multiple users.</em>
     </div>
@@ -18,9 +18,3 @@
         <a href="{% url "analyses.views.list_cases" %}" class="btn btn-default">Back</a>
     </div>
 </div>
-
-<style>
-    #id_users {
-        width: 310px
-    }
-</style>

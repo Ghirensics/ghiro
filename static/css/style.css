@@ -176,14 +176,19 @@ border-top-left-radius: 0;
     width: 400px;
 }
 
-/* PAGE HEADER */
-.page-h1 h1 { font-size:24px; font-weight:200; color:#448FBA; margin: 5px 15px; border-bottom:1px solid #E6E6E6; padding-bottom:10px; }
-
 /* MAP CUSTOM */
 #map_canvas{
     width: 1140px;
     height: 600px;
 }
+
+/* FORM CUSTOM */
+#id_users {
+    width: 310px
+}
+
+/* PAGE HEADER */
+.page-h1 h1 { font-size:24px; font-weight:200; color:#448FBA; margin: 5px 15px; border-bottom:1px solid #E6E6E6; padding-bottom:10px; }
 
 /* BUTTON OVERRIDE */
 .sbtn {
