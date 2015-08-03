@@ -11,7 +11,7 @@ from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.conf import settings
 
 from users.models import Activity
-from manage.models import UpdateCheck
+from system.models import UpdateCheck
 
 logger = logging.getLogger("audit")
 

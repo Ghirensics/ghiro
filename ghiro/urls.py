@@ -9,6 +9,6 @@ urlpatterns = patterns("",
     (r"^users/", include("users.urls")),
     (r"^analyses/", include("analyses.urls")),
     (r"^hashes/", include("hashes.urls")),
-    (r"^manage/", include("manage.urls")),
+    (r"^system/", include("system.urls")),
     (r"^api/", include("api.urls")),
 )
