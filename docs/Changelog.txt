@@ -4,6 +4,7 @@ Ghiro-0.3 (TBD)
  * Added processing log file.
  * Added auto upload of files from a directory (monitoring directory and uploading new images).
  * Added unit tests.
+ * Renamed 'manage' app to 'system'
 
 Ghiro-0.2 (09/01/2015)
 
