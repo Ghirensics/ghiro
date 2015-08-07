@@ -65,3 +65,29 @@ You can use these API as follows.
 
         **Status codes**:
             * ``200`` - success
+
+/api/images/report
+------------------
+
+    **POST /api/images/report**
+
+        Get image analysis report.
+
+        **Example request (requesting image analysis with ID 1)**::
+
+            curl -kis -F task_id=1 -F api_key=YOUR_API_KEY http://127.0.0.1:8000/api/images/report
+
+        **Example response of completed analysis (truncated)**::
+
+            {"id": 1, "status": "C", "data": {"signatures": [], "hash": {"sha1\": "fda88a5aa ..snip..
+
+        **Example response of not completed analysis (truncated)**::
+
+            {"id": 1, "status": "P"}
+
+        **Form parameters**:
+            * ``task_id`` *(required)* - analysis id
+            * ``api_key`` *(required)* - your API key (get it in your profile page)
+
+        **Status codes**:
+            * ``200`` - success
