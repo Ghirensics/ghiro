@@ -71,3 +71,24 @@ def new_image(request):
 
     response_data = {"id": task.id}
     return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+@require_POST
+@csrf_exempt
+def get_report(request):
+    """Returns a report."""
+    user = api_authenticate(request.POST.get("api_key"))
+
+    if request.POST.get("task_id"):
+        task = get_object_or_404(Analysis, pk=request.POST.get("task_id"))
+
+        # Security check.
+        if not task.can_read(user):
+            return HttpResponse("You are not authorized to read this analysis", status=400)
+
+        if task.state == "C":
+            response_data = {"id": task.id, "status": task.state, "data": task.to_json}
+        else:
+            response_data = {"id": task.id, "status": task.state}
+        return HttpResponse(json.dumps(response_data), content_type="application/json")
+    else:
+        return HttpResponse("Missing parameter task_id", status=400)
