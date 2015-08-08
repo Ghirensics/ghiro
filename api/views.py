@@ -40,6 +40,26 @@ def new_case(request):
 
 @require_POST
 @csrf_exempt
+def show_case(request):
+    """Shows a case."""
+    user = api_authenticate(request.POST.get("api_key"))
+
+    if request.POST.get("case_id"):
+        case = get_object_or_404(Case, pk=request.POST.get("case_id"))
+
+        # Security check.
+        if not case.can_read(user):
+            return HttpResponse("You are not authorized to read this case", status=400)
+
+        response_data = {"id": case.id, "status": case.state, "name": case.name,
+                         "description": case.description, "images":
+                             [image.id for image in case.images.all()]}
+        return HttpResponse(json.dumps(response_data), content_type="application/json")
+    else:
+        return HttpResponse("Missing parameter case_id", status=400)
+
+@require_POST
+@csrf_exempt
 def new_image(request):
     """Upload a new image."""
     user = api_authenticate(request.POST.get("api_key"))
