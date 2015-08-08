@@ -1,17 +1,24 @@
 API Usage
 =========
 
-External systems might like to interact with Ghiro and share data with it.
-For example you might be intrested in integrating Ghiro with your analysis environment or
-your scripts; for example you would have a system sending images to Ghiro and a script to
-fetch analysis results and process them.
-Ghiro comes with a set of JSON API to help automation and integration with external systems.
-All major functionalities are accessible through API, although API will be expanded and
-enriched in future releases.
+External systems might like to interact with Ghiro, use their features and
+share data with it.
+For example you might be interested in integrating Ghiro with your analysis
+environment or your scripts, to integrate Ghiro with your analysis pipeline.
+For example you would have a system sending images to Ghiro and a script to
+fetch analysis results and process them to send an email only if some
+circumstances are met.
+Ghiro comes with a set of JSON API to help automation and integration with
+external systems.
+All major functionalities are available through API, although API will be
+expanded and enriched in future releases.
+
 The available API methods are:
 
     * Create a new case
+    * Show case contents
     * Image upload for analysis (create a new analysis)
+    * Fetch report of an image analysis
 
 You can use these API as follows.
 
@@ -37,6 +44,30 @@ You can use these API as follows.
 
         **Status codes**:
             * ``200`` - success
+            * ``400`` - failure (see the message for error description)
+
+/api/cases/show
+---------------
+
+    **POST /api/cases/show**
+
+        Shows a case. Including image ids for this case.
+
+        **Example request (requesting case with ID 3)**::
+
+            curl -kis -F case_id=3 -F api_key=YOUR_API_KEY http://127.0.0.1:8000/api/cases/show
+
+        **Example response**::
+
+            {"status": "O", "images": [2, 1], "description": "Test case.", "id": 3, "name": "Test"}
+
+        **Form parameters**:
+            * ``case_id`` *(required)* - case ID
+            * ``api_key`` *(required)* - your API key (get it in your profile page)
+
+        **Status codes**:
+            * ``200`` - success
+            * ``400`` - failure (see the message for error description)
 
 /api/images/new
 ---------------
@@ -65,6 +96,7 @@ You can use these API as follows.
 
         **Status codes**:
             * ``200`` - success
+            * ``400`` - failure (see the message for error description)
 
 /api/images/report
 ------------------
@@ -91,3 +123,4 @@ You can use these API as follows.
 
         **Status codes**:
             * ``200`` - success
+            * ``400`` - failure (see the message for error description)
