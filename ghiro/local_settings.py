@@ -87,6 +87,10 @@ AUTO_UPLOAD_DEL_ORIGINAL = True
 # each startup.
 AUTO_UPLOAD_STARTUP_CLEANUP = True
 
+# Auditing.
+# Logs all user actions.
+AUDITING_ENABLED = True
+
 # Log directory. Here is where Ghiro puts all logs.
 LOG_DIR = os.path.join(PROJECT_DIR, "log")
 # File name used for image processor log.

@@ -24,6 +24,10 @@ def log_activity(category, message, request=None, user=None):
     @param user: optional user instance
     """
 
+    # Skip if auditing is not enabled.
+    if not settings.AUDITING_ENABLED:
+        return
+
     # In local submissions the request object could be missing.
     if request:
         # Get forwarded for if exists.
