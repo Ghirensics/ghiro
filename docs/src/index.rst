@@ -46,6 +46,7 @@ Usage
 .. toctree::
 
     usage/index
+    usage/appliance
     usage/api
     usage/faq
 
