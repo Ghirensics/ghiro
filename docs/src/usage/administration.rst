@@ -108,6 +108,14 @@ example a law enforcement organization or forensics lab could require to have a
 track of who did what.
 The logs are stored in your local database and are written in the auditing log
 file (if you enabled logging on files).
+Auditing is logging the following information:
+
+ * Message describing event.
+ * Category of the event.
+ * User who requested the event.
+ * Client IP address.
+ * Timestamp.
+
 If you want to disable auditing, set to false `AUDITING_ENABLED` inside
 `local_settings.py` as follows::
 
