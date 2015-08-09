@@ -2,6 +2,7 @@
 # This file is part of Ghiro.
 # See the file 'docs/LICENSE.txt' for license terms.
 
+import json
 import os
 from django.test import Client
 from django.test import TestCase
@@ -39,6 +40,31 @@ class NewCaseTest(TestCase):
         """Tests success auth.."""
         response = self.c.post("/api/cases/new", {"name": "test", "description": "test", "api_key": self.user.api_key})
         self.assertEqual(response.status_code, 200)
+
+class ShowCaseTest(TestCase):
+    def setUp(self):
+        self.user = Profile.objects.create_user(username="test", email="a@a.cp,", password="Test")
+        self.c = Client()
+
+    def test_fail_auth_show_case_no_api(self):
+        """Tests failed auth with no api key."""
+        response = self.c.post("/api/cases/show", {"case_id": 1})
+        self.assertEqual(response.status_code, 403)
+
+    def test_fail_auth_new_case_wrong_api(self):
+        """Tests failed auth with wrong api key."""
+        response = self.c.post("/api/cases/show", {"case_id": 1, "api_key": "aaaaa"})
+        self.assertEqual(response.status_code, 403)
+
+    def test_success_auth_show_case(self):
+        """Tests success auth."""
+        case = Case.objects.create(name="aaa", owner=self.user)
+        anal = Analysis.objects.create(owner=self.user, case=case)
+        response = self.c.post("/api/cases/show", {"case_id": case.id, "api_key": self.user.api_key})
+        self.assertEqual(response.status_code, 200)
+        response_data = json.loads(response.content)
+        self.assertEqual(response_data["id"], case.id)
+        self.assertEqual(response_data["images"][0], anal.id)
 
 class NewImageTest(TestCase):
     def setUp(self):
