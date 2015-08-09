@@ -2,9 +2,10 @@
 # This file is part of Ghiro.
 # See the file 'docs/LICENSE.txt' for license terms.
 
-from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
 
 from users.models import Profile
+
 
 def api_authenticate(api_key):
     """Authenticate users via API key.
