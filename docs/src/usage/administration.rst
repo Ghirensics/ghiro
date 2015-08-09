@@ -98,3 +98,17 @@ If you need to dump all images in Ghiro's database, in their original format, to
 disk, you can save all to disk with::
 
     python manage.py images_save_all -p /path/to/disk/
+
+Auditing
+--------
+
+Ghiro comes with an auditing feature enabled by default.
+The auditing support is designed to meet the requirements about logging, for
+example a law enforcement organization or forensics lab could require to have a
+track of who did what.
+The logs are stored in your local database and are written in the auditing log
+file (if you enabled logging on files).
+If you want to disable auditing, set to false `AUDITING_ENABLED` inside
+`local_settings.py` as follows::
+
+    AUDITING_ENABLED = False
