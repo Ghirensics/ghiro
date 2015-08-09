@@ -1,7 +1,7 @@
 Virtual Appliance
 =================
 
-The faster way to start playing with Ghiro is to download the Ghiro Virtual
+The fasteest way to start playing with Ghiro is to download the Ghiro Virtual
 Appliance.
 You can download it from the `official website`_.
 In few minutes you will have a fully functional Ghiro setup, running in a
