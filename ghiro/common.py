@@ -82,6 +82,7 @@ def check_version(url="http://update.getghiro.org/update/check/"):
     """Checks version of Ghiro.
     It connects to Ghiro update website to check if a new release is available.
     You can optionally disable this via configuration file.
+    @param url: update service URL
     @return: boolean status of update available
     """
 
