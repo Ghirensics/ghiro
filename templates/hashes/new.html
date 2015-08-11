@@ -23,39 +23,39 @@
         </div>
         <div class="col-md-12">
             <div class="wdgt">
-                <form action="{% url "hashes.views.new_hashes" %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
-                    <div class="control-group">
-                        <div class="controls">
+                <div class="wdgt-header">Complete the hash</div>
+                <div class="wdgt-body">
+                    <form action="{% url "hashes.views.new_hashes" %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                        <div class="form-group form-inline">
                             {{ form.non_field_errors }}
-                            <div class="fieldWrapper">
-                                <label for="id_name">Name:</label>
+                            Name
+                            <div class="controls box">
                                 {{ form.name }}<span class="help-inline">{{ form.name.errors }}</span>
                             </div>
-                            <div class="fieldWrapper">
-                                <label for="id_description">Description:</label>
+                            Description
+                            <div class="controls box">
                                 <textarea id="id_description" rows="3" name="description" style="width: 350px"></textarea><span class="help-inline">{{ form.description.errors }}</span>
                             </div>
-                            <div class="fieldWrapper">
-                                <label for="id_cipher">Cipher:</label>
+                            Cipher
+                            <div class="controls box">
                                 {{ form.cipher }}<span class="help-inline">{{ form.cipher.errors }}</span>
                             </div>
-                            <div class="fieldWrapper">
-                                <label for="id_public">{{ form.public }} Public - <small> shared with other users</small></label>
+                            <div class="box">
+                                {{ form.public }} Public - <small> shared with other users</small>
                                 <span class="help-inline">{{ form.public.errors }}</span>
                             </div>
-                            <div class="fieldWrapper">
-                                <label for="id_hash_list">File:</label>
-                                {{ form.hash_list }}<span class="help-inline">{{ form.hash_list.errors }}</span>
+                            <div class="controls box">
+                                File {{ form.hash_list }}<span class="help-inline">{{ form.hash_list.errors }}</span>
                             </div>
                             <div class="form-actions">
-                                <button id="btn_submit" type="submit" class="btn btn-large btn-success">
+                                <button id="btn_submit" type="submit" class="btn btn-success">
                                     Save
                                 </button>
-                                <a href="{% url "hashes.views.list_hashes" %}" class="btn btn-large"> Back </a>
+                                <a href="{% url "hashes.views.list_hashes" %}" class="btn btn-default"> Back </a>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
