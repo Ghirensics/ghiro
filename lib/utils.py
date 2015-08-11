@@ -2,9 +2,13 @@
 # This file is part of Ghiro.
 # See the file 'docs/LICENSE.txt' for license terms.
 
-import StringIO
 import tempfile
 import magic
+# Deal with Python 3.
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 
 from PIL import Image
 from pymongo.errors import InvalidId
