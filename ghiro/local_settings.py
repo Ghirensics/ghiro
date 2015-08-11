@@ -1,5 +1,5 @@
 LOCAL_SETTINGS = True
-from settings import *
+from .settings import *
 
 DATABASES = {
     'default': {

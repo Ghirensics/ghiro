@@ -130,7 +130,7 @@ try:
     LOCAL_SETTINGS
 except NameError:
     try:
-        from ghiro.local_settings import *
+        from .local_settings import *
     except ImportError:
         pass
 
