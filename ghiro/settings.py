@@ -66,7 +66,7 @@ FILE_UPLOAD_HANDLERS = ("django.core.files.uploadhandler.TemporaryFileUploadHand
 # Unique secret key generator.
 # Secret key will be placed in secret_key.py file.
 try:
-    from secret_key import *
+    from ghiro.secret_key import *
 except ImportError:
     SETTINGS_DIR=os.path.abspath(os.path.dirname(__file__))
     # Using the same generation schema of Django startproject.
@@ -76,7 +76,7 @@ except ImportError:
     with open(os.path.join(SETTINGS_DIR, "secret_key.py"), "w") as file:
         file.write("SECRET_KEY = \"{0}\"".format(key))
     # Reload key.
-    from secret_key import *
+    from ghiro.secret_key import *
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -130,7 +130,7 @@ try:
     LOCAL_SETTINGS
 except NameError:
     try:
-        from local_settings import *
+        from ghiro.local_settings import *
     except ImportError:
         pass
 
