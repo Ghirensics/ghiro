@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 
 from ghiro.common import log_activity
-from api.lib import api_authenticate
+from api.common import api_authenticate
 from analyses.models import Case, Analysis
 from lib.db import save_file
 from lib.utils import create_thumb
