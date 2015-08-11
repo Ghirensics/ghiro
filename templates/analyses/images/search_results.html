@@ -1,24 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="span11">
-    <div class="content content-large">
-        <div class="content-header">
-            <h2><i class="icon-search"> </i> Search</h2>
+    <div class="crumbs">
+        <ol class="breadcrumb hidden-xs">
+            <li>
+                <i class="fa fa-home"></i><a href="/">Dashboard</a>
+            </li>
+            <li class="active">
+                Search
+            </li>
+        </ol>
+    </div>
+</div>
+
+    <div class="content">
+        <div class="page-h1">
+            <h1>Search</h1>
         </div>
-        <div class="content-breadcrumb">
-            <ul class="breadcrumb">
-                <li>
-                    <a href="/"><i class="icon-home"> </i> Dashboard</a><span class="divider">&rsaquo;</span>
-                </li>
-                <li class="active">
-                    Search
-                </li>
-            </ul>
-        </div>
-        <div class="content-body">
-            <div class="row-fluid">
-                <ul class="nav nav-pills">
+        <div class="col-md-12">
+            <div class="wdgt">
+                <ul class="nav nav-pills nav-primary">
                     <li {% if pagename == "list" %} class="active" {% endif %}>
                         <a href="{% url "analyses.views.search" "list"%}?{{get_params.urlencode}}">List</a>
                     </li>
@@ -31,63 +32,61 @@
                         <a href="{% url "analyses.views.search" "map" %}?{{get_params.urlencode}}">Map</a>
                     </li>
                 </ul>
-            </div>
-            <div>
-            {% if pagename == "list" %}
-                    {% include "analyses/cases/_list_image.html" %}
-                    {% if images %}
-                        <div class="pagination text-center">
-                            {% if images.has_previous %}
-                                <ul>
-                                    <li>
-                                        <a href="{% url "analyses.views.search" "list" %}?{{get_params.urlencode}}&page={{ images.previous_page_number }}">← Previous</a>
-                                    </li>
-                                </ul>
-                            {% endif %}
-                            <span class="current pull-left">
-                                <small>Page {{ images.number }} of {{ images.paginator.num_pages }}</small>
-                            </span>
-                            {% if images.has_next %}
-                                <ul>
-                                    <li>
-                                        <a href="{% url "analyses.views.search" "list" %}?{{get_params.urlencode}}&page={{ images.next_page_number }}">Next → </a>
-                                    </li>
-                                </ul>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-            {% elif pagename == "thumb" %}
-                    {% include "analyses/cases/_thum_image.html" %}
-                    {% if images %}
-                        <div class="pagination text-center">
-                            {% if images.has_previous %}
-                                <ul>
-                                    <li>
-                                        <a href="{% url "analyses.views.search" "thumb" %}?{{get_params.urlencode}}&page={{ images.previous_page_number }}">← Previous</a>
-                                    </li>
-                                </ul>
-                            {% endif %}
-                            <span class="current pull-left">
-                                <small>Page {{ images.number }} of {{ images.paginator.num_pages }}</small>
-                            </span>        
-                            {% if images.has_next %}
-                                <ul>
-                                    <li>
-                                        <a href="{% url "analyses.views.search" "thumb" %}?{{get_params.urlencode}}&page={{ images.next_page_number }}">Next → </a>
-                                    </li>
-                                </ul>
-                            {% endif %}
-                        </div> 
-                    {% else %}
-                        <div class="alert">
-                            <strong>Warning!</strong> there are not any photos.
-                        </div> 
-                    {% endif %}
-            {% elif pagename == "map" %}
-                    {% include "analyses/cases/_map_image.html" %}
-            {% endif %}
+                {% if pagename == "list" %}
+                        {% include "analyses/cases/_list_image.html" %}
+                        {% if images %}
+                            <div class="pagination text-center">
+                                {% if images.has_previous %}
+                                    <ul>
+                                        <li>
+                                            <a href="{% url "analyses.views.search" "list" %}?{{get_params.urlencode}}&page={{ images.previous_page_number }}">← Previous</a>
+                                        </li>
+                                    </ul>
+                                {% endif %}
+                                <span class="current pull-left">
+                                    <small>Page {{ images.number }} of {{ images.paginator.num_pages }}</small>
+                                </span>
+                                {% if images.has_next %}
+                                    <ul>
+                                        <li>
+                                            <a href="{% url "analyses.views.search" "list" %}?{{get_params.urlencode}}&page={{ images.next_page_number }}">Next → </a>
+                                        </li>
+                                    </ul>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                {% elif pagename == "thumb" %}
+                        {% include "analyses/cases/_thum_image.html" %}
+                        {% if images %}
+                            <div class="pagination text-center">
+                                {% if images.has_previous %}
+                                    <ul>
+                                        <li>
+                                            <a href="{% url "analyses.views.search" "thumb" %}?{{get_params.urlencode}}&page={{ images.previous_page_number }}">← Previous</a>
+                                        </li>
+                                    </ul>
+                                {% endif %}
+                                <span class="current pull-left">
+                                    <small>Page {{ images.number }} of {{ images.paginator.num_pages }}</small>
+                                </span>
+                                {% if images.has_next %}
+                                    <ul>
+                                        <li>
+                                            <a href="{% url "analyses.views.search" "thumb" %}?{{get_params.urlencode}}&page={{ images.next_page_number }}">Next → </a>
+                                        </li>
+                                    </ul>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <div class="alert">
+                                <strong>Warning!</strong> there are not any photos.
+                            </div>
+                        {% endif %}
+                {% elif pagename == "map" %}
+                        {% include "analyses/cases/_map_image.html" %}
+                {% endif %}
             </div>
         </div>
     </div>
-</div>
+
 {% endblock %}

@@ -184,7 +184,11 @@ border-top-left-radius: 0;
 
 /* FORM CUSTOM */
 #id_users {
-    width: 310px
+    width: 310px;
+}
+
+.width-form-search{
+    width: 400px !important;
 }
 
 /* PAGE HEADER */

@@ -19,7 +19,7 @@
                     Filename
                 </a>
                 <div class="controls">
-                    <input id="filename" type="text" name="filename" class="form-control">
+                    <input id="filename" type="text" name="filename" class="form-control width-form-search">
                 </div>
             </div>
             <div class="form-group form-inline box">
@@ -27,7 +27,7 @@
                     Filetype
                 </a>
                 <div class="controls">
-                    <input id="filetype" type="text" name="filetype" class="form-control">
+                    <input id="filetype" type="text" name="filetype" class="form-control width-form-search">
                 </div>
             </div>
             <div class="form-group form-inline box">
@@ -44,7 +44,7 @@
                         <option value="SHA512">SHA512</option>
                         <option value="MD5">MD5</option>
                     </select>
-                    <input id="hash" type="text" name="hash" class="form-control">
+                    <input id="hash" type="text" name="hash" class="form-control" style="width: 320px;">
                 </div>
             </div>
             <div class="form-group form-inline box">
@@ -61,7 +61,7 @@
                     Signature
                 </a>
                 <div class="controls">
-                    <input id="signature" type="text" name="signature" class="form-control">
+                    <input id="signature" type="text" name="signature" class="form-control width-form-search">
                 </div>
             </div>
             {# Detects if the search form is called inside a case or not. (Search scope) #}
@@ -73,7 +73,7 @@
                         Case
                     </a>
                     <div class="controls">
-                        <select style="width: 715px" name="in_case">
+                        <select style="width: 400px; height: 35px;" name="in_case">
                             <option value="all">All cases</option>
                             {% for case in available_cases %}
                                 <option value="{{ case.id }}">{{ case.name }}</option>
@@ -82,7 +82,7 @@
                     </div>
                 </div>
             {% endif %}
-            <div class="control-group">
+            <div class="control-group box">
                 <a>Match condition</a>
                 <div class="controls">
                    <label class="radio">
