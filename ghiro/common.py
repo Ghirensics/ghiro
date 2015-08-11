@@ -5,7 +5,12 @@
 import json
 import logging
 import urllib
-import urllib2
+# Deal with python 3.
+# TODO: why not migrate to requests?
+try:
+    import urllib.request as urllib2
+except ImportError:
+    import urllib2
 
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.conf import settings
