@@ -23,4 +23,4 @@ class Command(NoArgsCommand):
         try:
             AnalysisManager().run()
         except KeyboardInterrupt:
-            print "Exiting... (requested by user)"
+            print("Exiting... (requested by user)")

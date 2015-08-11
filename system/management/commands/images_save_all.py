@@ -18,7 +18,7 @@ class Command(NoArgsCommand):
     )
 
     def handle(self, *args, **options):
-        print "Starting"
+        print("Starting")
 
         if os.path.exists(options["path"]):
             dst_path = os.path.join(options["path"], "ghiro_output")
@@ -34,10 +34,10 @@ class Command(NoArgsCommand):
                     try:
                        file = get_file(analysis.image_id)
                     except (InvalidId, TypeError) as e:
-                        print "Unable to dump %s: %s" % (analysis.id, e)
+                        print("Unable to dump %s: %s" % (analysis.id, e))
                         continue
                     else:
                         with open(os.path.join(dst_path, "analysis_%s" % analysis.id), "a") as the_file:
                             the_file.write(file.read())
         else:
-            print "ERROR: path not found!"
+            print("ERROR: path not found!")

@@ -20,7 +20,7 @@ def mongo_connect():
     try:
         db = Database(MongoClient(settings.MONGO_URI), settings.MONGO_DB)
     except ConnectionFailure:
-        print "ERROR: unable to connect to MongoDB. Please check the server availability."
+        print("ERROR: unable to connect to MongoDB. Please check the server availability.")
         sys.exit()
     else:
         return db

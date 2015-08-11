@@ -32,7 +32,7 @@ class Command(BaseCommand):
         """Runs command."""
         # Validation.
         if not options["username"] or not options["case"] or not options["target"]:
-            print "Options -t (target), -c (case id) and -u (username) are mandatory. Exiting."
+            print("Options -t (target), -c (case id) and -u (username) are mandatory. Exiting.")
             sys.exit(1)
 
         # Get options.
@@ -44,21 +44,21 @@ class Command(BaseCommand):
             for dirname, dirnames, filenames in os.walk(options["target"]):
                 for filename in filenames:
                     target = os.path.join(dirname, filename)
-                    print "INFO: adding {0}".format(target)
+                    print("INFO: adding {0}".format(target))
                     self._add_task(target, case, user)
         elif os.path.isdir(options["target"]):
             for file_name in os.listdir(options["target"]):
-                print "INFO: adding {0}".format(file_name)
+                print("INFO: adding {0}".format(file_name))
                 self._add_task(os.path.join(options["target"], file_name), case, user)
         elif os.path.isfile(options["target"]):
-            print "INFO: processing {0}".format(options["target"])
+            print("INFO: processing {0}".format(options["target"]))
             self._add_task(options["target"], case, user)
         else:
-            print "ERROR: target is not a file or directory"
+            print("ERROR: target is not a file or directory")
 
     def _add_task(self, target, case, user):
         """Wraps add_task() to catch errors."""
         try:
             Analysis.add_task(target, case=case, user=user)
         except GhiroValidationException as e:
-            print "ERROR: " % e
+            print("ERROR: " % e)

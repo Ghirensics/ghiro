@@ -178,8 +178,8 @@ class AnalysisManager():
                     logger.debug("No tasks. Waiting...")
                     sleep(1)
         except KeyboardInterrupt:
-            print "Exiting... (requested by user)"
+            print("Exiting... (requested by user)")
         finally:
-            print "Waiting tasks to accomplish..."
+            print("Waiting tasks to accomplish...")
             self.workers_stop()
-            print "Processing done. Have a nice day in the real world."
+            print("Processing done. Have a nice day in the real world.")

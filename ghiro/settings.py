@@ -231,4 +231,4 @@ if not os.path.exists(LOG_DIR):
     try:
         os.mkdir(LOG_DIR)
     except Exception as e:
-        print "Unable to create log directory: %s" % e
+        print("Unable to create log directory: %s" % e)

@@ -86,7 +86,7 @@ class Command(NoArgsCommand):
         try:
             self.run(monitor_path)
         except KeyboardInterrupt:
-            print "Exiting... (requested by user)"
+            print("Exiting... (requested by user)")
 
     def submit_file(self, path, case):
         """Submit a file for analysis.

@@ -17,14 +17,14 @@ class Command(NoArgsCommand):
     def handle(self, *args, **options):
         """Runs command."""
 
-        print "Starting update check..."
+        print("Starting update check...")
 
         try:
             new_release = check_version()
         except Exception as e:
-            print "Error occurred: %s" % e
+            print("Error occurred: %s" % e)
         else:
             if new_release:
-                print "New release available!"
+                print("New release available!")
             else:
-                print "No new releases available."
+                print("No new releases available.")
