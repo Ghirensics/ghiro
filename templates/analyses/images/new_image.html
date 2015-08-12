@@ -40,11 +40,11 @@
                 <div id="uploader"></div>
                 <div id="filelist" class="hide">
                     <strong id="generic_error">
-                        <i class="icon-warning-sign text-error"></i>
+                        <i class="fa fa-warning text-danger"></i>
                         Errors:
                     </strong>
                     <strong id="server_error" class="hide">
-                        <i class="icon-warning-sign text-error"></i>
+                        <i class="fa fa-warning text-danger"></i>
                         Server error: unexpected error, try to reload page and check logs.
                     </strong>
                 </div>
@@ -95,6 +95,7 @@
             uploader.bind('FilesAdded', function() {
                 $('.plupload_start').show();
                 $('.result_button').hide();
+                $('#uploader_browse').css('color','#FFF');
             });
 
             uploader.bind('UploadComplete', function(up) {
@@ -114,9 +115,9 @@
                     $('#filelist').append("<div>" + (file ? " File: " + file.name : "") +
                             ", Reason: " + response.error.message +
                             "</div>"
-                    ).show();
+                    ).removeClass('hide');
                 }else{
-                    $('#generic_error').show();
+                    $('#generic_error').removeClass('hide');
                     $('.result_button').hide();
                 }
             });
@@ -125,13 +126,12 @@
                 $('#filelist').append("<div>" +
                         (err.file ? " File: " + err.file.name : "") +
                         "</div>"
-                ).show();
-                $('#server_error').show();
+                ).removeClass('hide');
+                $('#server_error').removeClass('hide');
                 $('.result_button').hide();
             });
 
         })
-
     </script>
 
     {% endblock %}

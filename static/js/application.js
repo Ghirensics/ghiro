@@ -72,6 +72,7 @@ $(document).ready(function() {
                     $(".star"+rel).addClass('btn-warning');
                 }else{
                     $(".star"+rel).removeClass('btn-warning');
+                    $(".star"+rel).addClass('btn-default');
                 }
             }
         });
