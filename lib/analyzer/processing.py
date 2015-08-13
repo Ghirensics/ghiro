@@ -68,7 +68,7 @@ class AnalysisRunner(Process):
             task.analysis_id = save_results(results)
             task.state = "C"
             logger.info("Processed task {0} with success".format(task.id))
-        except Exception, e:
+        except Exception as e:
             logger.exception("Critical error processing task {0}, skipping task: {1}".format(task.id, e))
             task.state = "F"
         finally:
