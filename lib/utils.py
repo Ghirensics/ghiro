@@ -172,7 +172,7 @@ def import_is_available(module_name):
     @return: import status
     """
     try:
-        __import__(module_name, globals(), locals(), ["dummy"], -1)
+        __import__(module_name, globals(), locals(), ["dummy"], 0)
         return True
     except ImportError:
         return False
