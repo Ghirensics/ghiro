@@ -1,35 +1,43 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="span11">
-    <div class="content content-large">
-        <div class="content-header">
-            <h2><i class="icon-th-list"></i> Cases<small></small></h2>
+    <div class="crumbs">
+        <ol class="breadcrumb hidden-xs">
+            <li>
+                <i class="fa fa-home"></i><a href="/">Dashboard</a>
+            </li>
+            <li>
+                <a href="{% url "analyses.views.list_cases" %}"><i class="fa fa-book"> </i> Cases</a>
+            </li>
+            <li>
+                <a href="{% url "analyses.views.show_case" analysis.case.id "list" %}"><i class="fa fa-list"></i>
+                    {% if analysis.case.name|length > 70 %}
+                        {{ analysis.case.name|slice:":70" }} ...
+                    {% else %}
+                        {{ analysis.case.name }}
+                    {% endif %}
+                </a>
+            </li>
+            <li class="active">
+                Report
+            </li>
+        </ol>
+    </div>
+</div>
+
+    <div class="content">
+        <div class="page-h1">
+            <h1>Case: <small>
+                {% if analysis.case.name|length > 70 %}
+                    {{ analysis.case.name|slice:":70" }} ...
+                {% else %}
+                    {{ analysis.case.name }}
+                {% endif %}
+            </small></h1>
         </div>
-        <div class="content-breadcrumb">
-            <ul class="breadcrumb">
-                <li>
-                    <a href="/"><i class="icon-home"></i> Dashboard</a><span class="divider">&rsaquo;</span>
-                </li>
-                <li>
-                    <a href="{% url "analyses.views.list_cases" %}"><i class="icon-briefcase"></i> Cases</a><span class="divider">&rsaquo;</span>
-                </li>
-                <li>
-                    <a href="{% url "analyses.views.show_case" analysis.case.id "list" %}"><i class="icon-book"></i>
-                        {% if analysis.case.name|length > 70 %}
-                            {{ analysis.case.name|slice:":70" }} ...
-                        {% else %}
-                            {{ analysis.case.name }}
-                        {% endif %}
-                    </a><span class="divider">&rsaquo;</span>
-                </li>
-                <li class="active">
-                    Report
-                </li>
-            </ul>
-        </div>
-        <div class="content-body">
-            <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="wdgt">
+                <div class="container-fluid">
                 <div class="row-fluid">
                     <div class="pull-left" style="padding-right: 10px">
                         {% if analysis.thumb_id %}
@@ -43,28 +51,28 @@
                     <h2 class="media-heading">Image analysis: {{ analysis.report.hash.md5 }}</h2>
                     <div class="btn-group">
                         {% if analysis.favorites.all %}
-                            <a href="#" id="{% url "analyses.views.favorite" analysis.id %}" rel="{{ analysis.id }}" class="btn favorite btn-warning star{{ analysis.id }}"> <i class="icon-star"> </i></a>
+                            <a href="#" id="{% url "analyses.views.favorite" analysis.id %}" rel="{{ analysis.id }}" class="btn favorite btn-warning star{{ analysis.id }}"> <i class="fa fa-star"> </i></a>
                         {% else %}
-                            <a href="#" id="{% url "analyses.views.favorite" analysis.id %}" rel="{{ analysis.id }}" class="btn favorite star{{ analysis.id }}"> <i class="icon-star"> </i></a>
+                            <a href="#" id="{% url "analyses.views.favorite" analysis.id %}" rel="{{ analysis.id }}" class="btn favorite star{{ analysis.id }}"> <i class="fa fa-star"> </i></a>
                         {% endif %}
-                        <a href="{% url "analyses.views.image" analysis.image_id %}" class="action_print btn btn-info" title="Print"><i class="icon-print"></i> </a>
-                        <a class="btn btn-danger btn-delete-report" id="{% url "analyses.views.delete_analysis" analysis.id %}" href="#deleteReport" role="button" data-toggle="modal"> <i class="icon-trash"></i> </a>
+                        <a href="{% url "analyses.views.image" analysis.image_id %}" class="action_print btn btn-info" title="Print"><i class="fa fa-print"></i> </a>
+                        <a class="btn btn-danger btn-delete-report" id="{% url "analyses.views.delete_analysis" analysis.id %}" href="#deleteReport" role="button" data-toggle="modal"> <i class="fa fa-trash-o"></i> </a>
                     </div>
                     <div class="btn-group pull-right">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="icon-download-alt"></i> Export
+                        <a class="btn btn-dark dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-download"></i> Export
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{% url "analyses.views.static_report" analysis.id "pdf" %}"><i class="icon-file-text-alt"></i> PDF report</a>
-                                <a href="{% url "analyses.views.static_report" analysis.id "html" %}"><i class="icon-file-text"></i> HTML report</a>
+                                <a href="{% url "analyses.views.static_report" analysis.id "pdf" %}"><i class="fa fa-file-text-o"></i> PDF report</a>
+                                <a href="{% url "analyses.views.static_report" analysis.id "html" %}"><i class="fa fa-file-text"></i> HTML report</a>
                             </li>
                         </ul>
                     </div>
                     <div class="btn-group pull-right">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="icon-download"></i> Download
+                        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-download"></i> Download
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
@@ -79,7 +87,7 @@
                 <div class="row-fluid">
                     <div class="span12">
                         <div class="tabbable tabs-left">
-                            <ul class="nav nav-pills">
+                            <ul class="nav nav-pills nav-primary">
                                 <li class="active">
                                     <a href="#dash" data-toggle="tab">Dashboard</a>
                                 </li>
@@ -240,7 +248,6 @@
             </div>
         </div>
     </div>
-</div>
 
 {% include "layout/_modalActionCase.html" %}
 

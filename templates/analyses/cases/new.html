@@ -22,7 +22,7 @@
         </div>
         <div class="col-md-12">
             <div class="wdgt">
-                <div class="wdgt-header">Complete the following form fot to create a new case</div>
+                <div class="wdgt-header">Complete the following form for to create a new case</div>
                 <div class="wdgt-body">
                     <form action="{% url "analyses.views.new_case" %}" method="POST">{% csrf_token %}
                         {%include "layout/_form.html"%}
