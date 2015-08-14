@@ -53,14 +53,14 @@
                         {% if analysis.favorites.all %}
                             <a href="#" id="{% url "analyses.views.favorite" analysis.id %}" rel="{{ analysis.id }}" class="btn favorite btn-warning star{{ analysis.id }}"> <i class="fa fa-star"> </i></a>
                         {% else %}
-                            <a href="#" id="{% url "analyses.views.favorite" analysis.id %}" rel="{{ analysis.id }}" class="btn favorite star{{ analysis.id }}"> <i class="fa fa-star"> </i></a>
+                            <a href="#" id="{% url "analyses.views.favorite" analysis.id %}" rel="{{ analysis.id }}" class="btn favorite btn-default star{{ analysis.id }}"> <i class="fa fa-star"> </i></a>
                         {% endif %}
                         <a href="{% url "analyses.views.image" analysis.image_id %}" class="action_print btn btn-info" title="Print"><i class="fa fa-print"></i> </a>
                         <a class="btn btn-danger btn-delete-report" id="{% url "analyses.views.delete_analysis" analysis.id %}" href="#deleteReport" role="button" data-toggle="modal"> <i class="fa fa-trash-o"></i> </a>
                     </div>
                     <div class="btn-group pull-right">
                         <a class="btn btn-dark dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-download"></i> Export
+                            <i class="fa fa-cogs"></i> Export
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">

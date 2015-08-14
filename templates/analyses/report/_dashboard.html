@@ -1,26 +1,22 @@
 {% load analyses_tags %}
 
-<div class="box-tab corner-all">
-    <div class="box-header corner-top">
-        <div class="header-control pull-right">
-            <a data-box="collapse"><i class="icofont-caret-up"> </i></a>
-        </div>
-        <ul class="nav nav-pills" id="tab-stat">
-            <li class="active">
-                <a data-toggle="tab" href="#system-stat">Analysis results
-                {% if analysis.report.private %} <small>(flagged as private)</small> {% endif %}</a>
-            </li>
-            <li>
-                <a data-toggle="tab" href="#server-stat">Signature results</a>
-            </li>
-        </ul>
+<div class="box">
+    <div class="header-control pull-right">
+        <a data-box="collapse"><i class="icofont-caret-up"> </i></a>
     </div>
+    <ul class="nav nav-pills" id="tab-stat">
+        <li class="active">
+            <a data-toggle="tab" href="#system-stat">Analysis results
+            {% if analysis.report.private %} <small>(flagged as private)</small> {% endif %}</a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="#server-stat">Signature results</a>
+        </li>
+    </ul>
     <div class="box">
         <div class="tab-content">
             <div class="tab-pane fade in active" id="system-stat">
-                <div class="row-fluid">
-                    {% include 'analyses/report/_dashboardAnalysisResult.html' %}
-                </div>
+                {% include 'analyses/report/_dashboardAnalysisResult.html' %}
             </div>
             <div class="tab-pane fade" id="server-stat">
                 <div class="row-fluid">

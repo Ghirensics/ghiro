@@ -191,7 +191,7 @@ border-top-left-radius: 0;
     width: 400px !important;
 }
 
-#id_name, #id_description{
+#id_name, #id_description, #id_username, #id_email, #id_last_name, #id_first_name, #id_password1, #id_password2{
     background-color: #ffffff;
     background-image: none;
     border: 1px solid #cccccc;
@@ -206,11 +206,27 @@ border-top-left-radius: 0;
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
     vertical-align: middle;
 }
-#id_name:focus,#id_description:focus {
+
+#id_description{
+    height: 74px !important;
+    width: 309px !important;
+}
+
+#id_name:focus,#id_description:focus, #id_username:focus, #id_email:focus, #id_last_name:focus, #id_first_name:focus, #id_password1:focus, #id_password2:focus {
     border: 1px solid #66afe9;
     border-color: #66afe9;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
     outline: 0 none;
+}
+
+/* CUSTOM HexView */
+.hexview code{
+    background-color: #fff;
+    border-color: #fff;
+    color: #000;
+}
+#address{
+    color:red;
 }
 
 /* ALERT & NITIFICATION CUSTOM */
@@ -1921,7 +1937,8 @@ fieldset[disabled] .btn-link:focus {
 .nav-pills > li > a:focus { outline-width:0px !important; }
 .tab-pills .tab-pane { line-height:20px; padding:10px; border:1px solid #ddd; margin-top:5px; }
 
-.panel, .panel-heading, .panel-title { border-radius:0px !important; }
+.panel{ margin-bottom: -12px; }
+.panel, .panel-heading, .panel-title { border-radius:0px !important;}
 .panel-title > a { text-decoration:none; font-size:14px; }
 .panel-title > a:focus { outline-width:0px !important; }
 

@@ -5,7 +5,7 @@
     <div class="crumbs">
         <ol class="breadcrumb hidden-xs">
             <li><i class="fa fa-home"></i><a href="/">Dashboard</a></li>
-            <li><i class="fa fa-lock"></i><a href="{% url "users.views.admin_list_users" %}">Administration</a></li>
+            <li><a href="{% url "users.views.admin_list_users" %}"><i class="fa fa-lock"></i> Administration</a></li>
             <li class="active">{{ user.username }}'s profile</li>
         </ol>
     </div>
@@ -17,17 +17,17 @@
         </div>
         <div class="col-md-12">
             <div class="wdgt">
-                <div class="row-fluid profile">
-                    <div class="span6">
+                <div class="profile">
+
                         <div class="left">
-                            <h3 class="title-icon pull-left"><i class="icon-user"> </i></h3>
+                            <h3 class="title-icon pull-left"><i class="fa fa-user"> </i></h3>
                             <div class="title">
                                 <h3>{{ user.username }}</h3>
                             </div>
                             <a href="{% url "users.views.admin_edit_user" user.id %}"><i class="icon-edit"></i> Edit profile</a>
                         </div>
-                    </div>
-                    <div class="span6">
+
+
                         <div class="right">
                             <div class="title display-table">
                                 <p>
@@ -48,10 +48,10 @@
                                 <span class="pull-right">{{ user.email }}</span>
                             </div>
                         </div>
-                    </div>
+
                 </div>
-                <div class="row-fluid profile">
-                    <div class="span6">
+                <div class="profile">
+
                         <div class="left">
                             <h3 class="title-icon pull-left"><i class="icon-bar-chart"> </i></h3>
                             <div class="title">
@@ -66,8 +66,8 @@
                                 <dd><span class="badge badge-warning">{{ user.owned_hashes.all|length }}</span></dd>
                             </dl>
                         </div>
-                    </div>
-                    <div class="span6">
+
+
                         <div class="right">
                             <div class="title display-table">
                                 <p>
@@ -118,7 +118,7 @@
                                 </span>
                             </div>
                         </div>
-                    </div>
+
                 </div>
             </div>
         </div>

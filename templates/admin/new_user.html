@@ -27,15 +27,15 @@
                 <div class="wdgt-body">
                     <form action="{% url "users.views.admin_new_user" %}" method="POST">{% csrf_token %}
                         <div class="form-group form-inline">
-                        Username: (<span class="helptext"><small><em>Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only</em></small></span>)
+                        Username (<span class="helptext"><small><em>Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only</em></small></span>)
                         <div class="controls box">
                             {{ form.username }}<span class="help-inline">{{ form.username.errors }}</span>
                         </div>
-                        Password:
+                        Password
                         <div class="controls box">
                             {{ form.password1 }}<span class="help-inline">{{ form.password1.errors }}</span>
                         </div>
-                        Password (again): - <span class="helptext"><small><em> the same password as above, for verification.</em></small></span>
+                        Password (again) - <span class="helptext"><small><em> the same password as above, for verification.</em></small></span>
                         <div class="controls box">
                             {{ form.password2 }}<span class="help-inline">{{ form.password2.errors }}</span>
                         </div>

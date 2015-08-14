@@ -21,35 +21,37 @@
                     <div class="wdgt-body" style="padding-bottom:10px;">
                         <form action="{% url "users.views.admin_edit_user" user.id %}" method="POST">{% csrf_token %}
                             <div class="form-group">
-                                Username: (<small><em>Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only</em></small>)
-                                {{ form.username }}<span class="help-inline">{{ form.username.errors }}</span>
-                            </div>
-                            <div class="form-group">
-                                Email:
-                                {{ form.email }}<span class="help-inline">{{ form.email.errors }}</span>
-                            </div>
-                            <div class="form-group">
-                                Last name:
-                                {{ form.last_name }}<span class="help-inline">{{ form.last_name.errors }}</span>
-                            </div>
-                            <div class="form-group">
-                                First name:
-                                {{ form.first_name }}<span class="help-inline">{{ form.first_name.errors }}</span>
-                            </div>
-                            <div class="form-group">
-                                {{ form.is_active }} Active<span class="help-inline">{{ form.is_active.errors }}</span> - Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
-                            </div>
-                            <div class="form-group">
-                                {{ form.is_superuser }} Superuser<span class="help-inline">{{ form.is_superuser.errors }}</span> - Designates that this user has all permissions without explicitly assigning them.
-                            </div>
-                            <div class="form-group">
-                                {{ form.is_staff }} Staff<span class="help-inline">{{ form.is_staff.errors }}</span> - Designates whether the user can log into this admin site.
-                            </div>
-                            <div class="form-group">
-                                <button id="btn_submit" type="submit" class="btn btn-success">
-                                    Save
-                                </button>
-                                <a href="{% url "users.views.admin_show_user" user.id %}" class="btn btn-default"> Back </a>
+                                Username (<small><em>Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only</em></small>)
+                                <div class="controls box">
+                                    {{ form.username }}<span class="help-inline">{{ form.username.errors }}</span>
+                                </div>
+                                Email
+                                <div class="controls box">
+                                    {{ form.email }}<span class="help-inline">{{ form.email.errors }}</span>
+                                </div>
+                                Last name
+                                <div class="controls box">
+                                    {{ form.last_name }}<span class="help-inline">{{ form.last_name.errors }}</span>
+                                </div>
+                                First name
+                                <div class="controls box">
+                                    {{ form.first_name }}<span class="help-inline">{{ form.first_name.errors }}</span>
+                                </div>
+                                <div class="form-group">
+                                    {{ form.is_active }} Active<span class="help-inline">{{ form.is_active.errors }}</span> - Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
+                                </div>
+                                <div class="form-group">
+                                    {{ form.is_superuser }} Superuser<span class="help-inline">{{ form.is_superuser.errors }}</span> - Designates that this user has all permissions without explicitly assigning them.
+                                </div>
+                                <div class="form-group">
+                                    {{ form.is_staff }} Staff<span class="help-inline">{{ form.is_staff.errors }}</span> - Designates whether the user can log into this admin site.
+                                </div>
+                                <div class="form-group">
+                                    <button id="btn_submit" type="submit" class="btn btn-success">
+                                        Save
+                                    </button>
+                                    <a href="{% url "users.views.admin_show_user" user.id %}" class="btn btn-default"> Back </a>
+                                </div>
                             </div>
                         </form>
                     </div>
