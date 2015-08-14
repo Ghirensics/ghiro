@@ -62,7 +62,7 @@ class ShowCaseTest(TestCase):
         anal = Analysis.objects.create(owner=self.user, case=case)
         response = self.c.post("/api/cases/show", {"case_id": case.id, "api_key": self.user.api_key})
         self.assertEqual(response.status_code, 200)
-        response_data = json.loads(response.content)
+        response_data = json.loads(response.content.decode("utf8"))
         self.assertEqual(response_data["id"], case.id)
         self.assertEqual(response_data["images"][0], anal.id)
 
