@@ -75,13 +75,13 @@ class NewImageTest(TestCase):
 
     def test_success_new_image_no_case(self):
         """Uploads an image to any case."""
-        with open(self.image) as fd:
+        with open(self.image, "rb") as fd:
             response = self.c.post("/api/images/new", {"image": fd, "api_key": self.user.api_key})
             self.assertEqual(response.status_code, 200)
             self.assertTrue(Analysis.objects.filter(file_name="1x1.png").exists())
 
     def test_success_new_image_to_case(self):
-        with open(self.image) as fd:
+        with open(self.image, "rb") as fd:
             response = self.c.post("/api/images/new", {"image": fd, "case_id": self.case.pk, "api_key": self.user.api_key})
             self.assertEqual(response.status_code, 200)
             self.assertTrue(Analysis.objects.filter(file_name="1x1.png").exists())
@@ -97,16 +97,16 @@ class NewImageTest(TestCase):
     def test_fail_new_image_closed_case(self):
         """Uploads an image to a closed case."""
         case = Case.objects.create(name="ccc", owner=self.user, state="C")
-        with open(self.image) as fd:
+        with open(self.image, "rb") as fd:
             response = self.c.post("/api/images/new", {"image": fd, "case_id": case.pk, "api_key": self.user.api_key})
             self.assertEqual(response.status_code, 400)
 
     def test_fail_auth_wrong_key(self):
-        with open(self.image) as fd:
+        with open(self.image, "rb") as fd:
             response = self.c.post("/api/images/new", {"image": fd, "api_key": "aaa"})
             self.assertEqual(response.status_code, 403)
 
     def test_fail_auth_no_key(self):
-        with open(self.image) as fd:
+        with open(self.image, "rb") as fd:
             response = self.c.post("/api/images/new", {"image": fd})
             self.assertEqual(response.status_code, 403)
