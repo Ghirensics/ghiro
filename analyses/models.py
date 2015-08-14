@@ -216,7 +216,7 @@ class Analysis(models.Model):
         @param image_id: original image gridfs id
         @param thumb_id: thumbnail gridfs id
         """
-        assert isinstance(file_path, basestring)
+        assert isinstance(file_path, str)
 
         # File name.
         if not file_name:
