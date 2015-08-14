@@ -172,7 +172,7 @@ def import_is_available(module_name):
     @return: import status
     """
     try:
-        __import__(module_name, globals(), locals(), ["dummy"], 0)
+        __import__(module_name, globals(), locals(), ["dummy"], )
         return True
     except ImportError:
         return False
@@ -201,4 +201,4 @@ def get_content_type_from_file(file_path):
     @return: content type
     """
     mime = magic.Magic(mime=True)
-    return mime.from_file(file_path)
+    return mime.from_file(file_path).decode("utf-8")
