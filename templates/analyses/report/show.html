@@ -192,19 +192,17 @@
                                 <tr>
                                     <td>
                                         <p class="text-info">{{ comment.owner.username }} <small class="pull-right">{{ comment.created_at }}</small></p>
-                                        <p class="pull-right"><a href="{% url "analyses.views.delete_comment" comment.id %}" class="btn btn-danger btn-small"><i class="icon-trash"></i> Delete</a></p>
+                                        <p class="pull-right"><a href="{% url "analyses.views.delete_comment" comment.id %}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</a></p>
                                         {{ comment.message }}
                                     </td>
                                 </tr>
                                 {% endfor %}
                             </table>
                         {% endif %}
-                        <form method="post" action="{% url "analyses.views.add_comment" analysis.id %}"  class="controls">{% csrf_token %}
-                            <div>
-                                <textarea class="span12" name="message" id="id_message" class="height-large" type="text" placeholder="Insert your comment"></textarea>
-                            </div>
-                            <div>
-                                <button class="btn btn-success btn-small">Save</button>
+                        <form method="post" action="{% url "analyses.views.add_comment" analysis.id %}">{% csrf_token %}
+                            <textarea class="form-control" name="message" id="id_message" type="text" placeholder="Insert your comment"></textarea>
+                            <div class="box">
+                                <button class="btn btn-success">Save</button>
                             </div>
                         </form>
                     </div>
