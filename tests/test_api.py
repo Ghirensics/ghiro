@@ -90,7 +90,7 @@ class NewImageTest(TestCase):
         """Uploads an image to a case you have no permissions."""
         user = Profile.objects.create_user(username="test2", email="a@a.cp,", password="Test")
         case = Case.objects.create(name="bbb", owner=user)
-        with open(self.image) as fd:
+        with open(self.image, "rb") as fd:
             response = self.c.post("/api/images/new", {"image": fd, "case_id": case.pk, "api_key": self.user.api_key})
             self.assertEqual(response.status_code, 400)
 
