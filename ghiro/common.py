@@ -83,7 +83,7 @@ def check_allowed_content(content_type):
     else:
         return False
 
-def check_version(url="http://update.getghiro.org/update/check/"):
+def check_version(url="https://update.getghiro.org/update/check/"):
     """Checks version of Ghiro.
     It connects to Ghiro update website to check if a new release is available.
     You can optionally disable this via configuration file.
