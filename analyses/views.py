@@ -348,7 +348,7 @@ def new_url(request, case_id):
                     context_instance=RequestContext(request))
 
             # Create analysis task.
-            task = Analysis.add_task(os.path.basename(urlparse.urlparse(request.POST.get("url")).path),
+            task = Analysis.add_task(os.path.basename(request.POST.get("url").split("//")[1]),
                         case=case, user=request.user, content_type=content_type,
                         image_id=save_file(file_path=url_file, content_type=content_type),
                         thumb_id=create_thumb(url_file))
