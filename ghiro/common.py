@@ -4,13 +4,8 @@
 
 import json
 import logging
+import requests
 import urllib
-# Deal with python 3.
-# TODO: why not migrate to requests?
-try:
-    import urllib.request as urllib2
-except ImportError:
-    import urllib2
 
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.conf import settings
@@ -99,12 +94,13 @@ def check_version(url="https://update.getghiro.org/update/check/"):
         check = UpdateCheck.objects.create()
 
         # Format request.
-        data = urllib.urlencode({"version": settings.GHIRO_VERSION})
+        data = {"version": settings.GHIRO_VERSION}
         headers = {"User-Agent": "Ghiro update client"}
         try:
-            request = urllib2.Request(url, data=data, headers=headers)
-            response = urllib2.urlopen(request, timeout=60).read()
-        except (urllib2.URLError, urllib2.HTTPError) as e:
+            request = requests.post(url, json=data, headers=headers)
+            response = request.text
+            print(request.text)
+        except requests.exceptions.RequestException as e:
             check.state = "E"
             check.save()
             raise Exception("Unable to establish connection: %s" % e)

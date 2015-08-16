@@ -6,3 +6,4 @@ pdfkit>=0.4.1
 pymongo>=2.6.3
 python-dateutil>=2.2
 python-magic>=0.4.6
+requests>=2.7.0

@@ -6,8 +6,7 @@ import gridfs
 import os
 import re
 import magic
-import urllib2
-import urlparse
+import requests
 import json
 from bson.son import SON
 from bson.objectid import ObjectId, InvalidId
@@ -321,8 +320,9 @@ def new_url(request, case_id):
         if form.is_valid():
             # Download file.
             try:
-                url = urllib2.urlopen(request.POST.get("url"), timeout=5)
-            except urllib2.URLError as e:
+                url = requests.get(request.POST.get("url"), timeout=5)
+                response = url.content
+            except requests.exceptions.RequestException as e:
                 if hasattr(e, "reason"):
                     return render_to_response("error.html",
                         {"error": "We failed to reach a server, reason: %s" % e.reason},
@@ -334,7 +334,7 @@ def new_url(request, case_id):
 
             # Store temp file.
             url_temp = NamedTemporaryFile(delete=True)
-            url_temp.write(url.read())
+            url_temp.write(response)
             url_temp.flush()
 
             # Convert to File object.

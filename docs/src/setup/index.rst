@@ -25,6 +25,7 @@ Ghiro has the following requirements:
     * Chardet: for text encoding detection
     * Pdfkit: used for PDF report generation (at least release 0.4)
     * Wkhtmltopdf: used by pdfkit
+    * Requests: used for HTTP requests
 
 If you choose MySQL or PostgrSQL as database you have to install their additional drivers.
 
