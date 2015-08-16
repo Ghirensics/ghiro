@@ -98,7 +98,7 @@ def check_version(url="https://update.getghiro.org/update/check/", force=False):
         data = {"version": settings.GHIRO_VERSION}
         headers = {"User-Agent": "Ghiro update client"}
         try:
-            request = requests.post(url, data=data, headers=headers)
+            request = requests.post(url, data=data, headers=headers, verify=True)
             response = request.text
         except requests.exceptions.RequestException as e:
             check.state = "E"
