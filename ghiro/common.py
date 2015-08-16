@@ -78,17 +78,18 @@ def check_allowed_content(content_type):
     else:
         return False
 
-def check_version(url="https://update.getghiro.org/update/check/"):
+def check_version(url="https://update.getghiro.org/update/check/", force=False):
     """Checks version of Ghiro.
     It connects to Ghiro update website to check if a new release is available.
     You can optionally disable this via configuration file.
     @param url: update service URL
+    @param force: force update check
     @return: boolean status of update available
     """
 
     # Do i have to check? It checks only out of a time frame.
     # Disable with "UPDATE_CHECK" option in configuration file.
-    if UpdateCheck.should_check() and settings.UPDATE_CHECK:
+    if (UpdateCheck.should_check() and settings.UPDATE_CHECK) or force:
 
         # Create new check entry.
         check = UpdateCheck.objects.create()
@@ -97,9 +98,8 @@ def check_version(url="https://update.getghiro.org/update/check/"):
         data = {"version": settings.GHIRO_VERSION}
         headers = {"User-Agent": "Ghiro update client"}
         try:
-            request = requests.post(url, json=data, headers=headers)
+            request = requests.post(url, data=data, headers=headers)
             response = request.text
-            print(request.text)
         except requests.exceptions.RequestException as e:
             check.state = "E"
             check.save()
