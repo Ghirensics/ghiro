@@ -6,6 +6,18 @@ Please share your opinion with us, we are happy to get your feedback, we setup
 many different ways to communicate with us and to keep in touch with the
 community.
 
+Ghiro & Image Forensics Forum
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`Ghiro & Image Forensics Forum`_ is a bullettin board for discussions about
+image forensics and Ghiro. The forum has several categories, local forums where
+you can talk in your native language (if a forum for your country is missing,
+just ask and it will be added), registration with third party account (i.e.
+google, github), and many other features.
+Register your account and enjoy!
+
+.. _`Ghiro & Image Forensics Forum`: https://forum.getghiro.org
+
 Mailing list - Google Group
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
