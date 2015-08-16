@@ -21,7 +21,7 @@ from django.db.models import Q
 from django.utils.timezone import now
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_text
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 
@@ -282,7 +282,7 @@ def new_image(request, case_id):
             # Plupload needs a status code 200/OK to get additional data passed from the web server.
             response = HttpResponse(json.dumps({"jsonrpc" : "2.0",
                                                 "error" : {"code": 88,
-                                                           "message": " ".join([(u" ".join([force_unicode(i) for i in v])) for k, v in form.errors.items()])},
+                                                           "message": " ".join([(u" ".join([force_text(i) for i in v])) for k, v in form.errors.items()])},
                                                 "id" : "id"}),
                                     content_type="application/json")
             # Never cache AJAX response.
