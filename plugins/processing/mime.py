@@ -14,6 +14,8 @@ except ImportError:
 class MimeProcessing(BaseProcessingModule):
     """Extracts MIME information."""
 
+    name = "MIME Analysis"
+    description = "This plugin extracts MIME information."
     order = 10
 
     def check_deps(self):

@@ -23,6 +23,8 @@ logger = logging.getLogger(__name__)
 class GexivProcessing(BaseProcessingModule):
     """Extracts image metadata."""
 
+    name = "Metadata Extractor (GExiv)"
+    description = "This plugin performs metadata extraction using GExiv library."
     order = 10
 
     def check_deps(self):

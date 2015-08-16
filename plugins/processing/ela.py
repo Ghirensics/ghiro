@@ -22,6 +22,8 @@ logger = logging.getLogger(__name__)
 class ElaProcessing(BaseProcessingModule):
     """Calculates ELA."""
 
+    name = "ELA Analysis"
+    description = "This plugin performs Error Level Analysis (ELA)."
     order = 20
 
     def check_deps(self):

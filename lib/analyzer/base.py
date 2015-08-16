@@ -10,6 +10,10 @@ class BaseProcessingModule(object):
     """
     # Module execution order.
     order = 0
+    # Plugin name.
+    name = None
+    # Plugin description.
+    description = None
 
     def __init__(self):
         # Results storage.

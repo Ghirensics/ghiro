@@ -16,6 +16,8 @@ except ImportError:
 class HashComparerProcessing(BaseProcessingModule):
     """Compares hashes with hashes lists."""
 
+    name = "Hash List Comparer"
+    description = "This plugins searches for a match between the image hash and hash lists."
     order = 20
 
     def check_deps(self):

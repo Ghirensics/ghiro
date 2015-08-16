@@ -77,6 +77,8 @@ class ImageComparer():
 class PreviewComparerProcessing(BaseProcessingModule):
     """Compares previews extracted with the original image."""
 
+    name = "Preview Comparison"
+    description = "This plugin performs a comparison between the thumbnail embedded in metadata and the original image."
     order = 20
 
     def check_deps(self):

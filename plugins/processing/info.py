@@ -8,6 +8,8 @@ from lib.analyzer.base import BaseProcessingModule
 class InfoProcessing(BaseProcessingModule):
     """Collect basic information."""
 
+    name = "Image Information"
+    description = "This plugin collects basic information about the image."
     order = 10
 
     def check_deps(self):

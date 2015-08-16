@@ -15,6 +15,8 @@ except ImportError:
 class SignatureProcessing(BaseProcessingModule):
     """Run signatures on results data."""
 
+    name = "Signatures"
+    description = "This plugin runs the signature engine to collect signature matches."
     order = 80
 
     def check_deps(self):

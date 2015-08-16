@@ -15,6 +15,8 @@ except ImportError:
 class HashProcessing(BaseProcessingModule):
     """Calculates some hashes."""
 
+    name = "Hash Calculator"
+    description = "This plugins calculates common hash for the image."
     order = 10
 
     def check_deps(self):
