@@ -85,11 +85,19 @@ all images could be loaded in a single batch.
 Check for updates
 -----------------
 
-Ghiro automatically checks for new updates every day, if you don't disable the
-update check.
+Ghiro automatically checks for new updates every day, if a new release is found
+a message is shown in the web interface (if you don't disable the update check
+as described in this documentation).
 Anyway a command line command is available to manually check for updates::
 
     python manage.py update_check
+
+Updates are fetched once day, if you run the command two times the same day, a
+cached result will be used.
+If you want to force the update fetch every command you run, use the `force`
+option::
+
+    python manage.py update_check --force
 
 Save all images
 ---------------
