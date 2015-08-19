@@ -65,62 +65,6 @@
             </ul>
             <div class="hov">
                 <div class="btn-group">
-                    <a class="con" href="" data-toggle="dropdown"><span class="icon icon-bell"></span><span class="label label-danger">55</span></a>
-                    <ul class="dropdown-menu pull-right dropdown-alerts" role="menu">
-                        <li class="title"><span class="icon icon-bell"></span>&nbsp;&nbsp;There are 5 new alerts in the system...</li>
-                        <li class="alert">
-                            <div class="alert-icon alt-default"><span class="fa fa-check-square"></span></div>
-                            <div class="alert-content">Quality check was successful</div>
-                            <div class="alert-time">32 sec ago</div>
-                        </li>
-                        <li class="alert">
-                            <div class="alert-icon alt-primary"><span class="fa fa-plus-square"></span></div>
-                            <div class="alert-content">New user added (Bob Grassle)</div>
-                            <div class="alert-time">11 min ago</div>
-                        </li>
-                        <li class="alert">
-                            <div class="alert-icon alt-warning"><span class="fa fa-pencil-square"></span></div>
-                            <div class="alert-content">User profile updated (Steve Jones)</div>
-                            <div class="alert-time">3 hours ago</div>
-                        </li>
-                        <li class="alert">
-                            <div class="alert-icon alt-danger"><span class="fa fa-warning"></span></div>
-                            <div class="alert-content">System failure reported</div>
-                            <div class="alert-time">2 days ago</div>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="#">View all recent alerts</a></li>
-                    </ul>
-                </div>
-                <div class="btn-group">
-                    <a class="con" href="" data-toggle="dropdown"><span class="icon icon-envelope"></span><span class="label label-success">5</span></a>
-                    <ul class="dropdown-menu pull-right dropdown-messages" role="menu">
-                        <li class="title"><span class="icon icon-envelope"></span>&nbsp;&nbsp;You have 13 new messages to read...</li>
-                        <li class="message">
-                            <div class="message-icon"><img src="lib/img/users/1.png"></div>
-                            <div class="message-content"><a href="#">Steve</a> Lorem ipsum dolor sit amet...</div>
-                            <div class="message-time">32 sec ago</div>
-                        </li>
-                        <li class="message">
-                            <div class="message-icon"><img src="lib/img/users/2.png"></div>
-                            <div class="message-content"><a href="#">John</a> Quisque commodo sed ipsum...</div>
-                            <div class="message-time">11 min ago</div>
-                        </li>
-                        <li class="message">
-                            <div class="message-icon"><img src="lib/img/users/3.png"></div>
-                            <div class="message-content"><a href="#">Susan</a> Consectetur adipiscing elit...</div>
-                            <div class="message-time">3 hours ago</div>
-                        </li>
-                        <li class="message">
-                            <div class="message-icon"><img src="lib/img/users/4.png"></div>
-                            <div class="message-content"><a href="#">Barbara</a> Quisque commodo sed ipsum...</div>
-                            <div class="message-time">2 days ago</div>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="#">View all new messages...</a></li>
-                    </ul>
-                </div>
-                <div class="btn-group">
                     <a class="con" href="" data-toggle="dropdown"><i class="icon icon-user"></i></a>
                     <ul class="dropdown-menu pull-right dropdown-profile" role="menu">
                         <li class="title"><span class="icon icon-user"></span>&nbsp;&nbsp;Welcome, {{ request.user.username }}!</li>
@@ -134,5 +78,5 @@
         </div>
 
         <script type="text/javascript">
-            $("#{{ request.session.sidebar_active }}").addClass("active");
+            $("#{{ request.session.sidebar_active }}").addClass("btn-primary");
         </script>

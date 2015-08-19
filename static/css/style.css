@@ -52,7 +52,7 @@ h1, h2, h3, h4, h5, h6 { font-family:'Open Sans';}
 .bar .nav-pills > li span.label { margin-left:10px; position:relative; top:-2px; font-weight:normal; }
 
 /* HOV -> DROPDOWNS */
-.hov { margin:0px; height:60px; float:right; min-width:150px; }
+.hov { margin:0px; height:60px; float:right; min-width:10px; }
 .hov .btn-group { margin-right:10px;z-index:101; }
 .hov .con { color:#FFFFFF;text-decoration:none; display:block; height:40px; padding:10px 15px; line-height:20px; border-radius:5px; font-size:14px; }
 .hov .con:hover { color:#428bca; background:#FFFFFF !important;} .hov .con:focus {  color:#FFFFFF; background:#7DB4D8 !important; }
