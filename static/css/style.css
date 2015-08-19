@@ -51,6 +51,25 @@ h1, h2, h3, h4, h5, h6 { font-family:'Open Sans';}
 .bar .nav-pills > li span.icon, .bar .nav-pills > li span.fa { margin-right:10px; }
 .bar .nav-pills > li span.label { margin-left:10px; position:relative; top:-2px; font-weight:normal; }
 
+.thumbnails > li .tags {
+    background-color: transparent;
+    border-width: 0;
+    top: 110px;
+    direction: rtl;
+    display: inline-block;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    padding: 5px;
+    position: absolute;
+    left: 0;
+    vertical-align: inherit;
+    width: auto;
+}
+.label-holder{
+    margin-right: 2px;
+}
+
 /* HOV -> DROPDOWNS */
 .hov { margin:0px; height:60px; float:right; min-width:10px; }
 .hov .btn-group { margin-right:10px;z-index:101; }
