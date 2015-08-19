@@ -51,7 +51,7 @@ run the following command (inside Ghiro's root)::
 Create a new superuser
 ----------------------
 
-If you need to create a new superuser from the command lince, for example
+If you need to create a new superuser from the command line, for example
 because you closed you out from the web interface, run the following command
 (inside Ghiro's root)::
 
