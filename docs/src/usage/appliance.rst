@@ -29,8 +29,8 @@ run Ghiro Appliance.
 You need to have `VirtualBox`_ working, so download and install `VirtualBox`_
 following the instruction on his website.
 
-.. _`VirtualBox`: http://www.vmware.com/products/workstation
-.. _`Vmware`: https://www.virtualbox.org/
+.. _`Vmware`: http://www.vmware.com/products/workstation
+.. _`VirtualBox`: https://www.virtualbox.org/
 
 Step 2. Get Ghiro Appliance
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
