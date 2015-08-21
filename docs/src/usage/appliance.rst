@@ -161,7 +161,7 @@ for both web application and Linux console access.
 
 If you need to manually configure your IP address: login in, and configure the
 networking card with your desired IP, for example to
-give the IP 192.168.0.10 use the following command:
+give the IP 192.168.0.10 use the following command::
 
 sudo ifconfig eth0 192.168.0.10 up
 
