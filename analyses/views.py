@@ -281,10 +281,10 @@ def new_image(request, case_id):
             # so we have to deal with custom validation errors passing in JSON.
             # Plupload needs a status code 200/OK to get additional data passed from the web server.
             response = HttpResponse(json.dumps({"jsonrpc" : "2.0",
-                                                "error" : {"code": 88,
-                                                           "message": " ".join([(u" ".join([force_text(i) for i in v])) for k, v in form.errors.items()])},
-                                                "id" : "id"}),
-                                    content_type="application/json")
+                            "error" : {"code": 88,
+                                       "message": " ".join([(" ".join([force_text(i) for i in v])) for k, v in form.errors.items()])},
+                            "id" : "id"}),
+                content_type="application/json")
             # Never cache AJAX response.
             response["Expires"] = "Mon, 1 Jan 2000 01:00:00 GMT"
             response["Cache-Control"] = "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
