@@ -68,7 +68,7 @@ it will be ready:
 .. image:: ../_images/appliance_05.png
 
 When the appliance is imported you will see it in virtual machines list
-(don’t worry if you don’t have alle the machines listed in the screenshots,
+(don’t worry if you don’t have all the machines listed in the screenshots,
 I am sorry but I have many):
 
 .. image:: ../_images/appliance_06.png
