@@ -173,7 +173,7 @@ Appliance building
 ------------------
 
 This chapter explains how Ghiro Appliance is created, probably you could skip
-this if you are not interested on customizing the appliance.
+this if you are not interested in customizing the appliance.
 
 The appliance building script is open source and available under a project
 dubbed `ghiro-appliance`_ on Github.
