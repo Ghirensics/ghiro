@@ -188,6 +188,7 @@ def deps_check():
             {"name": "Chardet", "module": "chardet"},
             {"name": "Python Dateutil", "module": "dateutil"},
             {"name": "Python Magic", "module": "magic"},
+            {"name": "Python Requests", "module": "requests"}
             ]
 
     for dep in deps:
