@@ -701,11 +701,8 @@ def dashboard(request):
     request.session["sidebar_active"] = "side-dashboard"
 
     users_count = Profile.objects.count()
-    open_cases_count = Case.objects.filter(state="O").count()
-    analyses_complete_count = Analysis.objects.filter(state="C").count()
     last_cases = Case.objects.filter(state="O").filter(users=request.user).order_by("-created_at")[:5]
     last_analyses = Analysis.objects.filter(state="C").filter(case__users=request.user).order_by("-created_at")[:5]
-    analyses_wait_count = Analysis.objects.filter(state="W").count()
     completed_graph = Analysis.objects.filter(state="C").order_by("-created_at").extra({"created_at": "date(created_at)"}).values("created_at").annotate(counter=Count("pk"))[:30]
     waiting_graph = Analysis.objects.filter(state="W").order_by("-created_at").extra({"created_at": "date(created_at)"}).values("created_at").annotate(counter=Count("pk"))[:30]
     failed_graph = Analysis.objects.filter(state="F").order_by("-created_at").extra({"created_at": "date(created_at)"}).values("created_at").annotate(counter=Count("pk"))[:30]
@@ -713,11 +710,8 @@ def dashboard(request):
     return render_to_response("users/dashboard.html",
         {
             "users_count": users_count,
-            "open_cases_count": open_cases_count,
-            "analyses_complete_count": analyses_complete_count,
             "last_cases": last_cases,
             "last_analyses": last_analyses,
-            "analyses_wait_count": analyses_wait_count,
             "completed_graph": completed_graph,
             "waiting_graph": waiting_graph,
             "failed_graph": failed_graph
