@@ -232,7 +232,7 @@ border-top-left-radius: 0;
 
 /* CUSTOM FOOTER */
 #footer {
-    padding: 50px 0 0 90px;
+    padding: 50px 20px 0 90px;
     height:60px;
     line-height:60px; /* in base all'altezza del footer */
 }

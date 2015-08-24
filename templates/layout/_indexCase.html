@@ -1,50 +1,42 @@
 <div class="box">
-    {% if cases %}
-        <table class="table datatables">
-            <thead>
+    <table class="table datatables">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Created at</th>
+                <th>Owner</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for case in cases %}
                 <tr>
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Created at</th>
-                    <th>Owner</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for case in cases %}
-                    <tr>
-                        <td>
-                            <a href="{% url "analyses.views.show_case" case.id "list" %}">
-                                {% if case.name|length > 70 %}
-                                    {{ case.name|slice:":70" }} ...
-                                {% else %}
-                                    {{ case.name }}
-                                {% endif %}
-                            </a>
-                        </td>
-                        <td>{{ case.get_state_display }}</td>
-                        <td>{{ case.created_at }}</td>
-                        <td>{{ case.owner.username }}</td>
-                        <td>
-                            {% if case.state == "C" %}
-                                <a class="btn btn-soft" title="No actions available" disabled="disabled" ><i class="fa fa-pencil"></i></a>
-                                <a class="btn btn-warning" title="Case already closed" disabled="disabled"><i class="fa fa-times"></i></a>
-                                <a class="btn btn-danger btn-delete-case" id="{% url "analyses.views.delete_case" case.id %}" data-tooltip="tooltip" title="Delete case" href="#delete" data-target="#delete" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+                    <td>
+                        <a href="{% url "analyses.views.show_case" case.id "list" %}">
+                            {% if case.name|length > 70 %}
+                                {{ case.name|slice:":70" }} ...
                             {% else %}
-                                <a class="btn btn-tbl btn-soft" href="{% url "analyses.views.edit_case" case.id %}" data-tooltip="tooltip" title="Edit case"> <i class="fa fa-pencil"></i> </a>
-                                <a class="btn btn-tbl btn-warning btn-close-case" id="{% url "analyses.views.close_case" case.id %}" data-tooltip="tooltip" title="Close case" data-target="#close" data-toggle="modal"><i class="fa fa-times"></i></a>
-                                <a class="btn btn-tbl btn-danger btn-delete-case" id="{% url "analyses.views.delete_case" case.id %}" data-tooltip="tooltip"title="Delete case" data-target="#delete" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+                                {{ case.name }}
                             {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <div class="alert">
-            <span class="fa fa-info-circle"></span>
-            <strong>Info!</strong>
-            No data available
-        </div>
-    {% endif %}
+                        </a>
+                    </td>
+                    <td>{{ case.get_state_display }}</td>
+                    <td>{{ case.created_at }}</td>
+                    <td>{{ case.owner.username }}</td>
+                    <td>
+                        {% if case.state == "C" %}
+                            <a class="btn btn-soft" title="No actions available" disabled="disabled" ><i class="fa fa-pencil"></i></a>
+                            <a class="btn btn-warning" title="Case already closed" disabled="disabled"><i class="fa fa-times"></i></a>
+                            <a class="btn btn-danger btn-delete-case" id="{% url "analyses.views.delete_case" case.id %}" data-tooltip="tooltip" title="Delete case" href="#delete" data-target="#delete" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+                        {% else %}
+                            <a class="btn btn-tbl btn-soft" href="{% url "analyses.views.edit_case" case.id %}" data-tooltip="tooltip" title="Edit case"> <i class="fa fa-pencil"></i> </a>
+                            <a class="btn btn-tbl btn-warning btn-close-case" id="{% url "analyses.views.close_case" case.id %}" data-tooltip="tooltip" title="Close case" data-target="#close" data-toggle="modal"><i class="fa fa-times"></i></a>
+                            <a class="btn btn-tbl btn-danger btn-delete-case" id="{% url "analyses.views.delete_case" case.id %}" data-tooltip="tooltip"title="Delete case" data-target="#delete" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>

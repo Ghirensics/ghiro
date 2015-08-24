@@ -84,7 +84,6 @@
                             <tr>
                                 <th>File name</th>
                                 <th>Created at</th>
-                                <th>Signature</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -102,9 +101,6 @@
                                                 </a>
                                             </td>
                                             <td>{{ anal.completed_at }}</td>
-                                            <td>
-                                                <span class="label label-success">2</span>
-                                            </td>
                                             <td>
                                                 <a href="{% url "analyses.views.image" anal.image_id %}" type="button" class="btn btn-primary btn-xs fancybox" data-tooltip="tooltip" title="Show photo"><i class="fa fa-photo"></i></a>
                                                 <a href="{% url "analyses.views.show_analysis" anal.id %}" type="button" class="btn btn-info btn-xs" data-tooltip="tooltip" title="View report"><i class="fa fa-file-text"></i></a>

@@ -60,7 +60,7 @@
                     </div>
                     <div class="btn-group pull-right">
                         <a class="btn btn-dark dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-cogs"></i> Export
+                            <i class="fa fa-hdd-o"></i> Export
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
@@ -77,8 +77,8 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{% url "analyses.views.export_json" analysis.id %}"><i class="icon-code"></i> JSON report</a>
-                                <a href="{% url "analyses.views.image" analysis.image_id %}"><i class="icon-picture"></i> Original Image</a>
+                                <a href="{% url "analyses.views.export_json" analysis.id %}"><i class="fa fa-code"></i> JSON report</a>
+                                <a href="{% url "analyses.views.image" analysis.image_id %}"><i class="fa fa-picture-o"></i> Original Image</a>
                             </li>
                         </ul>
                     </div>

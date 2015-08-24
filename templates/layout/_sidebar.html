@@ -1,10 +1,6 @@
 <div class="left hidden-xs">
     <div class="logo"><img id="logo" src="/static/img/logo/logo_ghiro176x80.png" style="width:135lspx !important; height:52px; !important"></div>
     <div class="sidebar">
-        <div>
-            <input class="typeahead" type="text" placeholder="Search">
-            <span id="search-icon" class="glyphicon glyphicon-search"></span>
-        </div>
         <div class="">
             <div class="">
                 <a href="/" class="btn btn-primary btn-lg-sd" type="button">
@@ -60,8 +56,9 @@
         <div class="bar">
             <div class="logo-small visible-xs"><img src="/static/img/logo/logo_ghiro77x35.png"></div>
             <ul class="nav nav-pills hidden-xs">
-                <li class="active"><a href="/"><span class="fa fa-dashboard"></span>Dashboard</a></li>
                 <li><a href="{% url "analyses.views.list_cases" %}"><span class="fa fa-briefcase"></span>Open cases <span class="label label-primary">{{ open_cases_count }}</span></a></li>
+                <li><a><span class="fa fa-book"></span>Analyses completed <span class="label label-success">{{ analyses_complete_count }}</span></a></li>
+                <li><a><span class="fa fa-times"></span>Analyses waiting <span class="label label-warning">{{ analyses_wait_count }}</span></a></li>
             </ul>
             <div class="hov">
                 <div class="btn-group">
