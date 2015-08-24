@@ -191,7 +191,7 @@ border-top-left-radius: 0;
     width: 400px !important;
 }
 
-#id_name, #id_description, #id_username, #id_email, #id_last_name, #id_first_name, #id_password1, #id_password2{
+#id_name, #id_description, #id_username, #id_email, #id_last_name, #id_first_name, #id_password1, #id_password2, #id_old_password, #id_new_password1, #id_new_password2{
     background-color: #ffffff;
     background-image: none;
     border: 1px solid #cccccc;
@@ -212,7 +212,7 @@ border-top-left-radius: 0;
     width: 309px !important;
 }
 
-#id_name:focus,#id_description:focus, #id_username:focus, #id_email:focus, #id_last_name:focus, #id_first_name:focus, #id_password1:focus, #id_password2:focus {
+#id_name:focus,#id_description:focus, #id_username:focus, #id_email:focus, #id_last_name:focus, #id_first_name:focus, #id_password1:focus, #id_password2:focus, #id_old_password:focus, #id_new_password1:focus, #id_new_password2:focus{
     border: 1px solid #66afe9;
     border-color: #66afe9;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
@@ -229,10 +229,6 @@ border-top-left-radius: 0;
 #address{
     color:red;
 }
-
-/* CUSTOM PROFILE */
-
-
 
 /* CUSTOM FOOTER */
 #footer {
