@@ -1,33 +1,31 @@
 {% load analyses_tags %}
-<div class="box-tab corner-all">
-    <div class="box-header corner-top">
-        <div class="header-control pull-right">
-            <a data-box="collapse"><i class="icofont-caret-up"></i></a>
-        </div>
-        <ul class="nav nav-pills" id="tab-stat">
-            <li class="active">
-                <a data-toggle="tab" href="#system-info">Static info</a>
-            </li>
-            <li>
-                <a data-toggle="tab" href="#server-type">FileType</a>
-            </li>
-            <li>
-                <a data-toggle="tab" href="#server-hash">Hashes</a>
-            </li>
-            {% if analysis.list_set.all %}
-             <li>
-                <a data-toggle="tab" href="#server-hash-match">Hash matched</a>
-            </li>
-            {% endif %}
-            <li>
-                <a data-toggle="tab" href="#strings">Strings</a>
-            </li>
-            <li>
-                <a data-toggle="tab" href="#server-hex">Hex dump</a>
-            </li>
-        </ul>
+<div class="box">
+    <div class="pull-right">
+        <a data-box="collapse"><i class="icofont-caret-up"></i></a>
     </div>
-    <div class="box-body">
+    <ul class="nav nav-pills" id="tab-stat">
+        <li class="active">
+            <a data-toggle="tab" href="#system-info">Static info</a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="#server-type">FileType</a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="#server-hash">Hashes</a>
+        </li>
+        {% if analysis.list_set.all %}
+         <li>
+            <a data-toggle="tab" href="#server-hash-match">Hash matched</a>
+        </li>
+        {% endif %}
+        <li>
+            <a data-toggle="tab" href="#strings">Strings</a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="#server-hex">Hex dump</a>
+        </li>
+    </ul>
+    <div class="box">
         <div class="tab-content">
             <div class="tab-pane fade in active" id="system-info">
                 <div class="row-fluid">
@@ -72,14 +70,12 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="server-hex">
-                <div class="row-fluid">
-                    <div class="hexview"></div>
-                    <img class="hide" id="wait" src="{{ STATIC_URL }}img/ico/icona_wait.gif">
-                    <br>
-                    <div class="center">
-                        <a id="hexdown" class="btn">Prev</a>
-                        <a id="hexup" class="btn">Next</a>
-                    </div>
+                <div class="hexview"></div>
+
+                <br>
+                <div class="center">
+                    <a id="hexdown" class="btn btn-default">Prev</a>
+                    <a id="hexup" class="btn btn-default">Next</a> <img class="hide" id="wait" src="{{ STATIC_URL }}img/ico/icona_wait.gif">
                 </div>
             </div>
         </div>
@@ -97,20 +93,26 @@
     function loadPage(page){
         $.get('{% url "analyses.views.hex_dump" analysis.id %}?page='+ page, function(data) {
             $('.hexview').html(data);
-            $('#wait').hide();
+            $('#wait').addClass("hide");
+            $('#hexup').removeClass("disabled");
+            $('#hexdown').removeClass("disabled");
         });
     }
 
     $('#hexdown').click(function(){
         if(current_page > 0){
-            $('#wait').show();
+            $('#wait').removeClass("hide");
+            $('#hexdown').addClass("disabled");
+            $('#hexup').addClass("disabled");
             current_page = (current_page - 1);
             loadPage(current_page);
         }
     });
 
     $('#hexup').click(function(){
-        $('#wait').show();
+        $('#wait').removeClass("hide");
+        $('#hexup').addClass("disabled");
+        $('#hexdown').addClass("disabled");
         current_page = (current_page + 1);
         loadPage(current_page);
     });

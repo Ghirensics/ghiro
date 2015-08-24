@@ -1,47 +1,53 @@
 {% load analyses_tags %}
 
-<div class="row-fluid">
-    <ul class="ghiro-thumbnails">
-        {% for image in images %}
-            <li>
-                {% if image.thumb_id %}
-                    <a class="fancybox" rel="group" href="{% url "analyses.views.image" image.image_id %}" title="{{ image.file_name }}">
-                        <img src="{% url "analyses.views.image" image.thumb_id %}" />
-                    </a>
-                    <div class="tags">
-                        {% if image.report.signatures|count_severity:"1" %}
-                            <span class="label-holder">
-                                <span class="label label-success">{{ image.report.signatures|count_severity:"1" }}</span>
-                            </span>
-                        {% endif %}
-                        {% if image.report.signatures|count_severity:"2" %}
-                            <span class="label-holder">
-                                <span class="label label-warning">{{ image.report.signatures|count_severity:"2" }}</span>
-                            </span>
-                        {% endif %}
-                        {% if image.report.signatures|count_severity:"3" %}
-                            <span class="label-holder">
-                                <span class="label label-important">{{ image.report.signatures|count_severity:"3" }}</span>
-                            </span>
-                        {% endif %}
-                    </div>
-                    <div class="tools">
-                        <a href="{% url "analyses.views.show_analysis" image.id %}" title="Show report"> <i class="icon-list-alt"> </i></a>
-                        {% if image.favorites.all %}
-                            <a id="{% url "analyses.views.favorite" image.id %}" rel="{{ image.id }}" class="favorite btn-warning star{{image.id}}" title="Un-set as favorite"> <i class="icon-star"> </i></a>
+<div class="box">
+    <table>
+        <tr>
+            <td>
+                <ul class="thumbnails">
+                {% for image in images %}
+                    <li>
+                        {% if image.thumb_id %}
+                            <a href="{% url "analyses.views.image" image.image_id %}" title="{{ image.file_name }}">
+                                <img src="{% url "analyses.views.image" image.thumb_id %}" />
+                            </a>
+                            <div class="tags">
+                                {% if image.report.signatures|count_severity:"1" %}
+                                    <span class="label-holder">
+                                        <span class="label label-success label-round">{{ image.report.signatures|count_severity:"1" }}</span>
+                                    </span>
+                                {% endif %}
+                                {% if image.report.signatures|count_severity:"2" %}
+                                    <span class="label-holder">
+                                        <span class="label label-warning label-round">{{ image.report.signatures|count_severity:"2" }}</span>
+                                    </span>
+                                {% endif %}
+                                {% if image.report.signatures|count_severity:"3" %}
+                                    <span class="label-holder">
+                                        <span class="label label-danger label-round">{{ image.report.signatures|count_severity:"3" }}</span>
+                                    </span>
+                                {% endif %}
+                            </div>
+                            <div class="icns">
+                                <a href="{% url "analyses.views.show_analysis" image.id %}" title="Show report"> <i class="icon icon-list-alt"> </i></a>
+                                {% if image.favorites.all %}
+                                    <a id="{% url "analyses.views.favorite" image.id %}" rel="{{ image.id }}" class="favorite btn-warning star{{image.id}}" title="Un-set as favorite"> <i class="icon icon-star"> </i></a>
+                                {% else %}
+                                    <a id="{% url "analyses.views.favorite" image.id %}" rel="{{ image.id }}" class="favorite star{{image.id}}" title="Set as favorite"> <i class="icon icon-star"> </i></a>
+                                {% endif %}
+                                <a class="fancybox" href="{% url "analyses.views.image" image.image_id %}" title="View image: {{ image.file_name }}"><i class="icon icon-camera"> </i></a>
+                            </div>
                         {% else %}
-                            <a id="{% url "analyses.views.favorite" image.id %}" rel="{{ image.id }}" class="favorite star{{image.id}}" title="Set as favorite"> <i class="icon-star"> </i></a>
+                            <img src="{{ STATIC_URL }}img/no_image_large.jpg" />
+                            <div class="tools">
+                                <a href="{% url "analyses.views.show_analysis" image.id %}"> <i class="icon-list-alt"> </i></a>
+                                <a class="fancybox" href="{% url "analyses.views.image" image.image_id %}" title="{{ image.file_name }}"><i class="fa fa-photo"> </i></a>
+                            </div>
                         {% endif %}
-                        <a class="fancybox" href="{% url "analyses.views.image" image.image_id %}" title="View image: {{ image.file_name }}"><i class="icon-picture"> </i></a>
-                    </div>
-                {% else %}
-                    <img src="{{ STATIC_URL }}img/no_image_large.jpg" />
-                    <div class="tools">
-                        <a href="{% url "analyses.views.show_analysis" image.id %}"> <i class="icon-list-alt"> </i></a>
-                        <a class="fancybox" href="{% url "analyses.views.image" image.image_id %}" title="{{ image.file_name }}"><i class="icon-picture"> </i></a>
-                    </div>
-                {% endif %}
-            </li>
-        {% endfor %}
-    </ul>
+                    </li>
+                {% endfor %}
+                </ul>
+            </td>
+        </tr>
+    </table>
 </div>

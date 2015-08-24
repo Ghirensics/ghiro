@@ -39,7 +39,7 @@ i.icon-bg-dark {
 }
 .cbp-af-header {
     background: none repeat scroll 0 0 #333333;
-    height: 60px;
+    height: 80px;
     left: 0;
     padding: 20px 0;
     position: fixed;
@@ -64,6 +64,9 @@ i.icon-bg-dark {
 .features .icon i {
     position: absolute;
     top: 0px;
+}
+.btn-primary, .alert-danger {
+    margin-top: 7px;
 }
 footer {
     color: #fff;

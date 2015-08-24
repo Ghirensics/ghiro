@@ -1,114 +1,81 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="span11">
-    <div class="content content-large">
-        <div class="content-header">
-            <h2><i class="icon-user"> </i> Profile</h2>
+    <div class="crumbs">
+        <ol class="breadcrumb hidden-xs">
+            <li>
+                <i class="fa fa-home"></i><a href="/">Dashboard</a>
+            </li>
+            <li class="active">
+                Profile
+            </li>
+        </ol>
+    </div>
+</div>
+
+    <div class="content">
+        <div class="page-h1">
+            <h1>{{ user.username }}'s profile</h1>
         </div>
-        <div class="content-breadcrumb">
-            <ul class="breadcrumb">
-                <li>
-                    <a href="/"><i class="icon-home"> </i> Dashboard</a><span class="divider">&rsaquo;</span>
-                </li>
-                <li class="active">
-                    Profile
-                </li>
-            </ul>
-        </div>
-        <div class="content-body" id="resume-content">
-            <div class="row-fluid profile">
-                <div class="span6">
-                    <div class="left">
-                        <h3 class="title-icon pull-left"><i class="icon-user"> </i></h3>
-                        <div class="title">
-                            <h3>{{ user.username }}</h3>
-                        </div>
-                        <a href="{% url "django.contrib.auth.views.password_change" %}"><i class="icon-key"> </i> Change password</a>
-                    </div>
+        <div class="col-md-12">
+            <div class="wdgt">
+                <h3 class="title-icon"><i class="fa fa-user"> </i> {{ user.username }}</h3>
+                <a href="{% url "django.contrib.auth.views.password_change" %}"><i class="icon-key"> </i> Change password</a>
+                <div class="col-md-12">
+                    <dl class="dl-horizontal">
+                        <dt>Name:</dt>
+                        <dd>{{ user.first_name }}</dd>
+                        <dt>Last name:</dt>
+                        <dd>{{ user.last_name }}</dd>
+                        <dt>Email:</dt>
+                        <dd>{{ user.email }}</dd>
+                        <dt>API key:</dt>
+                        <dd>{{ user.api_key }}</dd>
+                    </dl>
                 </div>
-                <div class="span6">
-                    <div class="right">
-                        <div class="title display-table">
-                            <p>
-                                Name
-                            </p>
-                            <span class="pull-right">{{ user.first_name }}</span>
-                        </div>
-                        <div class="title display-table">
-                            <p>
-                                Last name
-                            </p>
-                            <span class="pull-right">{{ user.last_name }}</span>
-                        </div>
-                        <div class="title display-table">
-                            <p>
-                                Email
-                            </p>
-                            <span class="pull-right">{{ user.email }}</span>
-                        </div>
-                        <div class="title display-table">
-                            <p>
-                                API key
-                            </p>
-                            <span class="pull-right">{{ user.api_key }}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row-fluid profile">
-                <div class="span6">
-                    <div class="left">
-                        <h3 class="title-icon pull-left"><i class="icon-bar-chart"> </i></h3>
-                        <div class="title">
-                            <h3>Stats</h3>
-                        </div>
-                        <dl class="dl-horizontal">
-                            <dt>Case opened:</dt>
-                            <dd><span class="badge badge-important">{{ user.owned_cases.all|length }}</span> </dd>
-                            <dt>My analyses:</dt>
-                            <dd><span class="badge badge-success">{{ user.owned_images.all|length }}</span> </dd>
-                            <dt>My hash lists:</dt>
-                            <dd><span class="badge badge-warning">{{ user.owned_hashes.all|length }}</span> </dd>
-                        </dl>
-                    </div>
-                </div>
-                <div class="span6">
-                    <div class="right">
-                        <div class="title display-table">
-                            <p>
-                                Last login
-                            </p>
-                            <span class="pull-right">{{ user.last_login }}</span>
-                        </div>
-                        <div class="title display-table">
-                            <p>
-                                Account created
-                            </p>
-                            <span class="pull-right">{{ user.date_joined }}</span>
-                        </div>
-                        <div class="title display-table">
-                            <p>
-                                Account active
-                            </p>
-                            <span class="pull-right">{%if user.is_active%}<i class="icon-ok text-success"> </i>{%else%}<i class="icon-remove text-error"></i>{%endif%}</span>
-                        </div>
-                        <div class="title display-table">
-                            <p>
-                                Superuser
-                            </p>
-                            <span class="pull-right">
-                                {% if user.is_superuser %}
-                                    <i class="icon-ok text-success"> </i>
-                                {% else %}
-                                    <i class="icon-remove text-error"> </i>
-                                {% endif %}
-                            </span>
-                        </div>
-                    </div>
+                <div class="col-md-12">
+                    <h3 class="title-icon"><i class="fa fa-bar-chart"> </i> Stats</h3>
+                    <dl class="dl-horizontal">
+                        <dt>Case opened:</dt>
+                        <dd><span class="badge badge-important">{{ user.owned_cases.all|length }}</span></dd>
+                        <dt>My analyses:</dt>
+                        <dd><span class="badge badge-success">{{ user.owned_images.all|length }}</span></dd>
+                        <dt>My hash lists:</dt>
+                        <dd><span class="badge badge-warning">{{ user.owned_hashes.all|length }}</span></dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>Last login:</dt>
+                        <dd>{{ user.last_login }}</dd>
+                        <dt>Account created:</dt>
+                        <dd>{{ user.date_joined }}</dd>
+                        <dt>Account active:</dt>
+                        <dd>
+                            {%if user.is_active%}
+                                <i class="fa fa-check-circle-o text-success"> </i>
+                            {%else%}
+                                <i class="fa fa-remove text-error"> </i>
+                            {%endif%}
+                        </dd>
+                        <dt>Superuser:</dt>
+                        <dd>
+                            {%if user.is_superuser%}
+                                <i class="fa fa-check-circle-o text-success"> </i>
+                            {%else%}
+                                <i class="fa fa-remove text-error"> </i>
+                            {%endif%}
+                        </dd>
+                        <dt>Staff:</dt>
+                        <dd>
+                            {% if user.is_staff %}
+                                <i class="fa fa-check-circle-o text-success"> </i>
+                            {% else %}
+                                <i class="fa fa-remove text-error"> </i>
+                            {%endif%}
+                        </dd>
+                    </dl>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
 {% endblock %}

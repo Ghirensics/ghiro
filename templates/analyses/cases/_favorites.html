@@ -1,5 +1,5 @@
-<div class="row-fluid">
-    <table class="table table-bordered table-striped responsive">
+<div class="box">
+    <table class="table">
         <thead>
             <tr>
                 <th>File name</th>
@@ -17,17 +17,15 @@
                         <td>{{ image.owner.username }}</td>
                         <td>{{ image.created_at }}</td>
                         <td>
-                            <div class="btn-group">
-                                <a class="btn tool fancybox" title="Show preview" href="{% url "analyses.views.image" image.image_id %}">
-                                    <i class="icon-picture"> </i>
-                                </a>
-                                <a class="btn tool" title="Show analysis" href="{% url "analyses.views.show_analysis" image.id %}">
-                                    <i class="icon-list-alt"> </i>
-                                </a>
-                                <a class="btn tool btn-warning unfavorite" id="{% url "analyses.views.favorite" image.id %}" rel="{{ image.id }}" title="Unfavorite">
-                                    <i class="icon-star"> </i>
-                                </a>
-                            </div>
+                            <a class="btn btn-primary fancybox" data-tooltip="tooltip" title="Show preview" href="{% url "analyses.views.image" image.image_id %}">
+                                <i class="fa fa-photo"> </i>
+                            </a>
+                            <a class="btn btn-info" data-tooltip="tooltip" title="Show analysis" href="{% url "analyses.views.show_analysis" image.id %}">
+                                <i class="fa fa-file-text"> </i>
+                            </a>
+                            <a class="btn btn-warning unfavorite" id="{% url "analyses.views.favorite" image.id %}" rel="{{ image.id }}" data-tooltip="tooltip" title="Unfavorite">
+                                <i class="fa fa-star"> </i>
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}

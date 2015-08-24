@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $('.tool').tooltip();
+    $('[data-tooltip="tooltip"]').tooltip();
 
     $('.pop').popover();
 
@@ -12,7 +12,7 @@ $(document).ready(function() {
             }
         },
         tpl : {
-            error : 'Can not dispaly preview, unsupported format.'
+            error : 'Can not display preview, unsupported format.'
         },
         'autoSize': 'false'
     });
@@ -72,6 +72,7 @@ $(document).ready(function() {
                     $(".star"+rel).addClass('btn-warning');
                 }else{
                     $(".star"+rel).removeClass('btn-warning');
+                    $(".star"+rel).addClass('btn-default');
                 }
             }
         });

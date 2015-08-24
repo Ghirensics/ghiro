@@ -1,46 +1,44 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="span11">
-    <div class="content content-large">
-        <div class="content-header">
-            <h2><i class="icon-lock"> </i> Administration <small>activity logging</small></h2>
+
+    <div class="crumbs">
+        <ol class="breadcrumb hidden-xs">
+            <li>
+                <i class="fa fa-home"></i><a href="/">Dashboard</a>
+            </li>
+            <li>
+                <a href="{% url "users.views.admin_list_users" %}"><i class="fa fa-lock"> </i> Administration</a>
+            </li>
+            <li class="active">
+                Activity
+            </li>
+        </ol>
+    </div>
+</div>
+
+    <div class="content">
+        <div class="page-h1">
+            <h1>Administration <small>activity logging</small></h1>
         </div>
-        <div class="content-breadcrumb">
-            <ul class="breadcrumb">
-                <li>
-                    <a href="/"><i class="icon-home"> </i> Dashboard</a><span class="divider">&rsaquo;</span>
-                </li>
-                <li>
-                    <a href="{% url "users.views.admin_list_users" %}"><i class="icon-lock"> </i> Administration</a><span class="divider">&rsaquo;</span>
-                </li>
-                <li class="active">
-                    Activity
-                </li>
-            </ul>
-        </div>
-        <div class="content-body">
-            <div class="box-header corner-top">
-                <ul class="nav nav-pills" id="cases_tab">
-                    <li>
-                        <a href="{% url "users.views.admin_list_users" %}">Users</a>
-                    </li>
-                    <li class="active">
-                        <a href="{% url "users.views.admin_list_activity" %}">Activity</a>
-                    </li>
-                    <li>
-                        <a href="{% url "system.views.dependencies_list" %}">Requirements</a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="users">
-                        <div class="row-fluid">
-                            <div class="span12">
-                                <div class="box corner-all">
-                                    <div class="box-body">
-                                        {% include "admin/_list_activity.html" %}
-                                    </div>
-                                </div>
+        <div class="col-md-12">
+            <div class="wdgt">
+                <div class="box">
+                    <ul class="nav nav-pills nav-primary" id="cases_tab">
+                        <li>
+                            <a href="{% url "users.views.admin_list_users" %}">Users</a>
+                        </li>
+                        <li class="active">
+                            <a href="{% url "users.views.admin_list_activity" %}">Activity</a>
+                        </li>
+                        <li>
+                            <a href="{% url "manage.views.dependencies_list" %}">Requirements</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="users">
+                            <div class="box">
+                                {% include "admin/_list_activity.html" %}
                             </div>
                         </div>
                     </div>
@@ -48,5 +46,5 @@
             </div>
         </div>
     </div>
-</div>
+
 {% endblock %}

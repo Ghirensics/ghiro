@@ -1,53 +1,79 @@
-<div class="span1">
-    <aside class="side-left">
-        <ul class="sidebar">
-            <li id="side-dashboard">
-                <span class="glow"> </span>
-                <a href="/" title="dashboard">
-                <div class="helper-font-24">
-                    <i class="icon-dashboard"> </i>
-                </div> <span class="sidebar-text">Dashboard</span></a>
-            </li>
-            <li id="side-cases">
-                <span class="glow"> </span>
-                <a href="{% url "analyses.views.list_cases" %}" title="cases">
-                <div class="helper-font-24">
-                    <i class="icon-briefcase"> </i>
-                </div> <span class="sidebar-text">Cases</span></a>
-            </li>
-            <li id="side-images">
-                <span class="glow"> </span>
-                <a href="{% url "analyses.views.list_images" "list" %}" title="images">
-                <div class="helper-font-24">
-                    <i class="icon-picture"> </i>
-                </div> <span class="sidebar-text">Images</span></a>
-            </li>
-            <li id="side-search">
-                <span class="glow"> </span>
-                <a href="{% url "analyses.views.search" "form" %}" title="search">
-                <div class="helper-font-24">
-                    <i class="icon-search"> </i>
-                </div> <span class="sidebar-text">Search</span></a>
-            </li>
-            <li id="side-hashes">
-                <span class="glow"> </span>
-                <a href="{% url "hashes.views.list_hashes" %}" title="hashes">
-                <div class="helper-font-24">
-                    <i class="icon-table"> </i>
-                </div> <span class="sidebar-text">Hashes</span></a>
-            </li>
-            {% if request.user.is_stuff or request.user.is_superuser %}
-                <li id="side-admin">
-                    <span class="glow"> </span>
-                    <a href="{% url "users.views.admin_list_users" %}" title="administrator">
-                    <div class="helper-font-24">
-                        <i class="icon-lock"> </i>
-                    </div> <span class="sidebar-text">Admin</span></a>
-                </li>
-            {% endif %}
-        </ul>
-    </aside>
+<div class="left hidden-xs">
+    <div class="logo"><img id="logo" src="/static/img/logo/logo_ghiro176x80.png" style="width:135lspx !important; height:52px; !important"></div>
+    <div class="sidebar">
+        <div class="">
+            <div class="">
+                <a href="/" class="btn btn-primary btn-lg-sd" data-tooltip="tooltip" data-placement="bottom" title="Dashboard" type="button">
+                    <i class="fa fa-dashboard fa-2x"></i>
+                </a>
+                <a href="{% url "analyses.views.list_cases" %}" class="btn btn-dark btn-lg-sd" data-tooltip="tooltip" data-placement="bottom" title="Cases" type="button">
+                    <i class="fa fa-book fa-2x"></i>
+                </a>
+            </div>
+            <div class="">
+                <a href="{% url "analyses.views.list_images" "list" %}" class="btn btn-dark btn-lg-sd" data-tooltip="tooltip" data-placement="bottom" title="Images" type="button">
+                    <i class="fa fa-picture-o fa-2x"></i>
+                </a>
+                <a href="{% url "analyses.views.search" "form" %}" class="btn btn-dark btn-lg-sd" data-tooltip="tooltip" data-placement="bottom" title="Search" type="button">
+                    <i class="fa fa-search fa-2x"></i>
+                </a>
+            </div>
+            <div class="">
+                <a href="{% url "hashes.views.list_hashes" %}" class="btn btn-dark btn-lg-sd" data-tooltip="tooltip" data-placement="bottom" title="Hashes" type="button">
+                    <i class="fa fa-list fa-2x"></i>
+                </a>
+                {% if request.user.is_stuff or request.user.is_superuser %}
+                    <a href="{% url "users.views.admin_list_users" %}" class="btn btn-dark btn-lg-sd" data-tooltip="tooltip" data-placement="bottom" title="Adminitration" type="button">
+                        <i class="fa fa-cogs fa-2x"></i>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </div>
-<script type="text/javascript">
-    $("#{{ request.session.sidebar_active }}").addClass("active");
-</script>
+
+<!-- RESPONSIVE NAVIGATION -->
+<div id="secondary" class="btn-group visible-xs">
+    <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown"><span class="icon icon-th-large"></span>&nbsp;&nbsp;Navigation&nbsp;&nbsp;<span class="caret"></span></button>
+    <ul class="dropdown-menu dropdown-info pull-right" role="menu">
+        <li><a href="/">Dashboard</a></li>
+        <li><a href="{% url "analyses.views.list_cases" %}">Cases</a></li>
+        <li><a href="{% url "analyses.views.list_images" "list" %}">Images</a></li>
+        <li class="divider" style="border-bottom:1px solid #ddd; margin:0px; margin-top:5px;"></li>
+        <li><a href="{% url "analyses.views.search" "form" %}">Search</a></li>
+        <li><a href="{% url "hashes.views.list_hashes" %}">Hash</a></li>
+        {% if request.user.is_stuff or request.user.is_superuser %}
+        <li><a href="{% url "users.views.admin_list_users" %}">Admin</a></li>
+        {% endif %}
+    </ul>
+</div>
+<div id="secondary-search" class="input-icon visible-xs">
+    <i class="icon icon-search"></i>
+    <input class="form-control form-warning input-sm" type="text">
+</div>
+<div class="right">
+    <div class="nav">
+        <div class="bar">
+            <div class="logo-small visible-xs"><img src="/static/img/logo/logo_ghiro77x35.png"></div>
+            <ul class="nav nav-pills hidden-xs">
+                <li><a href="{% url "analyses.views.list_cases" %}"><span class="fa fa-briefcase"></span>Open cases <span class="label label-primary">{{ open_cases_count }}</span></a></li>
+                <li><a><span class="fa fa-book"></span>Analyses completed <span class="label label-success">{{ analyses_complete_count }}</span></a></li>
+                <li><a><span class="fa fa-clock-o"></span>Analyses waiting <span class="label label-warning">{{ analyses_wait_count }}</span></a></li>
+            </ul>
+            <div class="hov">
+                <div class="btn-group">
+                    <a class="con" href="" data-toggle="dropdown"><i class="icon icon-user"></i></a>
+                    <ul class="dropdown-menu pull-right dropdown-profile" role="menu">
+                        <li class="title"><span class="icon icon-user"></span>&nbsp;&nbsp;Welcome, {{ request.user.username }}!</li>
+                        <li><a href="{% url "users.views.profile" %}"><span class="fa fa-user"></span>Profile</a></li>
+                        <li><a href="{% url "users.views.admin_show_activity" user.id %}"><span class="fa fa-list"></span>Activity</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{% url "django.contrib.auth.views.logout" %}"><span class="fa fa-power-off"></span>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            $("#{{ request.session.sidebar_active }}").addClass("btn-primary");
+        </script>

@@ -1,58 +1,62 @@
 {% load analyses_tags %}
-<div class="accordion-group">
-    <div class="accordion-heading">
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                {# Used to separate signatures by severity and avoid dups in IDs. #}
+                {% if segment %}
+                    <a data-toggle="collapse" data-parent="#sign{{ segment }}-accordion" href="#{{ sign.name|slugify }}_{{ segment }}">
+                {% else %}
+                    <a data-toggle="collapse" data-parent="#sign-accordion" href="#{{ sign.name|slugify }}">
+                {% endif %}
+
+                    {# Badge selector. #}
+                    {% if sign.severity == 1 %}
+                        <span class="label label-success label-round">Low</span>
+                    {% elif sign.severity == 2 %}
+                        <span class="label label-warning label-round">Medium</span>
+                    {% elif sign.severity == 3 %}
+                        <span class="label label-danger label-round">High</span>
+                    {% endif %}
+                    {{ sign.name}}
+                </a>
+            </h4>
+        </div>
         {# Used to separate signatures by severity and avoid dups in IDs. #}
         {% if segment %}
-            <a class="accordion-toggle bg-green" data-toggle="collapse" data-parent="#sign{{ segment }}-accordion" href="#{{ sign.name|slugify }}_{{ segment }}">
+            <div id="{{ sign.name|slugify }}_{{ segment }}" class="panel-collapse collapse">
         {% else %}
-            <a class="accordion-toggle bg-green" data-toggle="collapse" data-parent="#sign-accordion" href="#{{ sign.name|slugify }}">
+            <div id="{{ sign.name|slugify }}" class="panel-collapse collapse">
         {% endif %}
-
-            {# Badge selector. #}
-            {% if sign.severity == 1 %}
-                <span class="badge badge-success">Low</span>
-            {% elif sign.severity == 2 %}
-                <span class="badge badge-warning">Medium</span>
-            {% elif sign.severity == 3 %}
-                <span class="badge badge-important">High</span>
-            {% endif %}
-            {{ sign.name}}
-        </a>
-    </div>
-    {# Used to separate signatures by severity and avoid dups in IDs. #}
-    {% if segment %}
-        <div id="{{ sign.name|slugify }}_{{ segment }}" class="accordion-body collapse">
-    {% else %}
-        <div id="{{ sign.name|slugify }}" class="accordion-body collapse">
-    {% endif %}
-        <div class="accordion-inner">
-            <dl class="dl-horizontal">
-                <dt>
-                    Category:
-                </dt>
-                <dd>
-                    {{ sign.category|capfirst }}
-                </dd>
-                <dt>
-                    Description:
-                </dt>
-                <dd>
-                    {{ sign.description }}
-                </dd>
-                {% if sign.data %}
+            <div class="panel-body">
+                <dl class="dl-horizontal">
                     <dt>
-                        Additional data:
+                        Category:
                     </dt>
                     <dd>
-                        {{sign.data.0}}:
-                        <i> {% if sign.data.1|classname == "list" %}
-                            {{ sign.data.1|join:", " }}
-                        {% else %}
-                            {{sign.data.1}}
-                        {% endif %} </i>
+                        {{ sign.category|capfirst }}
                     </dd>
-                {% endif %}
-            </dl>
+                    <dt>
+                        Description:
+                    </dt>
+                    <dd>
+                        {{ sign.description }}
+                    </dd>
+                    {% if sign.data %}
+                        <dt>
+                            Additional data:
+                        </dt>
+                        <dd>
+                            {{sign.data.0}}:
+                            <i> {% if sign.data.1|classname == "list" %}
+                                {{ sign.data.1|join:", " }}
+                            {% else %}
+                                {{sign.data.1}}
+                            {% endif %} </i>
+                        </dd>
+                    {% endif %}
+                </dl>
+            </div>
         </div>
     </div>
 </div>

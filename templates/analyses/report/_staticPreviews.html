@@ -1,72 +1,76 @@
 {% load analyses_tags %}
-<ul class="thumbnails">
-    {% for preview in analysis.report.metadata.preview %}
-        <li>
-            <div class="thumbnail">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>
-                                {% if preview.original_file %}
-                                    <a class="fancybox" href="{% url "analyses.views.image" preview.original_file %}">
-                                {% else %}
-                                    <a class="fancybox" href="{% url "analyses.views.image" preview.file %}">
+<table>
+    <tr>
+        <td>
+            <ul class="thumbnails">
+                {% for preview in analysis.report.metadata.preview %}
+                    <li>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        {% if preview.original_file %}
+                                            <a class="fancybox" href="{% url "analyses.views.image" preview.original_file %}">
+                                        {% else %}
+                                            <a class="fancybox" href="{% url "analyses.views.image" preview.file %}">
+                                        {% endif %}
+                                        {% if embed %}
+                                            <img src="{{ preview.file|to_base64 }}" />
+                                        {% else %}
+                                            <img src="{% url "analyses.views.image" preview.file %}">
+                                        {% endif %}
+                                        </a>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="pull-left">
+                                <tr>
+                                    <td>
+                                        <b>Size:</b>
+                                    </td>
+                                    <td>
+                                        {{ preview.size }} bytes
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Mime type:</b>
+                                    </td>
+                                    <td>
+                                        {{ preview.mime_type }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Extension:</b>
+                                    </td>
+                                    <td>
+                                        {{ preview.ext }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Dimension:</b>
+                                    </td>
+                                    <td>
+                                        {{ preview.dimensions }}
+                                    </td>
+                                </tr>
+                                {% if preview.diff %}
+                                <tr>
+                                    <td>
+                                        <b>Differ:</b>
+                                    </td>
+                                    <td>
+                                        <span class="label label-danger label-round">{{ preview.diff }}</span>
+                                    </td>
+                                </tr>
                                 {% endif %}
-                                {% if embed %}
-                                    <img src="{{ preview.file|to_base64 }}" />
-                                {% else %}
-                                    <img src="{% url "analyses.views.image" preview.file %}">
-                                {% endif %}
-                                </a>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="pull-left">
-                        <tr>
-                            <td>
-                                <b>Size:</b>
-                            </td>
-                            <td>
-                                {{ preview.size }} bytes
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <b>Mime type:</b>
-                            </td>
-                            <td>
-                                {{ preview.mime_type }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <b>Extension:</b>
-                            </td>
-                            <td>
-                                {{ preview.ext }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <b>Dimension:</b>
-                            </td>
-                            <td>
-                                {{ preview.dimensions }}
-                            </td>
-                        </tr>
-                        {% if preview.diff %}
-                        <tr>
-                            <td>
-                                <b>Differ:</b>
-                            </td>
-                            <td>
-                                <span class="badge badge-important">{{ preview.diff }}</span>
-                            </td>
-                        </tr>
-                        {% endif %}
-                    </tbody>
-                </table>
-            </div>
-        </li>
-    {% endfor %}
-</ul>
+                            </tbody>
+                        </table>
+                    </li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+</table>

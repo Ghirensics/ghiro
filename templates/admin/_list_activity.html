@@ -1,4 +1,4 @@
-<table class="table table-bordered table-striped responsive datatables">
+<table class="table table datatables">
     <thead>
         <tr>
             <th>#</th>
@@ -30,13 +30,13 @@
 </table>
 
 <script type="text/javascript">
-$('.datatables').dataTable({
-    "sDom" : '<"top"f>t<"bottom"lp><"clear">',
-    "aaSorting": [[ 0, "desc" ]],
-    "language": {
-        "search": "_INPUT_"
-    }
-});
+    $('.datatables').dataTable({
+        "sDom" : '<"top"f>rt<"bottom"p><"clear">',
+        "aaSorting": [[ 0, "desc" ]],
+        "language": {
+            "search": "_INPUT_"
+        }
+    });
 
-$('.dataTables_filter input').attr("placeholder", "Search...");
+    $('.dataTables_filter input').attr("placeholder", "Search...");
 </script>
