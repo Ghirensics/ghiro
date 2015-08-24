@@ -35,7 +35,7 @@
     <script type="text/javascript">
     $(document).ready(function(){
         $.ajax({
-            url : "{% url 'manage.views.update_check' %}",
+            url : "{% url 'system.views.update_check' %}",
             type : "GET",
             success : function(data) {
                 if (data == "False"){
