@@ -12,7 +12,7 @@
 
      <div class="content">
         <div class="page-h1">
-            <h1>Administration: <small>user management </small></h1>
+            <h1>Administration <small>user management</small></h1>
         </div>
         <div class="col-md-12">
             <div class="wdgt">
@@ -59,10 +59,10 @@
                                                 {% endif %}
                                             </td>
                                             <td>
-                                                <a class="btn" data-tooltip="tooltip" title="View user" href="{% url "users.views.admin_show_user" user.id %}">
+                                                <a class="btn btn-primary" data-tooltip="tooltip" title="View user" href="{% url "users.views.admin_show_user" user.id %}">
                                                     <i class="fa fa-eye"> </i>
                                                 </a>
-                                                <a class="btn" data-tooltip="tooltip" title="View user activity" href="{% url "users.views.admin_show_activity" user.id %}">
+                                                <a class="btn btn-info" data-tooltip="tooltip" title="View user activity" href="{% url "users.views.admin_show_activity" user.id %}">
                                                     <i class="fa fa-list"> </i>
                                                 </a>
                                                 <a class="btn btn-soft" data-tooltip="tooltip" title="Edit user" href="{% url "users.views.admin_edit_user" user.id %}">

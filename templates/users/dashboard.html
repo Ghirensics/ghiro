@@ -57,7 +57,7 @@
                                         </td>
                                         <td>{{ case.created_at }}</td>
                                         <td>
-                                            <a href="{% url "analyses.views.show_case" case.id "thumb" %}" type="button" class="btn btn-primary btn-xs" data-tooltip="tooltip" title="Show photo case"><i class="fa fa-camera"></i></a>
+                                            <a href="{% url "analyses.views.show_case" case.id "thumb" %}" type="button" class="btn btn-primary btn-xs" data-tooltip="tooltip" title="View case thumbnails"><i class="fa fa-camera"></i></a>
                                             <a href="{% url "analyses.views.show_case" case.id "list" %}" type="button" class="btn btn-info btn-xs" data-tooltip="tooltip" title="View case"><i class="fa fa-book"></i></a>
                                             <a href="{% url "analyses.views.edit_case" case.id %}" type="button" class="btn btn-soft btn-xs" data-tooltip="tooltip" title="Edit case"><i class="fa fa-pencil"></i></a>
                                         </td>
@@ -102,7 +102,7 @@
                                             </td>
                                             <td>{{ anal.completed_at }}</td>
                                             <td>
-                                                <a href="{% url "analyses.views.image" anal.image_id %}" type="button" class="btn btn-primary btn-xs fancybox" data-tooltip="tooltip" title="Show photo"><i class="fa fa-photo"></i></a>
+                                                <a href="{% url "analyses.views.image" anal.image_id %}" type="button" class="btn btn-primary btn-xs fancybox" data-tooltip="tooltip" title="View photo"><i class="fa fa-photo"></i></a>
                                                 <a href="{% url "analyses.views.show_analysis" anal.id %}" type="button" class="btn btn-info btn-xs" data-tooltip="tooltip" title="View report"><i class="fa fa-file-text"></i></a>
                                                 {% if anal.image.favorites.all %}
                                                     <a id="{% url "analyses.views.favorite" anal.id %}" rel="{{ anal.id }}" type="button" class="favorite btn btn-xs btn-warning star{{anal.id}}" data-tooltip="tooltip" title="Un-set as favorite"> <i class="fa fa-star"> </i></a>
