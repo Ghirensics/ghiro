@@ -145,6 +145,10 @@ def delete_case(request, case_id):
                                   {"error": "You are not authorized to delete this. Only owner can delete the case."},
                                   context_instance=RequestContext(request))
 
+    # Delete all analysis.
+    for image in case.images.all():
+        image.delete()
+    # Delete case.
     Case.objects.get(pk=case_id).delete()
 
     # Auditing.
