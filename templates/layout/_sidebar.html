@@ -3,27 +3,27 @@
     <div class="sidebar">
         <div class="">
             <div class="">
-                <a href="/" class="btn btn-primary btn-lg-sd" data-tooltip="tooltip" data-placement="bottom" title="Dashboard" type="button">
+                <a href="/" id="side-dashboard" class="btn btn-dark btn-lg-sd" data-tooltip="tooltip" data-placement="bottom" title="Dashboard" type="button">
                     <i class="fa fa-dashboard fa-2x"></i>
                 </a>
-                <a href="{% url "analyses.views.list_cases" %}" class="btn btn-dark btn-lg-sd" data-tooltip="tooltip" data-placement="bottom" title="Cases" type="button">
+                <a href="{% url "analyses.views.list_cases" %}" id="side-cases" class="btn btn-dark btn-lg-sd" data-tooltip="tooltip" data-placement="bottom" title="Cases" type="button">
                     <i class="fa fa-book fa-2x"></i>
                 </a>
             </div>
             <div class="">
-                <a href="{% url "analyses.views.list_images" "list" %}" class="btn btn-dark btn-lg-sd" data-tooltip="tooltip" data-placement="bottom" title="Images" type="button">
+                <a href="{% url "analyses.views.list_images" "list" %}" id="side-images" class="btn btn-dark btn-lg-sd" data-tooltip="tooltip" data-placement="bottom" title="Images" type="button">
                     <i class="fa fa-picture-o fa-2x"></i>
                 </a>
-                <a href="{% url "analyses.views.search" "form" %}" class="btn btn-dark btn-lg-sd" data-tooltip="tooltip" data-placement="bottom" title="Search" type="button">
+                <a href="{% url "analyses.views.search" "form" %}" id="side-search" class="btn btn-dark btn-lg-sd" data-tooltip="tooltip" data-placement="bottom" title="Search" type="button">
                     <i class="fa fa-search fa-2x"></i>
                 </a>
             </div>
             <div class="">
-                <a href="{% url "hashes.views.list_hashes" %}" class="btn btn-dark btn-lg-sd" data-tooltip="tooltip" data-placement="bottom" title="Hashes" type="button">
+                <a href="{% url "hashes.views.list_hashes" %}" id="side-hashes" class="btn btn-dark btn-lg-sd" data-tooltip="tooltip" data-placement="bottom" title="Hashes" type="button">
                     <i class="fa fa-list fa-2x"></i>
                 </a>
                 {% if request.user.is_stuff or request.user.is_superuser %}
-                    <a href="{% url "users.views.admin_list_users" %}" class="btn btn-dark btn-lg-sd" data-tooltip="tooltip" data-placement="bottom" title="Adminitration" type="button">
+                    <a href="{% url "users.views.admin_list_users" %}" id="side-admin" class="btn btn-dark btn-lg-sd" data-tooltip="tooltip" data-placement="bottom" title="Adminitration" type="button">
                         <i class="fa fa-cogs fa-2x"></i>
                     </a>
                 {% endif %}
@@ -75,5 +75,6 @@
         </div>
 
         <script type="text/javascript">
+            $("#{{ request.session.sidebar_active }}").removeClass("btn-dark");
             $("#{{ request.session.sidebar_active }}").addClass("btn-primary");
         </script>
