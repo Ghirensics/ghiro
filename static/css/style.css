@@ -171,6 +171,10 @@ border-top-left-radius: 0;
     margin-bottom: 0px !important;;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 /* IMAGE URL CUSTOM */
 #id_path{
     width: 400px;
@@ -418,9 +422,13 @@ border-top-left-radius: 0;
 
 /* CUSTOM FOOTER */
 #footer{
-    position: absolute;
+    position: fixed;
     bottom: 0;
-    right: 15px;
+    left: 0;
+    width: 100%;
+    background: url('../img/bg.png');
+    color: #FFF;
+    margin-top:15px;
 }
 
 /* CUSTOM THUN */

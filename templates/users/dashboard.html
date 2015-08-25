@@ -13,7 +13,7 @@
         <div class="page-h1">
             <h1>Dashboard <small>welcome to ghiro</small></h1>
         </div>
-        <div id="newVersion" class="col-md-12">
+        <div id="newVersion" class="col-md-12 hidden">
             <div class="alert alert-info" style="margin-bottom:0px;margin-top:10px;">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <span class="icon icon-exclamation-sign"></span> <strong>Info!</strong> Ghiro is back with a brand new version.
@@ -128,61 +128,61 @@
     </div>
 
     <script type="text/javascript">
-        $(function () {
-            $('#container').highcharts({
-                chart: {
-                    type: 'area'
-                },
-                credits: {
-                    enabled: false
-                },
+    $(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'area'
+            },
+            credits: {
+                enabled: false
+            },
+            title: {
+                text: 'Last 30 days'
+            },
+            subtitle: {
+                text: 'Analyses processing trend'
+            },
+            xAxis: {
+                type: 'datetime'
+            },
+            yAxis: {
                 title: {
-                    text: 'Last 30 days'
-                },
-                subtitle: {
-                    text: 'Analyses processing trend'
-                },
-                xAxis: {
-                    type: 'datetime'
-                },
-                yAxis: {
-                    title: {
-                        text: 'Analyses'
-                    }
-                },
-                tooltip: {
-                    enabled: false
-                },
-                series: [{
-                    name: 'Completed analyses',
-                    color: "#A8CD59",
-                    data: [
-                        {% for item in completed_graph %}
-                            [Date.parse("{{item.created_at|to_date|date:"m/d/Y"}}","MM/dd/yyyy"), {{item.counter}}]
-                            {% if not forloop.last %}{% ifequal forloop.revcounter 2 %}, {% else %}, {% endifequal %}{% else %}{% endif %}
-                        {% endfor %}
-                    ]
-                }, {
-                    name: 'Failed analyses',
-                    color: "#AC4040",
-                    data: [
-                        {% for item in failed_graph %}
-                            [Date.parse("{{item.created_at|to_date|date:"m/d/Y"}}","MM/dd/yyyy"), {{item.counter}}]
-                            {% if not forloop.last %}{% ifequal forloop.revcounter 2 %}, {% else %}, {% endifequal %}{% else %}{% endif %}
-                        {% endfor %}
-                    ]
-                }, {
-                    name: 'Waiting analyses',
-                    color: "#FFC90E",
-                    data: [
-                        {% for item in waiting_graph %}
-                            [Date.parse("{{item.created_at|to_date|date:"m/d/Y"}}","MM/dd/yyyy"), {{item.counter}}]
-                            {% if not forloop.last %}{% ifequal forloop.revcounter 2 %}, {% else %}, {% endifequal %}{% else %}{% endif %}
-                        {% endfor %}
-                    ]
-                }]
-            });
+                    text: 'Analyses'
+                }
+            },
+            tooltip: {
+                enabled: false
+            },
+            series: [{
+                name: 'Completed analyses',
+                color: "#A8CD59",
+                data: [
+                    {% for item in completed_graph %}
+                        [Date.parse("{{item.created_at|to_date|date:"m/d/Y"}}","MM/dd/yyyy"), {{item.counter}}]
+                        {% if not forloop.last %}{% ifequal forloop.revcounter 2 %}, {% else %}, {% endifequal %}{% else %}{% endif %}
+                    {% endfor %}
+                ]
+            }, {
+                name: 'Failed analyses',
+                color: "#AC4040",
+                data: [
+                    {% for item in failed_graph %}
+                        [Date.parse("{{item.created_at|to_date|date:"m/d/Y"}}","MM/dd/yyyy"), {{item.counter}}]
+                        {% if not forloop.last %}{% ifequal forloop.revcounter 2 %}, {% else %}, {% endifequal %}{% else %}{% endif %}
+                    {% endfor %}
+                ]
+            }, {
+                name: 'Waiting analyses',
+                color: "#FFC90E",
+                data: [
+                    {% for item in waiting_graph %}
+                        [Date.parse("{{item.created_at|to_date|date:"m/d/Y"}}","MM/dd/yyyy"), {{item.counter}}]
+                        {% if not forloop.last %}{% ifequal forloop.revcounter 2 %}, {% else %}, {% endifequal %}{% else %}{% endif %}
+                    {% endfor %}
+                ]
+            }]
         });
+    });
     </script>
 
 {% endblock %}
