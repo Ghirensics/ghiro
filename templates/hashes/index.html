@@ -130,8 +130,9 @@
 
     <script type="text/javascript">
         $('.datatables').dataTable({
-            "sDom" : '<"top">t<"bottom"p><"clear">',
-            "aaSorting" : [[2, "desc"]]
+            "sPaginationType": "bs_normal",
+            "sDom": '<"row view-filter"<"col-sm-12"<"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-right"p>>>',
+            "aaSorting": [[ 2, "desc" ]]
         });
 
         $('.btn-trash').click(function(){

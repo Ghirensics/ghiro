@@ -33,9 +33,12 @@
     {% include "layout/_modalActionCase.html" %}
 
     <script type="text/javascript">
-    $('.datatables').dataTable({
-        "sDom" : '<"top">t<"bottom"p><"clear">',
-        "aaSorting": [[ 2, "desc" ]]
+    $(document).ready(function() {
+        $('.datatables').dataTable({
+            "sPaginationType": "bs_normal",
+            "sDom": '<"row view-filter"<"col-sm-12"<"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-right"p>>>',
+            "aaSorting": [[ 2, "desc" ]]
+        });
     });
     </script>
 
