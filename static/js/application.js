@@ -31,8 +31,8 @@ $(document).ready(function() {
                 win.print();
             }
 
-            return false;
-            }
+        return false;
+        }
     };
     $(document).ready(function () {
         Popup.init();
