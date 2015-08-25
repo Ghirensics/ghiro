@@ -1,50 +1,52 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="span11">
-    <div class="content content-large">
-        <div class="content-header">
-            <h2><i class="icon-briefcase"> </i> Cases</h2>
+
+    <div class="crumbs">
+        <ol class="breadcrumb hidden-xs">
+            <li>
+                <i class="fa fa-home"></i><a href="/">Dashboard</a>
+            </li>
+            <li>
+                <a href="{% url "analyses.views.list_cases" %}"><i class="icon-briefcase"> </i> Cases</a>
+            </li>
+             <li>
+                <a href="{% url "analyses.views.show_case" analysis.case.id "list" %}"><i class="icon-book"> </i>
+                    {{ analysis.case.name }}
+                </a>
+            </li>
+            <li class="active">
+                Wait...
+            </li>
+        </ol>
+    </div>
+</div>
+
+    <div class="content">
+        <div class="page-h1">
+            <h1>Cases</h1>
         </div>
-        <div class="content-breadcrumb">
-            <ul class="breadcrumb">
-                <li>
-                    <a href="/"><i class="icon-home"> </i> Dashboard</a><span class="divider">&rsaquo;</span>
-                </li>
-                <li>
-                    <a href="{% url "analyses.views.list_cases" %}"><i class="icon-briefcase"> </i> Cases</a>
-                    <span class="divider">&rsaquo;</span>
-                </li>
-                <li>
-                    <a href="{% url "analyses.views.show_case" analysis.case.id "list" %}"><i class="icon-book"> </i>
-                        {{ analysis.case.name }}
-                    </a>
-                    <span class="divider">&rsaquo;</span>
-                </li>
-                <li class="active">
-                    Wait...
-                </li>
-            </ul>
-        </div>
-        <div class="content-body">
-            <script type="text/javascript">
-                setTimeout("location.reload(true);", 2000);
-            </script>
-            <div>
-                <h3>Processing {{ analysis.file_name }}</h3>
-            </div>
-            <div>
-                <div class="alert alert-info">
-                    <h4>Chipmunks working...</h4>
-                    <p>
-                        Your analysis task is waiting to be processed. This page will refresh every second, you will be automatically redirect to analysis when ready.
-                    </p>
-                    <div class="progress progress-info progress-striped active">
-                        <div class="bar" style="width: 100%;"></div>
+        <div class="col-md-12">
+            <div class="wdgt">
+                <script type="text/javascript">
+                    setTimeout("location.reload(true);", 2000);
+                </script>
+                <div>
+                    <h3>Processing {{ analysis.file_name }}</h3>
+                </div>
+                <div>
+                    <div class="alert alert-info">
+                        <h4>Chipmunks working...</h4>
+                        <p>
+                            Your analysis task is waiting to be processed. This page will refresh every second, you will be automatically redirect to analysis when ready.
+                        </p>
+                        <div class="progress progress-info progress-striped active">
+                            <div class="bar" style="width: 100%;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
 {% endblock %}

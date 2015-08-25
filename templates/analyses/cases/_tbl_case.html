@@ -134,32 +134,42 @@
             </tbody>
         </table>
         {% if tasks %}
-            <div class="pagination text-center">
-                {% if tasks.has_previous %}
-                    <ul>
-                        <li>
+            <div id="DataTables_Table_0_paginate" class="dataTables_paginate paging_bs_normal">
+                <ul class="pagination pull-right">
+                    {% if tasks.has_previous %}
+                        <li class="prev">
                             {% if filtered %}
-                                <a href="{% url "analyses.views.show_case" case.id "list" %}?page={{ tasks.previous_page_number }}&filter=completed">← Previous</a>
+                                <a href="{% url "analyses.views.show_case" case.id "list" %}?page={{ tasks.previous_page_number }}&filter=completed">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                    Previous
+                                </a>
                             {% else %}
-                                <a href="{% url "analyses.views.show_case" case.id "list" %}?page={{ tasks.previous_page_number }}">← Previous</a>
+                                <a href="{% url "analyses.views.show_case" case.id "list" %}?page={{ tasks.previous_page_number }}">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                    Previous
+                                </a>
                             {% endif %}
                         </li>
-                    </ul>
-                {% endif %}
-                <span class="current pull-left">
-                    <small>Page {{ tasks.number }} of {{ tasks.paginator.num_pages }}</small>
-                </span>
-                {% if tasks.has_next %}
-                    <ul>
-                        <li>
+                    {% endif %}
+                    {% if tasks.has_next %}
+                        <li class="next">
                             {% if filtered %}
-                                <a href="{% url "analyses.views.show_case" case.id "list" %}?page={{ tasks.next_page_number }}&filter=completed">Next → </a>
+                                <a href="{% url "analyses.views.show_case" case.id "list" %}?page={{ tasks.next_page_number }}&filter=completed">
+                                    Next
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </a>
                             {% else %}
-                                <a href="{% url "analyses.views.show_case" case.id "list" %}?page={{ tasks.next_page_number }}">Next → </a>
+                                <a href="{% url "analyses.views.show_case" case.id "list" %}?page={{ tasks.next_page_number }}">
+                                    Next
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </a>
                             {% endif %}
                         </li>
-                    </ul>
-                {% endif %}
+                    {% endif %}
+                </ul>
+                <div class="pull-left">
+                    <div id="DataTables_Table_0_info" class="dataTables_info" role="status" aria-live="polite">Showing {{ tasks.number }} to {{ tasks.paginator.num_pages }}</div>
+                </div>
             </div>
         {% endif %}
     {% elif pagename == "owned" %}
@@ -202,32 +212,42 @@
             </tbody>
         </table>
         {% if tasks %}
-            <div class="pagination text-center">
-                {% if tasks.has_previous %}
-                    <ul>
-                        <li>
+            <div id="DataTables_Table_0_paginate" class="dataTables_paginate paging_bs_normal">
+                <ul class="pagination pull-right">
+                    {% if tasks.has_previous %}
+                        <li class="prev">
                             {% if filtered %}
-                                <a href="{% url "analyses.views.show_case" case.id "owned" %}?page={{ tasks.previous_page_number }}&filter=completed">← Previous</a>
+                                <a href="{% url "analyses.views.show_case" case.id "owned" %}?page={{ tasks.previous_page_number }}&filter=completed">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                    Previous
+                                </a>
                             {% else %}
-                                <a href="{% url "analyses.views.show_case" case.id "owned" %}?page={{ tasks.previous_page_number }}">← Previous</a>
+                                <a href="{% url "analyses.views.show_case" case.id "owned" %}?page={{ tasks.previous_page_number }}">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                    Previous
+                                </a>
                             {% endif %}
                         </li>
-                    </ul>
-                {% endif %}
-                <span class="current pull-left">
-                    <small>Page {{ tasks.number }} of {{ tasks.paginator.num_pages }}</small>
-                </span>
-                {% if tasks.has_next %}
-                    <ul>
-                        <li>
+                    {% endif %}
+                    {% if tasks.has_next %}
+                        <li class="next">
                             {% if filtered %}
-                                <a href="{% url "analyses.views.show_case" case.id "owned" %}?page={{ tasks.next_page_number }}&filter=completed">Next → </a>
+                                <a href="{% url "analyses.views.show_case" case.id "owned" %}?page={{ tasks.next_page_number }}&filter=completed">
+                                    Next
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </a>
                             {% else %}
-                                <a href="{% url "analyses.views.show_case" case.id "owned" %}?page={{ tasks.next_page_number }}">Next → </a>
+                                <a href="{% url "analyses.views.show_case" case.id "owned" %}?page={{ tasks.next_page_number }}">
+                                    Next
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </a>
                             {% endif %}
                         </li>
-                    </ul>
-                {% endif %}
+                    {% endif %}
+                </ul>
+                <div class="pull-left">
+                    <div id="DataTables_Table_0_info" class="dataTables_info" role="status" aria-live="polite">Showing {{ tasks.number }} to {{ tasks.paginator.num_pages }}</div>
+                </div>
             </div>
         {% endif %}
     {% elif pagename == "others" %}
@@ -272,32 +292,42 @@
             </tbody>
         </table>
         {% if tasks %}
-            <div class="pagination text-center">
-                {% if tasks.has_previous %}
-                    <ul>
-                        <li>
+            <div id="DataTables_Table_0_paginate" class="dataTables_paginate paging_bs_normal">
+                <li class="pagination pull-right">
+                    {% if tasks.has_previous %}
+                        <li class="prev">
                             {% if filtered %}
-                                <a href="{% url "analyses.views.show_case" case.id "others" %}?page={{ tasks.previous_page_number }}&filter=completed">← Previous</a>
+                                <a href="{% url "analyses.views.show_case" case.id "others" %}?page={{ tasks.previous_page_number }}&filter=completed">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                    Previous
+                                </a>
                             {% else %}
-                                <a href="{% url "analyses.views.show_case" case.id "others" %}?page={{ tasks.previous_page_number }}">← Previous</a>
+                                <a href="{% url "analyses.views.show_case" case.id "others" %}?page={{ tasks.previous_page_number }}">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                    Previous
+                                </a>
                             {% endif %}
                         </li>
-                    </ul>
-                {% endif %}
-                <span class="current pull-left">
-                    <small>Page {{ tasks.number }} of {{ tasks.paginator.num_pages }}</small>
-                </span>
-                {% if tasks.has_next %}
-                    <ul>
-                        <li>
+                    {% endif %}
+                    {% if tasks.has_next %}
+                        <li class="next">
                             {% if filtered %}
-                                <a href="{% url "analyses.views.show_case" case.id "others" %}?page={{ tasks.next_page_number }}&filter=completed">Next → </a>
+                                <a href="{% url "analyses.views.show_case" case.id "others" %}?page={{ tasks.next_page_number }}&filter=completed">
+                                    Next
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </a>
                             {% else %}
-                                <a href="{% url "analyses.views.show_case" case.id "others" %}?page={{ tasks.next_page_number }}">Next → </a>
+                                <a href="{% url "analyses.views.show_case" case.id "others" %}?page={{ tasks.next_page_number }}">
+                                    Next
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </a>
                             {% endif %}
                         </li>
-                    </ul>
-                {% endif %}
+                    {% endif %}
+                </ul>
+                <div class="pull-left">
+                    <div id="DataTables_Table_0_info" class="dataTables_info" role="status" aria-live="polite">Showing {{ tasks.number }} to {{ tasks.paginator.num_pages }}</div>
+                </div>
             </div>
         {% endif %}
     {% elif pagename == "thumb" %}
