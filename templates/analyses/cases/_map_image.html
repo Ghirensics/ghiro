@@ -3,8 +3,28 @@
 <div class="alert hide" id="noNet">
     <strong>Warning!</strong> To use the map feature you need to be connected to internet.
 </div>
+
 <div class="box">
-    <div id="map_canvas"></div>
+    <div class="wdgt-header">Image geolocalization
+     <span style="float:right; position:relative; top:-2px; right:-2px;">
+      <div class="btn-group">
+          <button type="button" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown">Set Style</button>
+          <ul class="dropdown-menu pull-right dropdown-success" role="menu">
+              <li><a href="javascript:void(0);" onclick="setStyle(1, 1);">Style 1</a></li>
+              <li><a href="javascript:void(0);" onclick="setStyle(2, 1);">Style 2</a></li>
+              <li><a href="javascript:void(0);" onclick="setStyle(3, 1);">Style 3</a></li>
+              <li><a href="javascript:void(0);" onclick="setStyle(4, 1);">Style 4</a></li>
+              <li><a href="javascript:void(0);" onclick="setStyle(5, 1);">Style 5</a></li>
+          </ul>
+      </div>
+     </span>
+    </div>
+    <div class="wdgt-body wdgt-map" style="padding-bottom:10px;height:600px;">
+        <div id="map-canvas"></div>
+    </div>
+    <style type="text/css">
+        #map-canvas { height: 100% }
+    </style>
 </div>
 
 <script type="text/javascript">
@@ -12,18 +32,41 @@ $(document).ready(function(){
     internetStatus();
 });
 
+var marker = new Array();
+var lstnr = new Array();
+var map;
+
+var style1 = [{"stylers":[{"visibility":"off"}]},{"featureType":"road","stylers":[{"visibility":"on"},{"color":"#ffffff"}]},{"featureType":"road.arterial","stylers":[{"visibility":"on"},{"color":"#fee379"}]},{"featureType":"road.highway","stylers":[{"visibility":"on"},{"color":"#fee379"}]},{"featureType":"landscape","stylers":[{"visibility":"on"},{"color":"#f3f4f4"}]},{"featureType":"water","stylers":[{"visibility":"on"},{"color":"#7fc8ed"}]},{},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#83cead"}]},{"elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"landscape.man_made","elementType":"geometry","stylers":[{"weight":0.9},{"visibility":"off"}]}];
+var style2 = [{"featureType":"water","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]},{"featureType":"landscape","stylers":[{"color":"#f2e5d4"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"administrative","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"road"},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{},{"featureType":"road","stylers":[{"lightness":20}]}];
+var style3 = [{"stylers":[{"saturation":-100},{"gamma":0.8},{"lightness":4},{"visibility":"on"}]},{"featureType":"landscape.natural","stylers":[{"visibility":"on"},{"color":"#5dff00"},{"gamma":4.97},{"lightness":-5},{"saturation":100}]}];
+var style4 = [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#a2daf2"}]},{"featureType":"landscape.man_made","elementType":"geometry","stylers":[{"color":"#f7f1df"}]},{"featureType":"landscape.natural","elementType":"geometry","stylers":[{"color":"#d0e3b4"}]},{"featureType":"landscape.natural.terrain","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#bde6ab"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi.medical","elementType":"geometry","stylers":[{"color":"#fbd3da"}]},{"featureType":"poi.business","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffe15f"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#efd151"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"color":"black"}]},{"featureType":"transit.station.airport","elementType":"geometry.fill","stylers":[{"color":"#cfb2db"}]}];
+var style5 = [{"featureType":"water","stylers":[{"color":"#46bcec"},{"visibility":"on"}]},{"featureType":"landscape","stylers":[{"color":"#f2f2f2"}]},{"featureType":"road","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"transit","stylers":[{"visibility":"off"}]},{"featureType":"poi","stylers":[{"visibility":"off"}]}];
+
+function setStyle(which){
+    if(which == 1){ map.setOptions({styles: style1}); }
+    if(which == 2){ map.setOptions({styles: style2}); }
+    if(which == 3){ map.setOptions({styles: style3}); }
+    if(which == 4){ map.setOptions({styles: style4}); }
+    if(which == 5){ map.setOptions({styles: style5}); }
+}
+
+function getInfoWindow(mrk){
+    var contentString = '<div style="width:200px;color:#448fba;border-bottom:1px solid #DDD; font-size:14px; ">Window Header</div><div style="width:200px;margin-top:10px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</div><div style="text-align:right;margin-top:10px;"><button type="button" class="btn btn-dark btn-sm">Dark</button>&nbsp;&nbsp;<button type="button" class="btn btn-primary btn-sm">Primary</button></div>';
+    var infowindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 200  });
+    infowindow.open(map,mrk);
+}
+
 function initialize() {
     var mapOptions = {
-        center: new google.maps.LatLng(0,0),
-        zoom: 2,
-        mapTypeId: google.maps.MapTypeId.HYBRID
+        center: new google.maps.LatLng(35.2269, -80.8433),
+        zoom: 3
     };
 
-    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
     {% for image in images %}
-
-        var contentString = '<a href="{% url "analyses.views.show_analysis" image.id %}"><h4>{% if image.file_name|length > 20 %}{{ image.file_name|slice:":20" }} ...{% else %}{{ image.file_name }}{% endif %}</h4><img src="{% url "analyses.views.image" image.thumb_id %}" /></a><div class="tags">{% if image.report.signatures|count_severity:"1" %}<span class="label-holder"><span class="label label-success label-round">{{ image.report.signatures|count_severity:"1" }}</span></span>{% endif %}{% if image.report.signatures|count_severity:"2" %}<span class="label-holder"><span class="label label-warning label-round">{{ image.report.signatures|count_severity:"2" }}</span></span>{% endif %}{% if image.report.signatures|count_severity:"3" %}<span class="label-holder"><span class="label label-danger label-round">{{ image.report.signatures|count_severity:"3" }}</span></span>{% endif %}</div>';
+        var contentString = '<div style="width:200px;color:#448fba;border-bottom:1px solid #DDD; font-size:14px; ">{% if image.file_name|length > 20 %}{{ image.file_name|slice:":20" }} ...{% else %}{{ image.file_name }}{% endif %}</div><div style="width:200px;margin-top:10px;">{% if image.thumb_id %}<img src="{% url "analyses.views.image" image.thumb_id %}" />{% else %}<img src="{{ STATIC_URL }}img/no_image_large.jpg" />{% endif %}</div><div style="text-align:right;margin-top:10px;"><a href="{% url "analyses.views.show_analysis" image.id %}" class="btn btn-primary btn-sm">View report</a></div>';
+        //var contentString = '<a href="{% url "analyses.views.show_analysis" image.id %}"><h4>{% if image.file_name|length > 20 %}{{ image.file_name|slice:":20" }} ...{% else %}{{ image.file_name }}{% endif %}</h4><img src="{% url "analyses.views.image" image.thumb_id %}" /></a><div class="tags">{% if image.report.signatures|count_severity:"1" %}<span class="label-holder"><span class="label label-success label-round">{{ image.report.signatures|count_severity:"1" }}</span></span>{% endif %}{% if image.report.signatures|count_severity:"2" %}<span class="label-holder"><span class="label label-warning label-round">{{ image.report.signatures|count_severity:"2" }}</span></span>{% endif %}{% if image.report.signatures|count_severity:"3" %}<span class="label-holder"><span class="label label-danger label-round">{{ image.report.signatures|count_severity:"3" }}</span></span>{% endif %}</div>';
         var infowindow_{{ forloop.counter }} = new google.maps.InfoWindow({
             content: contentString
         });
@@ -35,7 +78,7 @@ function initialize() {
         google.maps.event.addListener(marker_{{ forloop.counter }}, 'click', function() {
             infowindow_{{ forloop.counter }}.open(map,marker_{{ forloop.counter }});
         });
-
     {% endfor %}
 }
+
 </script>
