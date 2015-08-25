@@ -28,11 +28,11 @@
     <div class="content">
         <div class="page-h1">
             <h1>New image <small>in
-                <span style="color: salmon">{% if case.name|length > 70 %}
+                "{% if case.name|length > 70 %}
                     {{ case.name|slice:":70" }} ...
                 {% else %}
                     {{ case.name }}
-                {% endif %}</span> case</small>
+                {% endif %}" case</small>
             </h1>
         </div>
         <div class="col-md-12">
