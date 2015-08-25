@@ -6,7 +6,7 @@ import tempfile
 import magic
 # Deal with Python 3.
 try:
-    import StringIO
+    from StringIO import StringIO
 except ImportError:
     from io import StringIO
 
@@ -89,7 +89,7 @@ def to_unicode(str):
     return result
 
 def str2file(text_data):
-    strIO = StringIO.StringIO()
+    strIO = StringIO()
     strIO.write(text_data)
     strIO.seek(0)
     return strIO
@@ -104,7 +104,7 @@ def str2image(data):
     @param data: binarydata
     @return: PIL Image object
     """
-    output = StringIO.StringIO()
+    output = StringIO()
     output.write(data)
     output.seek(0)
     return Image.open(output)
@@ -114,7 +114,7 @@ def image2str(img):
     @param img: PIL Image object
     @return:  binary data
     """
-    f = StringIO.StringIO()
+    f = StringIO()
     img.save(f, "JPEG")
     return f.getvalue()
 
