@@ -8,7 +8,9 @@ import magic
 try:
     from StringIO import StringIO
 except ImportError:
-    from io import StringIO
+    # Hack for python 3, binary files should be opened in binary mode and
+    # threatened with BytesIO.
+    from io import BytesIO as StringIO
 
 from PIL import Image
 from pymongo.errors import InvalidId
