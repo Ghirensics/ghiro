@@ -11,7 +11,7 @@ TEMPLATE_DEBUG = DEBUG
 SITE_ID = 1
 
 # Actual Ghiro release.
-GHIRO_VERSION = "0.2"
+GHIRO_VERSION = "0.2.1"
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
