@@ -6,7 +6,7 @@ import tempfile
 import magic
 # Deal with Python 3.
 try:
-    from StringIO import StringIO
+    import StringIO
 except ImportError:
     from io import StringIO
 
