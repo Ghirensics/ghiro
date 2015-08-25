@@ -68,17 +68,13 @@ i.icon-bg-dark {
 .btn-primary, .alert-danger {
     margin-top: 7px;
 }
-footer {
-    color: #fff;
-}
-footer.footer {
-    background: #333333;
-}
 .footer {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
+    background: #333333;
+    color: #fff;
 }
 .footer a{
     color: #cbcbcb;
