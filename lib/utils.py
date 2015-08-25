@@ -8,7 +8,9 @@ import magic
 try:
     from StringIO import StringIO
 except ImportError:
-    from io import StringIO
+    # Hack for python 3, binary files should be opened in binary mode and
+    # threatened with BytesIO.
+    from io import BytesIO as StringIO
 
 from PIL import Image
 from pymongo.errors import InvalidId
@@ -89,7 +91,7 @@ def to_unicode(str):
     return result
 
 def str2file(text_data):
-    strIO = StringIO.StringIO()
+    strIO = StringIO()
     strIO.write(text_data)
     strIO.seek(0)
     return strIO
@@ -104,7 +106,7 @@ def str2image(data):
     @param data: binarydata
     @return: PIL Image object
     """
-    output = StringIO.StringIO()
+    output = StringIO()
     output.write(data)
     output.seek(0)
     return Image.open(output)
@@ -114,7 +116,7 @@ def image2str(img):
     @param img: PIL Image object
     @return:  binary data
     """
-    f = StringIO.StringIO()
+    f = StringIO()
     img.save(f, "JPEG")
     return f.getvalue()
 
