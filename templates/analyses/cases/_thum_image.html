@@ -39,10 +39,6 @@
                             </div>
                         {% else %}
                             <img src="{{ STATIC_URL }}img/no_image_large.jpg" />
-                            <div class="tools">
-                                <a href="{% url "analyses.views.show_analysis" image.id %}"> <i class="icon-list-alt"> </i></a>
-                                <a class="fancybox" href="{% url "analyses.views.image" image.image_id %}" title="{{ image.file_name }}"><i class="fa fa-photo"> </i></a>
-                            </div>
                         {% endif %}
                     </li>
                 {% endfor %}

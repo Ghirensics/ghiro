@@ -37,40 +37,87 @@
                 </ul>
                 {% if pagename == "list" %}
                     {% include "analyses/cases/_list_image.html" %}
-                    {% if images %}
-                        {% if images.has_previous %}
-                            <a href="{% url "analyses.views.list_images" "list" %}?page={{ images.previous_page_number }}" class="btn btn-default">← Previous</a>
-                        {% endif %}
-                        {% if images.has_next %}
-                            <a href="{% url "analyses.views.list_images" "list" %}?page={{ images.next_page_number }}" class="btn btn-default">Next → </a>
-                        {% endif %}
-                        <small class="pull-right">Page {{ images.number }} of {{ images.paginator.num_pages }}</small>
-                    {% endif %}
+                    <div id="DataTables_Table_0_paginate" class="dataTables_paginate paging_bs_normal">
+                        <ul class="pagination pull-right">
+                            {% if images %}
+                                {% if images.has_previous %}
+                                    <li class="prev">
+                                        <a href="{% url "analyses.views.list_images" "list" %}?page={{ images.previous_page_number }}">
+                                            <span class="glyphicon glyphicon-chevron-left"></span>
+                                            Previous
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                {% if images.has_next %}
+                                    <li class="next">
+                                        <a href="{% url "analyses.views.list_images" "list" %}?page={{ images.next_page_number }}">
+                                            Next
+                                            <span class="glyphicon glyphicon-chevron-right"></span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+                        </ul>
+                        <div class="pull-left">
+                            <div id="DataTables_Table_0_info" class="dataTables_info" role="status" aria-live="polite">Showing {{ images.number }} to {{ images.paginator.num_pages }}</div>
+                        </div>
+                    </div>
                 {% elif pagename == "thumb" %}
                     {% include "analyses/cases/_thum_image.html" %}
-                    {% if images %}
-                        {% if images.has_previous %}
-                            <a href="{% url "analyses.views.list_images" "thumb" %}?page={{ images.previous_page_number }}" class="btn btn-default">← Previous</a>
-                        {% endif %}
-                        {% if images.has_next %}
-                            <a href="{% url "analyses.views.list_images" "thumb" %}?page={{ images.next_page_number }}" class="btn btn-default">Next → </a>
-                        {% endif %}
-                        <small class="pull-right">Page {{ images.number }} of {{ images.paginator.num_pages }}</small>
-                    {% else %}
-                        <div class="alert alert-info">
-                            <span class="fa fa-info-circle"></span>
-                            <strong>Info!</strong>
-                            There are not any photos
+                    <div id="DataTables_Table_0_paginate" class="dataTables_paginate paging_bs_normal">
+                        <ul class="pagination pull-right">
+                            {% if images %}
+                                {% if images.has_previous %}
+                                    <li class="prev">
+                                        <a href="{% url "analyses.views.list_images" "thumb" %}?page={{ images.previous_page_number }}">
+                                            <span class="glyphicon glyphicon-chevron-left"></span>
+                                            Previous
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                {% if images.has_next %}
+                                    <li class="next">
+                                        <a href="{% url "analyses.views.list_images" "thumb" %}?page={{ images.next_page_number }}">
+                                            Next
+                                            <span class="glyphicon glyphicon-chevron-right"></span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% else %}
+                                <div class="alert alert-info">
+                                    <span class="fa fa-info-circle"></span>
+                                    <strong>Info!</strong>
+                                    There are not any photos
+                                </div>
+                            {% endif %}
+                        </ul>
+                        <div class="pull-left">
+                            <div id="DataTables_Table_0_info" class="dataTables_info" role="status" aria-live="polite">Showing {{ images.number }} to {{ images.paginator.num_pages }}</div>
                         </div>
-                    {% endif %}
+                    </div>
                 {% elif pagename == "map" %}
                     {% include "analyses/cases/_map_image.html" %}
                 {% elif pagename == "favorites" %}
                     {% include "analyses/cases/_favorites.html" %}
                 {% endif %}
-                <div>
-                </div>
             </div>
         </div>
     </div>
+    <style>
+.pagination > li:last-child > a, .pagination > li:last-child > span {
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.pagination > li > a, .pagination > li > span {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #428bca;
+    float: left;
+    line-height: 1.42857;
+    margin-left: -1px;
+    padding: 6px 12px;
+    position: relative;
+    text-decoration: none;
+}
+    </style>
 {% endblock %}
