@@ -3,6 +3,7 @@
 # See the file 'docs/LICENSE.txt' for license terms.
 
 import os
+from PIL import Image
 from django.test import TestCase
 
 from lib.utils import *
@@ -23,3 +24,13 @@ class GetContentTypeFromFileTest(TestCase):
 
     def test_content_type(self):
         self.assertEqual(get_content_type_from_file(self.image), "image/png")
+
+class Image2StrTest(TestCase):
+    """Tests image2str()."""
+
+    def setUp(self):
+        self.image = Image.new("RGB", (10, 50))
+
+    def test_convert_to_str(self):
+        """Tests the returned data type, should be string."""
+        self.assertTrue(isinstance(image2str(self.image), str))
