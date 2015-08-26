@@ -22,7 +22,7 @@
         <a class="btn btn-danger btn-delete-case" id="{% url "analyses.views.delete_case" case.id %}" data-tooltip="tooltip" title="Delete case" href="#delete" role="button" data-toggle="modal"> <span class="glyphicon glyphicon-trash"></span></a>
     </div>
     <div class="pull-right">
-        <a class="btn btn-default" onClick="window.location.reload();return false;"><span class="glyphicon glyphicon-refresh"></span></a><span class="notice-new badge" id="notice"></span>
+        <a class="btn btn-default" onClick="window.location.reload();return false;"><span class="glyphicon glyphicon-refresh"></span></a><span class="notice-new label label-danger label-round" id="notice"></span>
     </div>
 {% else %}
     <div class="pull-right btn-group">
