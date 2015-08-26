@@ -5,7 +5,7 @@
     <div class="crumbs">
         <ol class="breadcrumb hidden-xs">
             <li>
-                <i class="fa fa-home"></i><a href="/">Dashboard</a>
+                <span class="glyphicon glyphicon-home gi-0x"></span><a href="/">Dashboard</a>
             </li>
             <li class="active">
                 Hashes
@@ -22,7 +22,7 @@
             <div class="wdgt">
                 <div class="header-control pull-right">
                     <a href="{% url "hashes.views.new_hashes" %}"  type="button" class="btn btn-success pull-right" title="Add list" data-tooltip="tooltip" data-placement="left">
-                        <i class="fa fa-plus"></i>
+                        <span class="glyphicon glyphicon-plus"></span>
                     </a>
                 </div>
                 <ul class="nav nav-pills nav-primary" id="cases_tab">
@@ -55,11 +55,11 @@
                                                 <div class="btn-group">
                                                     {% if request.user == list.owner or request.user.is_superuser %}
                                                         <a class="btn btn-danger btn-trash tool" href="#trash" role="button" data-toggle="modal" id="{% url "hashes.views.delete_hashes" list.id %}" title="Delete list">
-                                                            <i class="icon-trash"> </i>
+                                                            <span class="glyphicon glyphicon-trash"></span>
                                                         </a>
                                                     {% else %}
                                                         <a class="btn btn-danger tool" title="You are not authorized to delete this" disabled="disabled">
-                                                            <i class="icon-trash"> </i>
+                                                            <span class="glyphicon glyphicon-trash"></span>
                                                         </a>
                                                     {% endif %}
                                                 </div>
@@ -90,7 +90,7 @@
                                         <td>
                                             <div class="btn-group">
                                                 <a class="btn btn-danger btn-trash tool" href="#trash" role="button" data-toggle="modal" id="" title="Delete hash">
-                                                    <i class="icon-trash"></i>
+                                                    <span class="glyphicon glyphicon-trash"></span>
                                                 </a>
                                             </div>
                                         </td>

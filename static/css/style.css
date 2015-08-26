@@ -180,6 +180,14 @@ border-top-left-radius: 0;
     width: 400px;
 }
 
+.gi-0x{font-size: 0.8em;}
+.gi-1x{font-size: 1em;}
+.gi-2x{font-size: 2em;}
+.gi-3x{font-size: 3em;}
+.gi-4x{font-size: 4em;}
+.gi-5x{font-size: 5em;}
+.gi-sidebar{font-size: 2em;}
+
 /* MAP CUSTOM */
 #map_canvas{
     width: 1140px;

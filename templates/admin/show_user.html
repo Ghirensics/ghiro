@@ -5,10 +5,10 @@
     <div class="crumbs">
         <ol class="breadcrumb hidden-xs">
             <li>
-                <i class="fa fa-home"></i><a href="/">Dashboard</a>
+                <span class="glyphicon glyphicon-home gi-0x"></span><a href="/">Dashboard</a>
             </li>
             <li>
-                <a href="{% url "users.views.admin_list_users" %}"><i class="fa fa-lock"></i> Administration</a>
+                <a href="{% url "users.views.admin_list_users" %}"><span class="glyphicon glyphicon-lock gi-0x"></span> Administration</a>
             </li>
             <li class="active">
                 {{ user.username }}'s profile
@@ -24,8 +24,8 @@
         <div class="col-md-12">
             <div class="wdgt">
                 <div class="left">
-                    <h3 class="title-icon"><i class="fa fa-user"> </i> {{ user.username }}</h3>
-                    <a href="{% url "users.views.admin_edit_user" user.id %}"><i class="fa fa-edit"></i> Edit profile</a>
+                    <h3 class="title-icon"><span class="glyphicon glyphicon-user"></span> {{ user.username }}</h3>
+                    <a href="{% url "users.views.admin_edit_user" user.id %}"> Edit profile</a>
                 </div>
                 <div class="col-md-12">
                     <dl class="dl-horizontal">
@@ -38,7 +38,7 @@
                     </dl>
                 </div>
                 <div class="col-md-12">
-                    <h3 class="title-icon"><i class="fa fa-bar-chart"> </i> Stats</h3>
+                    <h3 class="title-icon"><span class="glyphicon glyphicon-equalizer"></span> Stats</h3>
                     <dl class="dl-horizontal">
                         <dt>Case opened:</dt>
                         <dd><span class="badge badge-important">{{ user.owned_cases.all|length }}</span></dd>
@@ -55,25 +55,25 @@
                         <dt>Account active:</dt>
                         <dd>
                             {%if user.is_active%}
-                                <i class="fa fa-check-circle-o text-success"> </i>
+                                <span class="glyphicon glyphicon-ok-circle text-success"></span>
                             {%else%}
-                                <i class="fa fa-remove text-error"> </i>
+                                <span class="glyphicon glyphicon-remove-circle text-danger"></span>
                             {%endif%}
                         </dd>
                         <dt>Superuser:</dt>
                         <dd>
                             {%if user.is_superuser%}
-                                <i class="fa fa-check-circle-o text-success"> </i>
+                                <span class="glyphicon glyphicon-ok-circle text-success"></span>
                             {%else%}
-                                <i class="fa fa-remove text-error"> </i>
+                                <span class="glyphicon glyphicon-remove-circle text-danger"></span>
                             {%endif%}
                         </dd>
                         <dt>Staff:</dt>
                         <dd>
                             {% if user.is_staff %}
-                                <i class="fa fa-check-circle-o text-success"> </i>
+                                <span class="glyphicon glyphicon-ok-circle text-success"></span>
                             {% else %}
-                                <i class="fa fa-remove text-error"> </i>
+                                <span class="glyphicon glyphicon-remove-circle text-danger"></span>
                             {%endif%}
                         </dd>
                     </dl>

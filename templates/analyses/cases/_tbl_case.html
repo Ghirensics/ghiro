@@ -3,26 +3,26 @@
 {% if case.state == "O" %}
     <div class="pull-right dropdown">
         <a type="button" class="btn btn-success dropdown-toggle" data-tooltip="tooltip" title="Add" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <i class="fa fa-plus"></i> <span class="caret"></span>
+            <span class="glyphicon glyphicon-plus"></span> <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a href="{% url "analyses.views.new_image" case.id %}"><i class="fa fa-photo"></i> Add image</a>
+                <a href="{% url "analyses.views.new_image" case.id %}"><span class="glyphicon glyphicon-picture"></span> Add image</a>
             </li>
             <li>
-                <a href="{% url "analyses.views.new_url" case.id %}"><i class="fa fa-link"></i> Add image url</a>
+                <a href="{% url "analyses.views.new_url" case.id %}"><span class="glyphicon glyphicon-link"></span> Add image url</a>
             </li>
             <li class="divider"></li>
             <li>
-                <a href="{% url "analyses.views.new_folder" case.id %}"><i class="fa fa-folder-open-o"></i> Add folder</a>
+                <a href="{% url "analyses.views.new_folder" case.id %}"><span class="glyphicon glyphicon-folder-open"></span> Add folder</a>
             </li>
         </ul>
-        <a href="{% url "analyses.views.edit_case" case.id %}" class="btn btn-soft" data-tooltip="tooltip" title="Edit case"><i class="fa fa-pencil"></i></a>
-        <a class="btn btn-warning btn-close-case" id="{% url "analyses.views.close_case" case.id %}" data-tooltip="tooltip" title="Close case" href="#close" role="button" data-toggle="modal"> <i class="fa fa-times"></i></a>
-        <a class="btn btn-danger btn-delete-case" id="{% url "analyses.views.delete_case" case.id %}" data-tooltip="tooltip" title="Delete case" href="#delete" role="button" data-toggle="modal"> <i class="fa fa-trash-o"></i></a>
+        <a href="{% url "analyses.views.edit_case" case.id %}" class="btn btn-soft" data-tooltip="tooltip" title="Edit case"><span class="glyphicon glyphicon-pencil"></span></a>
+        <a class="btn btn-warning btn-close-case" id="{% url "analyses.views.close_case" case.id %}" data-tooltip="tooltip" title="Close case" href="#close" role="button" data-toggle="modal"> <span class="glyphicon glyphicon-remove"></span></a>
+        <a class="btn btn-danger btn-delete-case" id="{% url "analyses.views.delete_case" case.id %}" data-tooltip="tooltip" title="Delete case" href="#delete" role="button" data-toggle="modal"> <span class="glyphicon glyphicon-trash"></span></a>
     </div>
     <div class="pull-right">
-        <a class="btn btn-default" onClick="window.location.reload();return false;"><i class="fa fa-refresh"></i></a><span class="notice-new badge" id="notice"></span>
+        <a class="btn btn-default" onClick="window.location.reload();return false;"><span class="glyphicon glyphicon-refresh"></span></a><span class="notice-new badge" id="notice"></span>
     </div>
 {% else %}
     <div class="pull-right btn-group">
@@ -100,9 +100,9 @@
                     <th>File name</th>
                     <th>Status
                         {% if filtered %}
-                            <a href="{% url "analyses.views.show_case" case.id "list" %}" class="tool" title="Show all tasks"><i class="fa fa-eye-slash"></i></a></th>
+                            <a href="{% url "analyses.views.show_case" case.id "list" %}" class="tool" title="Show all tasks"><span class="glyphicon glyphicon-eye-close gi-0x"></span></a></th>
                         {% else %}
-                            <a href="{% add_get filter='completed' %}" class="tool" title="Show only completed tasks"><i class="fa fa-eye"></i></a></th>
+                            <a href="{% add_get filter='completed' %}" class="tool" title="Show only completed tasks"><span class="glyphicon glyphicon-eye-open gi-0x"></span></a></th>
                         {% endif %}
                     <th>Owner</th>
                     <th>Submitted at</th>
@@ -179,9 +179,9 @@
                     <th>File name</th>
                     <th>Status
                         {% if filtered %}
-                            <a href="{% url "analyses.views.show_case" case.id "owned" %}" class="tool" title="Show all reports"><i class="fa fa-eye-slash"></i></a></th>
+                            <a href="{% url "analyses.views.show_case" case.id "owned" %}" class="tool" title="Show all reports"><span class="glyphicon glyphicon-eye-close gi-0x"></span></a></th>
                         {% else %}
-                            <a href="{% add_get filter='completed' %}" class="tool" title="Show only completed reports"><i class="fa fa-eye"></i></a></th>
+                            <a href="{% add_get filter='completed' %}" class="tool" title="Show only completed reports"><span class="glyphicon glyphicon-eye-open gi-0x"></span></a></th>
                         {% endif %}
                     </th>
                     <th>Submitted at</th>
@@ -257,9 +257,9 @@
                     <th>File name</th>
                     <th>Status
                         {% if filtered %}
-                            <a href="{% url "analyses.views.show_case" case.id "others" %}" class="tool" title="Show all reports"><i class="fa fa-eye-slash"></i></a></th>
+                            <a href="{% url "analyses.views.show_case" case.id "others" %}" class="tool" title="Show all reports"><span class="glyphicon glyphicon-eye-close gi-0x"></span></a></th>
                         {% else %}
-                            <a href="{% add_get filter='completed' %}" class="tool" title="Show only completed reports"><i class="fa fa-eye"></i></a></th>
+                            <a href="{% add_get filter='completed' %}" class="tool" title="Show only completed reports"><span class="glyphicon glyphicon-eye-open gi-0x"></span></a></th>
                         {% endif %}
                     </th>
                     <th>Owner</th>
@@ -354,7 +354,6 @@
                 </div>
             {% else %}
                 <div class="alert">
-                    <span class="fa fa-info-circle"></span>
                     There are not any photos.
                 </div>
             {% endif %}

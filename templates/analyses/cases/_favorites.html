@@ -18,13 +18,13 @@
                         <td>{{ image.created_at }}</td>
                         <td>
                             <a class="btn btn-primary fancybox" data-tooltip="tooltip" title="Show preview" href="{% url "analyses.views.image" image.image_id %}">
-                                <i class="fa fa-photo"> </i>
+                                <span class="glyphicon glyphicon-picture"></span>
                             </a>
                             <a class="btn btn-info" data-tooltip="tooltip" title="Show analysis" href="{% url "analyses.views.show_analysis" image.id %}">
-                                <i class="fa fa-file-text"> </i>
+                                <span class="glyphicon glyphicon-list-alt"></span>
                             </a>
                             <a class="btn btn-warning unfavorite" id="{% url "analyses.views.favorite" image.id %}" rel="{{ image.id }}" data-tooltip="tooltip" title="Unfavorite">
-                                <i class="fa fa-star"> </i>
+                                <span class="glyphicon glyphicon-star"></span>
                             </a>
                         </td>
                     </tr>

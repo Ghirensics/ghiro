@@ -5,13 +5,13 @@
     <div class="crumbs">
         <ol class="breadcrumb hidden-xs">
             <li>
-                <i class="fa fa-home"></i><a href="/">Dashboard</a>
+                <span class="glyphicon glyphicon-home gi-0x"></span><a href="/">Dashboard</a>
             </li>
             <li>
-                <a href="{% url "analyses.views.list_cases" %}"><i class="icon-briefcase"> </i> Cases</a>
+                <a href="{% url "analyses.views.list_cases" %}"><span class="glyphicon glyphicon-briefcase gi-0x"></span> Cases</a>
             </li>
              <li>
-                <a href="{% url "analyses.views.show_case" analysis.case.id "list" %}"><i class="icon-book"> </i>
+                <a href="{% url "analyses.views.show_case" analysis.case.id "list" %}"><span class="glyphicon glyphicon-book gi-0x"></span>
                     {{ analysis.case.name }}
                 </a>
             </li>
