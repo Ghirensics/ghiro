@@ -4,13 +4,13 @@
     <div class="crumbs">
         <ol class="breadcrumb hidden-xs">
             <li>
-                <i class="fa fa-home"></i><a href="/">Dashboard</a>
+                <span class="glyphicon glyphicon-home gi-0x"></span><a href="/">Dashboard</a>
             </li>
             <li>
-                <a href="{% url "analyses.views.list_cases" %}"><i class="fa fa-book"> </i> Cases</a>
+                <a href="{% url "analyses.views.list_cases" %}"><span class="glyphicon glyphicon-book gi-0x"></span> Cases</a>
             </li>
             <li>
-                <a href="{% url "analyses.views.show_case" analysis.case.id "list" %}"><i class="fa fa-list"></i>
+                <a href="{% url "analyses.views.show_case" analysis.case.id "list" %}"><span class="glyphicon glyphicon-list gi-0x"></span>
                     {% if analysis.case.name|length > 70 %}
                         {{ analysis.case.name|slice:":70" }} ...
                     {% else %}
@@ -51,34 +51,34 @@
                     <h2 class="media-heading">Image analysis: {{ analysis.report.hash.md5 }}</h2>
                     <div class="btn-group">
                         {% if analysis.favorites.all %}
-                            <a href="#" id="{% url "analyses.views.favorite" analysis.id %}" rel="{{ analysis.id }}" class="btn favorite btn-warning star{{ analysis.id }}"> <i class="fa fa-star"> </i></a>
+                            <a href="#" id="{% url "analyses.views.favorite" analysis.id %}" rel="{{ analysis.id }}" class="btn favorite btn-warning star{{ analysis.id }}"> <span class="glyphicon glyphicon-star"></span></a>
                         {% else %}
-                            <a href="#" id="{% url "analyses.views.favorite" analysis.id %}" rel="{{ analysis.id }}" class="btn favorite btn-default star{{ analysis.id }}"> <i class="fa fa-star"> </i></a>
+                            <a href="#" id="{% url "analyses.views.favorite" analysis.id %}" rel="{{ analysis.id }}" class="btn favorite btn-default star{{ analysis.id }}"> <span class="glyphicon glyphicon-star"></span></a>
                         {% endif %}
-                        <a href="{% url "analyses.views.image" analysis.image_id %}" class="action_print btn btn-info" title="Print"><i class="fa fa-print"></i> </a>
-                        <a class="btn btn-danger btn-delete-report" id="{% url "analyses.views.delete_analysis" analysis.id %}" href="#deleteReport" role="button" data-toggle="modal"> <i class="fa fa-trash-o"></i> </a>
+                        <a href="{% url "analyses.views.image" analysis.image_id %}" class="action_print btn btn-info" title="Print"><span class="glyphicon glyphicon-print"></span> </a>
+                        <a class="btn btn-danger btn-delete-report" id="{% url "analyses.views.delete_analysis" analysis.id %}" href="#deleteReport" role="button" data-toggle="modal"> <span class="glyphicon glyphicon-trash"></span> </a>
                     </div>
                     <div class="btn-group pull-right">
                         <a class="btn btn-dark dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-hdd-o"></i> Export
+                            <span class="glyphicon glyphicon-export"></span> Export
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{% url "analyses.views.static_report" analysis.id "pdf" %}"><i class="fa fa-file-text-o"></i> PDF report</a>
-                                <a href="{% url "analyses.views.static_report" analysis.id "html" %}"><i class="fa fa-file-text"></i> HTML report</a>
+                                <a href="{% url "analyses.views.static_report" analysis.id "pdf" %}"><span class="glyphicon glyphicon-file"></span> PDF report</a>
+                                <a href="{% url "analyses.views.static_report" analysis.id "html" %}"><span class="glyphicon glyphicon-save-file"></span> HTML report</a>
                             </li>
                         </ul>
                     </div>
                     <div class="btn-group pull-right">
                         <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-download"></i> Download
+                            <span class="glyphicon glyphicon-download-alt"></span> Download
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{% url "analyses.views.export_json" analysis.id %}"><i class="fa fa-code"></i> JSON report</a>
-                                <a href="{% url "analyses.views.image" analysis.image_id %}"><i class="fa fa-picture-o"></i> Original Image</a>
+                                <a href="{% url "analyses.views.export_json" analysis.id %}"><span class="glyphicon glyphicon-console"></span> JSON report</a>
+                                <a href="{% url "analyses.views.image" analysis.image_id %}"><span class="glyphicon glyphicon-picture"></span> Original Image</a>
                             </li>
                         </ul>
                     </div>
@@ -192,7 +192,7 @@
                                 <tr>
                                     <td>
                                         <p class="text-info">{{ comment.owner.username }} <small class="pull-right">{{ comment.created_at }}</small></p>
-                                        <p class="pull-right"><a href="{% url "analyses.views.delete_comment" comment.id %}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</a></p>
+                                        <p class="pull-right"><a href="{% url "analyses.views.delete_comment" comment.id %}" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Delete</a></p>
                                         {{ comment.message }}
                                     </td>
                                 </tr>

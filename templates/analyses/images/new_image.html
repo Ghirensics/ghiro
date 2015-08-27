@@ -4,13 +4,13 @@
     <div class="crumbs">
         <ol class="breadcrumb hidden-xs">
             <li>
-                <i class="fa fa-home"></i><a href="/">Dashboard</a>
+                <span class="glyphicon glyphicon-home gi-0x"></span><a href="/">Dashboard</a>
             </li>
             <li>
-                <a href="{% url "analyses.views.list_cases" %}"><i class="fa fa-book"> </i> Cases</a>
+                <a href="{% url "analyses.views.list_cases" %}"><span class="glyphicon glyphicon-book gi-0x"></span> Cases</a>
             </li>
              <li>
-                <a href="{% url "analyses.views.show_case" case.id "list" %}"><i class="fa fa-th-list"> </i>
+                <a href="{% url "analyses.views.show_case" case.id "list" %}"><span class="glyphicon glyphicon-th-list gi-0x"></span>
                     {% if case.name|length > 70 %}
                         {{ case.name|slice:":70" }} ...
                     {% else %}
@@ -40,11 +40,11 @@
                 <div id="uploader"></div>
                 <div id="filelist" class="hide">
                     <strong id="generic_error">
-                        <i class="fa fa-warning text-danger"></i>
+                        <span class="glyphicon glyphicon-warning-sign text-danger"></span>
                         Errors:
                     </strong>
                     <strong id="server_error" class="hide">
-                        <i class="fa fa-warning text-danger"></i>
+                        <span class="glyphicon glyphicon-warning-sign text-danger"></span>
                         Server error: unexpected error, try to reload page and check logs.
                     </strong>
                 </div>

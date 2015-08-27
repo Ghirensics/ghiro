@@ -4,8 +4,12 @@
 
     <div class="crumbs">
         <ol class="breadcrumb hidden-xs">
-            <li><i class="fa fa-home"></i><a href="/">Dashboard</a></li>
-            <li class="active">Administration</li>
+            <li>
+                <span class="glyphicon glyphicon-home gi-0x"></span><a href="/">Dashboard</a>
+            </li>
+            <li class="active">
+                Administration
+            </li>
         </ol>
     </div>
 </div>
@@ -17,7 +21,7 @@
         <div class="col-md-12">
             <div class="wdgt">
                 <div class="box">
-                <a href="{% url "users.views.admin_new_user" %}" class="btn btn-success pull-right" data-tooltip="tooltip" data-placement="left" title="Add user"><i class="fa fa-plus"></i></a>
+                <a href="{% url "users.views.admin_new_user" %}" class="btn btn-success pull-right" data-tooltip="tooltip" data-placement="left" title="Add user"><span class="glyphicon glyphicon-plus"></span></a>
                     <ul class="nav nav-pills nav-primary" id="cases_tab">
                         <li class="active">
                             <a href="{% url "users.views.admin_list_users" %}">Users</a>
@@ -46,35 +50,35 @@
                                             <td><a href="{% url "users.views.admin_show_user" user.id %}">{{ user.username }}</a></td>
                                             <td>
                                                 {% if user.is_active %}
-                                                    <i class="fa fa-check-circle-o fa-lg text-success"> </i>
+                                                    <span class="glyphicon glyphicon-ok-circle text-success"></span>
                                                 {% else %}
-                                                    <i class="fa fa-remove fa-lg text-danger"> </i>
+                                                    <span class="glyphicon glyphicon-remove-circle text-danger"></span>
                                                 {% endif %}
                                             </td>
                                             <td>
                                                 {% if user.is_superuser %}
-                                                    <i class="fa fa-check-circle-o fa-lg text-success"> </i>
+                                                    <span class="glyphicon glyphicon-ok-circle text-success"></span>
                                                 {% else %}
-                                                    <i class="fa fa-remove fa-lg text-danger"> </i>
+                                                    <span class="glyphicon glyphicon-remove-circle text-danger"></span>
                                                 {% endif %}
                                             </td>
                                             <td>
                                                 <a class="btn btn-primary" data-tooltip="tooltip" title="View user" href="{% url "users.views.admin_show_user" user.id %}">
-                                                    <i class="fa fa-eye"> </i>
+                                                    <span class="glyphicon glyphicon-user"></span>
                                                 </a>
                                                 <a class="btn btn-info" data-tooltip="tooltip" title="View user activity" href="{% url "users.views.admin_show_activity" user.id %}">
-                                                    <i class="fa fa-list"> </i>
+                                                    <span class="glyphicon glyphicon-tasks"></span>
                                                 </a>
                                                 <a class="btn btn-soft" data-tooltip="tooltip" title="Edit user" href="{% url "users.views.admin_edit_user" user.id %}">
-                                                    <i class="fa fa-pencil"> </i>
+                                                    <span class="glyphicon glyphicon-pencil"></span>
                                                 </a>
                                                 {% if user.is_active %}
                                                     <a class="btn btn-danger btn-disable" data-tooltip="tooltip" title="Disable user" href="#disable" role="button" data-toggle="modal" id="{% url "users.views.admin_disable_user" user.id %}">
-                                                        <i class="fa fa-times-circle"> </i>
+                                                        <span class="glyphicon glyphicon-trash"></span>
                                                     </a>
                                                 {% else %}
                                                     <a class="btn btn-danger" data-tooltip="tooltip" disabled="disabled" title="User disabled">
-                                                       <i class="fa fa-times-circle"> </i>
+                                                       <span class="glyphicon glyphicon-trash"></span>
                                                     </a>
                                                 {% endif %}
                                             </td>
