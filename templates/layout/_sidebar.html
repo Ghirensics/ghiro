@@ -58,7 +58,7 @@
                     <ul class="dropdown-menu pull-right dropdown-profile" role="menu">
                         <li class="title"><span class="glyphicon glyphicon-user gi-1x"></span>&nbsp;&nbsp;Welcome, {{ request.user.username }}!</li>
                         <li><a href="{% url "users.views.profile" %}"><span class="glyphicon glyphicon-user gi-0x"></span>Profile</a></li>
-                        <li><a href="{% url "users.views.admin_show_activity" user.id %}"><span class="glyphicon glyphicon-list gi-0x"></span>Activity</a></li>
+                        <li><a href="{% url "users.views.admin_show_activity" user.id %}"><span class="glyphicon glyphicon-tasks gi-0x"></span>Activity</a></li>
                         <li class="divider"></li>
                         <li><a href="{% url "django.contrib.auth.views.logout" %}"><span class="glyphicon glyphicon-log-out gi-0x"></span>Logout</a></li>
                     </ul>
