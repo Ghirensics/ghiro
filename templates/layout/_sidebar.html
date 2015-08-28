@@ -11,14 +11,14 @@
             <span class="glyphicon glyphicon-picture gi-sidebar" data-tooltip="tooltip" data-placement="bottom" title="Images"></span>
         </a>
         <a href="{% url "analyses.views.search" "form" %}" id="side-search" class="btn btn-dark btn-lg-sd" type="button">
-            <span class="glyphicon glyphicon-search gi-sidebar" data-tooltip="tooltip" data-placement="bottom" title="Search"></span>
+            <span class="glyphicon glyphicon-picture gi-sidebar" data-tooltip="tooltip" data-placement="bottom" title="Search"></span>
         </a>
         <a href="{% url "hashes.views.list_hashes" %}" id="side-hashes" class="btn btn-dark btn-lg-sd" type="button">
-            <span class="glyphicon glyphicon-list gi-sidebar" data-tooltip="tooltip" data-placement="bottom" title="Hashes"></span>
+            <span class="glyphicon glyphicon-picture gi-sidebar" data-tooltip="tooltip" data-placement="bottom" title="Hashes"></span>
         </a>
         {% if request.user.is_stuff or request.user.is_superuser %}
             <a href="{% url "users.views.admin_list_users" %}" id="side-admin" class="btn btn-dark btn-lg-sd" type="button">
-                <span class="glyphicon glyphicon-cog gi-sidebar" data-tooltip="tooltip" data-placement="bottom" title="Administration"></span>
+                <span class="glyphicon glyphicon-picture gi-sidebar" data-tooltip="tooltip" data-placement="bottom" title="Administration"></span>
             </a>
         {% endif %}
     </div>
