@@ -184,6 +184,7 @@ def deps_check():
     # TODO: move the dict to a configuration file.
     deps = [{"name": "Django", "module": "django"},
             {"name": "GExiv2", "module": "gi.repository.GExiv2"},
+            {"name": "ImageHash", "module": "imagehash"},
             {"name": "NudePy", "module": "nude"},
             {"name": "Pillow", "module": "PIL"},
             {"name": "Pdfkit", "module": "pdfkit"},
