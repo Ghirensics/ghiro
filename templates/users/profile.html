@@ -4,7 +4,7 @@
     <div class="crumbs">
         <ol class="breadcrumb hidden-xs">
             <li>
-                <i class="fa fa-home"></i><a href="/">Dashboard</a>
+                <span class="glyphicon glyphicon-home gi-0x"></span><a href="/">Dashboard</a>
             </li>
             <li class="active">
                 Profile
@@ -19,60 +19,144 @@
         </div>
         <div class="col-md-12">
             <div class="wdgt">
-                <h3 class="title-icon"><i class="fa fa-user"> </i> {{ user.username }}</h3>
-                <a href="{% url "django.contrib.auth.views.password_change" %}"><i class="icon-key"> </i> Change password</a>
-                <div class="col-md-12">
-                    <dl class="dl-horizontal">
-                        <dt>Name:</dt>
-                        <dd>{{ user.first_name }}</dd>
-                        <dt>Last name:</dt>
-                        <dd>{{ user.last_name }}</dd>
-                        <dt>Email:</dt>
-                        <dd>{{ user.email }}</dd>
-                        <dt>API key:</dt>
-                        <dd>{{ user.api_key }}</dd>
-                    </dl>
-                </div>
-                <div class="col-md-12">
-                    <h3 class="title-icon"><i class="fa fa-bar-chart"> </i> Stats</h3>
-                    <dl class="dl-horizontal">
-                        <dt>Case opened:</dt>
-                        <dd><span class="badge badge-important">{{ user.owned_cases.all|length }}</span></dd>
-                        <dt>My analyses:</dt>
-                        <dd><span class="badge badge-success">{{ user.owned_images.all|length }}</span></dd>
-                        <dt>My hash lists:</dt>
-                        <dd><span class="badge badge-warning">{{ user.owned_hashes.all|length }}</span></dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt>Last login:</dt>
-                        <dd>{{ user.last_login }}</dd>
-                        <dt>Account created:</dt>
-                        <dd>{{ user.date_joined }}</dd>
-                        <dt>Account active:</dt>
-                        <dd>
-                            {%if user.is_active%}
-                                <i class="fa fa-check-circle-o text-success"> </i>
-                            {%else%}
-                                <i class="fa fa-remove text-error"> </i>
-                            {%endif%}
-                        </dd>
-                        <dt>Superuser:</dt>
-                        <dd>
-                            {%if user.is_superuser%}
-                                <i class="fa fa-check-circle-o text-success"> </i>
-                            {%else%}
-                                <i class="fa fa-remove text-error"> </i>
-                            {%endif%}
-                        </dd>
-                        <dt>Staff:</dt>
-                        <dd>
-                            {% if user.is_staff %}
-                                <i class="fa fa-check-circle-o text-success"> </i>
+
+                <div class="profile-container">
+                    <div class="profile-header row">
+                        <div class="col-lg-2 col-md-4 col-sm-12 text-center">
+                            <i class="header-avatar glyphicon glyphicon-user gi-6x"></i>
+                        </div>
+                        <div class="col-lg-5 col-md-8 col-sm-12 profile-info">
+                            {% if user.first_name %}
+                                <div class="header-fullname">{{ user.first_name }} {{ user.last_name }}</div>
                             {% else %}
-                                <i class="fa fa-remove text-error"> </i>
-                            {%endif%}
-                        </dd>
-                    </dl>
+                                <a data-toggle="tab" href="#settings">Edit Name and Surname</a>
+                            {% endif %}
+                            <a href="#" class="btn btn-palegreen btn-sm  btn-follow">
+                                <i class="fa fa-mail-forward"></i>
+                                {{ user.email }}
+                            </a>
+                            <div class="header-information">
+                                API key: {{ user.api_key }}
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 profile-stats">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 stats-col">
+                                    <div class="stats-value pink">{{ user.owned_cases.all|length }}</div>
+                                    <div class="stats-title">Case opened</div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 stats-col">
+                                    <div class="stats-value pink">{{ user.owned_images.all|length }}</div>
+                                    <div class="stats-title">My analyses</div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 stats-col">
+                                    <div class="stats-value pink">{{ user.owned_hashes.all|length }}</div>
+                                    <div class="stats-title">My hash lists</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
+                                    Account active:
+                                    {%if user.is_active%}
+                                        <i class="glyphicon glyphicon-ok-circle text-success"></i>
+                                    {%else%}
+                                        <i class="glyphicon glyphicon-remove-circle text-danger"></i>
+                                    {%endif%}
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
+                                    Superuser:
+                                    {%if user.is_superuser%}
+                                        <i class="glyphicon glyphicon-ok-circle text-success"></i>
+                                    {%else%}
+                                        <i class="glyphicon glyphicon-remove-circle text-danger"></i>
+                                    {%endif%}
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
+                                    Staff:
+                                    {%if user.is_staff%}
+                                        <i class="glyphicon glyphicon-ok-circle text-success"></i>
+                                    {%else%}
+                                        <i class="glyphicon glyphicon-remove-circle text-danger"></i>
+                                    {%endif%}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-body">
+                        <div class="col-lg-12">
+                            <div class="tabbable">
+                                <ul class="nav nav-tabs tabs-flat  nav-justified" id="myTab11">
+                                    <li class="tab-red">
+                                        <a data-toggle="tab" href="#timeline">
+                                            Activity
+                                        </a>
+                                    </li>
+                                    <li class="tab-palegreen">
+                                        <a data-toggle="tab" id="contacttab" href="#contacts">
+                                            Contacts
+                                        </a>
+                                    </li>
+                                    <li class="tab-yellow">
+                                        <a data-toggle="tab" href="#settings">
+                                            Settings
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content tabs-flat">
+                                    <div id="timeline" class="tab-pane">
+                                        {% include "admin/_list_activity.html" %}
+                                    </div>
+                                    <div id="contacts" class="tab-pane">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="profile-contacts">
+                                                    <div class="profile-badge orange"><i class="glyphicon glyphicon-phone-alt orange"></i><span>Contacts</span></div>
+                                                    <div class="contact-info">
+                                                        <p>
+                                                            Phone	:  <br>
+                                                            Cell		:
+                                                        </p>
+                                                        <p>
+                                                            Email		: {{ user.email }}
+                                                            <br>
+                                                            Skype		:
+                                                        </p>
+                                                        <p>
+                                                            Facebook	:
+                                                            <br>
+                                                            Twitter	:
+                                                        </p>
+                                                    </div>
+                                                    <div class="profile-badge azure">
+                                                        <i class="glyphicon glyphicon-map-marker azure"></i><span>Location</span>
+                                                    </div>
+                                                    <div class="contact-info">
+                                                        <p>
+                                                            Address<br>
+                                                            Department <br>
+                                                            44-46 Garibaldi Road<br>
+                                                            Italy, Bologna
+                                                        </p>
+                                                        <p>
+                                                            Office<br>
+                                                            Via Mazzini, 33<br>
+                                                            Bologna, Italy
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div id="contact-map" class="animated flipInY"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="settings" class="tab-pane">
+                                        {% include "layout/_profileForm.html" %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

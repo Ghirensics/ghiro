@@ -186,6 +186,7 @@ border-top-left-radius: 0;
 .gi-3x{font-size: 3em;}
 .gi-4x{font-size: 4em;}
 .gi-5x{font-size: 5em;}
+.gi-6x{font-size: 6em;}
 .gi-sidebar{font-size: 2em;}
 
 /* MAP CUSTOM */
@@ -295,7 +296,6 @@ border-top-left-radius: 0;
     background-color: #fbfbfb;
 }
 .profile-container .profile-body .tab-content {
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
     margin-top: 30px;
 }
 .profile-container .profile-body .setting-header {
@@ -364,6 +364,13 @@ border-top-left-radius: 0;
     margin-top: -16px;
     padding-top: 35px;
 }
+.orange {
+    color: #fb6e52 !important;
+}
+.azure {
+    color: #2dc3e8 !important;
+}
+
 @media (max-width: 992px) {
 .profile-container .profile-header .profile-info {
     padding: 0 40px;
