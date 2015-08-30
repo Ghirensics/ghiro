@@ -49,7 +49,7 @@ class ElaProcessing(BaseProcessingModule):
             im.save(resaved, "JPEG", quality=95)
             resaved_im = Image.open(resaved)
         except IOError as e:
-            logger.warning("ELA error opening image: {0}".format(e))
+            logger.warning("[Task {0}]: ELA error opening image: {1}".format(task.id, e))
             return
         finally:
             tmp_file.close()
@@ -64,7 +64,7 @@ class ElaProcessing(BaseProcessingModule):
         try:
             ela_im = ImageChops.difference(im, resaved_im)
         except Exception as e:
-            logger.warning("Unable to calculate ELA difference: {0}".format(e))
+            logger.warning("[Task {0}]: Unable to calculate ELA difference: {0}".format(task.id, e))
             return
 
         # Calculate difference
@@ -86,6 +86,6 @@ class ElaProcessing(BaseProcessingModule):
             img = image2str(ela_im)
             self.results["ela"]["ela_image"] = save_file(img, content_type="image/jpeg")
         except Exception as e:
-            logger.warning("ELA error saving image: {0}".format(e))
+            logger.warning("[Task {0}]: ELA error saving image: {0}".format(task.id, e))
         finally:
             return self.results

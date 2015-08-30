@@ -34,7 +34,7 @@ class NudePyProcessing(BaseProcessingModule):
             n.resize(maxwidth=1000)
             n.parse()
         except Exception as e:
-            logger.warning("Unable to detect nude: {0}".format(e))
+            logger.warning("[Task {0}]: Error detecting nude: {1}".format(task.id, e))
         else:
             self.results["nude"]["nudepy"]["result"] = n.result
             self.results["nude"]["nudepy"]["msg"] = n.message
