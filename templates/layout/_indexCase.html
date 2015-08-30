@@ -26,13 +26,13 @@
                     <td>{{ case.owner.username }}</td>
                     <td>
                         {% if case.state == "C" %}
-                            <a class="btn btn-soft" title="No actions available" disabled="disabled" ><i class="fa fa-pencil"></i></a>
-                            <a class="btn btn-warning" title="Case already closed" disabled="disabled"><i class="fa fa-times"></i></a>
-                            <a class="btn btn-danger btn-delete-case" id="{% url "analyses.views.delete_case" case.id %}" data-tooltip="tooltip" title="Delete case" href="#delete" data-target="#delete" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+                            <a class="btn btn-soft" title="No actions available" disabled="disabled"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a class="btn btn-warning" title="Case already closed" disabled="disabled"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a class="btn btn-danger btn-delete-case" id="{% url "analyses.views.delete_case" case.id %}" data-tooltip="tooltip" title="Delete case" href="#delete" data-target="#delete" data-toggle="modal"><span class="glyphicon glyphicon-trash"></span></a>
                         {% else %}
-                            <a class="btn btn-tbl btn-soft" href="{% url "analyses.views.edit_case" case.id %}" data-tooltip="tooltip" title="Edit case"> <i class="fa fa-pencil"></i> </a>
-                            <a class="btn btn-tbl btn-warning btn-close-case" id="{% url "analyses.views.close_case" case.id %}" data-tooltip="tooltip" title="Close case" data-target="#close" data-toggle="modal"><i class="fa fa-times"></i></a>
-                            <a class="btn btn-tbl btn-danger btn-delete-case" id="{% url "analyses.views.delete_case" case.id %}" data-tooltip="tooltip"title="Delete case" data-target="#delete" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+                            <a class="btn btn-tbl btn-soft" href="{% url "analyses.views.edit_case" case.id %}" data-tooltip="tooltip" title="Edit case"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a class="btn btn-tbl btn-warning btn-close-case" id="{% url "analyses.views.close_case" case.id %}" data-tooltip="tooltip" title="Close case" data-target="#close" data-toggle="modal"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a class="btn btn-tbl btn-danger btn-delete-case" id="{% url "analyses.views.delete_case" case.id %}" data-tooltip="tooltip"title="Delete case" data-target="#delete" data-toggle="modal"><span class="glyphicon glyphicon-trash"></span></a>
                         {% endif %}
                     </td>
                 </tr>

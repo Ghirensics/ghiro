@@ -9,7 +9,13 @@ Ghiro-0.3 (TBD)
  * Added nude detection module using NudePy.
  * Added API method to fetch analysis report and show case.
  * Added support and unit tests for Python 3.
+ * Added new web interface based on Bootstrap 3.
+ * Added option to force update check from command line.
  * Renamed 'manage' app to 'system'.
+
+Ghiro-0.2.1 (27/08/2015)
+
+* Fixed pymongo release in requirements to avoid an error using pymongo 3.
 
 Ghiro-0.2 (09/01/2015)
 

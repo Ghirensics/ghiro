@@ -3,8 +3,12 @@
 {% block content %}
     <div class="crumbs">
         <ol class="breadcrumb hidden-xs">
-            <li><i class="fa fa-home"></i><a href="/">Dashboard</a></li>
-            <li class="active">Cases</li>
+            <li>
+                <span class="glyphicon glyphicon-home gi-0x"></span><a href="/">Dashboard</a>
+            </li>
+            <li class="active">
+                Cases
+            </li>
         </ol>
     </div>
 </div>
@@ -15,7 +19,7 @@
         </div>
         <div class="col-md-12">
             <div class="wdgt">
-                <a href="{% url "analyses.views.new_case" %}" class="btn btn-success pull-right" type="button" data-tooltip="tooltip" data-placement="left" title="Add new case"><i class="fa fa-plus"></i></a>
+            <a href="{% url "analyses.views.new_case" %}" class="btn btn-success pull-right" type="button" data-tooltip="tooltip" data-placement="left" title="Add new case"><span class="glyphicon glyphicon-plus"></span></a>
                 <ul class="nav nav-pills nav-primary">
                     <li class="active"><a href="#all" data-toggle="tab">All</a></li>
                     <li><a href="#owned" data-toggle="tab">Owned</a></li>

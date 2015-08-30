@@ -17,7 +17,6 @@
 
     {# Styles #}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/fonts.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/colorbox.css">
@@ -51,9 +50,9 @@
     <div class="cntnr">
         {% include "layout/_sidebar.html" %}
         {% block content %}{% endblock %}
-        <div id="footer">
-            <small class="pull-right"><strong>Ghiro 0.3-dev</strong> - &copy; With poetry, <a href="http://twitter.com/jekil" target="_blank">jekil</a> and <a href="http://twitter.com/burloneM" target="_blank">burlone</a>. <a href="http://getghiro.org" id="newVersionFooter" target="_blank" class="hidden"><span class="label label-success">New version available</span></a></small>
-        </div>
+    </div>
+    <div id="footer">
+        <small class="pull-right"><strong>Ghiro 0.3-dev</strong> - &copy; With poetry, <a href="http://twitter.com/jekil" target="_blank">jekil</a> and <a href="http://twitter.com/burloneM" target="_blank">burlone</a>. <a href="http://getghiro.org" id="newVersionFooter" target="_blank" class="hidden"><span class="label label-success">New version available</span></a></small>
     </div>
 </body>
 </html>

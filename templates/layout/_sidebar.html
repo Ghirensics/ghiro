@@ -2,24 +2,23 @@
     <div class="logo"><img id="logo" src="/static/img/logo/logo_ghiro176x80.png" style="width:135lspx !important; height:52px; !important"></div>
     <div class="sidebar">
         <a href="/" id="side-dashboard" class="btn btn-dark btn-lg-sd" type="button">
-            <i class="fa fa-dashboard fa-2x" data-tooltip="tooltip" data-placement="bottom" title="Dashboard" ></i>
+            <span class="glyphicon glyphicon-dashboard gi-sidebar" data-tooltip="tooltip" data-placement="bottom" title="Dashboard"></span>
         </a>
         <a href="{% url "analyses.views.list_cases" %}" id="side-cases" class="btn btn-dark btn-lg-sd" type="button">
-            <i class="fa fa-book fa-2x" data-tooltip="tooltip" data-placement="bottom" title="Cases" ></i>
+            <span class="glyphicon glyphicon-book gi-sidebar" data-tooltip="tooltip" data-placement="bottom" title="Cases"></span>
         </a>
         <a href="{% url "analyses.views.list_images" "list" %}" id="side-images" class="btn btn-dark btn-lg-sd" type="button">
-            <i class="fa fa-picture-o fa-2x" data-tooltip="tooltip" data-placement="bottom" title="Images"></i>
+            <span class="glyphicon glyphicon-picture gi-sidebar" data-tooltip="tooltip" data-placement="bottom" title="Images"></span>
         </a>
         <a href="{% url "analyses.views.search" "form" %}" id="side-search" class="btn btn-dark btn-lg-sd" type="button">
-            <i class="fa fa-search fa-2x" data-tooltip="tooltip" data-placement="bottom" title="Search"></i>
+            <span class="glyphicon glyphicon-search gi-sidebar" data-tooltip="tooltip" data-placement="bottom" title="Search"></span>
         </a>
-
         <a href="{% url "hashes.views.list_hashes" %}" id="side-hashes" class="btn btn-dark btn-lg-sd" type="button">
-            <i class="fa fa-list fa-2x" data-tooltip="tooltip" data-placement="bottom" title="Hashes"></i>
+            <span class="glyphicon glyphicon-list gi-sidebar" data-tooltip="tooltip" data-placement="bottom" title="Hashes"></span>
         </a>
         {% if request.user.is_stuff or request.user.is_superuser %}
             <a href="{% url "users.views.admin_list_users" %}" id="side-admin" class="btn btn-dark btn-lg-sd" type="button">
-                <i class="fa fa-cogs fa-2x" data-tooltip="tooltip" data-placement="bottom" title="Adminitration"></i>
+                <span class="glyphicon glyphicon-cog gi-sidebar" data-tooltip="tooltip" data-placement="bottom" title="Administration"></span>
             </a>
         {% endif %}
     </div>
@@ -49,19 +48,19 @@
         <div class="bar">
             <div class="logo-small visible-xs"><img src="/static/img/logo/logo_ghiro77x35.png"></div>
             <ul class="nav nav-pills hidden-xs">
-                <li><a href="{% url "analyses.views.list_cases" %}"><span class="fa fa-briefcase"></span>Open cases <span class="label label-primary">{{ open_cases_count }}</span></a></li>
-                <li><a><span class="fa fa-book"></span>Analyses completed <span class="label label-success">{{ analyses_complete_count }}</span></a></li>
-                <li><a><span class="fa fa-clock-o"></span>Analyses waiting <span class="label label-warning">{{ analyses_wait_count }}</span></a></li>
+                <li><a href="{% url "analyses.views.list_cases" %}"><span class="glyphicon glyphicon-briefcase gi-1x"></span>&nbsp; Open cases <span class="label label-primary">{{ open_cases_count }}</span></a></li>
+                <li><a><span class="glyphicon glyphicon-book gi-1x"></span>&nbsp; Analyses completed <span class="label label-success">{{ analyses_complete_count }}</span></a></li>
+                <li><a><span class="glyphicon glyphicon-time gi-1x"></span>&nbsp; Analyses waiting <span class="label label-warning">{{ analyses_wait_count }}</span></a></li>
             </ul>
             <div class="hov">
                 <div class="btn-group">
-                    <a class="con" href="" data-toggle="dropdown"><i class="icon icon-user"></i></a>
+                    <a class="con" href="" data-toggle="dropdown"><span class="glyphicon glyphicon-user gi-1x"></span></a>
                     <ul class="dropdown-menu pull-right dropdown-profile" role="menu">
-                        <li class="title"><span class="icon icon-user"></span>&nbsp;&nbsp;Welcome, {{ request.user.username }}!</li>
-                        <li><a href="{% url "users.views.profile" %}"><span class="fa fa-user"></span>Profile</a></li>
-                        <li><a href="{% url "users.views.admin_show_activity" user.id %}"><span class="fa fa-list"></span>Activity</a></li>
+                        <li class="title"><span class="glyphicon glyphicon-user gi-1x"></span>&nbsp;&nbsp;Welcome, {{ request.user.username }}!</li>
+                        <li><a href="{% url "users.views.profile" %}"><span class="glyphicon glyphicon-user gi-0x"></span>Profile</a></li>
+                        <li><a href="{% url "users.views.admin_show_activity" user.id %}"><span class="glyphicon glyphicon-tasks gi-0x"></span>Activity</a></li>
                         <li class="divider"></li>
-                        <li><a href="{% url "django.contrib.auth.views.logout" %}"><span class="fa fa-power-off"></span>Logout</a></li>
+                        <li><a href="{% url "django.contrib.auth.views.logout" %}"><span class="glyphicon glyphicon-log-out gi-0x"></span>Logout</a></li>
                     </ul>
                 </div>
             </div>

@@ -14,7 +14,7 @@ Requirements
 Ghiro has the following requirements:
 
     * MongoDB: you need to run a MongoDB database (at least release 2.0)
-    * Python: that's how we roll (Python 2.7 or Python 3)
+    * Python: that's how we roll (it is suggested Python 2.7, although Ghiro is written to work also in Python 3 some other library won't)
     * Python-magic: for MIME extraction
     * Python 2.x bindings for gobject-introspection libraries, required by Gexiv2
     * Gexiv2: for metadata extraction (at least release 0.6.1)

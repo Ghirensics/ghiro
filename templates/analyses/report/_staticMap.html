@@ -2,7 +2,15 @@
     <strong>Warning!</strong> To use the map feature you need to be connected to internet.
 </div>
 
-<div id="map_canvas" style="width:1100px;"></div>
+<div class="box">
+    <div class="wdgt-header">Image geolocalization</div>
+    <div class="wdgt-body wdgt-map" style="padding-bottom:10px;height:600px;">
+        <div id="map-canvas"></div>
+    </div>
+    <style type="text/css">
+        #map-canvas { height: 100% }
+    </style>
+</div>
 
 <div id="mapinfo">
     {% include 'analyses/report/_staticMapinfo.html' %}
@@ -12,7 +20,6 @@
 $(document).ready(function(){
     internetStatus();
 });
-
 var map = null;
 function initialize() {
     var pos = new google.maps.LatLng({{ analysis.report.metadata.gps.pos.Latitude|floatformat:6 }}, {{ analysis.report.metadata.gps.pos.Longitude|floatformat:6 }});
@@ -21,7 +28,7 @@ function initialize() {
         zoom: 7,
         mapTypeId: google.maps.MapTypeId.HYBRID
     };
-    map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     marker = new google.maps.Marker({
         position: pos,
         map: map,
