@@ -72,8 +72,9 @@ class AnalysisRunner(Process):
             logger.exception("Critical error processing task {0}, skipping task: {1}".format(task.id, e))
             task.state = "F"
         finally:
-            # Save.
+            # Saving timestamp.
             task.completed_at = now()
+            # Save.
             task.save()
             self.tasks.task_done()
 
