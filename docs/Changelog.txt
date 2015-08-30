@@ -5,6 +5,7 @@ Ghiro-0.3 (TBD)
  * Added auto upload of files from a directory (monitoring directory and uploading new images).
  * Added unit tests.
  * Added Perceptual Image Hashing module.
+ * Added repoting module to save analysis data to JSON file.
  * Added nude detection module using NudePy.
  * Added API method to fetch analysis report and show case.
  * Added support and unit tests for Python 3.
