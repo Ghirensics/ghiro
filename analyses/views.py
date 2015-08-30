@@ -5,7 +5,6 @@
 import gridfs
 import os
 import re
-import magic
 import requests
 import json
 from bson.son import SON
