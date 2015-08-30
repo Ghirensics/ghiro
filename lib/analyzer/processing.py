@@ -56,20 +56,20 @@ class AnalysisRunner(Process):
                 try:
                     output = current.run(task)
                 except Exception as e:
-                    logger.exception("Critical error in plugin {0}, skipping: {1}".format(module, e))
+                    logger.exception("[Task {0}]: Critical error in plugin {1}, skipping: {2}".format(task.id, module, e))
                     continue
                 else:
                     if isinstance(output, AutoVivification):
                         results.update(output)
                     else:
-                        logger.warning("Module %s returned results not in dict format." % module)
+                        logger.warning("[Task {0}]: Module {1} returned results not in dict format.".format(task.id, module))
 
             # Complete.
             task.analysis_id = save_results(results)
             task.state = "C"
-            logger.info("Processed task {0} with success".format(task.id))
+            logger.info("[Task {0}]: Processed task with success".format(task.id))
         except Exception as e:
-            logger.exception("Critical error processing task {0}, skipping task: {1}".format(task.id, e))
+            logger.exception("[Task {0}]: Critical error processing, skipping task: {1}".format(task.id, e))
             task.state = "F"
         finally:
             # Saving timestamp.
