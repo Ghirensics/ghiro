@@ -27,6 +27,7 @@ Ghiro has the following requirements:
     * Wkhtmltopdf: used by pdfkit
     * Requests: used for HTTP requests
     * NudePy: used for nude detection
+    * ImageHash: to calculate perceptual image hash
 
 If you choose MySQL or PostgrSQL as database you have to install their additional drivers.
 
