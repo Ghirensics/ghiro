@@ -105,3 +105,7 @@ LOG_AUDIT_NAME = "audit.log"
 LOG_AUDIT_SIZE = 1024*1024*16 # 16 megabytes
 # How many copies of audit log keep while rotating logs.
 LOG_AUDIT_NUM = 3 # keep 3 copies
+
+# Enable JSON export to file for analysis results.
+# This will create a JSON file for each analysis.
+JSON_EXPORT = False
