@@ -332,31 +332,35 @@
         {% endif %}
     {% elif pagename == "thumb" %}
         {% include "analyses/cases/_thum_image.html" with images=tasks %}
-            {% if tasks %}
-                <div class="pagination text-center">
-                    {% if tasks.has_previous %}
-                        <ul>
-                            <li>
-                                <a href="{% url "analyses.views.show_case" case.id "thumb" %}?page={{ tasks.previous_page_number }}">← Previous</a>
+            <div id="DataTables_Table_0_paginate" class="dataTables_paginate paging_bs_normal">
+                <ul class="pagination pull-right">
+                    {% if tasks %}
+                        {% if tasks.has_previous %}
+                            <li class="prev">
+                                <a href="{% url "analyses.views.show_case" case.id "thumb" %}?page={{ tasks.previous_page_number }}">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                    Previous
+                                </a>
                             </li>
-                        </ul>
-                    {% endif %}
-                    <span class="current pull-left">
-                        <small>Page {{ tasks.number }} of {{ tasks.paginator.num_pages }}</small>
-                    </span>
-                    {% if tasks.has_next %}
-                        <ul>
-                            <li>
-                                <a href="{% url "analyses.views.show_case" case.id "thumb" %}?page={{ tasks.next_page_number }}">Next → </a>
+                        {% endif %}
+                        {% if tasks.has_next %}
+                            <li class="next">
+                                <a href="{% url "analyses.views.show_case" case.id "thumb" %}?page={{ tasks.next_page_number }}">
+                                    Next
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </a>
                             </li>
-                        </ul>
+                        {% endif %}
+                    {% else %}
+                        <div class="alert alert-info">
+                            <strong>Info!</strong>
+                            There are not any photos
+                        </div>
                     {% endif %}
+                </ul>
+                <div class="pull-left">
+                    <div id="DataTables_Table_0_info" class="dataTables_info" role="status" aria-live="polite">Showing {{ tasks.number }} to {{ tasks.paginator.num_pages }}</div>
                 </div>
-            {% else %}
-                <div class="alert">
-                    There are not any photos.
-                </div>
-            {% endif %}
     {% elif pagename == "map" %}
         {% include "analyses/cases/_map_image.html" with images=tasks %}
     {% elif pagename == "favorites" %}
