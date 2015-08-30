@@ -154,11 +154,11 @@ class Analysis(models.Model):
             data = db.analyses.find_one(ObjectId(self.analysis_id))
         except:
             return None
-
-        # Data enrichment.
-        data["created_at"] = self.created_at
-        data["completed_at"] = self.completed_at
-        return data
+        else:
+            # Data enrichment.
+            data["created_at"] = self.created_at
+            data["completed_at"] = self.completed_at
+            return data
 
     @property
     def get_file_data(self):
