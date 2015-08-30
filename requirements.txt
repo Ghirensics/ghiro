@@ -7,3 +7,4 @@ pymongo>=2.6.3
 python-dateutil>=2.2
 python-magic>=0.4.6
 requests>=2.7.0
+nudepy>=0.2
