@@ -261,10 +261,12 @@ def new_image(request, case_id):
         form = forms.UploadImageForm(request.POST, request.FILES)
 
         if form.is_valid():
+            content_type = get_content_type_from_file(request.FILES["image"].temporary_file_path())
+
             task = Analysis.add_task(request.FILES["image"].temporary_file_path(), case=case,
-                    user=request.user, content_type=request.FILES["image"].content_type,
+                    user=request.user, content_type=content_type,
                     image_id=save_file(file_path=request.FILES["image"].temporary_file_path(),
-                              content_type=request.FILES["image"].content_type),
+                              content_type=content_type),
                     thumb_id=create_thumb(request.FILES["image"].temporary_file_path()),
                     file_name=request.FILES["image"].name)
 
