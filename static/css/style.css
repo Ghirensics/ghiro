@@ -1578,6 +1578,12 @@ div.jGrowl div.bright div.close {  padding:5px; color:transparent; padding:0px;m
   margin-bottom: 2px;
 }
 
+.btn-lg-sd-adm {
+  padding: 23px 78.5px !important;
+  font-size: 18px !important;
+  margin-bottom: 2px;
+}
+
 .btn-lg-sd i{
     width: 36px
 }

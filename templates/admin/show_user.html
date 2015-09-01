@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-
     <div class="crumbs">
         <ol class="breadcrumb hidden-xs">
             <li>
@@ -23,60 +22,70 @@
         </div>
         <div class="col-md-12">
             <div class="wdgt">
-                <div class="left">
-                    <h3 class="title-icon"><span class="glyphicon glyphicon-user"></span> {{ user.username }}</h3>
-                    <a href="{% url "users.views.admin_edit_user" user.id %}"> Edit profile</a>
-                </div>
-                <div class="col-md-12">
-                    <dl class="dl-horizontal">
-                        <dt>Name:</dt>
-                        <dd>{{ user.first_name }}</dd>
-                        <dt>Last name:</dt>
-                        <dd>{{ user.last_name }}</dd>
-                        <dt>Email:</dt>
-                        <dd>{{ user.email }}</dd>
-                    </dl>
-                </div>
-                <div class="col-md-12">
-                    <h3 class="title-icon"><span class="glyphicon glyphicon-equalizer"></span> Stats</h3>
-                    <dl class="dl-horizontal">
-                        <dt>Case opened:</dt>
-                        <dd><span class="badge badge-important">{{ user.owned_cases.all|length }}</span></dd>
-                        <dt>My analyses:</dt>
-                        <dd><span class="badge badge-success">{{ user.owned_images.all|length }}</span></dd>
-                        <dt>My hash lists:</dt>
-                        <dd><span class="badge badge-warning">{{ user.owned_hashes.all|length }}</span></dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt>Last login:</dt>
-                        <dd>{{ user.last_login }}</dd>
-                        <dt>Account created:</dt>
-                        <dd>{{ user.date_joined }}</dd>
-                        <dt>Account active:</dt>
-                        <dd>
-                            {%if user.is_active%}
-                                <span class="glyphicon glyphicon-ok-circle text-success"></span>
-                            {%else%}
-                                <span class="glyphicon glyphicon-remove-circle text-danger"></span>
-                            {%endif%}
-                        </dd>
-                        <dt>Superuser:</dt>
-                        <dd>
-                            {%if user.is_superuser%}
-                                <span class="glyphicon glyphicon-ok-circle text-success"></span>
-                            {%else%}
-                                <span class="glyphicon glyphicon-remove-circle text-danger"></span>
-                            {%endif%}
-                        </dd>
-                        <dt>Staff:</dt>
-                        <dd>
-                            {% if user.is_staff %}
-                                <span class="glyphicon glyphicon-ok-circle text-success"></span>
+                <div class="profile-container">
+                    <div class="profile-header row">
+                        <div class="col-lg-2 col-md-4 col-sm-12 text-center">
+                            <i class="header-avatar glyphicon glyphicon-user gi-6x"></i>
+                        </div>
+                        <div class="col-lg-5 col-md-8 col-sm-12 profile-info">
+                            {% if user.first_name %}
+                                <div class="header-fullname">
+                                    {{ user.first_name }} {{ user.last_name }} <a href="{% url "users.views.admin_edit_user" user.id %}"><i class="glyphicon glyphicon-pencil" data-tooltip="tooltip" title="Edit profile"></i></a>
+                                </div>
                             {% else %}
-                                <span class="glyphicon glyphicon-remove-circle text-danger"></span>
-                            {%endif%}
-                        </dd>
-                    </dl>
+                                <a href="{% url "users.views.admin_edit_user" user.id %}">Edit Name and Surname</a>
+                            {% endif %}
+                            <a href="#" class="btn btn-palegreen btn-sm  btn-follow">
+                                <i class="fa fa-mail-forward"></i>
+                                {{ user.email }}
+                            </a>
+                            <div class="header-information">
+                                API key: {{ user.api_key }}
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 profile-stats">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 stats-col">
+                                    <div class="stats-value pink">{{ user.owned_cases.all|length }}</div>
+                                    <div class="stats-title">Case opened</div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 stats-col">
+                                    <div class="stats-value pink">{{ user.owned_images.all|length }}</div>
+                                    <div class="stats-title">My analyses</div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 stats-col">
+                                    <div class="stats-value pink">{{ user.owned_hashes.all|length }}</div>
+                                    <div class="stats-title">My hash lists</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
+                                    Account active:
+                                    {%if user.is_active%}
+                                        <i class="glyphicon glyphicon-ok-circle text-success"></i>
+                                    {%else%}
+                                        <i class="glyphicon glyphicon-remove-circle text-danger"></i>
+                                    {%endif%}
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
+                                    Superuser:
+                                    {%if user.is_superuser%}
+                                        <i class="glyphicon glyphicon-ok-circle text-success"></i>
+                                    {%else%}
+                                        <i class="glyphicon glyphicon-remove-circle text-danger"></i>
+                                    {%endif%}
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
+                                    Staff:
+                                    {%if user.is_staff%}
+                                        <i class="glyphicon glyphicon-ok-circle text-success"></i>
+                                    {%else%}
+                                        <i class="glyphicon glyphicon-remove-circle text-danger"></i>
+                                    {%endif%}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

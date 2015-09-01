@@ -7,7 +7,7 @@
                 <span class="glyphicon glyphicon-home gi-0x"></span><a href="/">Dashboard</a>
             </li>
             <li class="active">
-                Profile
+                {{ user.username }}'s profile
             </li>
         </ol>
     </div>
@@ -19,7 +19,6 @@
         </div>
         <div class="col-md-12">
             <div class="wdgt">
-
                 <div class="profile-container">
                     <div class="profile-header row">
                         <div class="col-lg-2 col-md-4 col-sm-12 text-center">
@@ -27,9 +26,11 @@
                         </div>
                         <div class="col-lg-5 col-md-8 col-sm-12 profile-info">
                             {% if user.first_name %}
-                                <div class="header-fullname">{{ user.first_name }} {{ user.last_name }}</div>
+                                <div class="header-fullname">
+                                    {{ user.first_name }} {{ user.last_name }} <a href="{% url "users.views.admin_edit_user" user.id %}"><i class="glyphicon glyphicon-pencil" data-tooltip="tooltip" title="Edit profile"></i></a>
+                                </div>
                             {% else %}
-                                <a data-toggle="tab" href="#settings">Edit Name and Surname</a>
+                                <a href="{% url "users.views.admin_edit_user" user.id %}">Edit Name and Surname</a>
                             {% endif %}
                             <a href="#" class="btn btn-palegreen btn-sm  btn-follow">
                                 <i class="fa fa-mail-forward"></i>
@@ -78,81 +79,6 @@
                                     {%else%}
                                         <i class="glyphicon glyphicon-remove-circle text-danger"></i>
                                     {%endif%}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="profile-body">
-                        <div class="col-lg-12">
-                            <div class="tabbable">
-                                <ul class="nav nav-tabs tabs-flat  nav-justified" id="myTab11">
-                                    <li class="tab-red">
-                                        <a data-toggle="tab" href="#timeline">
-                                            Activity
-                                        </a>
-                                    </li>
-                                    <li class="tab-palegreen">
-                                        <a data-toggle="tab" id="contacttab" href="#contacts">
-                                            Contacts
-                                        </a>
-                                    </li>
-                                    <li class="tab-yellow">
-                                        <a data-toggle="tab" href="#settings">
-                                            Settings
-                                        </a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content tabs-flat">
-                                    <div id="timeline" class="tab-pane">
-                                        {% include "admin/_list_activity.html" %}
-                                    </div>
-                                    <div id="contacts" class="tab-pane">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="profile-contacts">
-                                                    <div class="profile-badge orange"><i class="glyphicon glyphicon-phone-alt orange"></i><span>Contacts</span></div>
-                                                    <div class="contact-info">
-                                                        <p>
-                                                            Phone	:  <br>
-                                                            Cell		:
-                                                        </p>
-                                                        <p>
-                                                            Email		: {{ user.email }}
-                                                            <br>
-                                                            Skype		:
-                                                        </p>
-                                                        <p>
-                                                            Facebook	:
-                                                            <br>
-                                                            Twitter	:
-                                                        </p>
-                                                    </div>
-                                                    <div class="profile-badge azure">
-                                                        <i class="glyphicon glyphicon-map-marker azure"></i><span>Location</span>
-                                                    </div>
-                                                    <div class="contact-info">
-                                                        <p>
-                                                            Address<br>
-                                                            Department <br>
-                                                            44-46 Garibaldi Road<br>
-                                                            Italy, Bologna
-                                                        </p>
-                                                        <p>
-                                                            Office<br>
-                                                            Via Mazzini, 33<br>
-                                                            Bologna, Italy
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div id="contact-map" class="animated flipInY"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="settings" class="tab-pane">
-                                        {% include "layout/_profileForm.html" %}
-                                    </div>
                                 </div>
                             </div>
                         </div>

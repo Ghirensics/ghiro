@@ -1,5 +1,5 @@
 <div class="wdgt">
-    <div class="wdgt-header">Insert details for {{ user.username }}'s profile </div>
+    <div class="wdgt-header">Edit profile</div>
     <div class="wdgt-body" style="padding-bottom:10px;">
         <form action="{% url "users.views.admin_edit_user" user.id %}" method="POST">{% csrf_token %}
             <div class="form-group">
