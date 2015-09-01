@@ -42,6 +42,9 @@
                             <div class="header-information">
                                 API key: {{ user.api_key }}
                             </div>
+                            <div class="header-information">
+                                <a href="{% url "users.views.admin_show_activity" user.id %}">Show user activity</a>
+                            </div>
                         </div>
                         <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 profile-stats">
                             <div class="row">
