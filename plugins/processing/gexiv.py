@@ -87,7 +87,7 @@ class GexivProcessing(BaseProcessingModule):
                     img.thumbnail([256, 160], Image.ANTIALIAS)
                     p["file"] = save_file(image2str(img), content_type="image/jpeg")
                 except Exception as e:
-                    logger.warning("Error reading preview: {0}".format(e))
+                    logger.warning("[Task {0}]: Error reading preview: {1}".format(self.task_id, e))
                     continue
                 finally:
                     # Save.
@@ -105,13 +105,16 @@ class GexivProcessing(BaseProcessingModule):
             }
 
     def run(self, task):
+        # Save task id for logging.
+        self.task_id = task.id
+
         # Read metadata from a temp file.
         try:
             tmp_file = str2temp_file(task.get_file_data)
             self.metadata = GExiv2.Metadata()
             self.metadata.open_path(str(tmp_file.name))
         except Exception as e:
-            logger.warning("Unable to read image metadata: {0}".format(e))
+            logger.warning("[Task {0}]: Unable to read image metadata: {1}".format(task.id, e))
             self.metadata = None
         finally:
             tmp_file.close()

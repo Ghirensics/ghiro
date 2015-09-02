@@ -17,6 +17,8 @@ except ImportError:
 
 logger = logging.getLogger(__name__)
 
+class ImageComparerError(Exception):
+    pass
 
 class ImageComparer():
     """Image comparator."""
@@ -31,8 +33,7 @@ class ImageComparer():
         try:
             i1 = str2image(get_file(original_image_id).read())
         except IOError as e:
-            logger.warning("Comparer error reading image: {0}".format(e))
-            return
+            raise ImageComparerError("Comparer error reading image: {0}".format(e))
 
         # Check if thumb was resized.
         if "original_file" in preview:
@@ -45,8 +46,7 @@ class ImageComparer():
         try:
             i1 = i1.resize([width, height], Image.ANTIALIAS)
         except IOError as e:
-            logger.warning("Comparer error reading image: {0}".format(e))
-            return
+            raise ImageComparerError("Comparer error reading image: {0}".format(e))
 
         # Checks.
         #assert i1.mode == i2.mode, "Different kinds of images."
@@ -89,8 +89,11 @@ class PreviewComparerProcessing(BaseProcessingModule):
         if "metadata" in self.results:
             if "preview" in self.results["metadata"]:
                 for preview in self.results["metadata"]["preview"]:
-                    difference = ImageComparer.calculate_difference(preview, self.results["file_data"])
-                    if difference:
+                    try:
+                        difference = ImageComparer.calculate_difference(preview, self.results["file_data"])
+                    except ImageComparerError as e:
+                        logger.warning("[Task {0}]: Error comparing previews: {1}".format(task.id, e))
+                    else:
                         preview["diff"], preview["diff_percent"] = difference
 
         return self.results

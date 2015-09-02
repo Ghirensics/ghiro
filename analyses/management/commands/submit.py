@@ -61,4 +61,4 @@ class Command(BaseCommand):
         try:
             Analysis.add_task(target, case=case, user=user)
         except GhiroValidationException as e:
-            print("ERROR: " % e)
+            print("ERROR: %s" % e)

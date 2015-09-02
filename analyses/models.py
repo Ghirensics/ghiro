@@ -151,9 +151,14 @@ class Analysis(models.Model):
     def report(self):
         """Lookups report on mongo, used to fetch anal."""
         try:
-            return db.analyses.find_one(ObjectId(self.analysis_id))
+            data = db.analyses.find_one(ObjectId(self.analysis_id))
         except:
             return None
+        else:
+            # Data enrichment.
+            data["created_at"] = self.created_at
+            data["completed_at"] = self.completed_at
+            return data
 
     @property
     def get_file_data(self):

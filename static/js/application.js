@@ -117,8 +117,7 @@ function loadScript() {
     script.type = "text/javascript";
     script.src = "http://maps.google.com/maps/api/js?sensor=false&callback=initialize";
     document.body.appendChild(script);
-    $('a[data-toggle="tab"]').on('shown', function (e) {
-        google.maps.event.trigger(map, 'resize');
-        map.setCenter(marker.getPosition());
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+  	    initialize();
     });
 }

@@ -186,6 +186,7 @@ border-top-left-radius: 0;
 .gi-3x{font-size: 3em;}
 .gi-4x{font-size: 4em;}
 .gi-5x{font-size: 5em;}
+.gi-6x{font-size: 6em;}
 .gi-sidebar{font-size: 2em;}
 
 /* MAP CUSTOM */
@@ -295,7 +296,6 @@ border-top-left-radius: 0;
     background-color: #fbfbfb;
 }
 .profile-container .profile-body .tab-content {
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
     margin-top: 30px;
 }
 .profile-container .profile-body .setting-header {
@@ -364,6 +364,13 @@ border-top-left-radius: 0;
     margin-top: -16px;
     padding-top: 35px;
 }
+.orange {
+    color: #fb6e52 !important;
+}
+.azure {
+    color: #2dc3e8 !important;
+}
+
 @media (max-width: 992px) {
 .profile-container .profile-header .profile-info {
     padding: 0 40px;
@@ -436,7 +443,6 @@ border-top-left-radius: 0;
     width: 100%;
     background: url('../img/bg.png');
     color: #FFF;
-    margin-top:15px;
 }
 
 /* CUSTOM THUN */
@@ -1572,6 +1578,12 @@ div.jGrowl div.bright div.close {  padding:5px; color:transparent; padding:0px;m
   margin-bottom: 2px;
 }
 
+.btn-lg-sd-adm {
+  padding: 23px 78.5px !important;
+  font-size: 18px !important;
+  margin-bottom: 2px;
+}
+
 .btn-lg-sd i{
     width: 36px
 }
@@ -2411,7 +2423,7 @@ td.center { text-align:center; }
 .input-icon.icon-right .icon, .input-icon.icon-right .fa { font-size:16px;float:right; position:relative; left:-12px; top:26px; }
 .input-icon.icon-right .form-control { padding-right:28px; padding-left:12px; }
 
-.cntnr {  width:100%; height:100%; display:table; content: ''; clear:both; margin:0; padding:0; }
+.cntnr {  width:100%; height:100%; display:table; content: ''; clear:both; margin:0; padding:0; margin-bottom: 15px }
 .cntnr > .left { display:table-cell; width:200px; height:100%; background:#F3F3F3 !important; box-shadow: inset -10px 0px 20px -10px #C6C6C6 !important; vertical-align:top; }
 .cntnr > .right { display:table-cell; height:100%; background:#FFF; vertical-align:top; }
 .cntnr > .left > .logo { width:100%; height:100px; line-height:100px; text-align:center; background: url('../img/bg.png'); }

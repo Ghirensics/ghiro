@@ -38,7 +38,7 @@ class ElaProcessing(BaseProcessingModule):
         # Check this kind of analysis should be run on this file type.
         # It can be applied only on PNG and JPEG formats.
         if "mime_type" in self.data and not (self.data["mime_type"] == "image/png" or self.data["mime_type"] == "image/jpeg"):
-            return False
+            return self.results
 
         # Create temporary file.
         handle, resaved = tempfile.mkstemp()
@@ -49,8 +49,8 @@ class ElaProcessing(BaseProcessingModule):
             im.save(resaved, "JPEG", quality=95)
             resaved_im = Image.open(resaved)
         except IOError as e:
-            logger.warning("ELA error opening image: {0}".format(e))
-            return
+            logger.warning("[Task {0}]: ELA error opening image: {1}".format(task.id, e))
+            return self.results
         finally:
             tmp_file.close()
             os.close(handle)
@@ -64,14 +64,14 @@ class ElaProcessing(BaseProcessingModule):
         try:
             ela_im = ImageChops.difference(im, resaved_im)
         except Exception as e:
-            logger.warning("Unable to calculate ELA difference: {0}".format(e))
-            return
+            logger.warning("[Task {0}]: Unable to calculate ELA difference: {0}".format(task.id, e))
+            return self.results
 
         # Calculate difference
         extrema = ela_im.getextrema()
         max_diff = max([ex[1] for ex in extrema])
         if not max_diff:
-            return
+            return self.results
         scale = 255.0/max_diff
         ela_im = ImageEnhance.Brightness(ela_im).enhance(scale)
         self.results["ela"]["max_difference"] = max([ex[1] for ex in extrema])
@@ -86,6 +86,6 @@ class ElaProcessing(BaseProcessingModule):
             img = image2str(ela_im)
             self.results["ela"]["ela_image"] = save_file(img, content_type="image/jpeg")
         except Exception as e:
-            logger.warning("ELA error saving image: {0}".format(e))
+            logger.warning("[Task {0}]: ELA error saving image: {0}".format(task.id, e))
         finally:
             return self.results

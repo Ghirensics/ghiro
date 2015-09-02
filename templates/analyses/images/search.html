@@ -19,7 +19,10 @@
         </div>
         <div class="col-md-12">
             <div class="wdgt">
-                {% include "layout/_searchForm.html" with in_case_id=False %}
+                <div class="wdgt-header">Enter keywords for your search</div>
+                <div class="wdgt-body">
+                    {% include "layout/_searchForm.html" with in_case_id=False %}
+                </div>
             </div>
         </div>
     </div>
