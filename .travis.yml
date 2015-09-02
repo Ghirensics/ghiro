@@ -12,6 +12,8 @@ python:
 before_install:
     - export PIP_USE_MIRRORS=true
     - sudo apt-get update -qq
+    # Linear algebra (Scipy deps).
+    - sudo apt-get install gfortran libopenblas-dev liblapack-dev
     # Start X for selenium tests.
     - "export DISPLAY=:99.0"
     - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
