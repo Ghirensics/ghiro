@@ -153,6 +153,25 @@ case, and add your images with the add button.
 For usage help please refer to the documentation at:
 http://www.getghiro.org/docs/latest/usage/index.html
 
+How to login
+------------
+
+What you see after Ghiro Appliance boot is a Linux login screen, you have just
+to enter the credentials to login if you need to access the Appliance linux
+OS.
+
+Login as explained with:
+
+ * Login: ghiro
+ * Password: ghiromanager
+
+Note that when you type the password it will not be shown.
+
+If you login successfully you will see the command prompt, with the blinking
+cursor after a “$” symbol.
+
+.. image:: ../_images/appliance_11.png
+
 Extra Configuration
 -------------------
 
