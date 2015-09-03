@@ -205,6 +205,19 @@ def show_case(request, case_id, page_name):
                 tasks.append(analyses.get(analysis_id=result["_id"]))
             except ObjectDoesNotExist:
                 continue
+    elif page_name == "nude":
+        # Return all data, lookup on mongo to be faster.
+        mongo_results = db.analyses.find({"nude.nudepy.result": True})
+        # Get results (run a bunch of queries to avoid too long sql queries).
+        tasks = []
+        for result in mongo_results:
+            try:
+                analyses = Analysis.objects.filter(case=case)
+                if not request.user.is_superuser:
+                    analyses = analyses.filter(Q(case__owner=request.user) | Q(case__users=request.user))
+                tasks.append(analyses.get(analysis_id=result["_id"]))
+            except ObjectDoesNotExist:
+                continue
     elif page_name == "search":
         pass
     else:
@@ -549,6 +562,19 @@ def list_images(request, page_name):
                 if not request.user.is_superuser:
                     analyses = analyses.filter(Q(case__owner=request.user) | Q(case__users=request.user))
                 last.append(analyses.get(analysis_id=result["_id"]))
+            except ObjectDoesNotExist:
+                continue
+    elif page_name == "nude":
+        # Return all data, lookup on mongo to be faster.
+        mongo_results = db.analyses.find({"nude.nudepy.result": True})
+        # Get results (run a bunch of queries to avoid too long sql queries).
+        tasks = []
+        for result in mongo_results:
+            try:
+                analyses = Analysis.objects
+                if not request.user.is_superuser:
+                    analyses = analyses.filter(Q(case__owner=request.user) | Q(case__users=request.user))
+                tasks.append(analyses.get(analysis_id=result["_id"]))
             except ObjectDoesNotExist:
                 continue
     else:
