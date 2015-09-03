@@ -577,6 +577,8 @@ def list_images(request, page_name):
                 tasks.append(analyses.get(analysis_id=result["_id"]))
             except ObjectDoesNotExist:
                 continue
+        page = request.GET.get("page")
+        last = _paginate(tasks, page, 20)
     else:
         raise Exception
 
