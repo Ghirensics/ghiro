@@ -113,27 +113,9 @@ start, when the appliance is ready you will see a screen like this one.
 
 .. image:: ../_images/appliance_10.png
 
-What you see is a Linux login screen, you have just to enter the credentials to
-login.
+The appliance IP address is printed on the screen, as highlighted:
 
-Login as explained with:
-
- * Login: ghiro
- * Password: ghiromanager
-
-Note that when you type the password it will not be shown.
-
-If you login successfully you will see the command prompt, with the blinking
-cursor after a “$” symbol.
-
-.. image:: ../_images/appliance_11.png
-
-Now you must lookup your VirtualBox Appliance IP typing: ifconfig -a
-
-On the line corresponding to “inet addr” for the interface “eth0” you will
-have the Appliance IP address, highlighted in the picture below.
-
-.. image:: ../_images/appliance_12.png
+.. image:: ../_images/appliance_15.png
 
 Now just put that address in your browser and the Ghiro interface will appear.
 
