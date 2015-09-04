@@ -1,5 +1,8 @@
 <table class="table">
     <thead>
+        <th colspan="3" style="background-color: #AFD5EA">File Hash</th>
+    </thead>
+    <thead>
         <tr>
             <th>Type</th>
             <th>Value</th>
@@ -7,10 +10,52 @@
     </thead>
     <tbody>
         {% for k, v in analysis.report.hash.iteritems %}
-        <tr>
+        <tr colspan="2">
             <td><b>{{ k|upper }}</b></td>
             <td>{{ v }}</td>
         </tr>
         {% endfor %}
+    </tbody>
+</table>
+<br>
+<table class="table">
+    <thead>
+        <th colspan="3" style="background-color: #AFD5EA">Image Hash</th>
+    </thead>
+    <thead>
+        <th>Type</th>
+        <th>Value</th>
+    </thead>
+    <tbody>
+        {% if analysis.report.imghash.d_hash %}
+            <tr colspan="2">
+                <td>
+                    <b>Difference hashing</b>
+                </td>
+                <td>
+                    {{ analysis.report.imghash.d_hash }}
+                </td>
+            </tr>
+        {% endif %}
+        {% if analysis.report.imghash.a_hash %}
+            <tr colspan="2">
+                <td>
+                    <b>Average hashing</b>
+                </td>
+                <td>
+                    {{ analysis.report.imghash.a_hash }}
+                </td>
+            </tr>
+        {% endif %}
+        {% if analysis.report.imghash.p_hash %}
+            <tr colspan="2">
+                <td>
+                    <b>Perception hashing</b>
+                </td>
+                <td>
+                    {{ analysis.report.imghash.p_hash }}
+                </td>
+            </tr>
+        {% endif %}
     </tbody>
 </table>

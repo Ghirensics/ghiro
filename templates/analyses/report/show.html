@@ -66,7 +66,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="{% url "analyses.views.static_report" analysis.id "pdf" %}"><span class="glyphicon glyphicon-file"></span> PDF report</a>
-                                <a href="{% url "analyses.views.static_report" analysis.id "html" %}"><span class="glyphicon glyphicon-save-file"></span> HTML report</a>
+                                <a href="{% url "analyses.views.static_report" analysis.id "html" %}"> HTML report</a>
                             </li>
                         </ul>
                     </div>
@@ -77,7 +77,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{% url "analyses.views.export_json" analysis.id %}"><span class="glyphicon glyphicon-console"></span> JSON report</a>
+                                <a href="{% url "analyses.views.export_json" analysis.id %}"> JSON report</a>
                                 <a href="{% url "analyses.views.image" analysis.image_id %}"><span class="glyphicon glyphicon-picture"></span> Original Image</a>
                             </li>
                         </ul>
