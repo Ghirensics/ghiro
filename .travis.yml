@@ -9,11 +9,15 @@ python:
   - "3.2"
   - "3.3"
   - "3.4"
+virtualenv:
+  system_site_packages: true
 before_install:
     - export PIP_USE_MIRRORS=true
     - sudo apt-get update -qq
     # Linear algebra (Scipy deps).
-    - sudo apt-get install libblas-dev liblapack-dev libatlas-base-dev gfortran python-dev
+    # - sudo apt-get install libblas-dev liblapack-dev libatlas-base-dev gfortran python-dev
+    # Using system scipy because it's too slow to compile for travis.
+    - sudo apt-get install -qq python-numpy python-scipy
     # Start X for selenium tests.
     - "export DISPLAY=:99.0"
     - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
