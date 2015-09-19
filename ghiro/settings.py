@@ -123,6 +123,7 @@ INSTALLED_APPS = (
     "analyses",
     "hashes",
     "system",
+    "api",
 )
 
 # Hack to import local settings.
