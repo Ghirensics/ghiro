@@ -186,3 +186,8 @@ class AnalysisManager():
             print("Waiting tasks to accomplish...")
             self.workers_stop()
             print("Processing done. Have a nice day in the real world.")
+
+    def stop(self):
+        """Stops the analysis manager."""
+        if self.workers:
+            self.workers_stop()
