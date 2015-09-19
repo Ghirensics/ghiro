@@ -16,6 +16,8 @@ DATABASES = {
         'PORT': '',
         # Set timeout (avoids SQLite "database is locked" errors).
         'timeout': 300,
+        # The lifetime of a database  persistent connection, in seconds.
+        "CONN_MAX_AGE": 60,
     }
 }
 
