@@ -227,7 +227,8 @@ LOGOUT_URL = "/users/logout/"
 LOGIN_REDIRECT_URL = "/"
 
 # Custom context processors.
-TEMPLATE_CONTEXT_PROCESSORS += ("analyses.context_processors.dashboard_data", )
+TEMPLATE_CONTEXT_PROCESSORS += ("analyses.context_processors.dashboard_data",
+                                "analyses.context_processors.ghiro_release")
 
 # Create log directory.
 if not os.path.exists(LOG_DIR):
