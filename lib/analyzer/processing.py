@@ -92,7 +92,6 @@ class AnalysisManager():
         # Starting worker pool.
         self.workers = []
         self.tasks = JoinableQueue(self.get_parallelism())
-        self.workers_start()
 
     def workers_start(self):
         """Start workers pool."""
@@ -154,6 +153,9 @@ class AnalysisManager():
 
     def run(self):
         """Start all analyses."""
+        # Start workers.
+        self.workers_start()
+
         # Clean up tasks remaining stale from old runs.
         if Analysis.objects.filter(state="P").exists():
             logger.info("Found %i stale analysis, putting them in queue." % Analysis.objects.filter(state="P").count())
