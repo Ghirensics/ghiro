@@ -6,9 +6,10 @@ branches:
     - master
 python:
   - "2.7"
-  - "3.2"
-  - "3.3"
-  - "3.4"
+  # Disabled testing with Python 3 because some libraries don't support it.
+  # - "3.2"
+  # - "3.3"
+  # - "3.4"
 virtualenv:
   system_site_packages: true
 before_install:
