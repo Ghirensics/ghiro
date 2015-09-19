@@ -37,7 +37,7 @@ class AnalysisRunner(Process):
             try:
                 # Get a new task from queue.
                 task = self.tasks.get()
-                self._process_image(task)
+                self.process_image(task)
             except KeyboardInterrupt:
                 break
 
@@ -61,7 +61,7 @@ class AnalysisRunner(Process):
                 logger.warning("[Task {0}]: Module {1} returned results not in dict format.".format(task.id, module))
         return results
 
-    def _process_image(self, task):
+    def process_image(self, task):
         """Process an image.
         @param task: image task
         """
