@@ -16,6 +16,7 @@ from lib.utils import AutoVivification
 from analyses.models import Analysis
 from lib.analyzer.base import BaseProcessingModule
 from lib.db import save_results
+from lib.exceptions import GhiroPluginException
 
 logger = logging.getLogger(__name__)
 
@@ -40,6 +41,26 @@ class AnalysisRunner(Process):
             except KeyboardInterrupt:
                 break
 
+    def run_module(self, task, module, results):
+        """Runs a processing module.
+        @param task: task
+        @param module: module
+        @param results: results dict
+        """
+        current = module()
+        current.data = results
+        try:
+            output = current.run(task)
+        except Exception as e:
+            logger.exception("[Task {0}]: Critical error in plugin {1}, skipping: {2}".format(task.id, module, e))
+            raise GhiroPluginException(e)
+        else:
+            if isinstance(output, AutoVivification):
+                results.update(output)
+            else:
+                logger.warning("[Task {0}]: Module {1} returned results not in dict format.".format(task.id, module))
+        return results
+
     def _process_image(self, task):
         """Process an image.
         @param task: image task
@@ -51,18 +72,10 @@ class AnalysisRunner(Process):
             results["file_data"] = task.image_id
 
             for module in self.modules:
-                current = module()
-                current.data = results
                 try:
-                    output = current.run(task)
-                except Exception as e:
-                    logger.exception("[Task {0}]: Critical error in plugin {1}, skipping: {2}".format(task.id, module, e))
+                    results = self.run_module(task, module, results)
+                except GhiroPluginException:
                     continue
-                else:
-                    if isinstance(output, AutoVivification):
-                        results.update(output)
-                    else:
-                        logger.warning("[Task {0}]: Module {1} returned results not in dict format.".format(task.id, module))
 
             # Complete.
             task.analysis_id = save_results(results)
