@@ -179,13 +179,18 @@ class Analysis(models.Model):
     @property
     def to_json(self):
         """Converts object to JSON."""
+        def date_handler(obj):
+            """Converts datetime to str."""
+            return obj.isoformat() if hasattr(obj, "isoformat") else obj
+
         # Fetch report from mongo.
         data = self.report
         # Cleanup.
         del(data["_id"])
         # If result available converts it.
         if data:
-            return json.dumps(data, sort_keys=False, indent=4)
+            return json.dumps(data, sort_keys=False, indent=4,
+                              default=date_handler)
         else:
             return json.dumps({})
 
