@@ -80,126 +80,127 @@
                         </li>
                     </ul>
                 </div>
-                <br />
-                <div class="box tabs-left">
-                    <ul class="nav nav-pills nav-primary">
-                        <li class="active">
-                            <a href="#dash" data-toggle="tab">Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="#static" data-toggle="tab">Static</a>
-                        </li>
-                        {% if analysis.report.metadata.Exif %}
-                        <li>
-                            <a href="#exif" data-toggle="tab">EXIF</a>
-                        </li>
-                        {% endif %}
-                        {% if analysis.report.metadata.Iptc %}
-                        <li>
-                            <a href="#iptc" data-toggle="tab">IPTC</a>
-                        </li>
-                        {% endif %}
-                        {% if analysis.report.metadata.Xmp %}
-                        <li>
-                            <a href="#xmp" data-toggle="tab">XMP</a>
-                        </li>
-                        {% endif %}
-                        {% if analysis.report.metadata.preview and analysis.report.metadata.preview|length > 0  %}
-                        <li>
-                            <a href="#thumb" data-toggle="tab">Thumb</a>
-                        </li>
-                        {% endif %}
-                        {% if analysis.report.metadata.gps %}
-                        <li>
-                            <a href="#map" data-toggle="tab">Map</a>
-                        </li>
-                        {% endif %}
-                        {% if analysis.report.ela %}
-                        <li>
-                            <a href="#ela" data-toggle="tab">ELA</a>
-                        </li>
-                        {% endif %}
-                        {% if analysis.report.signatures and analysis.report.signatures|length > 0 %}
-                        <li>
-                            <a href="#signs" data-toggle="tab">Signatures</a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                    <div class="tab-content">
-                        <div class="active tab-pane" id="dash">
-                            {% include 'analyses/report/_dashboard.html' %}
-                        </div>
-                        <div class="tab-pane" id="static">
-                            {% include 'analyses/report/_static.html' %}
-                        </div>
-                        {% if analysis.report.metadata.Exif %}
-                        <div id="exif" class="tab-pane">
-                            {% include 'analyses/report/_exif.html' %}
-                        </div>
-                        {% endif %}
-                        {% if analysis.report.metadata.Iptc %}
-                        <div id="iptc" class="tab-pane">
-                            {% include 'analyses/report/_iptc.html' %}
-                        </div>
-                        {% endif %}
-                        {% if analysis.report.metadata.Xmp %}
-                        <div id="xmp" class="tab-pane">
-                            {% include 'analyses/report/_xmp.html' %}
-                        </div>
-                        {% endif %}
-                        {% if analysis.report.metadata.preview and analysis.report.metadata.preview|length > 0  %}
-                        <div id="thumb" class="tab-pane">
-                            {% include 'analyses/report/_previews.html' %}
-                        </div>
-                        {% endif %}
-                        {% if analysis.report.metadata.gps %}
-                        <div id="map" class="tab-pane">
-                            {% include 'analyses/report/_map.html' %}
-                        </div>
-                        {% endif %}
-                        {% if analysis.report.ela %}
-                        <div id="ela" class="tab-pane">
-                            {% include 'analyses/report/_ela.html' %}
-                        </div>
-                        {% endif %}
-                        {% if analysis.report.signatures and analysis.report.signatures|length > 0 %}
-                        <div id="signs" class="tab-pane">
-                            {% include 'analyses/report/_signature.html' %}
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-                <br>
-                <div>
-                    <ul id="tags">
-                        {% for tag in analysis.tag_set.all %}
-                            <li>{{ tag.text }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-
-                <div class="comment controls">
-                    {% if analysis.comments.all %}
-                        <h3>Comments</h3>
-                        <table class="table table-striped table-condensed ">
-                            {% for comment in analysis.comments.all %}
-                            <tr>
-                                <td>
-                                    <p class="text-info">{{ comment.owner.username }} <small class="pull-right">{{ comment.created_at }}</small></p>
-                                    <p class="pull-right"><a href="{% url "analyses.views.delete_comment" comment.id %}" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Delete</a></p>
-                                    {{ comment.message }}
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </table>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="box tabs-left">
+                <ul class="nav nav-pills nav-primary">
+                    <li class="active">
+                        <a href="#dash" data-toggle="tab">Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#static" data-toggle="tab">Static</a>
+                    </li>
+                    {% if analysis.report.metadata.Exif %}
+                    <li>
+                        <a href="#exif" data-toggle="tab">EXIF</a>
+                    </li>
                     {% endif %}
-                    <form method="post" action="{% url "analyses.views.add_comment" analysis.id %}">{% csrf_token %}
-                        <textarea class="form-control" name="message" id="id_message" type="text" placeholder="Insert your comment"></textarea>
-                        <div class="box">
-                            <button class="btn btn-success">Save</button>
-                        </div>
-                    </form>
+                    {% if analysis.report.metadata.Iptc %}
+                    <li>
+                        <a href="#iptc" data-toggle="tab">IPTC</a>
+                    </li>
+                    {% endif %}
+                    {% if analysis.report.metadata.Xmp %}
+                    <li>
+                        <a href="#xmp" data-toggle="tab">XMP</a>
+                    </li>
+                    {% endif %}
+                    {% if analysis.report.metadata.preview and analysis.report.metadata.preview|length > 0  %}
+                    <li>
+                        <a href="#thumb" data-toggle="tab">Thumb</a>
+                    </li>
+                    {% endif %}
+                    {% if analysis.report.metadata.gps %}
+                    <li>
+                        <a href="#map" data-toggle="tab">Map</a>
+                    </li>
+                    {% endif %}
+                    {% if analysis.report.ela %}
+                    <li>
+                        <a href="#ela" data-toggle="tab">ELA</a>
+                    </li>
+                    {% endif %}
+                    {% if analysis.report.signatures and analysis.report.signatures|length > 0 %}
+                    <li>
+                        <a href="#signs" data-toggle="tab">Signatures</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <div class="tab-content">
+                    <div class="active tab-pane" id="dash">
+                        {% include 'analyses/report/_dashboard.html' %}
+                    </div>
+                    <div class="tab-pane" id="static">
+                        {% include 'analyses/report/_static.html' %}
+                    </div>
+                    {% if analysis.report.metadata.Exif %}
+                    <div id="exif" class="tab-pane">
+                        {% include 'analyses/report/_exif.html' %}
+                    </div>
+                    {% endif %}
+                    {% if analysis.report.metadata.Iptc %}
+                    <div id="iptc" class="tab-pane">
+                        {% include 'analyses/report/_iptc.html' %}
+                    </div>
+                    {% endif %}
+                    {% if analysis.report.metadata.Xmp %}
+                    <div id="xmp" class="tab-pane">
+                        {% include 'analyses/report/_xmp.html' %}
+                    </div>
+                    {% endif %}
+                    {% if analysis.report.metadata.preview and analysis.report.metadata.preview|length > 0  %}
+                    <div id="thumb" class="tab-pane">
+                        {% include 'analyses/report/_previews.html' %}
+                    </div>
+                    {% endif %}
+                    {% if analysis.report.metadata.gps %}
+                    <div id="map" class="tab-pane">
+                        {% include 'analyses/report/_map.html' %}
+                    </div>
+                    {% endif %}
+                    {% if analysis.report.ela %}
+                    <div id="ela" class="tab-pane">
+                        {% include 'analyses/report/_ela.html' %}
+                    </div>
+                    {% endif %}
+                    {% if analysis.report.signatures and analysis.report.signatures|length > 0 %}
+                    <div id="signs" class="tab-pane">
+                        {% include 'analyses/report/_signature.html' %}
+                    </div>
+                    {% endif %}
                 </div>
+            </div>
+            <br>
+            <div>
+                <ul id="tags">
+                    {% for tag in analysis.tag_set.all %}
+                        <li>{{ tag.text }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="comment controls">
+                {% if analysis.comments.all %}
+                    <h3>Comments</h3>
+                    <table class="table table-striped table-condensed ">
+                        {% for comment in analysis.comments.all %}
+                        <tr>
+                            <td>
+                                <p class="text-info">{{ comment.owner.username }} <small class="pull-right">{{ comment.created_at }}</small></p>
+                                <p class="pull-right"><a href="{% url "analyses.views.delete_comment" comment.id %}" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Delete</a></p>
+                                {{ comment.message }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+                <form method="post" action="{% url "analyses.views.add_comment" analysis.id %}">{% csrf_token %}
+                    <textarea class="form-control" name="message" id="id_message" type="text" placeholder="Insert your comment"></textarea>
+                    <div class="box">
+                        <button class="btn btn-success">Save</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
