@@ -22,13 +22,13 @@ you are welcome to `submit a new issue`_.
 
 If you are filling a bug report you should always follow this template:
 
-1. What were you doing?
-1. What did you expect to happen?
-1. What happened instead?
-1. Ghiro release of Ghiro Appliance release.
-1. Browser and Version of Browser, Operating
+#. What were you doing?
+#. What did you expect to happen?
+#. What happened instead?
+#. Ghiro release of Ghiro Appliance release.
+#. Browser and Version of Browser, Operating
    System running Browser.
-1. If you are reporting a UI issue screenshot(s) showing the problem.
+#. If you are reporting a UI issue screenshot(s) showing the problem.
 
 .. _`submit a bug report`: https://github.com/Ghirensics/ghiro/issues/new
 
