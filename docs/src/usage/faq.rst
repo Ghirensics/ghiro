@@ -30,7 +30,7 @@ If you are filling a bug report you should always follow this template:
    System running Browser.
 #. If you are reporting a UI issue screenshot(s) showing the problem.
 
-.. _`submit a bug report`: https://github.com/Ghirensics/ghiro/issues/new
+.. _`submit a new issue`: https://github.com/Ghirensics/ghiro/issues/new
 
 Is Ghiro uploading my data somewhere?
 -------------------------------------
