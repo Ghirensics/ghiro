@@ -2199,7 +2199,7 @@ fieldset[disabled] .btn-link:focus {
 
 .panel{ margin-bottom: -12px; }
 .panel, .panel-heading, .panel-title { border-radius:0px !important;}
-.panel-heading {padding-bottom: 23px;}
+.panel-heading {padding-bottom: 16px;}
 .panel-title > a { text-decoration:none; font-size:14px; }
 .panel-title > a:focus { outline-width:0px !important; }
 

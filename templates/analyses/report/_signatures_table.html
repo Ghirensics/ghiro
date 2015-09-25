@@ -2,7 +2,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h4 class="panel-title">
+            <div class="panel-title">
                 {# Used to separate signatures by severity and avoid dups in IDs. #}
                 {% if segment %}
                     <a data-toggle="collapse" data-parent="#sign{{ segment }}-accordion" href="#{{ sign.name|slugify }}_{{ segment }}">
@@ -20,7 +20,7 @@
                     {% endif %}
                     {{ sign.name}}
                 </a>
-            </h4>
+            </div>
         </div>
         {# Used to separate signatures by severity and avoid dups in IDs. #}
         {% if segment %}
