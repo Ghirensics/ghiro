@@ -47,6 +47,7 @@ class AnalysisRunner(Process):
         @param module: module
         @param results: results dict
         """
+        logger.debug("[Task {0}]: Running module {1}".format(task.id, module))
         current = module()
         current.data = results
         try:
