@@ -93,8 +93,8 @@
                                         <tr>
                                             <td>
                                                 <a href="{% url "analyses.views.show_analysis" anal.id %}">
-                                                    {% if anal.file_name|length > 60 %}
-                                                        {{ anal.file_name|slice:":60" }} ...
+                                                    {% if anal.file_name|length > 40 %}
+                                                        {{ anal.file_name|slice:":40" }} ...
                                                     {% else %}
                                                         {{ anal.file_name }}
                                                     {% endif %}
