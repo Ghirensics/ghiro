@@ -75,7 +75,7 @@ class GexivProcessing(BaseProcessingModule):
             for preview in self.metadata.get_preview_properties():
                 p = AutoVivification()
                 p["mime_type"] = preview.get_mime_type()
-                p["size"] = len(self.metadata.get_preview_image(preview).get_data())
+                p["size"] = preview.get_size()
                 p["ext"] = preview.get_extension()
                 p["dimensions"] = [preview.get_width(), preview.get_height()]
 
