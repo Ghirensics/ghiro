@@ -11,13 +11,15 @@
                                     <th>
                                         {% if preview.original_file %}
                                             <a class="fancybox" href="{% url "analyses.views.image" preview.original_file %}">
-                                        {% else %}
+                                        {% elif preview.file %}
                                             <a class="fancybox" href="{% url "analyses.views.image" preview.file %}">
                                         {% endif %}
-                                        {% if embed %}
-                                            <img src="{{ preview.file|to_base64 }}" />
-                                        {% else %}
-                                            <img src="{% url "analyses.views.image" preview.file %}">
+                                        {% if preview.file %}
+                                            {% if embed %}
+                                                <img src="{{ preview.file|to_base64 }}" />
+                                            {% else %}
+                                                <img src="{% url "analyses.views.image" preview.file %}">
+                                            {% endif %}
                                         {% endif %}
                                         </a>
                                     </th>
