@@ -96,8 +96,8 @@ def str2file(text_data):
     strIO.seek(0)
     return strIO
 
-def str2temp_file(text_data):
-    tmp = tempfile.NamedTemporaryFile(prefix="ghiro-")
+def str2temp_file(text_data, delete=True):
+    tmp = tempfile.NamedTemporaryFile(prefix="ghiro-", delete=delete)
     tmp.write(text_data)
     return tmp
 
