@@ -27,8 +27,8 @@ class NudePyProcessing(BaseProcessingModule):
 
     def run(self, task):
         try:
-            tmp_file = str2image(task.get_file_data)
-            n = Nude(tmp_file)
+            tmp_image = str2image(task.get_file_data)
+            n = Nude(tmp_image)
             # The resize is used to have although less accurate processing.
             # TODO: move this to options panel.
             n.resize(maxwidth=1000)
@@ -38,7 +38,5 @@ class NudePyProcessing(BaseProcessingModule):
         else:
             self.results["nude"]["nudepy"]["result"] = n.result
             self.results["nude"]["nudepy"]["msg"] = n.message
-        finally:
-            tmp_file.close()
 
         return self.results
