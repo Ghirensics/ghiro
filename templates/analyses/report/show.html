@@ -198,7 +198,7 @@
                 <form method="post" action="{% url "analyses.views.add_comment" analysis.id %}">{% csrf_token %}
                     <textarea class="form-control" name="message" id="id_message" type="text" placeholder="Insert your comment"></textarea>
                     <div class="box">
-                        <button class="btn btn-success">Save</button>
+                        <button class="btn btn-success btn-sm">Save comment</button>
                     </div>
                 </form>
             </div>
