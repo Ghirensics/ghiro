@@ -220,13 +220,7 @@ border-top-left-radius: 0;
     min-height: 175px;
 }
 .profile-container .profile-header .header-avatar {
-    background-clip: padding-box;
-    border: 5px solid #f5f5f5;
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-    height: 125px;
-    margin: 25px auto;
-    width: 125px;
+    margin: 55px auto;
 }
 .profile-container .profile-header .profile-info {
     border-right: 1px solid #eee;

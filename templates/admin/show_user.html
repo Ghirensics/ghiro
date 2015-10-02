@@ -35,8 +35,7 @@
                             {% else %}
                                 <a href="{% url "users.views.admin_edit_user" user.id %}">Edit Name and Surname</a>
                             {% endif %}
-                            <a href="#" class="btn btn-palegreen btn-sm  btn-follow">
-                                <i class="fa fa-mail-forward"></i>
+                            <a class="btn-follow">
                                 {{ user.email }}
                             </a>
                             <div class="header-information">
