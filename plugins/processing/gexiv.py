@@ -111,7 +111,7 @@ class GexivProcessing(BaseProcessingModule):
         # Read metadata from a temp file.
         try:
             self.metadata = GExiv2.Metadata()
-            self.metadata.open_buf(task.get_file_data)
+            self.metadata.open_buf(vytes(task.get_file_data))
         except Exception as e:
             logger.warning("[Task {0}]: Unable to read image metadata: {1}".format(task.id, e))
             self.metadata = None
