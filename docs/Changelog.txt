@@ -11,6 +11,7 @@ Ghiro-0.3 (TBD)
  * Added support and unit tests for Python 3.
  * Added new web interface based on Bootstrap 3.
  * Added option to force update check from command line.
+ * Added command to purge auditing logs.
  * Renamed 'manage' app to 'system'.
 
 Ghiro-0.2.1 (27/08/2015)
