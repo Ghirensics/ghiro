@@ -128,3 +128,19 @@ If you want to disable auditing, set to false `AUDITING_ENABLED` inside
 `local_settings.py` as follows::
 
     AUDITING_ENABLED = False
+
+Auditing purge
+--------------
+
+Auditing logs are stored in Ghiro's database. If you need to purge all audit
+trails, for example because you want to free some space, there is a management
+command for that::
+
+    $ python manage.py purge_auditing
+    Audit log purge
+    WARNING: this will permanently delete all your audit logs!
+    Do you want to continue? [y/n]y
+    Purging audit log... (it could take several minutes)
+    Done.
+
+This command wil PERMANENTLY delete all audit data!
