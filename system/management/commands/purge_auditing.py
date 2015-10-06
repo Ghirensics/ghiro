@@ -19,12 +19,12 @@ class Command(NoArgsCommand):
 
         print "Audit log purge"
         print "WARNING: this will permanently delete all your audit logs!"
-        try:
-            ans = bool(input("Do you want to continue? [y/n]"))
-        except NameError:
-            print "Please use only y/n"
+
+        ans = raw_input("Do you want to continue? [y/n]")
+
+        if ans.strip().lower() == "y":
+            print "Purging audit log... (it could take several minutes)"
+            Activity.objects.all().delete()
+            print "Done."
         else:
-            if ans:
-                print "Purging audit log... (it could take several minutes)"
-                Activity.objects.all().delete()
-                print "Done."
+            print "Please use only y/n"
