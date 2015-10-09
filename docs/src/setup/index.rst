@@ -29,7 +29,7 @@ Ghiro has the following requirements:
     * NudePy: used for nude detection
     * ImageHash: to calculate perceptual image hash
 
-If you choose MySQL or PostgrSQL as database you have to install their additional drivers.
+If you choose MySQL or PostgreSQL as database you have to install their additional drivers.
 
 Ghiro web application is tested and working on the following browsers:
 
