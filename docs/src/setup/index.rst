@@ -34,9 +34,10 @@ If you choose MySQL or PostgreSQL as database you have to install their addition
 Ghiro web application is tested and working on the following browsers:
 
     * Internet Explorer 8, Internet Explorer 9, Internet Explorer 10
-    * Mozilla Firefox 24
-    * Opera 17
-    * Safari 7
+    * Mozilla Firefox starting from 35
+    * Google Chrome starting from 39
+    * Opera starting from 26
+    * Safari 8 and 9
     * IOS 7 for Ipad and Iphone
 
 Getting started
