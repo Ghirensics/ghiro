@@ -18,7 +18,8 @@ def mongo_connect():
     @return: connection handler
     """
     try:
-        db = Database(MongoClient(settings.MONGO_URI), settings.MONGO_DB)
+        # connect = False will open a connection to db only when really needed.
+        db = Database(MongoClient(settings.MONGO_URI, connect=False), settings.MONGO_DB)
     except ConnectionFailure:
         print("ERROR: unable to connect to MongoDB. Please check the server availability.")
         sys.exit()

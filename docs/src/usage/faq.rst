@@ -14,6 +14,24 @@ The second one is to symlink the GExiv2 library from your virtualenv with::
     $ cd lib/python2.7/
     $ ln -s /usr/lib/python2.7/dist-packages/gi
 
+How to submit a bug report
+--------------------------
+
+If you encounter an issue with Ghiro or if you want to suggest a new feature,
+you are welcome to `submit a new issue`_.
+
+If you are filling a bug report you should always follow this template:
+
+#. What were you doing?
+#. What did you expect to happen?
+#. What happened instead?
+#. Ghiro release of Ghiro Appliance release.
+#. Browser and Version of Browser, Operating
+   System running Browser.
+#. If you are reporting a UI issue screenshot(s) showing the problem.
+
+.. _`submit a new issue`: https://github.com/Ghirensics/ghiro/issues/new
+
 Is Ghiro uploading my data somewhere?
 -------------------------------------
 

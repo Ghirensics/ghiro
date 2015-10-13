@@ -14,7 +14,7 @@ Requirements
 Ghiro has the following requirements:
 
     * MongoDB: you need to run a MongoDB database (at least release 2.0)
-    * Python: that's how we roll (it is suggested Python 2.7, although Ghiro is written to work also in Python 3 some other library won't)
+    * Python: that's how we roll (it is required Python 2.7, although Ghiro is written to work also in Python 3 some third party libraries aren't)
     * Python-magic: for MIME extraction
     * Python 2.x bindings for gobject-introspection libraries, required by Gexiv2
     * Gexiv2: for metadata extraction (at least release 0.6.1)
@@ -29,14 +29,15 @@ Ghiro has the following requirements:
     * NudePy: used for nude detection
     * ImageHash: to calculate perceptual image hash
 
-If you choose MySQL or PostgrSQL as database you have to install their additional drivers.
+If you choose MySQL or PostgreSQL as database you have to install their additional drivers.
 
 Ghiro web application is tested and working on the following browsers:
 
     * Internet Explorer 11
-    * Mozilla Firefox 24
-    * Opera 17
-    * Safari 7
+    * Mozilla Firefox starting from 35
+    * Google Chrome starting from 39
+    * Opera starting from 26
+    * Safari 8 and 9
     * IOS 7 for Ipad and Iphone
 
 Getting started

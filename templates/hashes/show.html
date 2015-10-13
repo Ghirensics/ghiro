@@ -1,85 +1,88 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="span11">
-    <div class="content content-large">
-        <div class="content-header">
-            <h2><i class="icon-table"> </i> {{ hash_list.name }} <small>details about this hash list</small></h2>
-        </div>
-        <div class="content-breadcrumb">
-            <ul class="breadcrumb">
-                <li>
-                    <a href="/"><i class="icon-home"> </i> Dashboard</a><span class="divider">&rsaquo;</span>
-                </li>
-                <li>
-                    <a href="{% url "hashes.views.list_hashes" %}"><i class="icon-table"> </i> Hashes</a>
-                    <span class="divider">&rsaquo;</span>
-                </li>
-                <li class="active">
-                    {{ hash_list.name }}
-                </li>
-            </ul>
-        </div>
-        <div class="content-body">
-            <dl class="dl-horizontal">
-                {% if hash_list.description %}
-                <dt>
-                    Description:
-                </dt>
-                <dd>
-                    {{ hash_list.description }}&nbsp;
-                </dd>
-                {% endif %}
-                <dt>
-                    Chiper:
-                </dt>
-                <dd>
-                    {{ hash_list.cipher|upper }}&nbsp;
-                </dd>
-                <dt>
-                    Public:
-                </dt>
-                <dd>
-                    {% if hash_list.public %}
-                        <i class="icon-ok text-success"> </i>
-                    {% else %}
-                        <i class="icon-remove text-error"> </i>
-                    {% endif %}
-                </dd>
-                <dt>
-                    Owner:
-                </dt>
-                <dd>
-                    {{ hash_list.owner }}&nbsp;
-                </dd>
-                <dt>
-                    Created:
-                </dt>
-                <dd>
-                    {{ hash_list.created_at }}&nbsp;
-                </dd>
-            </dl>
-            <table class="table table-bordered table-striped responsive datatables">
-                <thead>
-                    <tr>
-                        <th>Value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for hash in hash_list.hash_set.all %}
-                    <tr>
-                        <td>{{ hash.value }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+
+    <div class="crumbs">
+        <ol class="breadcrumb hidden-xs">
+            <li>
+                <span class="glyphicon glyphicon-home gi-0x"></span><a href="/">Dashboard</a>
+            </li>
+            <li>
+                <a href="{% url "hashes.views.list_hashes" %}"><span class="glyphicon glyphicon-list-alt gi-0x"></span> Hashes</a>
+            </li>
+            <li class="active">
+                {{ hash_list.name }}
+            </li>
+        </ol>
     </div>
 </div>
 
+    <div class="content">
+        <div class="page-h1">
+            <h1>{{ hash_list.name }} <small>details about this hash list</small></h1>
+        </div>
+        <div class="col-md-12">
+            <div class="wdgt">
+                <dl class="dl-horizontal">
+                    {% if hash_list.description %}
+                    <dt>
+                        Description:
+                    </dt>
+                    <dd>
+                        {{ hash_list.description }}&nbsp;
+                    </dd>
+                    {% endif %}
+                    <dt>
+                        Chiper:
+                    </dt>
+                    <dd>
+                        {{ hash_list.cipher|upper }}&nbsp;
+                    </dd>
+                    <dt>
+                        Public:
+                    </dt>
+                    <dd>
+                        {% if hash_list.public %}
+                            <span class="glyphicon glyphicon-ok-circle text-success"> </span>
+                        {% else %}
+                            <span class="glyphicon glyphicon-remove-circle text-danger"></span>
+                        {% endif %}
+                    </dd>
+                    <dt>
+                        Owner:
+                    </dt>
+                    <dd>
+                        {{ hash_list.owner }}&nbsp;
+                    </dd>
+                    <dt>
+                        Created:
+                    </dt>
+                    <dd>
+                        {{ hash_list.created_at }}&nbsp;
+                    </dd>
+                </dl>
+                <table class="table datatables">
+                    <thead>
+                        <tr>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for hash in hash_list.hash_set.all %}
+                        <tr>
+                            <td>{{ hash.value }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 <script type="text/javascript">
 $('.datatables').dataTable({
-    "sDom" : '<"top"f>t<"bottom"lp><"clear">',
+    "sPaginationType": "bs_normal",
+    "sDom": '<"row view-filter"<"col-sm-12"<"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-right"p>>>',
     "aLengthMenu": [[1000, 10000, -1], [1000, 10000, "All"]]
 });
 </script>

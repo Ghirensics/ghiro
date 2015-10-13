@@ -36,3 +36,30 @@
         {% endif %}
     </tbody>
 </table>
+{% if analysis.report.nude.nudepy %}
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nude detection</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <b>Detection: </b>
+                    {% if analysis.report.nude.nudepy.result %}
+                            <span class="label label-success">{{ analysis.report.nude.nudepy.result }}</span>
+                            </td>
+                        </tr>
+                    {% else %}
+                            <span class="label label-danger">{{ analysis.report.nude.nudepy.result }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Message: </b>{{ analysis.report.nude.nudepy.msg }}</td>
+                        </tr>
+                    {% endif %}
+        </tbody>
+    </table>
+{% endif %}

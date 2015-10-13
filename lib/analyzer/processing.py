@@ -16,6 +16,7 @@ from lib.utils import AutoVivification
 from analyses.models import Analysis
 from lib.analyzer.base import BaseProcessingModule
 from lib.db import save_results
+from lib.exceptions import GhiroPluginException
 
 logger = logging.getLogger(__name__)
 
@@ -36,11 +37,32 @@ class AnalysisRunner(Process):
             try:
                 # Get a new task from queue.
                 task = self.tasks.get()
-                self._process_image(task)
+                self.process_image(task)
             except KeyboardInterrupt:
                 break
 
-    def _process_image(self, task):
+    def run_module(self, task, module, results):
+        """Runs a processing module.
+        @param task: task
+        @param module: module
+        @param results: results dict
+        """
+        logger.debug("[Task {0}]: Running module {1}".format(task.id, module))
+        current = module()
+        current.data = results
+        try:
+            output = current.run(task)
+        except Exception as e:
+            logger.exception("[Task {0}]: Critical error in plugin {1}, skipping: {2}".format(task.id, module, e))
+            raise GhiroPluginException(e)
+        else:
+            if isinstance(output, AutoVivification):
+                results.update(output)
+            else:
+                logger.warning("[Task {0}]: Module {1} returned results not in dict format.".format(task.id, module))
+        return results
+
+    def process_image(self, task):
         """Process an image.
         @param task: image task
         """
@@ -51,18 +73,10 @@ class AnalysisRunner(Process):
             results["file_data"] = task.image_id
 
             for module in self.modules:
-                current = module()
-                current.data = results
                 try:
-                    output = current.run(task)
-                except Exception as e:
-                    logger.exception("[Task {0}]: Critical error in plugin {1}, skipping: {2}".format(task.id, module, e))
+                    results = self.run_module(task, module, results)
+                except GhiroPluginException:
                     continue
-                else:
-                    if isinstance(output, AutoVivification):
-                        results.update(output)
-                    else:
-                        logger.warning("[Task {0}]: Module {1} returned results not in dict format.".format(task.id, module))
 
             # Complete.
             task.analysis_id = save_results(results)
@@ -92,7 +106,6 @@ class AnalysisManager():
         # Starting worker pool.
         self.workers = []
         self.tasks = JoinableQueue(self.get_parallelism())
-        self.workers_start()
 
     def workers_start(self):
         """Start workers pool."""
@@ -154,6 +167,9 @@ class AnalysisManager():
 
     def run(self):
         """Start all analyses."""
+        # Start workers.
+        self.workers_start()
+
         # Clean up tasks remaining stale from old runs.
         if Analysis.objects.filter(state="P").exists():
             logger.info("Found %i stale analysis, putting them in queue." % Analysis.objects.filter(state="P").count())
@@ -184,3 +200,8 @@ class AnalysisManager():
             print("Waiting tasks to accomplish...")
             self.workers_stop()
             print("Processing done. Have a nice day in the real world.")
+
+    def stop(self):
+        """Stops the analysis manager."""
+        if self.workers:
+            self.workers_stop()

@@ -8,7 +8,7 @@ from PIL import Image
 
 from lib.db import save_file
 from lib.analyzer.base import BaseProcessingModule
-from lib.utils import str2temp_file, to_unicode, AutoVivification, str2image, image2str
+from lib.utils import to_unicode, AutoVivification, str2image, image2str
 from analyses.models import AnalysisMetadataDescription
 
 try:
@@ -75,7 +75,7 @@ class GexivProcessing(BaseProcessingModule):
             for preview in self.metadata.get_preview_properties():
                 p = AutoVivification()
                 p["mime_type"] = preview.get_mime_type()
-                p["size"] = len(self.metadata.get_preview_image(preview).get_data())
+                p["size"] = preview.get_size()
                 p["ext"] = preview.get_extension()
                 p["dimensions"] = [preview.get_width(), preview.get_height()]
 
@@ -110,14 +110,11 @@ class GexivProcessing(BaseProcessingModule):
 
         # Read metadata from a temp file.
         try:
-            tmp_file = str2temp_file(task.get_file_data)
             self.metadata = GExiv2.Metadata()
-            self.metadata.open_path(str(tmp_file.name))
+            self.metadata.open_buf(bytes(task.get_file_data))
         except Exception as e:
             logger.warning("[Task {0}]: Unable to read image metadata: {1}".format(task.id, e))
             self.metadata = None
-        finally:
-            tmp_file.close()
 
         # Run all analysis.
         if self.metadata:

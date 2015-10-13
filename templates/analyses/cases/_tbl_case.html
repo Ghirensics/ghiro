@@ -82,6 +82,9 @@
     <li {% if pagename == "thumb" %} class="active" {% endif %}>
         <a href="{% url "analyses.views.show_case" case.id "thumb" %}">Thumbnails</a>
     </li>
+    <li {% if pagename == "nude" %} class="active" {% endif %}>
+        <a href="{% url "analyses.views.show_case" case.id "nude" %}">Nude detection</a>
+    </li>
     <li {% if pagename == "map" %} class="active" {% endif %}>
         <a href="{% url "analyses.views.show_case" case.id "map" %}">Map</a>
     </li>
@@ -332,35 +335,66 @@
         {% endif %}
     {% elif pagename == "thumb" %}
         {% include "analyses/cases/_thum_image.html" with images=tasks %}
-            <div id="DataTables_Table_0_paginate" class="dataTables_paginate paging_bs_normal">
+        <div id="DataTables_Table_0_paginate" class="dataTables_paginate paging_bs_normal">
+             {% if tasks %}
                 <ul class="pagination pull-right">
-                    {% if tasks %}
-                        {% if tasks.has_previous %}
-                            <li class="prev">
-                                <a href="{% url "analyses.views.show_case" case.id "thumb" %}?page={{ tasks.previous_page_number }}">
-                                    <span class="glyphicon glyphicon-chevron-left"></span>
-                                    Previous
-                                </a>
-                            </li>
-                        {% endif %}
-                        {% if tasks.has_next %}
-                            <li class="next">
-                                <a href="{% url "analyses.views.show_case" case.id "thumb" %}?page={{ tasks.next_page_number }}">
-                                    Next
-                                    <span class="glyphicon glyphicon-chevron-right"></span>
-                                </a>
-                            </li>
-                        {% endif %}
-                    {% else %}
-                        <div class="alert alert-info">
-                            <strong>Info!</strong>
-                            There are not any photos
-                        </div>
+                    {% if tasks.has_previous %}
+                        <li class="prev">
+                            <a href="{% url "analyses.views.show_case" case.id "thumb" %}?page={{ tasks.previous_page_number }}">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                Previous
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if tasks.has_next %}
+                        <li class="next">
+                            <a href="{% url "analyses.views.show_case" case.id "thumb" %}?page={{ tasks.next_page_number }}">
+                                Next
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </li>
                     {% endif %}
                 </ul>
                 <div class="pull-left">
                     <div id="DataTables_Table_0_info" class="dataTables_info" role="status" aria-live="polite">Showing {{ tasks.number }} to {{ tasks.paginator.num_pages }}</div>
                 </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <strong>Info!</strong>
+                    There are not any photos
+                </div>
+            {% endif %}
+    {% elif pagename == "nude" %}
+        {% include "analyses/cases/_thum_image.html" with images=tasks %}
+        <div id="DataTables_Table_0_paginate" class="dataTables_paginate paging_bs_normal">
+            {% if tasks %}
+                <ul class="pagination pull-right">
+                    {% if tasks.has_previous %}
+                        <li class="prev">
+                            <a href="{% url "analyses.views.show_case" case.id "nude" %}?page={{ tasks.previous_page_number }}">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                Previous
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if tasks.has_next %}
+                        <li class="next">
+                            <a href="{% url "analyses.views.show_case" case.id "nude" %}?page={{ tasks.next_page_number }}">
+                                Next
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <div class="pull-left">
+                    <div id="DataTables_Table_0_info" class="dataTables_info" role="status" aria-live="polite">Showing {{ tasks.number }} to {{ tasks.paginator.num_pages }}</div>
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <strong>Info!</strong>
+                    There are not any photos
+                </div>
+            {% endif %}
     {% elif pagename == "map" %}
         {% include "analyses/cases/_map_image.html" with images=tasks %}
     {% elif pagename == "favorites" %}

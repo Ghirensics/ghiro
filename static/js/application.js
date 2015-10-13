@@ -107,8 +107,8 @@ function internetStatus(){
     if (navigator.onLine){
         loadScript();
     }else{
-        $("#noNet").show();
-        $("#map_canvas").hide();
+        $("#noNet").removeClass('hidden');
+        $(".maps").hide();
     }
 }
 

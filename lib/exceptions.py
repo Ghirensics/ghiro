@@ -9,3 +9,7 @@ class GhiroException(Exception):
 class GhiroValidationException(GhiroException):
     """Validation error."""
     pass
+
+class GhiroPluginException(GhiroException):
+    """An error occurred when running the plugin."""
+    pass

@@ -218,7 +218,6 @@ def show_case(request, case_id, page_name):
                 tasks.append(analyses.get(analysis_id=result["_id"]))
             except ObjectDoesNotExist:
                 continue
-        tasks = tasks.filter(favorites__owner=request.user)
         tasks = _paginate(tasks, page, 20)
     elif page_name == "search":
         pass

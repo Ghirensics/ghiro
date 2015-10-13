@@ -5,7 +5,6 @@
 import json
 import logging
 import requests
-import urllib
 
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.conf import settings
