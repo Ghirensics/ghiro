@@ -121,6 +121,10 @@
                         <a href="#ela" data-toggle="tab">ELA</a>
                     </li>
                     {% endif %}
+                    {# Similarity detection. #}
+                    <li>
+                        <a href="#simil" data-toggle="tab">Similarity</a>
+                    </li>
                     {% if analysis.report.signatures and analysis.report.signatures|length > 0 %}
                     <li>
                         <a href="#signs" data-toggle="tab">Signatures</a>
@@ -164,6 +168,10 @@
                         {% include 'analyses/report/_ela.html' %}
                     </div>
                     {% endif %}
+                    {# Similarity detection. #}
+                    <div id="simil" class="tab-pane">
+                        {% include 'analyses/report/_similarity.html' %}
+                    </div>
                     {% if analysis.report.signatures and analysis.report.signatures|length > 0 %}
                     <div id="signs" class="tab-pane">
                         {% include 'analyses/report/_signature.html' %}
