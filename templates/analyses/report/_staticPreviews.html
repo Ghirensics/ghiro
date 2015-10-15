@@ -1,4 +1,5 @@
 {% load analyses_tags %}
+
 <table>
     <tr>
         <td>
@@ -31,7 +32,7 @@
                                         <b>Size:</b>
                                     </td>
                                     <td>
-                                        {{ preview.size }} bytes
+                                        {{ preview.size|filesizeformat }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -59,14 +60,14 @@
                                     </td>
                                 </tr>
                                 {% if preview.diff %}
-                                <tr>
-                                    <td>
-                                        <b>Differ:</b>
-                                    </td>
-                                    <td>
-                                        <span class="label label-danger label-round">{{ preview.diff }}</span>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Differ:</b>
+                                        </td>
+                                        <td>
+                                            <span class="label label-danger label-round">{{ preview.diff }}</span>
+                                        </td>
+                                    </tr>
                                 {% endif %}
                             </tbody>
                         </table>
