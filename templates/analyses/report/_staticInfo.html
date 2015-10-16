@@ -7,32 +7,32 @@
     </thead>
     <tbody>
         {% if analysis.report.file_name %}
-        <tr>
-            <td><b>Filename</b></td>
-            <td>{{ analysis.report.file_name }}</td>
-        </tr>
+            <tr>
+                <td><b>Filename</b></td>
+                <td>{{ analysis.report.file_name }}</td>
+            </tr>
         {% endif %}
         {% if analysis.report.file_size|filesizeformat %}
-        <tr>
-            <td><b>Size</b></td>
-            <td>{{ analysis.report.file_size|filesizeformat }}</td>
-        </tr>
+            <tr>
+                <td><b>Size</b></td>
+                <td>{{ analysis.report.file_size|filesizeformat }}</td>
+            </tr>
         {% endif %}
         {% if analysis.report.metadata.dimensions %}
-        <tr>
-            <td><b>Dimensions</b></td>
-            <td>{{ analysis.report.metadata.dimensions }}</td>
-        </tr>
+            <tr>
+                <td><b>Dimensions</b></td>
+                <td>{{ analysis.report.metadata.dimensions }}</td>
+            </tr>
         {% endif %}
-        <tr>
-            <td><b>Analyzed at</b></td>
-            <td>{{ analysis.completed_at }}</td>
-        </tr>
+            <tr>
+                <td><b>Analyzed at</b></td>
+                <td>{{ analysis.completed_at }}</td>
+            </tr>
         {% if analysis.report.metadata.comment %}
-        <tr>
-            <td><b>Comment</b></td>
-            <td>{{ analysis.report.metadata.comment }}</td>
-        </tr>
+            <tr>
+                <td><b>Comment</b></td>
+                <td>{{ analysis.report.metadata.comment }}</td>
+            </tr>
         {% endif %}
     </tbody>
 </table>
