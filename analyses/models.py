@@ -155,10 +155,13 @@ class Analysis(models.Model):
         except:
             return None
         else:
-            # Data enrichment.
-            data["created_at"] = self.created_at
-            data["completed_at"] = self.completed_at
-            return data
+            if data:
+                # Data enrichment.
+                data["created_at"] = self.created_at
+                data["completed_at"] = self.completed_at
+                return data
+            else:
+                return None
 
     @property
     def get_file_data(self):
