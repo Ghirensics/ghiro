@@ -37,14 +37,16 @@ class PerceptualImageHashProcessing(BaseProcessingModule):
 
         # Search.
         image_hash = imagehash.hex_to_hash(hash_value)
-        similarities = set()
-        for img in self.task.case.images.all():
-            if img.state == "C" and img.report and \
+        similarities = list()
+        for img in self.task.case.images.filter(state="C").exclude(id=self.task.id):
+            if img.report and \
             "imghash" in img.report and \
             hash_name in img.report["imghash"] and \
             image_hash == imagehash.hex_to_hash(img.report["imghash"][hash_name]):
-                similarities.add(self.task.id)
-        return list(similarities)
+                # TODO: store also image distance.
+                similarities.append(img.id)
+        return similarities
+
 
     def run(self, task):
         self.task = task
