@@ -21,6 +21,8 @@ class PerceptualImageHashProcessing(BaseProcessingModule):
     description = "This plugins calculates image hash using Perceptual Image Hashing."
     order = 10
 
+    HASH_SIZE = 8
+
     def check_deps(self):
         return IS_IMAGEHASH
 
@@ -53,9 +55,9 @@ class PerceptualImageHashProcessing(BaseProcessingModule):
         image = str2image(task.get_file_data)
 
         # Calculate hash.
-        self.results["imghash"]["a_hash"] = str(imagehash.average_hash(image))
-        self.results["imghash"]["p_hash"] = str(imagehash.phash(image))
-        self.results["imghash"]["d_hash"] = str(imagehash.dhash(image))
+        self.results["imghash"]["a_hash"] = str(imagehash.average_hash(image, hash_size=self.HASH_SIZE))
+        self.results["imghash"]["p_hash"] = str(imagehash.phash(image, hash_size=self.HASH_SIZE))
+        self.results["imghash"]["d_hash"] = str(imagehash.dhash(image, hash_size=self.HASH_SIZE))
 
         # Get similar images.
         self.results["similar"]["a_hash"] = self.get_similar_images(self.results["imghash"]["a_hash"], imagehash.average_hash)
