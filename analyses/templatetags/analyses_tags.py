@@ -10,7 +10,9 @@ from dateutil import parser
 from bson.objectid import InvalidId
 from lib.db import get_file
 
-from analyses.models import AnalysisMetadataDescription
+from django.core.exceptions import ObjectDoesNotExist
+
+from analyses.models import AnalysisMetadataDescription, Analysis
 
 register = template.Library()
  
@@ -85,11 +87,24 @@ def get_metadata_description(key):
     @return: metadata key description
     """
     try:
-        data = AnalysisMetadataDescription.objects.get(key=key.lower())
+        data = Analysis.objects.get(key=key.lower())
     except AnalysisMetadataDescription.DoesNotExist:
         return "Description not available."
     else:
         return data.description
+
+@register.filter
+def get_analysis(anal_id):
+    """Get analysis object from id.
+    @param anal_id: analysis id
+    @return: Analysis object
+    """
+    try:
+        analysis = Analysis.objects.get(pk=anal_id)
+    except ObjectDoesNotExist:
+        return None
+    else:
+        return analysis
 
 @register.filter
 def to_base64(image_id):
