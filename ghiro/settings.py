@@ -135,6 +135,14 @@ except NameError:
     except ImportError:
         pass
 
+#
+# Logging.
+#
+
+# Create log dir.
+if not os.path.exists(LOG_DIR):
+    os.mkdir(LOG_DIR)
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
