@@ -119,7 +119,7 @@ The fingerprint of `Ghiro Master Signing key`_ is published here (for additional
 
     9DD9 3A61 39A4 A72D 2467  378D AFDA 03A5 81C2 1EE9
 
-Now you can download the signature for every Ghiro package and appliance from Ghiro website,
+Now you can download the signature for Ghiro package or appliance from Ghiro website,
 you can verify it with the following::
 
     $ gpg --verify ghiro-0.2.zip.sig
