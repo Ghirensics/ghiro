@@ -121,7 +121,6 @@ following command (inside Ghiro's root)::
 
     python manage.py process
 
-
 Configuration
 =============
 
