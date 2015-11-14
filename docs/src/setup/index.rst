@@ -96,10 +96,12 @@ localhost). If you need to change this see the configuration chapter below.
 First of all you need to create an empty database with the following command
 (inside Ghiro's root)::
 
-    python manage.py syncdb
+    python manage.py migrate
 
-You will be asked to create a superuser for administration, choose *yes* and
-fill all the required fields.
+Create a superuser for administration, you should provide an username and a
+password, use the following command (inside Ghiro's root)::
+
+    python manage.py createsuperuser
 
 Running
 -------
