@@ -7,8 +7,8 @@ Auto Upload
 -----------
 
 Auto Upload is a feature to automatically upload images written in a default directory; you can
-share the default directory over FTP, Samba (Windows shared folder) or other file sharing technologies
-so you can simply launch a Ghiro analysis copying a file in a shared folder.
+share the default directory over FTP, Samba (Windows shared folder) or other file sharing technologies,
+writing a file here you can simply launch a Ghiro analysis copying a file in a shared folder.
 
 To configure Auto Upload you have to edit `local_settings.py` and configure:
 
@@ -20,20 +20,19 @@ After configuration, you have to start the directory monitoring with the followi
 
     python manage.py auto_upload
 
-Now directory monitoring is running, a tree of folder related to cases in your system will be created,
+Now directory monitoring is running, a tree of folders related to cases will be created,
 for example:
 
 .. image:: ../_images/auto_upload_folders.png
 
-As you can see there are many folder, one for each case stored, with the case id in the folder name.
-You should only put the images you want to be analyzed inside a case folder, ghiro will automatically
-process them, store inside the case with the same id of the folder name, and remove the original file
-from disk.
+As you can see there are many folders, one for each case stored, with the case id in the folder name.
+You should only put the images you want to analyze in a case folder, ghiro will automatically
+process them, and remove the original file from disk.
 
-This feature comes to help in many situations:
+This feature is designed to help in many situations:
 
  * When you need to provide people an easy way to submit images to Ghiro, you could just setup a shared folder.
- * If you need to analyze a large amount of data, you could submit with a files copy command.
+ * If you need to analyze a large amount of data, you could submit with a copy files command.
 
 .. warning::
         Don't use the Auto Upload directory configured in `AUTO_UPLOAD_DIR` as a permanent storage!
@@ -43,17 +42,16 @@ This feature comes to help in many situations:
 Run processor in debug mode
 ---------------------------
 
-If you need to run the image processor daemon in debug mode to debug tracebacks
+If you need to run the image processor daemon in debug mode with tracebacks enabled
 run the following command (inside Ghiro's root)::
 
     python manage.py process --traceback
 
-Create a new superuser
-----------------------
+Create a superuser
+------------------
 
-If you need to create a new superuser from the command line, for example
-because you closed you out from the web interface, run the following command
-(inside Ghiro's root)::
+If you need to create a new superuser from the command line (at least an user is mandatory
+to use Ghiro), run the following command (inside Ghiro's root)::
 
     python manage.py createsuperuser
 
@@ -143,4 +141,5 @@ command for that::
     Purging audit log... (it could take several minutes)
     Done.
 
-This command wil PERMANENTLY delete all audit data!
+.. warning::
+        This command wil PERMANENTLY delete all audit data!
