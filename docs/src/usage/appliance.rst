@@ -157,7 +157,20 @@ cursor after a “$” symbol.
 Uploading files
 ---------------
 
+You can upload images using the following methods:
 
+ * Using Web interface
+   * Go to cases page
+   * Create a new case
+   * Upload your images to the case using the add images button
+* Via SMB share (windows shared folders)
+   * Go to cases page
+   * Create a new case
+   * List the SMB (windows shared folders) shares on your network: Ghiro appliance is exposing all cases in a shared folder, you can upload images related to a case his folder
+* Via FTP share
+   * Go to cases page
+   * Create a new case
+   * Access to FTP listeing on Ghiro appliance IP address: Ghiro appliance is exposing all cases in a FTP folder, you can upload images related to a case his folder
 
 Extra Configuration
 -------------------
