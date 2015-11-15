@@ -154,6 +154,11 @@ cursor after a “$” symbol.
 
 .. image:: ../_images/appliance_11.png
 
+Uploading files
+---------------
+
+
+
 Extra Configuration
 -------------------
 
@@ -180,11 +185,11 @@ The appliance building script is open source and available under a project
 dubbed `ghiro-appliance`_ on Github.
 
 Ghiro appliance builder is a `packer.io`_ script to automagically create a Ghiro
-appliance ready to be used, based on Ubuntu.
+appliance ready to be used, based on Ubuntu Linux.
 
 Using this script you should be able to create your onw Ghiro appliance updated
-to Ghiro's developed branch. You can easily customize the appliance building
-script to have your own customized appliance.
+to latest Ghiro's development branch. You can easily customize the appliance building
+script to create your own customized appliance.
 
 .. _`packer.io`: http://packer.io
 .. _`ghiro-appliance`: https://github.com/ghirensics/ghiro-appliance
