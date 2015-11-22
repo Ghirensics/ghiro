@@ -127,6 +127,11 @@ def create_thumb(file_path):
     """
     try:
         thumb = Image.open(file_path)
+
+        # Check if conversion to RGBA is needed (i.e. for PNG files).
+        if thumb.mode is not "RGBA":
+            thumb.convert("RGBA")
+
         thumb.thumbnail([200, 150], Image.ANTIALIAS)
         return save_file(data=image2str(thumb), content_type="image/jpeg")
     except:
