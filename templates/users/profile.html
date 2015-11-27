@@ -56,7 +56,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
-                                    Account active:
+                                    Enabled:<br/>
                                     {%if user.is_active%}
                                         <i class="glyphicon glyphicon-ok-circle text-success"></i>
                                     {%else%}
@@ -64,7 +64,7 @@
                                     {%endif%}
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
-                                    Superuser:
+                                    Superuser:<br/>
                                     {%if user.is_superuser%}
                                         <i class="glyphicon glyphicon-ok-circle text-success"></i>
                                     {%else%}
@@ -72,7 +72,7 @@
                                     {%endif%}
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
-                                    Staff:
+                                    Staff:<br/>
                                     {%if user.is_staff%}
                                         <i class="glyphicon glyphicon-ok-circle text-success"></i>
                                     {%else%}
