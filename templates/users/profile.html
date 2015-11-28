@@ -57,27 +57,27 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
                                     Enabled:<br/>
-                                    {%if user.is_active%}
+                                    {% if user.is_active %}
                                         <i class="glyphicon glyphicon-ok-circle text-success"></i>
-                                    {%else%}
+                                    {% else %}
                                         <i class="glyphicon glyphicon-remove-circle text-danger"></i>
-                                    {%endif%}
+                                    {% endif %}
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
                                     Superuser:<br/>
-                                    {%if user.is_superuser%}
+                                    {% if user.is_superuser %}
                                         <i class="glyphicon glyphicon-ok-circle text-success"></i>
-                                    {%else%}
+                                    {% else %}
                                         <i class="glyphicon glyphicon-remove-circle text-danger"></i>
-                                    {%endif%}
+                                    {% endif %}
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
                                     Staff:<br/>
-                                    {%if user.is_staff%}
+                                    {% if user.is_staff %}
                                         <i class="glyphicon glyphicon-ok-circle text-success"></i>
-                                    {%else%}
+                                    {% else %}
                                         <i class="glyphicon glyphicon-remove-circle text-danger"></i>
-                                    {%endif%}
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
