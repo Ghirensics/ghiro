@@ -81,8 +81,8 @@ def admin_show_user(request, user_id):
 
     user = get_object_or_404(Profile, pk=user_id)
 
-    return render_to_response("admin/show_user.html",
-                              {"user": user},
+    return render_to_response("users/profile.html",
+                              {"user": user, "admin_mode": True},
                               context_instance=RequestContext(request))
 
 @login_required

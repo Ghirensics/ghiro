@@ -6,6 +6,11 @@
             <li>
                 <span class="glyphicon glyphicon-home gi-0x"></span><a href="/">Dashboard</a>
             </li>
+            {% if admin_mode %}
+                <li>
+                    <a href="{% url "users.views.admin_list_users" %}"><span class="glyphicon glyphicon-lock gi-0x"></span> Administration</a>
+                </li>
+            {% endif %}
             <li class="active">
                 {{ user.username }}'s profile
             </li>
@@ -38,6 +43,11 @@
                             <div class="header-information">
                                 API key: {{ user.api_key }}
                             </div>
+                            {% if admin_mode %}
+                                <div class="header-information">
+                                    <a href="{% url "users.views.admin_show_activity" user.id %}">Show user activity</a>
+                                </div>
+                            {% endif %}
                         </div>
                         <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 profile-stats">
                             <div class="row">
