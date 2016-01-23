@@ -131,7 +131,7 @@ if you get a different output you are facing a security risk, you should contact
 developers and never use the downloaded package.
 
 It is also a good, although optional, practice to set its trust level to “ultimate”,
-so that it can be used to automatically verify all the keys signed by the Ghiro developers:
+so that it can be used to automatically verify all the keys signed by the Ghiro developers::
 
     $ gpg –edit-key 0x81C21EE9
 
