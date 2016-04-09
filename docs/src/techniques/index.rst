@@ -7,9 +7,12 @@ digital images. They are briefly described in this chapter.
 ELA (Error Level Analysis)
 ==========================
 
-`Error Level Analysis`_ (ELA) is a technique aimed to detect if an image is edited or not.
-It can be applied to compressed images, i.e. JPEG or PNG. The main idea is that an image in his original form has unique levels of compression.
-The analyzed image is resaved and differences in compression levels are calculated, if differences are detected a probability of edits is high.
+`Error Level Analysis`_ (ELA) is a technique aimed to detect if an image is
+edited or not.
+It can be applied to compressed images only, i.e. JPEG or PNG. The main idea is
+that an image in his original form has unique levels of compression.
+The analyzed image is resaved and differences in compression levels are
+calculated, if differences are detected a probability of edits is high.
 Ghiro calculates error levels and detects differences between them.
 
 .. _`Error Level Analysis`: http://blackhat.com/presentations/bh-dc-08/Krawetz/Whitepaper/bh-dc-08-krawetz-WP.pdf
@@ -17,20 +20,25 @@ Ghiro calculates error levels and detects differences between them.
 GPS Localization
 ================
 
-Embedded in the image metadata sometimes there is a geotag, a bit of GPS data providing the longitude and
-latitude of where the photo was taken.
-Geotagging is when a device such as an iPhone, Android smartphone or digital camera stores your location
-or geographical information, such as your GPS coordinates, within a photo.
-A geotagged photograph is a photograph which is associated with a geographical location by geotagging.
-Geotags are useful in helping people find a wide variety of location-specific information.
-For example, one can find images taken near a given location by entering latitude and longitude coordinates
-into a suitable image search engine.
-The geotag inside image metadata is read and the position where the photo was taken is displayed on a map.
+Embedded in the image metadata sometimes there is a geotag, a bit of GPS data
+providing the longitude and latitude of where the photo was taken.
+Geotagging is useful when a device such as an iPhone, Android smartphone or
+digital camera stores your location or geographical information, such as your
+GPS coordinates, within a photo.
+A geotagged photograph is a photograph which is associated with a geographical
+location by geotagging.
+Geotags are useful in helping people find a wide variety of location-specific
+information.
+For example, one can find images taken near a given location by entering
+latitude and longitude coordinates into a suitable image search engine.
+The geotag inside image metadata is read and the position where the photo was
+taken is displayed on a map.
 
 Hash digest generation
 ======================
 
-Most common hash are calculated for the image, to create an unique identifier of it.
+Most common hash are calculated for the image, to create an unique identifier of
+it.
 The calculated hashes are:
 
  * CRC32
@@ -40,6 +48,15 @@ The calculated hashes are:
  * SHA256
  * SHA384
  * SHA512
+
+Perceptual Hash
+===============
+
+Regular hashing techniques usually don't work well with images. Images are
+different from usual binary files, like executables, if you change only a bit of
+an image, it could remain pretty much the same.
+Perceptual hash or image hash are algorithms designed to work with images
+despite of the little differences.
 
 Hash list matching
 ==================
@@ -51,12 +68,13 @@ Metadata information
 ====================
 
 Metadata may be written into a digital photo file that will identify who owns it,
-copyright and contact information, what camera created the file, along with exposure
-information and descriptive information such as keywords about the photo, making the
-file searchable on the computer and/or the Internet.
-Some metadata are written by the camera and some is input by the photographer and/or
-software after downloading to a computer.
-Metadata are divided in several categories depending on the standard they come from.
+copyright and contact information, what camera created the file, along with
+exposure information and descriptive information such as keywords about the
+photo, making the file searchable on the computer and/or the Internet.
+Some metadata are written by the camera and some is input by the photographer
+and/or software after downloading to a computer.
+Metadata are divided in several categories depending on the standard they come
+from.
 The following categories are extracted and analyzed:
 
  * EXIF metadata extraction
@@ -113,24 +131,35 @@ between many file formats and can yield further run-time information.
 The image MIME type is detected to know the image type your are dealing with, in
 both contacted (example: image/jpeg) and extended form.
 
+Nude detection
+==============
+
+Nude detector is based on NudePy library and should detect images with nude
+figures due to their skin tone.
+
 Preview thumbnail
 =================
 
-Most digital camera and phones write a preview, called thumbnail, in image metadata.
-The thumbnails and data related to them are extracted from image metadata and stored for review.
+Most digital camera and phones write a preview, called thumbnail, in image
+metadata.
+The thumbnails and data related to them are extracted from image metadata and
+stored for review.
 
 Preview thumbnail consistency
 =============================
 
 This check compares an image with the embedded thumbnail to spot differences.
-Sometimes when a photo is edited, if the image editing software does not support embedded thumbnail automatic editing,
-the original image is edited but the thumbnail not. A simple comparison between the original image and
-the thumbnail could detect image alteration or show the original image.
+Sometimes when a photo is edited, if the image editing software does not support
+embedded thumbnail automatic editing,
+the original image is edited but the thumbnail not. A simple comparison between
+the original image and the thumbnail could detect image alteration or show the
+original image.
 
 Signature engine
 ================
 
-Signature provides evidence about most critical data to highlight focal points and common exposures.
+Signature provides evidence about most critical data to highlight focal points
+and common exposures.
 Signature engine to highlight common exposure on over 120 signatures.
 
 Strings extraction
