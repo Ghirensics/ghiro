@@ -27,7 +27,7 @@
     </div>
 </form>
 {% if form.non_field_errors %}
-    <div class="alert alert-danger">
+    <div class="alert alert-danger" id="failed-login-alert">
         <i class="icon-warning-sign"></i> {{ form.non_field_errors|striptags }}
     </div>
 {% endif %}
