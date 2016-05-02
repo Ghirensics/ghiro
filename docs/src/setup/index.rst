@@ -246,8 +246,8 @@ Create the file ghiro.conf in /etc/init/ with the following content::
     start on started mysql
     stop on shutdown
     script
-            chdir /var/www/ghiro/
-            exec /usr/bin/python manage.py process
+        exec start-stop-daemon --start -d /var/www/ghiro \
+            --exec /usr/bin/python manage.py process
     end script
 
 To stop the processor use the following command (run as root or with sudo)::
