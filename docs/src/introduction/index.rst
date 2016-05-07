@@ -63,7 +63,7 @@ Ghiro is composed by the following components:
 
  * The web interface: to interact with all features, this is the component used by users to work with Ghiro
  * The processor daemon: it fetches waiting tasks from the queue, process and analyze images
- * The relation database: it stores relational data, you can choose between MySQL, PostgreSQL and SQLite3
+ * The SQL database: it stores relational data, you can choose between MySQL, PostgreSQL and SQLite3
  * The MongoDB database: it stores analysis data
 
 Following the architecture in a simple schema:
