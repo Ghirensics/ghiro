@@ -26,9 +26,9 @@
         </div>
     </div>
 </form>
-{% if form.non_field_errors %}
+{% if form.errors %}
     <div class="alert alert-danger" id="failed-login-alert">
-        <i class="icon-warning-sign"></i> {{ form.non_field_errors|striptags }}
+        <i class="icon-warning-sign"></i> Your username and password didn't match. Please try again.
     </div>
 {% endif %}
 
