@@ -85,9 +85,9 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
+TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + [
     "django.core.context_processors.request",
-    )
+    ]
 
 INTERNAL_IPS = ('127.0.0.1',)
 MIDDLEWARE_CLASSES = (
