@@ -70,7 +70,7 @@ Install required libraries with the following commands
 
     apt-get install python-pip build-essential python-dev python-gi
     apt-get install libgexiv2-2 gir1.2-gexiv2-0.10 wkhtmltopdf
-    apt-get install libtiff4-dev libjpeg8-dev zlib1g-dev libfreetype6-dev
+    apt-get install libtiff5-dev libjpeg-dev zlib1g-dev libfreetype6-dev
     apt-get install liblcms2-dev libwebp-dev tcl8.5-dev tk8.5-dev python-tk
 
 
